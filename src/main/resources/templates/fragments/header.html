@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header th:fragment="fragment-header" class="header">
+        <div class="nav">
+            <div class="logo">
+                <a href="/">HOME</a>
+            </div>
+            <ul class="menu">
+                <li>
+                    <a href="./postWriter">글쓰기</a>
+                </li>
+                <li>
+                    <a href="./register">회원가입</a>
+                </li>
+                <li>
+                    <a href="#">로그인</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+</body>
+</html>

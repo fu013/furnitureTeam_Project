@@ -1,0 +1,41 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Karla|Open+Sans:300,400,700&display=swap');
+html { font-size: 20px; }
+body { font-size: 1rem; margin: 0; padding: 0; background: #fff; font-weight: normal; font-family: 'Open Sans'; }
+li { list-style: none; }
+a { text-decoration: none; }
+
+.postWriterWrapper {  margin: 50px auto 75px; width: 1400px; }
+.postWriterWrapper h2 { border-bottom: 1px solid black; padding-bottom: 20px; font-weight: 300; }
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=search],
+input[type=number],
+input[type=date],
+input[type=tel] { width: 175px; height: 35px; color: #373737; font-size: 13px;
+border: 1px solid #e8e8e8; background: #fff; text-decoration: none; text-indent: 10px;
+transition: all 0.5s; vertical-align: middle; }
+.productColor,
+.productCategory,
+.productSize { width: 80px; height: 35px; color: #373737; font-size: 13px;
+border: 1px solid #e8e8e8; background: #fff; text-decoration: none; text-indent: 10px;
+transition: all 0.5s; vertical-align: middle; }
+
+#productGuideline { width: 600px; }
+input::-webkit-input-placeholder{color:#999; font-size:13px;}
+.summary { display: none; }
+.container { padding: 0px; border-bottom: 1px solid black; margin: 0 auto 15px; position: relative; width: 1100px; }
+th,
+table td { padding: 0 0 20px; position: relative; }
+table th { font-size: 14px; color: #222; text-align: left; font-weight: normal; padding-left: 25px; }
+table tr { border-bottom: 1px solid black; }
+table th span { color: #de4f41; }
+table th em { color: #999; }
+table tr:last-child th { padding: 0 0 20px 25px; }
+
+.btnList { background: #fff; width: 100px; height: 40px; line-height: 40px; color: black; text-align: center; display: inline-block; border-radius: 3px;}
+.btnWrite { background: black; width: 100px; height: 40px; line-height: 40px; color: #fff; text-align: center; display: inline-block; border-radius: 3px;}
+.txtCenter { text-align: center; padding: 1rem 0 0; }
+.colValue { width: 200px; }
+#productComment { width: 900px; height: 600px; }

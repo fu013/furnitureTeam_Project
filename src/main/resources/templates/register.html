@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Furniture_postWriter</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css"/>
+    <link rel="stylesheet" th:href="@{/css/register.css}" href="../static/css/register.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <div th:replace="/fragments/header.html :: fragment-header"></div>
+        <div class="registerWrapper">
+            <h2>회원가입</h2>
+            <div class = "container">
+            	<form id = "registerForm" method = "post">
+            		<table>
+            			<colgroup>
+            				<col class = "colValue"></col>
+            			</colgroup>
+            			<tbody>
+            				<tr> <!-- 아이디 -->
+            					<th><label for = "registerId">아이디</label></th>
+            					<td><input type = "text" id = "registerId" name = "registerId" placeholder="아이디를 입력하세요"></td>
+            				</tr>
+            			
+            				<tr> <!-- 비밀번호 -->
+            					<th><label for = "registerPassword">비밀번호</label></th>
+            					<td><input type = "password" id = "registerPassword" name = "registerPassword" placeholder="비밀번호를 입력하세요">
+            					<button>중복확인</button>
+            					</td>
+            				</tr>
+            				
+            				<tr> <!-- 비밀번호재입력 -->
+            					<th><label for = "registerRePassword">비밀번호재입력</label></th>
+            					<td><input type = "password" id = "registerRePassword" name = "registerRePassword" placeholder="다시한번 입력하세요"></td>
+            				</tr>
+            				
+            				<tr> <!-- 이름 -->
+            					<th><label for = "registerName">이 름</label></th>
+            					<td><input type = "text" id = "registerName" name = "registerName" placeholder="이름을 입력하세요"></td>
+            				</tr>
+            				
+            				<tr> <!-- 생년월일 -->
+            					<th><label for = "registerBirth">생년월일</label></th>
+            					<td><input type = "number" id = "registerBirthYear" name = "registerBirthYear" placeholder="년(4자)" maxlength="4">년</td>
+            					<td>
+            						<select id = "registerBirthMonth" name = "registerBirth" class = "registerBirth">
+            							<option value = "1" selected = "selected">1</option>
+            							<option value = "2">2</option>
+            							<option value = "3">3</option>
+            							<option value = "4">4</option>
+            							<option value = "5">5</option>
+            							<option value = "6">6</option>
+            							<option value = "7">7</option>
+            							<option value = "8">8</option>
+            							<option value = "9">9</option>
+            							<option value = "10">10</option>
+            							<option value = "11">11</option>
+            							<option value = "12">12</option>
+            						</select>월
+            						<select>
+            							<option value = "1" selected="selected">1</option>
+            							<option value = "2">2</option>
+            							<option value = "3">3</option>
+            							<option value = "4">4</option>
+            							<option value = "5">5</option>
+            							<option value = "6">6</option>
+            							<option value = "7">7</option>
+            							<option value = "8">8</option>
+            							<option value = "9">9</option>
+            							<option value = "10">10</option>
+            							<option value = "11">11</option>
+            							<option value = "12">12</option>
+            							<option value = "13">13</option>
+            							<option value = "14">14</option>
+            							<option value = "15">15</option>
+            							<option value = "16">16</option>
+            							<option value = "17">17</option>
+            							<option value = "18">18</option>
+            							<option value = "19">19</option>
+            							<option value = "20">20</option>
+            							<option value = "21">21</option>
+            							<option value = "22">22</option>
+            							<option value = "23">23</option>
+            							<option value = "24">24</option>
+            							<option value = "25">25</option>
+            							<option value = "26">26</option>
+            							<option value = "27">27</option>
+            							<option value = "28">28</option>
+            							<option value = "29">29</option>
+            							<option value = "30">30</option>
+            							<option value = "31">31</option>
+            						</select>일
+            					</td>
+            				</tr>
+            				
+            				<tr> <!-- 성별 -->
+            					<th><label for = "registerGender">성 별</label></th>
+            					<td>
+            						<select id = "registerGender" name = "registerGender" class = "registerGender">
+            							<option value = "mail" selected="selected">남성</option>
+            							<option value = "femail">여성</option>
+            						</select>
+            					</td>
+            				</tr>
+            				
+            				<tr> <!-- 이메일 -->
+            					<th><label for = "registerEmail">이메일</label></th>
+            					<td><input type = "text" id = "registerEmail" name = "registerEmail" placeholder="이메일을 입력하세요"></td>
+            					
+            				</tr>
+            				
+            				<tr> <!-- 전화번호 -->
+            					<th><label for = "registerPhone">전화번호</label></th>
+            					<td><input type = "number" id = "registerPhone" name = "registerPhone" placeholder="전화번호를 입력하세요"></td>
+            				</tr>
+            			</tbody>
+            		</table>
+            		
+            		<!-- 가입, 취소 버튼 -->
+            		<div class = "txtCenter">
+            			<button class = "btnCancel" type = "button" onclick = "location.href = '/'">취소</button>
+            			<button class = "btnRegister" type = "submit" id = "ResisterSuccess">가입하기</button>
+            		</div>
+            	</form>
+            </div>
+        </div>
+    <div th:replace="/fragments/footer.html :: fragment-footer"></div>
+</body>
+
+<script>
+	// #ResisterSuccess [가입하기] 버튼 누르면 response/responseResisterSuccess.do URL로 AJAX 요청 보냄
+	$("#ResisterSuccess").on('click', function(e) {
+		const form
+	}
+</script>
+</html>

@@ -1,0 +1,114 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Karla|Open+Sans:300,400,700&display=swap');
+    body { margin: 0; padding: 0; background: #fff; font-weight: normal; font-family: 'Open Sans'; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { list-style: none; }
+    a { text-decoration: none; color: black; }
+    a:hover { color: aqua; }
+    img { border: 0 none; margin: 0; padding: 0; line-height: 0px; }
+    .hide { display: none; }
+    header {
+        position: relative;
+    }
+    header > .nav {
+        border-bottom: 1px solid black;
+        height: 80px;
+    }
+    header > .nav > .logo {
+        border: 1px solid black;
+        margin: 10px;
+        width: 100px;
+        line-height: 60px;
+        height: 60px;
+        text-align: center;
+    }
+    header > .nav > .menu {
+        position: absolute;
+        border: 1px solid black;
+        top: 0;
+        right: 0;
+        padding: 0 10px;
+        margin: 10px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    header > .nav > .menu > li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    .sliderBox {
+        height: 300px;
+        text-align: center;
+        border: 1px solid black;
+        border-top: none;
+    }
+    .sliderBox > h1 {
+        line-height: 300px;
+    }
+    .bodyWrapper {
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
+    }
+    .bodyWrapper > section {
+        flex: 1;
+        display: flex;
+    }
+    .bodyWrapper > section > .category {
+        border: 1px solid black;
+        border-right: none;
+        border-top: none;
+        overflow: auto;
+        flex: 0.3;
+        height: 500px;
+    }
+    .bodyWrapper > section > .category > ul > li {
+        border-bottom: 1px solid black;
+        font-size: 30px;
+    }
+    .bodyWrapper > section > .view {
+       border: 1px solid black;
+       border-bottom: none;
+       border-top: none;
+       flex: 1;
+    }
+    .bodyWrapper > section > .view > h1 {
+        border-bottom: 1px solid black;
+    }
+    .bodyWrapper > aside {
+        border: 1px solid black;
+        border-top: none;
+        border-left: none;
+        flex: 0.2;
+        height: 500px;
+    }
+    .bodyWrapper > aside > h1 {
+        text-align: center;
+        border-bottom: 1px solid black;
+    }
+    .bodyWrapper > section > .view > .itemUl > .itemLi {
+        position: relative;
+        border-bottom: 1px solid black;
+        height: 200px;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    .bodyWrapper > section > .view > .itemUl > .itemLi:last-child {
+        border-bottom: none;
+    }
+    .bodyWrapper > section > .view > .itemUl > .itemLi > .imgBox {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+    }
+    footer {
+        border-top: 1px solid black;
+        clear: both;
+        text-align: center;
+        height: 200px;
+    }
+    footer h1 {
+        line-height: 200px;
+    }
