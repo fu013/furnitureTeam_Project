@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device=width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Furniture_postWriter</title>
+    <title>Furniture_register</title>
     <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css"/>
     <link rel="stylesheet" th:href="@{/css/register.css}" href="../static/css/register.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -89,6 +89,7 @@
 		const formData = new FormDatad($('registerWrapperForm')[0]);
 		e.preventDefault();
 		$.ajax({
+			/* get, post 중 전송방식을 선택한다. */
 			type : "POST",
 			enctype : 'multipart/form-data',
 			url : '/resisterSuccess',
