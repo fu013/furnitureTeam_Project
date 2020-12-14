@@ -1,0 +1,13 @@
+create table Product(
+	product_no number(10) not null PRIMARY KEY,
+	productCategory_NomeScale varchar2(20)  not null,
+	productCategory_NumberOfHouseholds varchar2(20) not null,
+	productCategory_Interior varchar2(20) not null,
+	productName varchar2(50) unique not null,
+	productPrice number(10) not null,
+	productGuideline varchar2(50) not null,
+	productSize varchar2(20) not null,
+	productColor varchar2(20) not null,
+	productComment varchar(1000) not null,
+	create_date date default sysdate
+);
