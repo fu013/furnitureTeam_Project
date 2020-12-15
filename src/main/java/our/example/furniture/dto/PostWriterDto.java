@@ -12,7 +12,7 @@ public class PostWriterDto {
     private String productSize;
     private String productColor;
     private MultipartFile productMainImg;
-    private MultipartFile productImg;
+    private MultipartFile[] productImg;
     private String productComment;
 
     public String getProductCategoryHomeScale() {
@@ -87,13 +87,9 @@ public class PostWriterDto {
         this.productMainImg = productMainImg;
     }
 
-    public MultipartFile getProductImg() {
-        return productImg;
-    }
+    public MultipartFile[] getProductImg() { return productImg; }
 
-    public void setProductImg(MultipartFile productImg) {
-        this.productImg = productImg;
-    }
+    public void setProductImg(MultipartFile[] productImg) { this.productImg = productImg; }
 
     public String getProductComment() {
         return productComment;

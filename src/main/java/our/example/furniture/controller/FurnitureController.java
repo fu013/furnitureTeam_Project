@@ -10,10 +10,13 @@ import our.example.furniture.dto.PostWriterDto;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.UploadImage;
 
+import java.io.IOException;
+
 @Controller
 public class FurnitureController {
     @Autowired
     private UploadImage uploadImage;
+
     @Autowired
     private PostMapper postMapper;
 
@@ -37,7 +40,8 @@ public class FurnitureController {
 
     // postWriter[게시글작성] :: URL 매핑
     @PostMapping("/productRegister")
-    public String temp(PostWriterDto postWriterDto) {
+    public String temp(PostWriterDto postWriterDto) throws Exception {
+        uploadImage.restore(postWriterDto);
         postMapper.insertAllName(postWriterDto);
         return "index";
     }
