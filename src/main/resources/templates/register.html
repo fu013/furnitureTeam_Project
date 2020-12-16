@@ -45,7 +45,7 @@
             				</tr>
             				
             				<tr> <!-- 생년월일 -->
-            					<th><label for = "registerBirth">생년월일</label></th>
+            					<th><label for = "registerBirthYear">생년월일</label></th>
             					<td><input type = "date" id = "registerBirthYear" name = "registerBirthYear"></td>
             				</tr>
             				
@@ -75,7 +75,7 @@
             		<!-- 가입, 취소 버튼 -->
             		<div class = "txtCenter">
             			<button class = "btnCancel" type = "button" onclick = "location.href = '/'">취소</button>
-            			<button class = "btnRegister" type = "submit" id = "ResisterSuccess">가입하기</button>
+            			<button class = "btnRegister" type = "submit" id = "registerSuccess">가입하기</button>
             		</div>
             	</form>
             </div>
@@ -84,25 +84,41 @@
 </body>
 
 <script>
-	// #resisterSuccess [가입하기] 버튼 누르면 response/responseResisterSuccess.do URL로 AJAX 요청 보냄
-	$("#resisterSuccess").on('click', function(e) {
-		const formData = new FormDatad($('registerWrapperForm')[0]);
-		e.preventDefault();
-		$.ajax({
-			/* get, post 중 전송방식을 선택한다. */
-			type : "POST",
-			enctype : 'multipart/form-data',
-			url : '/resisterSuccess',
-			data : formData,
-			processData : false,
-			contentType : false,
-			cache : false,
-			success : function (result) {
-				location.href = "/";
-			},
-			error : function(e) {
-			}
-		});
-	})
+   var emailCheckJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+   $("#registerSuccess").on('click', function(e) {
+      var id = document.getElementById("registerId");
+      var pw = document.getElementById("registerPassword");
+      var pw2 = document.getElementById("registerRePassword");
+      var name = document.getElementById("registerName");
+      var birth = document.getElementById("registerBirth");
+      var gender = document.getElementById("registerGender");
+      var email = document.getElementById("registerEmail");
+      var phone = document.getElementById("registerPhone");
+
+	  if(phone.value == "") {
+         alert("전화번호를 입력해 주세요");
+         phone.focus();
+         e.preventDefault;
+      	 return false;
+      } else {
+         const formData = new FormData($('#registerForm')[0]);
+      	 e.preventDefault();
+         $.ajax({
+            type : "POST",
+            enctype : 'multipart/form-data',
+            url : '/registerSuccess',
+            data : formData,
+            processData : false,
+            contentType : false,
+            cache : false,
+            success : function (result) {
+               location.href = "/";
+            },
+            error : function(e) {
+            }
+         });
+      }
+   })
 </script>
 </html>

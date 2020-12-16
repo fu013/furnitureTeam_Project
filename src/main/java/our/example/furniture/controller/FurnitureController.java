@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import our.example.furniture.dto.PostWriterDto;
+import our.example.furniture.dto.RegisterDto;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.UploadImage;
 
@@ -36,6 +37,11 @@ public class FurnitureController {
     @GetMapping("/register")
     public String register(Model model) {
         return "register";
+    }
+
+    @PostMapping("/registerSuccess")
+    public String temp2(RegisterDto registerDto) {
+        return "index";
     }
 
     // postWriter[게시글작성] :: URL 매핑

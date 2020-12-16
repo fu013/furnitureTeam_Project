@@ -44,7 +44,7 @@ public class UploadImage {
         // 이너 이미지(다중) - 데이터 배열형태로 가져오기
         MultipartFile[] images = postWriterDto.getProductImg();
 
-        // 이너 이미지(다중) - 데이터 담을 리스트 생성
+        // 이너 이미지(다중) - 데이터 담을 리스트(HashMap Data) 생성
         List<Map<String, Object>> imagesList = new ArrayList<Map<String, Object>>();
 
         for (int i = 0; i < images.length; i++) {
@@ -63,6 +63,21 @@ public class UploadImage {
             imagesInfo.put("saveFileSize", saveFileSize);
             imagesInfo.put("saveFileNameInner", saveFileNameInner);
             imagesList.add(imagesInfo);
+
+            // 이너 이미지(다중) 파일 images/inner 폴더에 데이터 저장
+            byte[] data = images[i].getBytes();
+            FileOutputStream fos = new FileOutputStream(SAVE_PATH_INNER + "/" + saveFileNameInner);
+            fos.write(data);
+            fos.close();
+        }
+
+        // imagesList 에 데이터가 잘들어왔는지 검사하는 로직
+        for(int i = 0; i < imagesList.size(); i++){
+            //arraylist 사이즈 만큼 for 문을 실행합니다.
+            log.info("list 순서 " + i + "번쨰");
+            for( Map.Entry<String, Object> elem : imagesList.get(i).entrySet() ){
+                log.info( String.format("키 : %s, 값 : %s", elem.getKey(), elem.getValue()) );
+            }
         }
     }
 
@@ -82,7 +97,7 @@ public class UploadImage {
         return fileName;
     }
 
-    // 이미지 - 파일 데이터를 실제 경로에 저장하는 Method
+    // 메인 이미지(단일) 파일 images/main 폴더에 데이터 저장
     private boolean writeFile(PostWriterDto postWriterDto, String saveFileName, String SAVE_PATH) throws IOException {
             byte[] data = postWriterDto.getProductMainImg().getBytes();
             FileOutputStream fos = new FileOutputStream(SAVE_PATH + "/" + saveFileName);
@@ -90,6 +105,4 @@ public class UploadImage {
             fos.close();
             return false;
     }
-
-    // 이너 이미지 - 파일 데이터를 실제 경로에 저장하는 Method 따로 만들기 data 가 다름
 }
