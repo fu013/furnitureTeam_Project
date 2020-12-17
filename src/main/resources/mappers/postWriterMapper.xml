@@ -6,8 +6,9 @@
         >
 <mapper namespace="our.example.furniture.repository.PostMapper">
     <insert id="insertAllName">
-        INSERT INTO product(product_no, productCategory_NomeScale, productCategory_NumberOfHouseholds, productCategory_Interior, productName, productPrice, productGuideline, productSize, productColor, productComment) VALUES(AUTO_INCREMENT.NEXTVAL, #{productCategoryHomeScale}, #{productCategoryNumberOfHouseholds}, #{productCategoryInterior},
-        #{productName}, #{productPrice}, #{productGuideline}, #{productSize}, #{productColor}, #{productComment}
-        )
+        INSERT INTO product(product_no, productCategory_NomeScale, productCategory_NumberOfHouseholds,
+        productCategory_Interior, productName, productPrice, productGuideline, productSize, productColor, productComment)
+        VALUES(AUTO_INCREMENT.NEXTVAL, #{productCategoryHomeScale}, #{productCategoryNumberOfHouseholds}, #{productCategoryInterior},
+        #{productName}, #{productPrice}, #{productGuideline}, #{productSize}, #{productColor}, #{productComment})
     </insert>
 </mapper>
