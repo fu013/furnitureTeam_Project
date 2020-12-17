@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        >
+<mapper namespace="our.example.furniture.repository.imgUploadMapper">
+    <insert id ="restore" parameterType="java.util.HashMap">
+        <foreach item="item" collection="list">
+            INSERT INTO SERVER_CUN_SUM (t_seq, k_seq, s_total_count, s_unique_count)
+            VALUES (${item.t_seq}, #{item.k_seq}, #{item.s_total_count}, #{item.s_unique_count})
+        </foreach>
+    </insert>
+</mapper>

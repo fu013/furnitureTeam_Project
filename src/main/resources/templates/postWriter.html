@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/postWriter.css}" href="../static/css/postWriter.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script th:src="@{/js/test.js}"></script>
+    <script th:src="@{/js/postWriter.js}"></script>
 </head>
 <body>
     <div th:replace="/fragments/header.html :: fragment-header"></div>
@@ -124,25 +124,4 @@
     </div>
     <div th:replace="/fragments/footer.html :: fragment-footer"></div>
 </body>
-<script>
-    // #productRegister[게시물등록] 버튼을 눌렀을때 response/responseProductRegister.do URL로 AJAX 요청을 보냄
-    $("#productRegister").on('click', function(e) {
-        const formData = new FormData($('#postWriterWrapperForm')[0]);
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: '/productRegister',
-            data: formData,
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (result) {
-                location.href="/";
-            },
-            error: function (e) {
-           }
-        });
-    });
-</script>
 </html>
