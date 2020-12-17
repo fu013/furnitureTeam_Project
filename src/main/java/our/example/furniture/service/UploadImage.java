@@ -45,7 +45,7 @@ public class UploadImage {
         MultipartFile[] images = postWriterDto.getProductImg();
 
         // 이너 이미지(다중) - 데이터 담을 리스트(HashMap Data) 생성
-        List<Map<String, Object>> imagesList = new ArrayList<Map<String, Object>>();
+        List<String> imagesList = new ArrayList<Map<String, Object>>();
 
         for (int i = 0; i < images.length; i++) {
             // 이너 이미지(다중) - 원래 이름
