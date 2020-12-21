@@ -1,25 +1,39 @@
 package our.example.furniture.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import our.example.furniture.dto.InnerImagesInfoDto;
+import our.example.furniture.dto.MainImageInfoDto;
 import our.example.furniture.dto.PostWriterDto;
 import our.example.furniture.dto.RegisterDto;
-import our.example.furniture.repository.PostMapper;
-import our.example.furniture.service.UploadImage;
+import our.example.furniture.repository.InnerImagesUploadMapper;
+import our.example.furniture.repository.MainImageUploadMapper;
+import our.example.furniture.repository.PostWriterMapper;
+import our.example.furniture.service.UploadInnerImages;
+import our.example.furniture.service.UploadMainImage;
 
-import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class FurnitureController {
     @Autowired
-    private UploadImage uploadImage;
-
+    private UploadInnerImages uploadInnerImages;
     @Autowired
-    private PostMapper postMapper;
+    private UploadMainImage uploadMainImage;
+    @Autowired
+    private InnerImagesUploadMapper innerImagesUploadMapper;
+    @Autowired
+    private MainImageUploadMapper mainImageUploadMapper;
+    @Autowired
+    private PostWriterMapper postWriterMapper;
+
+    private Log log = LogFactory.getLog(this.getClass());
 
     // index[홈페이지] :: URL 매핑
     @GetMapping("/")
@@ -47,8 +61,21 @@ public class FurnitureController {
     // postWriter[게시글작성] :: URL 매핑
     @PostMapping("/productRegister")
     public String temp(PostWriterDto postWriterDto) throws Exception {
-        uploadImage.restore(postWriterDto);
-        postMapper.insertAllName(postWriterDto);
+        // 게시물에 값 넣어주는 로직
+        postWriterMapper.insertProductInfo(postWriterDto);
+
+        // 메인 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
+        if(!postWriterDto.getProductMainImg().isEmpty()) {
+            // 메인 이미지 DB
+            List<MainImageInfoDto> MainImageLogic = uploadMainImage.MainImageLogic(postWriterDto);
+            mainImageUploadMapper.InsertMainImage(MainImageLogic);
+        }
+
+        // 내부 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
+        if(postWriterDto.getProductImg().length >= 1 && !postWriterDto.getProductImg()[0].isEmpty()) {
+            List<InnerImagesInfoDto> InnerImageLogic = uploadInnerImages.InnerImagesLogic(postWriterDto);
+            innerImagesUploadMapper.InsertInnerImages(InnerImageLogic);
+        }
         return "index";
     }
 }

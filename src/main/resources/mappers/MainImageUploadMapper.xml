@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        >
+<mapper namespace="our.example.furniture.repository.MainImageUploadMapper">
+    <insert id="InsertMainImage" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+            INTO Product_MainImg(product_no, img_SaveName, Img_extName, Img_FileSize)
+            VALUES (AUTO_INCREMENT.CURRVAL, #{item.saveImageName}, #{item.extName}, #{item.FileSize})
+        </foreach>
+    </insert>
+</mapper>

@@ -11,3 +11,9 @@ create table Product(
 	productComment varchar(1000) not null,
 	create_date date default sysdate
 );
+
+create table img(
+	productMainImg varchar2(20)  not null,
+	productInnerImg varchar2(20)  not null,
+	create_date date default sysdate
+)
