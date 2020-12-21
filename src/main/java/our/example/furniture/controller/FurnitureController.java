@@ -15,6 +15,7 @@ import our.example.furniture.dto.RegisterDto;
 import our.example.furniture.repository.InnerImagesUploadMapper;
 import our.example.furniture.repository.MainImageUploadMapper;
 import our.example.furniture.repository.PostWriterMapper;
+import our.example.furniture.repository.RegisterMapper;
 import our.example.furniture.service.UploadInnerImages;
 import our.example.furniture.service.UploadMainImage;
 
@@ -32,6 +33,8 @@ public class FurnitureController {
     private MainImageUploadMapper mainImageUploadMapper;
     @Autowired
     private PostWriterMapper postWriterMapper;
+    @Autowired
+    private RegisterMapper registerMapper;
 
     private Log log = LogFactory.getLog(this.getClass());
 
@@ -55,6 +58,7 @@ public class FurnitureController {
 
     @PostMapping("/registerSuccess")
     public String temp2(RegisterDto registerDto) {
+        registerMapper.insertRegister(registerDto);
         return "index";
     }
 
@@ -66,7 +70,6 @@ public class FurnitureController {
 
         // 메인 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
         if(!postWriterDto.getProductMainImg().isEmpty()) {
-            // 메인 이미지 DB
             List<MainImageInfoDto> MainImageLogic = uploadMainImage.MainImageLogic(postWriterDto);
             mainImageUploadMapper.InsertMainImage(MainImageLogic);
         }

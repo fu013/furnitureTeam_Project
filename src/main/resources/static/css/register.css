@@ -22,13 +22,17 @@ border: 1px solid #e8e8e8; background: #fff; text-decoration: none; text-indent:
 transition: all 0.5s; vertical-align: middle; }
 
 /* select 구문 설정 */
-.registerGender { width: 80px; height: 35px; color: #373737; font-size: 13px;
+.registerGender,
+.registerPhone1 { width: 80px; height: 35px; color: #373737; font-size: 13px;
 border: 1px solid #e8e8e8; background: #fff; text-decoration: none; text-indent: 10px;
 transition: all 0.5s; vertical-align: middle; }
 
 /* input의 attribute인 placeholder 설정 -> ::를 붙여서 selector를 만든다. */
 /* -webkit- : 구글, 사파리 브라우저에 적용 */
 input::-webkit-input-placeholder{color:#999; font-size:13px;}
+
+/* 버튼 설정 */
+.overlap { margin-left: 20px; }
 
 /* 테이블 설정 */
 th,

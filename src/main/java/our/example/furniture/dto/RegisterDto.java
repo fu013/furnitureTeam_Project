@@ -8,8 +8,10 @@ public class RegisterDto {
 	private String registerBirth;
 	private String registerGender;
 	private String registerEmail;
-	private String registerPhone;
-	
+	private String registerPhone1;
+	private String registerPhone2;
+	private String registerPhone3;
+
 	public String getRegisterId() {
 		return registerId;
 	}
@@ -52,10 +54,23 @@ public class RegisterDto {
 	public void setRegisterEmail(String registerEmail) {
 		this.registerEmail = registerEmail;
 	}
-	public String getRegisterPhone() {
-		return registerPhone;
+	public String getRegisterPhone1() {
+		return registerPhone1;
 	}
-	public void setRegisterPhone(String registerPhone) {
-		this.registerPhone = registerPhone;
+	public void setRegisterPhone1(String registerPhone1) {
+		this.registerPhone1 = registerPhone1;
 	}
+	public String getRegisterPhone2() {
+		return registerPhone2;
+	}
+	public void setRegisterPhone2(String registerPhone2) {
+		this.registerPhone2 = registerPhone2;
+	}
+	public String getRegisterPhone3() {
+		return registerPhone3;
+	}
+	public void setRegisterPhone3(String registerPhone3) {
+		this.registerPhone3 = registerPhone3;
+	}
+
 }
