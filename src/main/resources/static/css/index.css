@@ -11,7 +11,6 @@
         position: relative;
     }
     header > .nav {
-        border-bottom: 1px solid black;
         height: 80px;
     }
     header > .nav > .logo {
@@ -42,7 +41,6 @@
         height: 300px;
         text-align: center;
         border: 1px solid black;
-        border-top: none;
     }
     .sliderBox > h1 {
         line-height: 300px;
@@ -76,6 +74,8 @@
     }
     .bodyWrapper > section > .view > h1 {
         border-bottom: 1px solid black;
+        padding: 0;
+        margin: 0;
     }
     .bodyWrapper > aside {
         border: 1px solid black;
@@ -91,19 +91,25 @@
     .bodyWrapper > section > .view > .itemUl > .itemLi {
         position: relative;
         border-bottom: 1px solid black;
-        height: 200px;
+        height: 300px;
         padding: 30px;
         box-sizing: border-box;
     }
-    .bodyWrapper > section > .view > .itemUl > .itemLi:last-child {
-        border-bottom: none;
-    }
     .bodyWrapper > section > .view > .itemUl > .itemLi > .imgBox {
-        width: 100px;
-        height: 100px;
+        width: 250px;
+        height: 240px;
+        display: inline-block;
         border: 1px solid black;
     }
+    .bodyWrapper > section > .view > .itemUl > .itemLi > .productUl {
+        display: inline-block;
+        position: relative;
+        font-size: 25px;
+        bottom: 85px;
+        left: 10px;
+    }
     footer {
+        margin-top: 20px;
         border-top: 1px solid black;
         clear: both;
         text-align: center;

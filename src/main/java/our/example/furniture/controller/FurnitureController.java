@@ -8,14 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import our.example.furniture.dto.InnerImagesInfoDto;
-import our.example.furniture.dto.MainImageInfoDto;
-import our.example.furniture.dto.PostWriterDto;
-import our.example.furniture.dto.RegisterDto;
-import our.example.furniture.repository.InnerImagesUploadMapper;
-import our.example.furniture.repository.MainImageUploadMapper;
-import our.example.furniture.repository.PostWriterMapper;
-import our.example.furniture.repository.RegisterMapper;
+import our.example.furniture.dto.*;
+import our.example.furniture.repository.*;
 import our.example.furniture.service.UploadInnerImages;
 import our.example.furniture.service.UploadMainImage;
 
@@ -35,12 +29,17 @@ public class FurnitureController {
     private PostWriterMapper postWriterMapper;
     @Autowired
     private RegisterMapper registerMapper;
+    @Autowired
+    private SelectAllProductMapper selectAllProductMapper;
 
     private Log log = LogFactory.getLog(this.getClass());
+    private Object SelectedPostDto;
 
     // index[홈페이지] :: URL 매핑
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(SelectedPostDto selectedPostDto) {
+        selectAllProductMapper.SelectAllProduct();
+        log.info(selectedPostDto.getProduct_no());
         return "index";
     }
     // postWriter[글쓰기] :: URL 매핑
