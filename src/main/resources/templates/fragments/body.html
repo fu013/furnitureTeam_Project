@@ -22,13 +22,13 @@
                 <div class="view">
                     <h1>정렬방식</h1>
                     <ul class="itemUl">
-                        <li class="itemLi">
+                        <li th:each="postList : ${postList}" class="itemLi">
                             <div class="imgBox">
                             </div>
                             <ul class="productUl">
-                                <li>상품명 : 딘트 조명 가죽침대</li>
-                                <li>가격 : 50000 원</li>
-                                <li>태그 : 모던, 4인 가구, 원룸 </li>
+                                <li th:text="'상품명: ' + ${postList.getProductName()}">상품명</li>
+                                <li th:text="'상품가격: ' + ${postList.getProductPrice()}">상품가격</li>
+                                <li th:text="'태그 : ' + ${postList.getProductCategory_HomeScale()} + ', ' + ${postList.getProductCategory_NumberOfHouseholds()} + ', ' + ${postList.getProductCategory_Interior()}">태그</li>
                             </ul>
                         </li>
                     </ul>

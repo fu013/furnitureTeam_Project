@@ -2,6 +2,7 @@ package our.example.furniture.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.annotations.UpdateProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,13 +34,12 @@ public class FurnitureController {
     private SelectAllProductMapper selectAllProductMapper;
 
     private Log log = LogFactory.getLog(this.getClass());
-    private Object SelectedPostDto;
 
     // index[홈페이지] :: URL 매핑
     @GetMapping("/")
-    public String index(SelectedPostDto selectedPostDto) {
-        selectAllProductMapper.SelectAllProduct();
-        log.info(selectedPostDto.getProduct_no());
+    public String index(Model model) {
+        List<SelectedPostDto> postList = selectAllProductMapper.SelectAllProduct();
+        model.addAttribute("postList", postList);
         return "index";
     }
     // postWriter[글쓰기] :: URL 매핑
@@ -64,7 +64,6 @@ public class FurnitureController {
     // postWriter[게시글작성] :: URL 매핑
     @PostMapping("/productRegister")
     public String temp(PostWriterDto postWriterDto) throws Exception {
-        // 게시물에 값 넣어주는 로직
         postWriterMapper.insertProductInfo(postWriterDto);
 
         // 메인 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직

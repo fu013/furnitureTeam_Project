@@ -1,6 +1,6 @@
 CREATE TABLE Product(
 	product_no number(10) not null PRIMARY KEY,
-	productCategory_NomeScale varchar2(20)  not null,
+	productCategory_HomeScale varchar2(20)  not null,
 	productCategory_NumberOfHouseholds varchar2(20) not null,
 	productCategory_Interior varchar2(20) not null,
 	productName varchar2(50) unique not null,
@@ -14,9 +14,9 @@ CREATE TABLE Product(
 
 CREATE TABLE Product_MainImg(
 	product_no number(10) not null,
-	img_SaveName varchar2(30) not null,
-	Img_extName varchar2(30) not null,
-	Img_FileSize varchar2(30) not null,
+	img_saveName varchar2(30) not null,
+	img_extName varchar2(30) not null,
+	img_fileSize varchar2(30) not null,
 	create_date date default sysdate,
 	CONSTRAINTS FK_product_no_2 FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
@@ -24,9 +24,9 @@ CREATE TABLE Product_MainImg(
 
 CREATE TABLE Product_InnerImages(
 	product_no number(10) not null,
-	img_SaveName varchar2(30) not null,
-	Img_extName varchar2(30) not null,
-	Img_FileSize varchar2(30) not null,
+	img_saveName varchar2(30) not null,
+	img_extName varchar2(30) not null,
+	img_fileSize varchar2(30) not null,
 	create_date date default sysdate,
 	CONSTRAINTS FK_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE

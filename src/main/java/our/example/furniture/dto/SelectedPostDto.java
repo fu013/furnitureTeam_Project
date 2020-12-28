@@ -2,7 +2,7 @@ package our.example.furniture.dto;
 
 public class SelectedPostDto {
     private int product_no;
-    private String productCategory_NomeScale;
+    private String productCategory_HomeScale;
     private String productCategory_NumberOfHouseholds;
     private String productCategory_Interior;
     private String productName;
@@ -20,12 +20,12 @@ public class SelectedPostDto {
         this.product_no = product_no;
     }
 
-    public String getProductCategory_NomeScale() {
-        return productCategory_NomeScale;
+    public String getProductCategory_HomeScale() {
+        return productCategory_HomeScale;
     }
 
-    public void setProductCategory_NomeScale(String productCategory_NomeScale) {
-        this.productCategory_NomeScale = productCategory_NomeScale;
+    public void setProductCategory_HomeScale(String productCategory_HomeScale) {
+        this.productCategory_HomeScale = productCategory_HomeScale;
     }
 
     public String getProductCategory_NumberOfHouseholds() {

@@ -100,6 +100,9 @@
         height: 240px;
         display: inline-block;
         border: 1px solid black;
+        background-image: url("C:\images\inner\2020112154352552.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi > .productUl {
         display: inline-block;
