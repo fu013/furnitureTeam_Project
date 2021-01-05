@@ -67,16 +67,19 @@ public class UploadInnerImages {
             Long saveFileSize = images[i].getSize();
             // 이너 이미지(다중) - 서버에서 저장 할 파일 이름(고유값, 업로드 날짜의 밀리세컨즈로 이름을 정함)
             String saveFileNameInner = getSaveFileName(extNameInner);
+            // 이미지 경로 + 네임
+            String imgURL = "/inner/" + saveFileNameInner;
 
             imageInfoDto.setSaveImageName(saveFileNameInner);
             imageInfoDto.setExtName(extNameInner);
             imageInfoDto.setFileSize(saveFileSize);
+            imageInfoDto.setImgURL(imgURL);
 
             imagesList.add(imageInfoDto);
 
             // 이너 이미지(다중) 파일 images/inner 폴더에 데이터 저장
             byte[] data = images[i].getBytes();
-            FileOutputStream fos = new FileOutputStream(SAVE_PATH_INNER + "/" + saveFileNameInner);
+            FileOutputStream fos = new FileOutputStream(SAVE_PATH_INNER +saveFileNameInner);
             fos.write(data);
             fos.close();
         }

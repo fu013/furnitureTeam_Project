@@ -1,7 +1,6 @@
 package our.example.furniture.service;
 
 import org.springframework.stereotype.Component;
-import our.example.furniture.dto.InnerImagesInfoDto;
 import our.example.furniture.dto.MainImageInfoDto;
 import our.example.furniture.dto.PostWriterDto;
 
@@ -24,6 +23,9 @@ public class UploadMainImage {
         long mainImgSize = postWriterDto.getProductMainImg().getSize();
         // 메인 이미지 - 서버에서 저장 할 파일 이름(고유값, 업로드 날짜의 밀리세컨즈로 이름을 정함)
         String saveFileName = UploadInnerImages.getSaveFileName(extName);
+        // 이미지 경로 + 네임
+        String imgURL = "/main/" + saveFileName;
+
         // 메인 이미지 - 이미지 리스트
         List<MainImageInfoDto> MainImageList = new ArrayList<>();
 
@@ -31,6 +33,7 @@ public class UploadMainImage {
         mainImgDto.setSaveImageName(saveFileName);
         mainImgDto.setExtName(extName);
         mainImgDto.setFileSize(mainImgSize);
+        mainImgDto.setImgURL(imgURL);
         MainImageList.add(mainImgDto);
 
         // 받은 이미지파일 폴더에 저장하는 Method

@@ -95,16 +95,13 @@
         padding: 30px;
         box-sizing: border-box;
     }
-    .bodyWrapper > section > .view > .itemUl > .itemLi > .imgBox {
+    .bodyWrapper > section > .view > .itemUl > .itemLi > a > .imgBox {
         width: 250px;
         height: 240px;
         display: inline-block;
         border: 1px solid black;
-        background-image: url("C:\images\inner\2020112154352552.jpg");
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
     }
-    .bodyWrapper > section > .view > .itemUl > .itemLi > .productUl {
+    .bodyWrapper > section > .view > .itemUl > .itemLi > a > .productUl {
         display: inline-block;
         position: relative;
         font-size: 25px;

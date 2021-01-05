@@ -2,18 +2,19 @@ package our.example.furniture.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.ibatis.annotations.UpdateProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import our.example.furniture.dto.*;
 import our.example.furniture.repository.*;
 import our.example.furniture.service.UploadInnerImages;
 import our.example.furniture.service.UploadMainImage;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -32,6 +33,8 @@ public class FurnitureController {
     private RegisterMapper registerMapper;
     @Autowired
     private SelectAllProductMapper selectAllProductMapper;
+    @Autowired
+    private SelectPostMapper selectPostMapper;
 
     private Log log = LogFactory.getLog(this.getClass());
 
@@ -54,6 +57,7 @@ public class FurnitureController {
     public String register(Model model) {
         return "register";
     }
+
 
     @PostMapping("/registerSuccess")
     public String temp2(RegisterDto registerDto) {
@@ -78,5 +82,14 @@ public class FurnitureController {
             innerImagesUploadMapper.InsertInnerImages(InnerImageLogic);
         }
         return "index";
+    }
+
+    // 상품 상세페이지 :: URL 매핑
+    @GetMapping("/postInfo")
+    public String postInfo(@RequestParam("post_no") int post_no, SelectedPostDto selectedPostDto, Model model) {
+        selectedPostDto.setProduct_No(post_no);
+        SelectedPostDto postInfo = selectPostMapper.SelectPost(selectedPostDto);
+        model.addAttribute("postInfo", postInfo);
+        return "postInfo";
     }
 }

@@ -3,6 +3,7 @@ package our.example.furniture.dto;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PostWriterDto {
+    private int product_no;
     private String productCategoryHomeScale;
     private String productCategoryNumberOfHouseholds;
     private String productCategoryInterior;
@@ -14,6 +15,14 @@ public class PostWriterDto {
     private MultipartFile productMainImg;
     private MultipartFile[] productImg;
     private String productComment;
+
+    public int getProduct_no() {
+        return product_no;
+    }
+
+    public void setProduct_no(int product_no) {
+        this.product_no = product_no;
+    }
 
     public String getProductCategoryHomeScale() {
         return productCategoryHomeScale;

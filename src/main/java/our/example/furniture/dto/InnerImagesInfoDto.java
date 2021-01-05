@@ -4,6 +4,15 @@ package our.example.furniture.dto;
         private String saveImageName;
         private String extName;
         private Long FileSize;
+        private String imgURL;
+
+        public String getImgURL() {
+            return imgURL;
+        }
+
+        public void setImgURL(String imgURL) {
+            this.imgURL = imgURL;
+        }
 
         public String getSaveImageName() {
             return saveImageName;

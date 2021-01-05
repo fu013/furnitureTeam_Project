@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Furniture</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/postInfo.css}"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <div th:replace="/fragments/header.html :: fragment-header"></div>
+    <section>
+        <div class="info_wrapper">
+            <div class="img_section"><img th:src="${postInfo.getImg_url_main()}"></div>
+            <div class="read_section">
+                <ul>
+                    <li class="info_title">
+                        <h5 class="title" th:text="${postInfo.getProductName()}"></h5>
+                        <p class="size"></p>
+                        <span class="status"><?=$product_select_array['product_category']?></span>
+                        <hr>
+                    </li>
+                    <li class="explanation"><?=$product_select_array['product_guideline']?></li>
+                    <li class="price">판매가:<h4 th:text="${postInfo.getProductPrice()} + '원'"></h4>
+                    </li>
+                    <li class="colour">색상:
+                        <?=$product_select_array['product_color']?>
+                        </span>
+                    </li>
+                    <li class="size_2">사이즈:<span class="size_box"><?=$product_select_array['product_size']?></span></li>
+                    <li class="total_price">총 상품 금액:<h4><?=$product_select_array['product_price']?></h4>원</li>
+
+                    <li class="like">
+                        <button type="button" class="like_button">좋아요</button>
+
+                        <input
+                                type="hidden"
+                                class="like_post_no"
+                                name="like_post_no"
+                                value="<?=$post_no?>">
+                    </li>
+
+                    <li class="jjim_li">
+                        <button class="jjim_button">찜하기</button>
+
+                        <input
+                                type="hidden"
+                                class="jjim_post_no"
+                                name="jjim_post_no"
+                                value="<?=$post_no?>">
+                    </li>
+                    <li class="basket_li">
+                        <!-- <form action="basket.php" method="post"> -->
+                        <button type="button" class="basket" id="basket_button">장바구니</button>
+
+                        <input
+                                type="hidden"
+                                class="basket_post_no"
+                                name="basket_post_no"
+                                value="<?=$post_no?>">
+                        <!-- </form> -->
+                    </li>
+                    <li>조회수:
+                        <?=$post_view?></li>
+                    <li class="purchase_li">
+                        <button class="purchase_button">주문기능은 없습니다</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab_div">
+            <ul class="tab_menu">
+                <li>
+                    <a
+                            class="targetInfo"
+                            href="#a"
+                            style=" border: 1px solid black; font-size: 20px; color: black;">상품정보</a>
+                </li>
+                <li>
+                    <a class="tabReview" href="#a" style=" color: black; ">구매후기(<?=$review_count_row?>)</a>
+                </li>
+            </ul>
+        </div>
+        <div class="detail_info">
+            <p>&nbsp;<?=$product_select_array['product_comment']?></p>
+
+            <div class='img_upload' alt='이미지 올리는 곳'>
+                <?php
+            while($img_select_array = mysqli_fetch_array($img_select_result)) {  // 어레이는 처음에 가져올떄 무조건 최상단의 값을 가져오는데, 한번 가져온배열은 다시가져오지않으므로, 와일문을 통해
+              // 돌리게되면 처음가져왔을때 최상단배열 그리고 그배열은 다시가져오지않으니 두번째엔 그다음배열을 가져오게된다 이런식으로 배열의 갯수대로 와일문이돌고 모든 배열을 다 가져오게되며,
+              // 최상단부터 순차적으로 값을 가져오게된다. 그래서 가져올때마다 값을넣으면 1번째 배열의값 2번쨰~ 마지막 배열에 있는값까지 다 들어간다.
+            </div>
+
+            <div class="tab_div" id="tab_back">
+                <ul class="tab_menu">
+                    <li>
+                        <a class="tabContent" href="#a" style=" color: black;">상품정보</a>
+                    </li>
+                    <li>
+                        <a
+                                class="targetReview"
+                                href="#a"
+                                style=" border: 1px solid black; font-size: 20px; color: black;">구매후기(<?=$review_count_row?>)</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="review_spot">
+                <?php
+               $con = mysqli_connect("localhost","seungchanshop25","tmdcks2416!","seungchanshop25");
+                $comment = 'select * from seungchanshop25.comment where product_autoNum = '.$post_no.' order by created_at desc'.' '.$sqlLimit;
+                $result = mysqli_query($con, $comment);
+                include "info/comment_info.php";
+              ?>
+            </div>
+
+            <?php echo $paging ?>
+
+            <!-- 댓글 등록 -->
+            <div
+                    class="review_register"
+                    style="border: 1px solid black; height: 200px; box-sizing: border-box; padding: 20px; text-align: left; position: relative;">
+                <textarea
+                        placeholder="댓글을 입력해주세요."
+                        id="review_commnet"
+                        name="review_comment"
+                        style="width: 100%; height: 60%; border: 1px solid black; margin: 0 -3px 0;"></textarea>
+                <div style="margin-top: 15px;">
+                    <span style="font-size: 15px;">
+                        상품만족도 조사:
+                        <select
+                                name="review_satisfaction"
+                                class="review_satisfaction"
+                                id="review_satisfaction"
+                                title="상품만족도조사"
+                                style="width: 120px; height: 30px;">
+                            <option value="최고에요">최고에요</option>
+                            <option value="굿이에요">굿이에요</option>
+                            <option value="그냥그래요">그냥그래요</option>
+                            <option value="별로에요">별로에요</option>
+                            <option value="최악이에요">최악이에요</option>
+                        </select>
+                    </span>
+                    <input
+                            type="hidden"
+                            id="review_userNickname"
+                            name="review_userNickname"
+                            value="<?=$user_nickname?>">
+                    <input
+                            type="hidden"
+                            id="review_imgName"
+                            name="review_imgName"
+                            value="<?=$product_select_array['main_img_dir_name']?>">
+                    <input type="hidden" id="post_no" name="post_no" value="<?=$post_no?>">
+                    <input
+                            type="hidden"
+                            id="product_name"
+                            name="post_name"
+                            value="<?=$product_select_array['product_name']?>">
+                    <input
+                            type="hidden"
+                            id="product_size"
+                            name="product_size"
+                            value="<?=$product_select_array['product_size']?>">
+                </div>
+                <button
+                        type="button"
+                        id="review_button"
+                        name="review_button"
+                        style="position: absolute; right:18px; top: 140px; width: 80px; height: 40px; line-height: 40px; background: white;">댓글등록</button>
+            </div>
+
+        </div>
+    </section>
+    <div th:replace="/fragments/footer.html :: fragment-footer"></div>
+</body>
+</html>

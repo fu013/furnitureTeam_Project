@@ -1,23 +1,21 @@
 package our.example.furniture.dto;
 
 public class SelectedPostDto {
-    private int product_no;
+    private int product_No;
     private String productCategory_HomeScale;
     private String productCategory_NumberOfHouseholds;
     private String productCategory_Interior;
     private String productName;
     private int productPrice;
-    private String productGuideLine;
-    private String productSize;
-    private String productColor;
-    private String productComment;
+    private String img_url_inner;
+    private String img_url_main;
 
-    public int getProduct_no() {
-        return product_no;
+    public int getProduct_No() {
+        return product_No;
     }
 
-    public void setProduct_no(int product_no) {
-        this.product_no = product_no;
+    public void setProduct_No(int product_No) {
+        this.product_No = product_No;
     }
 
     public String getProductCategory_HomeScale() {
@@ -60,42 +58,19 @@ public class SelectedPostDto {
         this.productPrice = productPrice;
     }
 
-    public String getProductGuideLine() {
-        return productGuideLine;
+    public String getImg_url_inner() {
+        return img_url_inner;
     }
 
-    public void setProductGuideLine(String productGuideLine) {
-        this.productGuideLine = productGuideLine;
+    public void setImg_url_inner(String img_url_inner) {
+        this.img_url_inner = img_url_inner;
     }
 
-    public String getProductSize() {
-        return productSize;
+    public String getImg_url_main() {
+        return img_url_main;
     }
 
-    public void setProductSize(String productSize) {
-        this.productSize = productSize;
-    }
-
-    public String getProductColor() {
-        return productColor;
-    }
-
-    public void setProductColor(String productColor) {
-        this.productColor = productColor;
-    }
-
-    public String getProductComment() {
-        return productComment;
-    }
-
-    public void setProductComment(String productComment) {
-        this.productComment = productComment;
-    }
-
-    public void View() {
-        System.out.println("key = 상품번호");
-        System.out.println("value = " + product_no);
-        System.out.println("key = 상품이름");
-        System.out.println("value = " + productName);
+    public void setImg_url_main(String img_url_main) {
+        this.img_url_main = img_url_main;
     }
 }
