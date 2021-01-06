@@ -10,12 +10,13 @@
     <link rel="stylesheet" th:href="@{/css/postInfo.css}"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script th:src="@{/js/postInfo.js}"></script>
 </head>
 <body>
     <div th:replace="/fragments/header.html :: fragment-header"></div>
     <section>
         <div class="info_wrapper">
-            <div class="img_section"><img th:src="${postInfo.getImg_url_main()}"></div>
+            <div class="img_section"><img th:src="${postInfo.getImg_url_main()}"/></div>
             <div class="read_section">
                 <ul>
                     <li class="info_title">
@@ -89,10 +90,7 @@
             <p>&nbsp;<?=$product_select_array['product_comment']?></p>
 
             <div class='img_upload' alt='이미지 올리는 곳'>
-                <?php
-            while($img_select_array = mysqli_fetch_array($img_select_result)) {  // 어레이는 처음에 가져올떄 무조건 최상단의 값을 가져오는데, 한번 가져온배열은 다시가져오지않으므로, 와일문을 통해
-              // 돌리게되면 처음가져왔을때 최상단배열 그리고 그배열은 다시가져오지않으니 두번째엔 그다음배열을 가져오게된다 이런식으로 배열의 갯수대로 와일문이돌고 모든 배열을 다 가져오게되며,
-              // 최상단부터 순차적으로 값을 가져오게된다. 그래서 가져올때마다 값을넣으면 1번째 배열의값 2번쨰~ 마지막 배열에 있는값까지 다 들어간다.
+                <img th:each="postImages : ${postImages}" th:src="${postImages.getImg_url_inner()}"/>
             </div>
 
             <div class="tab_div" id="tab_back">

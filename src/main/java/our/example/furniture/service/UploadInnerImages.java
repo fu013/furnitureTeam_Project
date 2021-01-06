@@ -19,7 +19,7 @@ public class UploadInnerImages {
     private Log log = LogFactory.getLog(this.getClass());
 
     // 이너 이미지(다중) - 경로
-    private static final String SAVE_PATH_INNER = "/images/inner";
+    private static final String SAVE_PATH_INNER = "/images/inner/";
 
     // 이미지이름 날짜데이터로 고유값 만들어서 새로 저장하는 Method
     public static String getSaveFileName(String extName) {

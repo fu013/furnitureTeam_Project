@@ -17,7 +17,7 @@ CREATE TABLE Product_MainImg(
 	img_saveName varchar2(30) not null,
 	img_extName varchar2(30) not null,
 	img_fileSize varchar2(30) not null,
-	img_url_main varchar2(50) not null,
+	img_url_main varchar2(50) null,
 	create_date date default sysdate,
 	CONSTRAINTS FK_product_no_2 FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE

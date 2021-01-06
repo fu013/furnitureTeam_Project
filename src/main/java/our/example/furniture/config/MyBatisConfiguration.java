@@ -26,7 +26,6 @@ public class MyBatisConfiguration {
         sqlSessionFactoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*.xml")
         );
-
         return sqlSessionFactoryBean.getObject();
     }
 }

@@ -7,14 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import our.example.furniture.dto.*;
 import our.example.furniture.repository.*;
 import our.example.furniture.service.UploadInnerImages;
 import our.example.furniture.service.UploadMainImage;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -24,29 +21,27 @@ public class FurnitureController {
     @Autowired
     private UploadMainImage uploadMainImage;
     @Autowired
-    private InnerImagesUploadMapper innerImagesUploadMapper;
-    @Autowired
-    private MainImageUploadMapper mainImageUploadMapper;
-    @Autowired
-    private PostWriterMapper postWriterMapper;
+    private PostMapper postMapper;
     @Autowired
     private RegisterMapper registerMapper;
-    @Autowired
-    private SelectAllProductMapper selectAllProductMapper;
-    @Autowired
-    private SelectPostMapper selectPostMapper;
 
     private Log log = LogFactory.getLog(this.getClass());
 
     // index[홈페이지] :: URL 매핑
     @GetMapping("/")
     public String index(Model model) {
-        List<SelectedPostDto> postList = selectAllProductMapper.SelectAllProduct();
+        List<SelectedPostDto> postList = postMapper.SelectAllProduct();
         model.addAttribute("postList", postList);
+        for(int i = 0; i < postList.size(); i++) {
+            if(postList.get(i).getImg_url_main() == null) {
+                String a = "img/null.gif";
+                postList.get(i).setImg_url_main(a);
+            }
+        }
         return "index";
     }
-    // postWriter[글쓰기] :: URL 매핑
 
+    // postWriter[글쓰기] :: URL 매핑
     @GetMapping("/postWriter")
     public String postWriter(Model model) {
         return "postWriter";
@@ -58,7 +53,6 @@ public class FurnitureController {
         return "register";
     }
 
-
     @PostMapping("/registerSuccess")
     public String temp2(RegisterDto registerDto) {
         registerMapper.insertRegister(registerDto);
@@ -68,18 +62,18 @@ public class FurnitureController {
     // postWriter[게시글작성] :: URL 매핑
     @PostMapping("/productRegister")
     public String temp(PostWriterDto postWriterDto) throws Exception {
-        postWriterMapper.insertProductInfo(postWriterDto);
+        postMapper.insertProductInfo(postWriterDto);
 
         // 메인 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
         if(!postWriterDto.getProductMainImg().isEmpty()) {
             List<MainImageInfoDto> MainImageLogic = uploadMainImage.MainImageLogic(postWriterDto);
-            mainImageUploadMapper.InsertMainImage(MainImageLogic);
+            postMapper.InsertMainImage(MainImageLogic);
         }
 
         // 내부 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
         if(postWriterDto.getProductImg().length >= 1 && !postWriterDto.getProductImg()[0].isEmpty()) {
             List<InnerImagesInfoDto> InnerImageLogic = uploadInnerImages.InnerImagesLogic(postWriterDto);
-            innerImagesUploadMapper.InsertInnerImages(InnerImageLogic);
+            postMapper.InsertInnerImages(InnerImageLogic);
         }
         return "index";
     }
@@ -88,8 +82,14 @@ public class FurnitureController {
     @GetMapping("/postInfo")
     public String postInfo(@RequestParam("post_no") int post_no, SelectedPostDto selectedPostDto, Model model) {
         selectedPostDto.setProduct_No(post_no);
-        SelectedPostDto postInfo = selectPostMapper.SelectPost(selectedPostDto);
+        SelectedPostDto postInfo = postMapper.SelectPost(selectedPostDto);
+        List<SelectedPostDto> postImages = postMapper.SelectPostImages(selectedPostDto);
+        if(postInfo.getImg_url_main() == null) {
+            String a = "img/null.gif";
+            postInfo.setImg_url_main(a);
+        }
         model.addAttribute("postInfo", postInfo);
+        model.addAttribute("postImages", postImages);
         return "postInfo";
     }
 }
