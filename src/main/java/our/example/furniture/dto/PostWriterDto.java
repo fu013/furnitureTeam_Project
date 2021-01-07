@@ -16,6 +16,7 @@ public class PostWriterDto {
     private MultipartFile[] productImg;
     private String productComment;
 
+    // GETTER & SETTER
     public int getProduct_no() {
         return product_no;
     }
@@ -28,25 +29,19 @@ public class PostWriterDto {
         return productCategoryHomeScale;
     }
 
-    public void setProductCategoryHomeScale(String productCategoryHomeScale) {
-        this.productCategoryHomeScale = productCategoryHomeScale;
-    }
+    public void setProductCategoryHomeScale(String productCategoryHomeScale) { this.productCategoryHomeScale = productCategoryHomeScale; }
 
     public String getProductCategoryNumberOfHouseholds() {
         return productCategoryNumberOfHouseholds;
     }
 
-    public void setProductCategoryNumberOfHouseholds(String productCategoryNumberOfHouseholds) {
-        this.productCategoryNumberOfHouseholds = productCategoryNumberOfHouseholds;
-    }
+    public void setProductCategoryNumberOfHouseholds(String productCategoryNumberOfHouseholds) { this.productCategoryNumberOfHouseholds = productCategoryNumberOfHouseholds; }
 
     public String getProductCategoryInterior() {
         return productCategoryInterior;
     }
 
-    public void setProductCategoryInterior(String productCategoryInterior) {
-        this.productCategoryInterior = productCategoryInterior;
-    }
+    public void setProductCategoryInterior(String productCategoryInterior) { this.productCategoryInterior = productCategoryInterior; }
 
     public String getProductName() {
         return productName;

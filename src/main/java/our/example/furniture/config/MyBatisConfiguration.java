@@ -9,6 +9,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
+// Mybatis & Spring 연동 Configuration
 @Configuration
 @MapperScan(basePackages = "our.example.furniture.repository")
 public class MyBatisConfiguration {
@@ -16,13 +17,11 @@ public class MyBatisConfiguration {
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
-
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         var sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-
-        //쿼리가 정의된 xml 파일들의 위치 지정
+        // 쿼리가 정의된 xml 파일들의 위치 지정
         sqlSessionFactoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*.xml")
         );

@@ -22,7 +22,6 @@ public class BoardController {
     private UploadMainImage uploadMainImage;
     @Autowired
     private PostMapper postMapper;
-
     private Log log = LogFactory.getLog(this.getClass());
 
     // 상품 게시글 작성

@@ -6,13 +6,10 @@ package our.example.furniture.dto;
         private Long FileSize;
         private String imgURL;
 
-        public String getImgURL() {
-            return imgURL;
-        }
+        // GETTER & SETTER
+        public String getImgURL() { return imgURL; }
 
-        public void setImgURL(String imgURL) {
-            this.imgURL = imgURL;
-        }
+        public void setImgURL(String imgURL) { this.imgURL = imgURL; }
 
         public String getSaveImageName() {
             return saveImageName;

@@ -12,6 +12,7 @@ public class RegisterDto {
 	private String registerPhone2;
 	private String registerPhone3;
 
+	// GETTER & SETTER
 	public String getRegisterId() {
 		return registerId;
 	}

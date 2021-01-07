@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// 이미지 외부경로 매핑 Configuration
+// 이미지의 상대경로값을 외부경로로 매핑해주는 Configuration
 @Configuration
 public class ResourceHandlers implements WebMvcConfigurer {
     @Value("${resources.location_Main}")

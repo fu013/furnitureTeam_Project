@@ -10,6 +10,7 @@ public class SelectedPostDto {
     private String img_url_inner;
     private String img_url_main;
 
+    // GETTER & SETTER
     public int getProduct_No() {
         return product_No;
     }

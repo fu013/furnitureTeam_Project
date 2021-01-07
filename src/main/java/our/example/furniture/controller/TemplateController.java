@@ -14,10 +14,9 @@ import java.util.List;
 public class TemplateController {
     @Autowired
     private PostMapper postMapper;
-
     private Log log = LogFactory.getLog(this.getClass());
 
-    // index[홈페이지] :: URL 매핑
+    // index[홈페이지] :: Template Mapping
     @GetMapping("/")
     public String index(Model model) {
         List<SelectedPostDto> postList = postMapper.SelectAllProduct();
@@ -34,7 +33,7 @@ public class TemplateController {
     @GetMapping("/postWriter")
     public String postWriter(Model model) { return "postWriter"; }
 
-    // register[회원가입] :: URL 매핑
+    // register[회원가입] :: Template Mapping
     @GetMapping("/register")
     public String register(Model model) {
         return "register";

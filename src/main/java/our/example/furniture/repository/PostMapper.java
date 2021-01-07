@@ -5,17 +5,29 @@ import our.example.furniture.dto.InnerImagesInfoDto;
 import our.example.furniture.dto.MainImageInfoDto;
 import our.example.furniture.dto.PostWriterDto;
 import our.example.furniture.dto.SelectedPostDto;
+import our.example.furniture.paging.Pagination;
 
 import java.io.IOException;
 import java.util.List;
 
-// @Mapper 만 붙이면 마이바티스 xml 과 매핑되는 빈즈 클래스가 된다.
+// 상품 게시물관련 Mapper
 @Mapper
 public interface PostMapper {
+
+    // 게시물 작성시 - 데이터베이스에 데이터 추가하는 Method
     void insertProductInfo(PostWriterDto postWriterDto);
-    List<SelectedPostDto> SelectAllProduct();
-    List<SelectedPostDto> SelectPostImages(SelectedPostDto selectedPostDto);
-    SelectedPostDto SelectPost(SelectedPostDto selectedPostDto);
     void InsertInnerImages(List<InnerImagesInfoDto> InnerImagesLogic) throws IOException;
     void InsertMainImage(List<MainImageInfoDto> InnerImagesLogic) throws IOException;
+
+    // 게시물 인덱스 페이지에 데이터 조회하는 Method
+    List<SelectedPostDto> SelectAllProduct();
+
+    // 게시물 상세페이지에 데이터 조회하는 Method
+    SelectedPostDto SelectPost(SelectedPostDto selectedPostDto);
+    List<SelectedPostDto> SelectPostImages(SelectedPostDto selectedPostDto);
+
+    // 게시물 Pagination Method
+    public List<SelectedPostDto> selectPostList(Pagination pagination);
+    public int selectPostTotalCount(Pagination pagination);
+
 }

@@ -12,9 +12,9 @@ import our.example.furniture.repository.*;
 public class RegisterController {
     @Autowired
     private RegisterMapper registerMapper;
-
     private Log log = LogFactory.getLog(this.getClass());
 
+    // 등록 성공시 Data Insert
     @PostMapping("/registerSuccess")
     public String RegisterSuccess(RegisterDto registerDto) {
         registerMapper.insertRegister(registerDto);
