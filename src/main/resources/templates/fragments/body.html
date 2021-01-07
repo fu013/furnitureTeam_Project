@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
     <div th:fragment="fragment-body">
         <div class="sliderBox">
             <h1>슬라이더 영역</h1>
@@ -25,7 +20,7 @@
                         <li th:each="postList : ${postList}" class="itemLi">
                             <a th:href="'postInfo?post_no=' + ${postList.getProduct_No()}">
                                 <div class="imgBox">
-                                    <img th:src="${postList.getImg_url_main()}" style=" width: 100%; height:100%;"/>
+                                    <img th:src="${postList.getImg_url_main()}" style="width: 100%; height:100%;"/>
                                 </div>
                                 <ul class="productUl">
                                     <li th:text="'상품명: ' + ${postList.getProductName()}">상품명</li>
@@ -34,7 +29,19 @@
                                 </ul>
                             </a>
                         </li>
-                        <div th:replace="/fragments/pagination.html :: fragment-pagination"></div>
+                        <th:block layout:frament="paging">
+                            <nav th:replace="/fragments/pagination.html :: pagination"></nav>
+                        </th:block>
+                        <!-- 버튼클릭시 상태에 맞는 현재페이지 쿼리스트링 값 변경 -->
+                        <th:block layout:fragment="script">
+                            <script th:inline="javascript">
+                                /*<![CDATA[*/
+                                function movePage(uri, queryString) {
+                                    location.href = uri + queryString;
+                                }
+                                /*]]>*/
+                            </script>
+                        </th:block>
                     </ul>
                 </div>
             </section>
@@ -43,5 +50,4 @@
             </aside>
         </div>
     </div>
-</body>
 </html>

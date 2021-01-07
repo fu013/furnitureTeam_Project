@@ -1,5 +1,8 @@
 package our.example.furniture.paging;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class Pagination {
     // 현재 페이지 번호
     private int currentPageNo;
@@ -19,12 +22,28 @@ public class Pagination {
     // 생성자
     public Pagination() {
         this.currentPageNo = 1;
-        this.recordsPerPage = 10;
-        this.pageSize = 10;
+        this.recordsPerPage = 5;
+        this.pageSize = 5;
+    }
+
+    // 스프링에서 제공해주는 UriComponents 클래스를 사용하면 URI 를 더욱 효율적으로 처리할 수 있다. <쿼리스트링 생성>
+    public String makeQueryString(int pageNo) {
+
+        UriComponents uriComponents = UriComponentsBuilder.newInstance()
+                .queryParam("currentPageNo", pageNo)
+                .queryParam("recordsPerPage", recordsPerPage)
+                .queryParam("pageSize", pageSize)
+                .queryParam("searchType", searchType)
+                .queryParam("searchKeyword", searchKeyword)
+                .build()
+                .encode();
+
+        return uriComponents.toUriString();
     }
 
     // GETTER & SETTER
     public int getStartPage() {
+        // StartPage 값
         return (currentPageNo - 1) * recordsPerPage;
     }
 

@@ -1,6 +1,6 @@
 package our.example.furniture.dto;
 
-public class SelectedPostDto {
+public class SelectedPostDto extends CommonDto {
     private int product_No;
     private String productCategory_HomeScale;
     private String productCategory_NumberOfHouseholds;

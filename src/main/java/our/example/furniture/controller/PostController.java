@@ -15,7 +15,7 @@ import our.example.furniture.service.UploadMainImage;
 import java.util.List;
 
 @Controller
-public class BoardController {
+public class PostController {
     @Autowired
     private UploadInnerImages uploadInnerImages;
     @Autowired

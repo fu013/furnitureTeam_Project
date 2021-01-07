@@ -5,6 +5,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
         >
 <mapper namespace="our.example.furniture.repository.PostMapper">
+
+    <!-- INCLUDE -->
+    <sql id="select_indexViewPost">
+        Product.Product_No, Product.productCategory_HomeScale, Product.productCategory_NumberOfHouseholds, Product.productCategory_Interior,
+        Product.productName, Product.productPrice, Product_MainImg.img_url_main
+    </sql>
+
     <!-- 데이터베이스 상품관련 데이터 INSERT QUERY -->
     <insert id="insertProductInfo">
         INSERT INTO product(product_no, productCategory_HomeScale, productCategory_NumberOfHouseholds,
@@ -26,13 +33,6 @@
     </insert>
 
     <!-- 데이터베이스 상품관련 데이터 SELECT QUERY -->
-    <select id="SelectAllProduct" resultType="our.example.furniture.dto.SelectedPostDto">
-        SELECT
-        Product.Product_No, Product.productCategory_HomeScale, Product.productCategory_NumberOfHouseholds, Product.productCategory_Interior,
-        Product.productName, Product.productPrice, Product_MainImg.img_url_main
-        FROM
-        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
-    </select>
     <select id="SelectPostImages" resultType="our.example.furniture.dto.SelectedPostDto" parameterType="our.example.furniture.dto.SelectedPostDto">
         SELECT
         img_url_inner
@@ -41,11 +41,25 @@
     </select>
     <select id="SelectPost" resultType="our.example.furniture.dto.SelectedPostDto" parameterType="our.example.furniture.dto.SelectedPostDto">
         SELECT
-        Product.Product_No, Product.productCategory_HomeScale, Product.productCategory_NumberOfHouseholds, Product.productCategory_Interior,
-        Product.productName, Product.productPrice, Product_MainImg.img_url_main
+        <include refid="select_indexViewPost"/>
         FROM
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
         WHERE Product.Product_No = #{product_No}
     </select>
+
     <!-- 데이터베이스 Pagination 관련 데이터 QUERY -->
+    <select id="selectPostList" parameterType="our.example.furniture.paging.Pagination" resultType="our.example.furniture.dto.SelectedPostDto">
+        SELECT
+        <include refid="select_indexViewPost"/>
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        ORDER BY Product.Product_no DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
+    <select id="selectPostTotalCount" parameterType="our.example.furniture.paging.Pagination" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        Product
+    </select>
 </mapper>

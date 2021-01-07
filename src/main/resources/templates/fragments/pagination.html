@@ -1,27 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <nav aria-label="Page navigation example" th:fragment="fragment-pagination">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <nav th:fragment="pagination" th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}" aria-label="Page navigation" class="text-center">
         <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
+            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1)} ]])" class="page-item">
+                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true" class="page-link">&laquo;</span></a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
+            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.firstPage - 1)} ]])" class="page-item">
+                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true" class="page-link">&lsaquo;</span></a>
+            </li>
+            <li th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo == params.currentPageNo} ? 'active'" class="page-item">
+                <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo)} ]])" class="page-link"></a>
+            </li>
+            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.lastPage + 1)} ]])" class="page-item">
+                <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true" class="page-link">&rsaquo;</span></a>
+            </li>
+            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount)} ]])" class="page-item">
+                <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true" class="page-link">&raquo;</span></a>
             </li>
         </ul>
     </nav>
-</body>
 </html>

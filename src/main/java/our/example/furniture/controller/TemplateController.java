@@ -6,20 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import our.example.furniture.dto.*;
+import our.example.furniture.paging.Pagination;
 import our.example.furniture.repository.*;
+import our.example.furniture.service.PostService;
+
 import java.util.List;
 
 @Controller
 public class TemplateController {
     @Autowired
+    private PostService postService;
     private PostMapper postMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
     // index[홈페이지] :: Template Mapping
     @GetMapping("/")
-    public String index(Model model) {
-        List<SelectedPostDto> postList = postMapper.SelectAllProduct();
+    public String openPostList(@ModelAttribute("params") SelectedPostDto params, Model model) {
+        List<SelectedPostDto> postList = postService.getPostList(params);
         model.addAttribute("postList", postList);
         for(int i = 0; i < postList.size(); i++) {
             if(postList.get(i).getImg_url_main() == null) {
