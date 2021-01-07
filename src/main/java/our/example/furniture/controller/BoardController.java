@@ -15,51 +15,17 @@ import our.example.furniture.service.UploadMainImage;
 import java.util.List;
 
 @Controller
-public class FurnitureController {
+public class BoardController {
     @Autowired
     private UploadInnerImages uploadInnerImages;
     @Autowired
     private UploadMainImage uploadMainImage;
     @Autowired
     private PostMapper postMapper;
-    @Autowired
-    private RegisterMapper registerMapper;
 
     private Log log = LogFactory.getLog(this.getClass());
 
-    // index[홈페이지] :: URL 매핑
-    @GetMapping("/")
-    public String index(Model model) {
-        List<SelectedPostDto> postList = postMapper.SelectAllProduct();
-        model.addAttribute("postList", postList);
-        for(int i = 0; i < postList.size(); i++) {
-            if(postList.get(i).getImg_url_main() == null) {
-                String a = "img/null.gif";
-                postList.get(i).setImg_url_main(a);
-            }
-        }
-        return "index";
-    }
-
-    // postWriter[글쓰기] :: URL 매핑
-    @GetMapping("/postWriter")
-    public String postWriter(Model model) {
-        return "postWriter";
-    }
-
-    // register[회원가입] :: URL 매핑
-    @GetMapping("/register")
-    public String register(Model model) {
-        return "register";
-    }
-
-    @PostMapping("/registerSuccess")
-    public String temp2(RegisterDto registerDto) {
-        registerMapper.insertRegister(registerDto);
-        return "index";
-    }
-
-    // postWriter[게시글작성] :: URL 매핑
+    // 상품 게시글 작성
     @PostMapping("/productRegister")
     public String temp(PostWriterDto postWriterDto) throws Exception {
         postMapper.insertProductInfo(postWriterDto);
@@ -78,7 +44,7 @@ public class FurnitureController {
         return "index";
     }
 
-    // 상품 상세페이지 :: URL 매핑
+    // 상품 상세페이지
     @GetMapping("/postInfo")
     public String postInfo(@RequestParam("post_no") int post_no, SelectedPostDto selectedPostDto, Model model) {
         selectedPostDto.setProduct_No(post_no);

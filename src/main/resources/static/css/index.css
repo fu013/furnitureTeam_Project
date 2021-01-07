@@ -105,7 +105,7 @@
         display: inline-block;
         position: relative;
         font-size: 25px;
-        bottom: 85px;
+        bottom: -35px;
         left: 10px;
     }
     footer {
@@ -117,4 +117,9 @@
     }
     footer h1 {
         line-height: 200px;
+    }
+    .pagination {
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
     }
