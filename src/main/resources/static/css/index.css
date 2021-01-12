@@ -34,7 +34,7 @@
         margin: 0 10px;
     }
     .sliderBox {
-        background-image: url('https://source.unsplash.com/1400x300/?furniture');
+        background-image: url('https://source.unsplash.com/1400x300/?christmas');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         height: 300px;
@@ -198,13 +198,18 @@
         border-top: 1px solid black;
         clear: both;
         text-align: center;
-        height: 200px;
-    }
-    footer h1 {
-        line-height: 200px;
+        height: 250px;
+        line-height: 300px;
     }
     .pagination {
         align-items: center;
         justify-content: center;
         margin-top: 30px;
+    }
+    footer > i {
+        font-size: 100px;
+        margin-right: 40px;
+    }
+    footer > i:nth-child(4) {
+        margin: none;
     }
