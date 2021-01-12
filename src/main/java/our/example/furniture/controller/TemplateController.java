@@ -19,6 +19,7 @@ import java.util.List;
 public class TemplateController {
     @Autowired
     private PostService postService;
+    @Autowired
     private PostMapper postMapper;
     private Log log = LogFactory.getLog(this.getClass());
 

@@ -18,7 +18,9 @@ import java.util.List;
 public class PostController {
     @Autowired
     private UploadInnerImages uploadInnerImages;
+    @Autowired
     private UploadMainImage uploadMainImage;
+    @Autowired
     private PostMapper postMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
