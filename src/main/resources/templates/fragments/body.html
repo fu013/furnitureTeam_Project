@@ -67,13 +67,15 @@
                     </div>
                     <ul class="itemUl">
                         <li th:each="postList : ${postList}" class="itemLi">
-                            <a th:href="'postInfo?post_no=' + ${postList.getProduct_No()}">
+                            <a th:href="'postInfo?post_no=' + ${postList.getProduct_No()}" class="itemLiLink">
                                 <div class="imgBox">
                                     <img th:src="${postList.getImg_url_main()}" style="width: 100%; height:100%;"/>
                                 </div>
                                 <ul class="productUl">
                                     <li th:text="'상품명 : ' + ${postList.getProductName()}">상품명</li>
                                     <li th:text="'상품가격 : ' + ${postList.getProductPrice()} + '원'">상품가격</li>
+                                    <li> 조회수 : </li>
+                                    <li> 추천수 : </li>
                                     <li th:text="'태그 : ' + ${postList.getProductCategory_HomeScale()} + ' | ' + ${postList.getProductCategory_NumberOfHouseholds()} + ' | ' + ${postList.getProductCategory_Interior()}">태그</li>
                                 </ul>
                             </a>

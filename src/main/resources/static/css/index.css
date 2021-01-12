@@ -34,10 +34,12 @@
         margin: 0 10px;
     }
     .sliderBox {
-        background-image: url('https://source.unsplash.com/1520x300/?furniture');
+        background-image: url('https://source.unsplash.com/1400x300/?furniture');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         height: 300px;
+        width: 1400px;
+        margin: 0 auto;
         margin-bottom: 20px;
         text-align: center;
         border: 1px solid black;
@@ -47,6 +49,8 @@
     }
     .bodyWrapper {
         margin-top: 20px;
+        width: 1400px;
+        margin: 0 auto;
         border-top: 1px solid black;
         display: flex;
         flex-direction: row;
@@ -76,6 +80,12 @@
         font-size: 15px;
         text-align: center;
     }
+    .bodyWrapper > section > .category > ul > li:nth-child(1),
+    .bodyWrapper > section > .category > ul > li:nth-child(2),
+    .bodyWrapper > section > .category > ul > li:nth-child(3) {
+        padding: 10px;
+        text-align: left;
+    }
     .bodyWrapper > section > .category > ul > li .productCategoryPrice {
         width: 60%;
         margin-top: 10px;
@@ -98,14 +108,14 @@
     }
     .bodyWrapper > section > .view > .filterBox {
         position: relative;
-        padding: 30px;
+        padding: 20px;
         border-bottom: 1px solid black;
     }
     .bodyWrapper > section > .view > .filterBox > .wayBox {
         display: inline-block;
         position: absolute;
-        top: 40px;
-        right: 30px;
+        top: 30px;
+        right: 25px;
         font-size: 1.2rem;
         font-weight: 300;
     }
@@ -155,10 +165,10 @@
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi {
         position: relative;
-        width: 32.105%;
+        width: 31.402%;
         display: inline-block;
         margin-top: 60px;
-        margin-right: 30px;
+        margin-right: 21.093px;
         border-bottom: 1px solid black;
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi:nth-child(1) {
@@ -171,7 +181,6 @@
         margin-top: 0;
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi:nth-child(3n) {
-        width: 30%;
         margin-right: 0;
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi > a > .imgBox {
@@ -186,6 +195,7 @@
         margin: 10px 0;
     }
     footer {
+        border-top: 1px solid black;
         clear: both;
         text-align: center;
         height: 200px;
