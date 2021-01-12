@@ -33,11 +33,11 @@ public class PaginationInfo {
         if (pagination.getCurrentPageNo() < 1) {
             pagination.setCurrentPageNo(1);
         }
-        if (pagination.getRecordsPerPage() < 1 || pagination.getRecordsPerPage() > 50) {
-            pagination.setRecordsPerPage(5);
+        if (pagination.getRecordsPerPage() < 1 || pagination.getRecordsPerPage() > 90) {
+            pagination.setRecordsPerPage(9);
         }
-        if (pagination.getPageSize() < 5 || pagination.getPageSize() > 10) {
-            pagination.setPageSize(5);
+        if (pagination.getPageSize() < 10 || pagination.getPageSize() > 20) {
+            pagination.setPageSize(10);
         }
 
         this.pagination = pagination;

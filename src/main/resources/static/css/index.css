@@ -12,18 +12,18 @@
     }
     header > .nav {
         height: 80px;
+        border-bottom: 1px solid black;
     }
     header > .nav > .logo {
-        border: 1px solid black;
-        margin: 10px;
-        width: 100px;
-        line-height: 60px;
-        height: 60px;
+        margin: 17px 17px 17px 23px;
         text-align: center;
+        width: 400px;
+    }
+    header > .nav > .logo img {
+        width: 100%;
     }
     header > .nav > .menu {
         position: absolute;
-        border: 1px solid black;
         top: 0;
         right: 0;
         padding: 0 10px;
@@ -38,7 +38,11 @@
         margin: 0 10px;
     }
     .sliderBox {
+        background-image: url('https://source.unsplash.com/1520x300/?furniture');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
         height: 300px;
+        margin-bottom: 20px;
         text-align: center;
         border: 1px solid black;
     }
@@ -46,6 +50,8 @@
         line-height: 300px;
     }
     .bodyWrapper {
+        margin-top: 20px;
+        border-top: 1px solid black;
         display: flex;
         flex-direction: row;
         overflow: auto;
@@ -59,19 +65,77 @@
         border-right: none;
         border-top: none;
         overflow: auto;
-        flex: 0.3;
-        height: 500px;
+        flex: 0.25;
+    }
+    .bodyWrapper > section > .category > h1 {
+        font-size: 2rem;
+        padding: 10px;
+        text-align: center;
+        margin: 0;
+        border-bottom: 1px solid black;
     }
     .bodyWrapper > section > .category > ul > li {
         border-bottom: 1px solid black;
-        font-size: 30px;
+        padding: 20px;
+        font-size: 15px;
+        text-align: center;
+    }
+    .bodyWrapper > section > .category > ul > li .productCategoryPrice {
+        width: 60%;
+        margin-top: 10px;
+    }
+    .bodyWrapper > section > .category > ul > li #productCategoryPriceButton {
+        background: black;
+        box-sizing: border-box;
+        font-size: 20px;
+        font-weight: 300;
+        padding: 5px;
+        color: white;
+    }
+    .bodyWrapper > section > .category > ul > li > select {
+        margin-left: 10px;
     }
     .bodyWrapper > section > .view {
        border: 1px solid black;
-       border-bottom: none;
        border-top: none;
        flex: 1;
     }
+    .bodyWrapper > section > .view > .filterBox {
+        position: relative;
+        padding: 30px;
+        border-bottom: 1px solid black;
+    }
+    .bodyWrapper > section > .view > .filterBox > .wayBox {
+        display: inline-block;
+        position: absolute;
+        top: 40px;
+        right: 30px;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    .bodyWrapper > section > .view > .filterBox > .searchBox {
+        display: inline-block;
+        width: 70%;
+        position: relative;
+    }
+    .bodyWrapper > section > .view > .filterBox > .searchBox > #searchBar {
+        width: 100%;
+        height: 46px;
+        padding: 11px 20px 13px 68px;
+        font-size: 22px;
+        letter-spacing: 3px;
+        color: #373737;
+    }
+    .bodyWrapper > section > .view > .filterBox > input {
+        margin: 0 5px;
+    }
+    .bodyWrapper > section > .view > .filterBox > .searchBox > .sub-search-icon {
+        position: absolute;
+        top: 2px;
+        left: 20px;
+        font-size: 28px;
+    }
+
     .bodyWrapper > section > .view > h1 {
         border-bottom: 1px solid black;
         padding: 0;
@@ -82,35 +146,50 @@
         border-top: none;
         border-left: none;
         flex: 0.2;
-        height: 500px;
     }
     .bodyWrapper > aside > h1 {
+        font-size: 2rem;
+        padding: 10px;
         text-align: center;
         border-bottom: 1px solid black;
     }
-    .bodyWrapper > section > .view > .itemUl > .itemLi {
-        position: relative;
-        border-bottom: 1px solid black;
-        height: 300px;
+    .bodyWrapper > section > .view > .itemUl {
         padding: 30px;
         box-sizing: border-box;
     }
+    .bodyWrapper > section > .view > .itemUl > .itemLi {
+        position: relative;
+        width: 31.25%;
+        display: inline-block;
+        margin-top: 60px;
+        margin-right: 30px;
+        border-bottom: 1px solid black;
+    }
+    .bodyWrapper > section > .view > .itemUl > .itemLi:nth-child(1) {
+        margin-top: 0;
+    }
+    .bodyWrapper > section > .view > .itemUl > .itemLi:nth-child(2) {
+        margin-top: 0;
+    }
+    .bodyWrapper > section > .view > .itemUl > .itemLi:nth-child(3) {
+        margin-top: 0;
+    }
+    .bodyWrapper > section > .view > .itemUl > .itemLi:nth-child(3n) {
+        width: 30%;
+        margin-right: 0;
+    }
     .bodyWrapper > section > .view > .itemUl > .itemLi > a > .imgBox {
-        width: 250px;
+        width: 100%;
         height: 240px;
         display: inline-block;
         border: 1px solid black;
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi > a > .productUl {
         display: inline-block;
-        position: relative;
-        font-size: 25px;
-        bottom: -35px;
-        left: 10px;
+        font-size: 15px;
+        margin: 10px 0;
     }
     footer {
-        margin-top: 20px;
-        border-top: 1px solid black;
         clear: both;
         text-align: center;
         height: 200px;
@@ -121,5 +200,5 @@
     .pagination {
         align-items: center;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 30px;
     }
