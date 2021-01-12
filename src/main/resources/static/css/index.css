@@ -213,3 +213,9 @@
     footer > i:nth-child(4) {
         margin: none;
     }
+    aside > .advertisementBox {
+        padding: 10px 20px 20px 20px;
+        box-sizing: border-box;
+        height: 50%;
+        width: 100%;
+    }

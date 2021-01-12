@@ -47,9 +47,7 @@ public class Pagination {
         return (currentPageNo - 1) * recordsPerPage;
     }
 
-    public int getCurrentPageNo() {
-        return currentPageNo;
-    }
+    public int getCurrentPageNo() { return currentPageNo; }
 
     public void setCurrentPageNo(int currentPageNo) {
         this.currentPageNo = currentPageNo;
