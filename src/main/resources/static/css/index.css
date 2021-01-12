@@ -7,11 +7,7 @@
     a:hover { color: aqua; }
     img { border: 0 none; margin: 0; padding: 0; line-height: 0px; }
     .hide { display: none; }
-    header {
-        position: relative;
-    }
     header > .nav {
-        height: 80px;
         border-bottom: 1px solid black;
     }
     header > .nav > .logo {
