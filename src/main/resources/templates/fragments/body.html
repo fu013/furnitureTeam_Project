@@ -1,31 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <div th:fragment="fragment-body">
+    <div th:fragment="fragment-body" style="padding: 20px;">
         <div class="sliderBox">
-            <h1>슬라이더 영역</h1>
         </div>
         <div class="bodyWrapper">
             <section>
                 <div class="category">
-                    <h1>카테고리</h1>
+                    <h1>카테고리 선택</h1>
                     <ul>
-                        <li>대분류</li>
-                        <li>소분류</li>
-                        <li>상세</li>
+                        <li>
+                            <span>인원수 선택 &nbsp; | </span>
+                            <select id = "productCategoryNumberOfHouseholds" name = "productCategoryNumberOfHouseholds" class = "productCategoryNumberOfHouseholds">
+                                <option value = "single">싱글</option>
+                                <option value = "couple">커플</option>
+                                <option value = "trio">3인</option>
+                                <option value = "squad">4인</option>
+                                <option value = "more">그외</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>집형태 선택 &nbsp; | </span>
+                            <select id = "productCategoryHomeScale" name = "productCategoryHomeScale" class = "productCategoryHomeScale">
+                                <option value = "apartment">아파트</option>
+                                <option value = "villa">빌라</option>
+                                <option value = "house">단독주택</option>
+                                <option value = "studio">오피스텔</option>
+                                <option value = "studioApartment">원룸</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>디자인 선택 &nbsp; | </span>
+                            <select id = "productCategoryInterior" name = "productCategoryInterior" class = "productCategoryInterior">
+                                <option value = "classic">클래식</option>
+                                <option value = "modern">모던</option>
+                                <option value = "minimalistic">미니멀리즘</option>
+                                <option value = "natural">자연</option>
+                                <option value = "vintage">빈티지</option>
+                            </select>
+                        </li>
+                        <li>
+                            <h5 style="font-weight: 200;">가격 선택</h5>
+                            <div>
+                                <input type="text" placeholder="최소 가격" value="" name="productCategoryMinPrice" class= "productCategoryPrice"/>
+                                <div style="margin-top: 10px;">|</div>
+                                <input type="text" placeholder="최대 가격" value="" name="productCategoryMaxPrice" class= "productCategoryPrice"/>
+                            </div>
+                            <input type="button" name="productCategoryPrice" class= "productCategoryPrice" id="productCategoryPriceButton" value="적용"/>
+                        </li>
                     </ul>
                 </div>
                 <div class="view">
-                    <h1>정렬방식</h1>
+                    <div class="filterBox">
+                        <div class="searchBox">
+                            <input type="text" placeholder="이름으로 검색" value="" id="searchBar"/>
+                            <span class="sub-search-icon">
+                                <label>
+                                    <i class="xi-search"></i>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="wayBox">
+                            <span class="title">정렬방식 : </span>
+                            가격순 <input type="radio" name="filter" value="priceDesc" class="filterPrice" checked />
+                            최신순 <input type="radio" name="filter" value="dateDesc" class="filterDate" />
+                        </div>
+                    </div>
                     <ul class="itemUl">
                         <li th:each="postList : ${postList}" class="itemLi">
-                            <a th:href="'postInfo?post_no=' + ${postList.getProduct_No()}">
+                            <a th:href="'postInfo?post_no=' + ${postList.getProduct_No()}" class="itemLiLink">
                                 <div class="imgBox">
                                     <img th:src="${postList.getImg_url_main()}" style="width: 100%; height:100%;"/>
                                 </div>
                                 <ul class="productUl">
-                                    <li th:text="'상품명: ' + ${postList.getProductName()}">상품명</li>
-                                    <li th:text="'상품가격: ' + ${postList.getProductPrice()} + '원'">상품가격</li>
-                                    <li th:text="'태그 : ' + ${postList.getProductCategory_HomeScale()} + ', ' + ${postList.getProductCategory_NumberOfHouseholds()} + ', ' + ${postList.getProductCategory_Interior()}">태그</li>
+                                    <li th:text="'상품명 : ' + ${postList.getProductName()}">상품명</li>
+                                    <li th:text="'상품가격 : ' + ${postList.getProductPrice()} + '원'">상품가격</li>
+                                    <li> 조회수 : </li>
+                                    <li> 추천수 : </li>
+                                    <li th:text="'태그 : ' + ${postList.getProductCategory_HomeScale()} + ' | ' + ${postList.getProductCategory_NumberOfHouseholds()} + ' | ' + ${postList.getProductCategory_Interior()}">태그</li>
                                 </ul>
                             </a>
                         </li>
@@ -47,6 +98,8 @@
             </section>
             <aside>
                 <h1>광고</h1>
+                <div class="advertisementBox">
+                </div>
             </aside>
         </div>
     </div>

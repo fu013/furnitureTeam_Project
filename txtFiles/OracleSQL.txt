@@ -34,20 +34,6 @@ CREATE TABLE Product_InnerImages(
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
 
-create table userRegisterTable(
-    userRegisterId varchar2(20) not null PRIMARY KEY,
-    userRegisterPassword varchar2(20) not null,
-    userRegisterRePassword varchar2(20) not null,
-    userRegisterName varchar2(20) not null,
-    userRegisterBirth date not null,
-    userRegisterGender varchar2(6) not null,
-    userRegisterEmail varchar2(50) not null,
-    userRegisterPhone1 number(3) not null,
-    userRegisterPhone2 number(4) not null,
-    userRegisterPhone3 number(4) not null,
-    create_date date default sysdate
-);
-
 CREATE SEQUENCE AUTO_INCREMENT
   START WITH 1
   INCREMENT BY 1
