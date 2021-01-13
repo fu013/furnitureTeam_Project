@@ -3,6 +3,7 @@ package our.example.furniture.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import our.example.furniture.dto.SelectedPostDto;
+import our.example.furniture.paging.Pagination;
 import our.example.furniture.paging.PaginationInfo;
 import our.example.furniture.repository.PostMapper;
 import java.util.Collections;

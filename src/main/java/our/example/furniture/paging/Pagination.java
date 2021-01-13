@@ -22,8 +22,8 @@ public class Pagination {
     // 생성자
     public Pagination() {
         this.currentPageNo = 1;
-        this.recordsPerPage = 9;
-        this.pageSize = 10;
+        this.recordsPerPage = 5;
+        this.pageSize = 5;
     }
 
     // 스프링에서 제공해주는 UriComponents 클래스를 사용하면 URI 를 더욱 효율적으로 처리할 수 있다. <쿼리스트링 생성>
@@ -47,7 +47,9 @@ public class Pagination {
         return (currentPageNo - 1) * recordsPerPage;
     }
 
-    public int getCurrentPageNo() { return currentPageNo; }
+    public int getCurrentPageNo() {
+        return currentPageNo;
+    }
 
     public void setCurrentPageNo(int currentPageNo) {
         this.currentPageNo = currentPageNo;

@@ -23,27 +23,21 @@ public class PaginationInfo {
     // SQL의 조건절에 사용되는 마지막 RNUM */
     private int lastRecordIndex;
 
-    // 이전 블록 존재 여부 */
+    // 이전 페이지 존재 여부 */
     private boolean hasPreviousPage;
 
-    // 다음 블록 존재 여부 */
+    // 다음 페이지 존재 여부 */
     private boolean hasNextPage;
-
-    // 이전 블록 존재 여부 */
-    private boolean hasPreviousBlock;
-
-    // 다음 블록 존재 여부 */
-    private boolean hasNextBlock;
 
     public PaginationInfo(Pagination pagination) {
         if (pagination.getCurrentPageNo() < 1) {
             pagination.setCurrentPageNo(1);
         }
-        if (pagination.getRecordsPerPage() < 1 || pagination.getRecordsPerPage() > 90) {
-            pagination.setRecordsPerPage(9);
+        if (pagination.getRecordsPerPage() < 1 || pagination.getRecordsPerPage() > 50) {
+            pagination.setRecordsPerPage(5);
         }
-        if (pagination.getPageSize() < 10 || pagination.getPageSize() > 20) {
-            pagination.setPageSize(10);
+        if (pagination.getPageSize() < 5 || pagination.getPageSize() > 10) {
+            pagination.setPageSize(5);
         }
 
         this.pagination = pagination;
@@ -81,16 +75,10 @@ public class PaginationInfo {
         lastRecordIndex = pagination.getCurrentPageNo() * pagination.getRecordsPerPage();
 
         /* 이전 페이지 존재 여부 */
-        hasPreviousPage = pagination.getCurrentPageNo() > 1;
+        hasPreviousPage = firstPage != 1;
 
         /* 다음 페이지 존재 여부 */
-        hasNextPage = totalRecordCount > pagination.getRecordsPerPage() * pagination.getCurrentPageNo();
-
-        /* 이전 블록 존재 여부 */
-        hasPreviousBlock = firstPage != 1;
-
-        /* 다음 블록 존재 여부 */
-        hasNextBlock = (lastPage * pagination.getRecordsPerPage()) < totalRecordCount;
+        hasNextPage = (lastPage * pagination.getRecordsPerPage()) < totalRecordCount;
     }
 
     // GETTER & SETTER
@@ -160,21 +148,5 @@ public class PaginationInfo {
 
     public void setHasNextPage(boolean hasNextPage) {
         this.hasNextPage = hasNextPage;
-    }
-
-    public boolean isHasPreviousBlock() {
-        return hasPreviousBlock;
-    }
-
-    public void setHasPreviousBlock(boolean hasPreviousBlock) {
-        this.hasPreviousBlock = hasPreviousBlock;
-    }
-
-    public boolean isHasNextBlock() {
-        return hasNextBlock;
-    }
-
-    public void setHasNextBlock(boolean hasNextBlock) {
-        this.hasNextBlock = hasNextBlock;
     }
 }

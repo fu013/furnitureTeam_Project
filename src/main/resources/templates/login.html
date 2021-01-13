@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+	<meta name="viewport" content="width=device=width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv="Contane-Type" content="text/html; charset=utf-8">
+	<title>Furniture_login</title>
+	<link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css"/>
+	<link rel="stylesheet" th:href="@{/css/login.css}" href="../static/css/login.css"/>
+	<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script th:src="@{/js/login.js}"></script>
+</head>
+<body>
+<div th:replace="/fragments/header.html :: fragment-header"></div>
+<div class = "loginWrapper">
+	<h2>로그인</h2>
+	<div class = "container">
+		<form id = "loginForm" method = "post">
+			<table>
+				<colgroup>
+					<col class = "colValue"></col>
+				</colgroup>
+				<tbody>
+					<tr> <!-- 아이디 -->
+						<th><label for = "loginId">아이디</label></th>
+						<td>
+							<input type = "text" id = "loginId" name = "loginId" placeholder = "아이디를 입력하세요">
+						</td>
+					</tr>
+					
+					<tr> <!-- 비밀번호 -->
+						<th><label for = "loginPassword">비밀번호</label></th>
+						<td><input type = "password" id = "loginPassword" name = "loginPassword" placeholder = "비밀번호를 입력하세요"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<!-- 회원가입, 아이디 분실 링크 -->
+			<div>
+			<p><a>아이디를 잊어버리셨나요?</a></p>
+			<p><a onclick = "location.href = 'userRegister'">회원가입하러 가기</a></p>
+			</div>
+			
+			<!-- 가입, 취소 버튼 -->
+			<div class = "txtCenter">
+				<button class = "btnCancel" type = "button" onclick = "location.href = '/'">취소</button>
+				<button class = "btnLogin" type = "submit" id = loginSuccess>로그인</button>
+			</div>
+		</form>
+	</div>
+</div>
+<div th:replace = "/fragments/footer.html :: fragment-footer"></div>
+</body>
+</html>

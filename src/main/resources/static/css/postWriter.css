@@ -36,6 +36,6 @@
 
     .btnList { background: #fff; width: 100px; height: 40px; line-height: 40px; color: black; text-align: center; display: inline-block; border-radius: 3px;}
     .btnWrite { background: black; width: 100px; height: 40px; line-height: 40px; color: #fff; text-align: center; display: inline-block; border-radius: 3px;}
-    .txtCenter { text-align: center; padding: 1rem 0; }
+    .txtCenter { text-align: center; padding: 1rem 0 0; }
     .colValue { width: 200px; }
     #productComment { width: 900px; height: 600px; }

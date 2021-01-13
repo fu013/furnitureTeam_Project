@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import our.example.furniture.dto.*;
 import our.example.furniture.paging.Pagination;
-import our.example.furniture.paging.PaginationInfo;
 import our.example.furniture.repository.*;
 import our.example.furniture.service.PostService;
 
@@ -19,7 +18,6 @@ import java.util.List;
 public class TemplateController {
     @Autowired
     private PostService postService;
-    @Autowired
     private PostMapper postMapper;
     private Log log = LogFactory.getLog(this.getClass());
 

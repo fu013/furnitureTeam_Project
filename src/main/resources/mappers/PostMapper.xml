@@ -48,7 +48,7 @@
     </select>
 
     <!-- 데이터베이스 Pagination 관련 데이터 QUERY -->
-    <select id="selectPostList" parameterType="our.example.furniture.dto.SelectedPostDto" resultType="our.example.furniture.dto.SelectedPostDto">
+    <select id="selectPostList" parameterType="our.example.furniture.paging.Pagination" resultType="our.example.furniture.dto.SelectedPostDto">
         SELECT
         <include refid="select_indexViewPost"/>
         FROM
@@ -56,7 +56,7 @@
         ORDER BY Product.Product_no DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
     </select>
-    <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.SelectedPostDto" resultType="int">
+    <select id="selectPostTotalCount" parameterType="our.example.furniture.paging.Pagination" resultType="int">
         SELECT
         COUNT(*)
         FROM

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        >
+        
+<mapper namespace = "our.example.furniture.repository.LoginMapper">
+	<select id = "overlapLogin">
+		SELECT * from userRegisterTable where loginId = #{UserRegisterDto.userRegisterId}
+	</select>
+	<select id = "overlapPassword">
+		SELECT * from userRegisterTable where loginId = #{UserRegisterDto.userRegisterId}
+	</select>
+</mapper>

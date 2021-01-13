@@ -8,17 +8,17 @@ window.onload = function() {
 	// 핸드폰번호는 숫자로 3~4자리만 가능
 	var phoneJ = /^[0-9]{3,4}$/;
 
-	$("#registerSuccess").on('click', function(e) {
-		var id = document.getElementById("registerId");
-		var pw = document.getElementById("registerPassword");
-		var pw2 = document.getElementById("registerRePassword");
-		var name = document.getElementById("registerName");
-		var birth = document.getElementById("registerBirth");
-		var gender = document.getElementById("registerGender");
-		var email = document.getElementById("registerEmail");
-		var phone1 = document.getElementById("registerPhone1");
-		var phone2 = document.getElementById("registerPhone2");
-		var phone3 = document.getElementById("registerPhone3");
+	$("#userRegisterSuccess").on('click', function(e) {
+		var id = document.getElementById("userRegisterId");
+		var pw = document.getElementById("userRegisterPassword");
+		var pw2 = document.getElementById("userRegisterRePassword");
+		var name = document.getElementById("userRegisterName");
+		var birth = document.getElementById("userRegisterBirth");
+		var gender = document.getElementById("userRegisterGender");
+		var email = document.getElementById("userRegisterEmail");
+		var phone1 = document.getElementById("userRegisterPhone1");
+		var phone2 = document.getElementById("userRegisterPhone2");
+		var phone3 = document.getElementById("userRegisterPhone3");
 
 		if (id.value == "") {
 			alert("아이디를 입력해 주세요");
@@ -110,17 +110,18 @@ window.onload = function() {
 			return false;
 		}
 		else {
-			const formData = new FormData($('#registerForm')[0]);
+			const formData = new FormData($('#userRegisterForm')[0]);
 			e.preventDefault();
 			$.ajax({
 				type: "POST",
 				enctype: 'multipart/form-data',
-				url: '/registerSuccess',
+				url: '/userRegisterSuccess',
 				data: formData,
 				processData: false,
 				contentType: false,
 				cache: false,
 				success: function(result) {
+					alert("회원가입을 축하합니다");
 					location.href = "/";
 				},
 				error: function(e) {
