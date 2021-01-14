@@ -12,65 +12,84 @@ public class UserRegisterDto {
 	private String userRegisterPhone2;
 	private String userRegisterPhone3;
 
-	public String getuserRegisterId() {
+
+	public String getUserRegisterId() {
 		return userRegisterId;
 	}
-	public void setuserRegisterId(String userRegisterId) {
+
+	public void setUserRegisterId(String userRegisterId) {
 		this.userRegisterId = userRegisterId;
 	}
-	public String getuserRegisterPassword() {
+
+	public String getUserRegisterPassword() {
 		return userRegisterPassword;
 	}
-	public void setuserRegisterPassword(String userRegisterPassword) {
+
+	public void setUserRegisterPassword(String userRegisterPassword) {
 		this.userRegisterPassword = userRegisterPassword;
 	}
-	public String getuserRegisterRePassword() {
+
+	public String getUserRegisterRePassword() {
 		return userRegisterRePassword;
 	}
-	public void setuserRegisterRePassword(String userRegisterRePassword) {
+
+	public void setUserRegisterRePassword(String userRegisterRePassword) {
 		this.userRegisterRePassword = userRegisterRePassword;
 	}
-	public String getuserRegisterName() {
+
+	public String getUserRegisterName() {
 		return userRegisterName;
 	}
-	public void setuserRegisterName(String userRegisterName) {
+
+	public void setUserRegisterName(String userRegisterName) {
 		this.userRegisterName = userRegisterName;
 	}
-	public String getuserRegisterBirth() {
+
+	public String getUserRegisterBirth() {
 		return userRegisterBirth;
 	}
-	public void setuserRegisterBirth(String userRegisterBirth) {
+
+	public void setUserRegisterBirth(String userRegisterBirth) {
 		this.userRegisterBirth = userRegisterBirth;
 	}
-	public String getuserRegisterGender() {
+
+	public String getUserRegisterGender() {
 		return userRegisterGender;
 	}
-	public void setuserRegisterGender(String userRegisterGender) {
+
+	public void setUserRegisterGender(String userRegisterGender) {
 		this.userRegisterGender = userRegisterGender;
 	}
-	public String getuserRegisterEmail() {
+
+	public String getUserRegisterEmail() {
 		return userRegisterEmail;
 	}
-	public void setuserRegisterEmail(String userRegisterEmail) {
+
+	public void setUserRegisterEmail(String userRegisterEmail) {
 		this.userRegisterEmail = userRegisterEmail;
 	}
-	public String getuserRegisterPhone1() {
+
+	public String getUserRegisterPhone1() {
 		return userRegisterPhone1;
 	}
-	public void setuserRegisterPhone1(String userRegisterPhone1) {
+
+	public void setUserRegisterPhone1(String userRegisterPhone1) {
 		this.userRegisterPhone1 = userRegisterPhone1;
 	}
-	public String getuserRegisterPhone2() {
+
+	public String getUserRegisterPhone2() {
 		return userRegisterPhone2;
 	}
-	public void setuserRegisterPhone2(String userRegisterPhone2) {
+
+	public void setUserRegisterPhone2(String userRegisterPhone2) {
 		this.userRegisterPhone2 = userRegisterPhone2;
 	}
-	public String getuserRegisterPhone3() {
+
+	public String getUserRegisterPhone3() {
 		return userRegisterPhone3;
 	}
-	public void setuserRegisterPhone3(String userRegisterPhone3) {
+
+	public void setUserRegisterPhone3(String userRegisterPhone3) {
 		this.userRegisterPhone3 = userRegisterPhone3;
 	}
-
 }

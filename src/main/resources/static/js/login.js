@@ -1,37 +1,36 @@
-window.onload = function(){
-	$("#loginSuccess").on('click', function(e) {
-		var id = document.getElementById("loginId");
-		var pw = document.getElementById("loginPassword");
-		
+$(document).ready(function() {
+	$("#loginSuccess").on('click', function (e) {
+		const id = document.getElementById("loginId");
+		const pw = document.getElementById("loginPassword");
+		const idVal = $("#loginId").val();
+		const pwVal = $("#loginPassword").val();
+		const login_data_json = {
+            "userRegisterId": idVal,
+            "userRegisterPassword": pwVal
+        };
 		if (id.value == "") {
 			alert("아이디를 입력해 주세요");
 			id.focus();
 			e.preventDefault;
 			return false;
-		}
-		else if (pw.value == "") {
+		} else if (pw.value == "") {
 			alert("비밀번호를 입력해 주세요");
 			pw.focus();
 			e.preventDefault;
 			return false;
-		}
-		else {
-			const formData = new FormData($('#loginForm')[0]);
-			e.preventDefault();
+		} else {
 			$.ajax({
-				type : "POST",
-				enctype : 'multipart/form-data',
+				type: "post",
+                data: login_data_json,
 				url : '/loginSuccess',
-				data : formData,
-				processData : false,
-				contentType : false,
-				chche : false,
-				success : function(result) {
-					location.href = "/";
-				},
-				error : function(e) {
-				}
+                dataType: "json",
+				success: function() {
+                    console.log(data);
+                    alert("로그인에 성공했습니다.");
+                }, error: function(e) {
+                    alert("로그인에 실패했습니다.");
+                }
 			});
 		}
 	});
-}
+});
