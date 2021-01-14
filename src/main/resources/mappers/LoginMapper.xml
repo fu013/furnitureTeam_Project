@@ -6,10 +6,8 @@
         >
         
 <mapper namespace = "our.example.furniture.repository.LoginMapper">
-	<select id = "overlapLogin">
-		SELECT * from userRegisterTable where loginId = #{UserRegisterDto.userRegisterId}
-	</select>
-	<select id = "overlapPassword">
-		SELECT * from userRegisterTable where loginId = #{UserRegisterDto.userRegisterId}
+	<select id = "overlapLogin" parameterType = "our.example.furniture.dto.UserRegisterDto">
+		SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
+		AND userRegisterPassword = #{userRegisterPassword}
 	</select>
 </mapper>
