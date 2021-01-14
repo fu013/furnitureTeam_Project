@@ -34,6 +34,17 @@ CREATE TABLE Product_InnerImages(
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
 
+CREATE TABLE Product_Review(
+	product_no number(10) not null,
+	review_userNickname varchar2(40) null,
+	review_comment varchar2(500) not null,
+	review_size varchar2(40) not null,
+	review_satisfaction varchar2(30) not null,
+	create_date date default sysdate,
+	CONSTRAINTS FK2_product_no FOREIGN KEY(product_no)
+		REFERENCES Product(product_no) ON DELETE CASCADE
+);
+
 CREATE SEQUENCE AUTO_INCREMENT
   START WITH 1
   INCREMENT BY 1

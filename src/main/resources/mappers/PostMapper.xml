@@ -31,6 +31,10 @@
             VALUES (PRODUCT_AUTO_I.CURRVAL, #{item.saveImageName}, #{item.extName}, #{item.FileSize}, #{item.imgURL})
         </foreach>
     </insert>
+    <insert id="WriteComment" parameterType="our.example.furniture.dto.ReviewDto">
+        INSERT INTO Product_Review(product_no, review_satisfaction, review_comment)
+        VALUES (#{product_no}, #{review_satisfaction}, #{review_comment})
+    </insert>
 
     <!-- 데이터베이스 상품관련 데이터 SELECT QUERY -->
     <select id="SelectPostImages" resultType="our.example.furniture.dto.SelectedPostDto" parameterType="our.example.furniture.dto.SelectedPostDto">
@@ -61,5 +65,12 @@
         COUNT(*)
         FROM
         Product
+    </select>
+    <select id="ViewComment" parameterType="our.example.furniture.dto.ReviewDto" resultType="our.example.furniture.dto.ReviewDto">
+        SELECT
+        review_satisfaction, review_comment
+        FROM
+        Product_Review
+        WHERE Product_Review.product_no = #{product_no}
     </select>
 </mapper>

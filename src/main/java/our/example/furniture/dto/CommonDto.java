@@ -16,7 +16,7 @@ public class CommonDto extends Pagination {
     // 등록일
     private LocalDateTime insertTime;
 
-    //수정일
+    // 수정일
     private LocalDateTime updateTime;
 
     // 삭제일

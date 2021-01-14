@@ -1,10 +1,7 @@
 package our.example.furniture.repository;
 
 import org.apache.ibatis.annotations.Mapper;
-import our.example.furniture.dto.InnerImagesInfoDto;
-import our.example.furniture.dto.MainImageInfoDto;
-import our.example.furniture.dto.PostWriterDto;
-import our.example.furniture.dto.SelectedPostDto;
+import our.example.furniture.dto.*;
 import our.example.furniture.paging.Pagination;
 
 import java.io.IOException;
@@ -27,4 +24,7 @@ public interface PostMapper {
     public List<SelectedPostDto> selectPostList(SelectedPostDto params);
     public int selectPostTotalCount(SelectedPostDto params);
 
+    // 댓글 등록 & 조회
+    void WriteComment(ReviewDto reviewDto);
+    List<ReviewDto> ViewComment(ReviewDto reviewDto);
 }

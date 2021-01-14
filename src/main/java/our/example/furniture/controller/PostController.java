@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.*;
 import our.example.furniture.repository.*;
 import our.example.furniture.service.UploadInnerImages;
@@ -28,7 +29,6 @@ public class PostController {
     @PostMapping("/productRegister")
     public String temp(PostWriterDto postWriterDto) throws Exception {
         postMapper.insertProductInfo(postWriterDto);
-
         // 메인 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
         if(!postWriterDto.getProductMainImg().isEmpty()) {
             List<MainImageInfoDto> MainImageLogic = uploadMainImage.MainImageLogic(postWriterDto);
@@ -45,9 +45,10 @@ public class PostController {
 
     // 상품 상세페이지
     @GetMapping("/postInfo")
-    public String postInfo(@RequestParam("post_no") int post_no, SelectedPostDto selectedPostDto, Model model) {
+    public String postInfo(@RequestParam("post_no") int post_no, SelectedPostDto selectedPostDto, ReviewDto reviewDto, Model model) {
         selectedPostDto.setProduct_No(post_no);
         SelectedPostDto postInfo = postMapper.SelectPost(selectedPostDto);
+        List<ReviewDto> reviewInfo = postMapper.ViewComment(reviewDto);
         List<SelectedPostDto> postImages = postMapper.SelectPostImages(selectedPostDto);
         if(postInfo.getImg_url_main() == null) {
             String a = "img/null.gif";
@@ -55,6 +56,16 @@ public class PostController {
         }
         model.addAttribute("postInfo", postInfo);
         model.addAttribute("postImages", postImages);
+        model.addAttribute("reviewInfo", reviewInfo);
         return "postInfo";
+    }
+
+    // 댓글 AJAX 요청 응답 API
+    @ResponseBody
+    @PostMapping("/postReviewInfo")
+    public List<ReviewDto> ReqReview(ReviewDto reviewDto, Model model) {
+        postMapper.WriteComment(reviewDto);
+        List<ReviewDto> reviewInfo = postMapper.ViewComment(reviewDto);
+        return reviewInfo;
     }
 }
