@@ -1,8 +1,8 @@
 CREATE TABLE Product(
 	product_no number(10) not null PRIMARY KEY,
-	productCategory_HomeScale varchar2(20)  not null,
-	productCategory_NumberOfHouseholds varchar2(20) not null,
-	productCategory_Interior varchar2(20) not null,
+	productCategoryHomeScale varchar2(20)  not null,
+	productCategoryNumberOfHouseholds varchar2(20) not null,
+	productCategoryInterior varchar2(20) not null,
 	productName varchar2(50) unique not null,
 	productPrice number(10) not null,
 	productGuideline varchar2(50) Null,
@@ -39,7 +39,8 @@ CREATE TABLE Product_Review(
 	review_userNickname varchar2(40) null,
 	review_comment varchar2(500) not null,
 	review_size varchar2(40) not null,
-	review_satisfaction varchar2(30) not null,
+	review_satisfaction varchar2(40) not null,
+	review_color varchar2(40) not null,
 	create_date date default sysdate,
 	CONSTRAINTS FK2_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE

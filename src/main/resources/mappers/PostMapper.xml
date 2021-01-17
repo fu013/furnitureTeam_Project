@@ -8,14 +8,14 @@
 
     <!-- INCLUDE -->
     <sql id="select_indexViewPost">
-        Product.Product_No, Product.productCategory_HomeScale, Product.productCategory_NumberOfHouseholds, Product.productCategory_Interior,
+        Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
         Product.productName, Product.productPrice, Product_MainImg.img_url_main
     </sql>
 
     <!-- 데이터베이스 상품관련 데이터 INSERT QUERY -->
     <insert id="insertProductInfo">
-        INSERT INTO product(product_no, productCategory_HomeScale, productCategory_NumberOfHouseholds,
-        productCategory_Interior, productName, productPrice, productGuideline, productSize, productColor, productComment)
+        INSERT INTO product(product_no, productCategoryHomeScale, productCategoryNumberOfHouseholds,
+        productCategoryInterior, productName, productPrice, productGuideline, productSize, productColor, productComment)
         VALUES(PRODUCT_AUTO_I.NEXTVAL, #{productCategoryHomeScale}, #{productCategoryNumberOfHouseholds}, #{productCategoryInterior},
         #{productName}, #{productPrice}, #{productGuideline}, #{productSize}, #{productColor}, #{productComment})
     </insert>
@@ -31,28 +31,29 @@
             VALUES (PRODUCT_AUTO_I.CURRVAL, #{item.saveImageName}, #{item.extName}, #{item.FileSize}, #{item.imgURL})
         </foreach>
     </insert>
-    <insert id="WriteComment" parameterType="our.example.furniture.dto.ReviewDto">
-        INSERT INTO Product_Review(product_no, review_satisfaction, review_comment)
-        VALUES (#{product_no}, #{review_satisfaction}, #{review_comment})
+    <insert id="WriteComment" parameterType="our.example.furniture.dto.ReviewDTO">
+        INSERT INTO Product_Review(product_no, review_satisfaction, review_comment, review_size, review_color)
+        VALUES (#{product_no}, #{review_satisfaction}, #{review_comment}, #{review_size}, #{review_color})
     </insert>
 
     <!-- 데이터베이스 상품관련 데이터 SELECT QUERY -->
-    <select id="SelectPostImages" resultType="our.example.furniture.dto.SelectedPostDto" parameterType="our.example.furniture.dto.SelectedPostDto">
+    <select id="SelectPostImages" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
         SELECT
         img_url_inner
         FROM
-        Product_InnerImages WHERE Product_No = #{product_No}
+        Product_InnerImages WHERE Product_No = #{product_no}
     </select>
-    <select id="SelectPost" resultType="our.example.furniture.dto.SelectedPostDto" parameterType="our.example.furniture.dto.SelectedPostDto">
+    <select id="SelectPost" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
         SELECT
-        <include refid="select_indexViewPost"/>
+        Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
+        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productColor, Product_MainImg.img_url_main
         FROM
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
-        WHERE Product.Product_No = #{product_No}
+        WHERE Product.Product_No = #{product_no}
     </select>
 
     <!-- 데이터베이스 Pagination 관련 데이터 QUERY -->
-    <select id="selectPostList" parameterType="our.example.furniture.dto.SelectedPostDto" resultType="our.example.furniture.dto.SelectedPostDto">
+    <select id="selectPostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
         SELECT
         <include refid="select_indexViewPost"/>
         FROM
@@ -60,17 +61,25 @@
         ORDER BY Product.Product_no DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
     </select>
-    <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.SelectedPostDto" resultType="int">
+    <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
         SELECT
         COUNT(*)
         FROM
         Product
     </select>
-    <select id="ViewComment" parameterType="our.example.furniture.dto.ReviewDto" resultType="our.example.furniture.dto.ReviewDto">
+    <select id="ViewComment" parameterType="our.example.furniture.dto.ReviewDTO" resultType="our.example.furniture.dto.ReviewDTO">
         SELECT
-        review_satisfaction, review_comment
+        *
         FROM
         Product_Review
-        WHERE Product_Review.product_no = #{product_no}
+        WHERE Product_Review.product_no = #{product_no} ORDER BY create_date DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
+    <select id="selectPostReviewTotalCountThisPage" parameterType="our.example.furniture.dto.ReviewDTO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        Product_Review
+        WHERE Product_Review.product_no = #{product_no} ORDER BY create_date DESC
     </select>
 </mapper>

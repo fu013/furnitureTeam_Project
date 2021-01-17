@@ -2,32 +2,31 @@ package our.example.furniture.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import our.example.furniture.dto.PostDTO;
+import our.example.furniture.dto.ReviewDTO;
 import our.example.furniture.paging.PaginationInfo;
 import our.example.furniture.repository.PostMapper;
 import java.util.Collections;
 import java.util.List;
 
 @Service
-public class PostServiceImpl implements PostService  {
+public class PostReviewImpl implements PostReviewService  {
     @Autowired
     private PostMapper postMapper;
 
     @Override
-    public List<PostDTO> getPostList(PostDTO params) {
-
-        List<PostDTO> postList = Collections.emptyList();
-        int postTotalCount = postMapper.selectPostTotalCount(params);
+    public List<ReviewDTO> getReviewList(ReviewDTO params) {
+        List<ReviewDTO> postReviewList = Collections.emptyList();
+        int postReviewTotalCount = postMapper.selectPostReviewTotalCountThisPage(params);
 
         PaginationInfo paginationInfo = new PaginationInfo(params);
-        paginationInfo.setTotalRecordCount(postTotalCount);
+        paginationInfo.setTotalRecordCount(postReviewTotalCount);
 
         params.setPaginationInfo(paginationInfo);
 
-        if (postTotalCount > 0) {
-            postList = postMapper.selectPostList(params);
+        if (postReviewTotalCount > 0) {
+            postReviewList = postMapper.ViewComment(params);
         }
 
-        return postList;
+        return postReviewList;
     }
 }

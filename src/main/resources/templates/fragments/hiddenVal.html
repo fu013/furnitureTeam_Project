@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <div th:fragment="fragment-hiddenVal">
-        <input type="hidden" id="review_productName" th:value="${postInfo.getProductName()}"/>
-        <input type="hidden" id="review_productNo" th:value="${postInfo.getProduct_No()}"/>
-    </div>
+<div th:fragment="fragment-hiddenVal">
+    <input type="hidden" id="review_productName" th:value="${postInfo.getProductName()}"/>
+    <input type="hidden" id="review_productNo" th:value="${postInfo.getProduct_no()}"/>
+    <input type="hidden" id="review_size" th:value="${postInfo.getProductSize()}"/>
+    <input type="hidden" id="review_color" th:value="${postInfo.getProductColor()}"/>
+</div>
 </html>

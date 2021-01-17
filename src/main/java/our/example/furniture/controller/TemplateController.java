@@ -25,8 +25,8 @@ public class TemplateController {
 
     // index[홈페이지] :: Template Mapping
     @GetMapping("/")
-    public String openPostList(@ModelAttribute("params") SelectedPostDto params, Model model) {
-        List<SelectedPostDto> postList = postService.getPostList(params);
+    public String openPostList(@ModelAttribute("params") PostDTO params, Model model) {
+        List<PostDTO> postList = postService.getPostList(params);
         model.addAttribute("postList", postList);
         for(int i = 0; i < postList.size(); i++) {
             if(postList.get(i).getImg_url_main() == null) {

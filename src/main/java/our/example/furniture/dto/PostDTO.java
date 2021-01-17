@@ -2,7 +2,7 @@ package our.example.furniture.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class PostWriterDto {
+public class PostDTO extends CommonDTO {
     private int product_no;
     private String productCategoryHomeScale;
     private String productCategoryNumberOfHouseholds;
@@ -15,6 +15,8 @@ public class PostWriterDto {
     private MultipartFile productMainImg;
     private MultipartFile[] productImg;
     private String productComment;
+    private String img_url_inner;
+    private String img_url_main;
 
     // GETTER & SETTER
     public int getProduct_no() {
@@ -29,19 +31,25 @@ public class PostWriterDto {
         return productCategoryHomeScale;
     }
 
-    public void setProductCategoryHomeScale(String productCategoryHomeScale) { this.productCategoryHomeScale = productCategoryHomeScale; }
+    public void setProductCategoryHomeScale(String productCategoryHomeScale) {
+        this.productCategoryHomeScale = productCategoryHomeScale;
+    }
 
     public String getProductCategoryNumberOfHouseholds() {
         return productCategoryNumberOfHouseholds;
     }
 
-    public void setProductCategoryNumberOfHouseholds(String productCategoryNumberOfHouseholds) { this.productCategoryNumberOfHouseholds = productCategoryNumberOfHouseholds; }
+    public void setProductCategoryNumberOfHouseholds(String productCategoryNumberOfHouseholds) {
+        this.productCategoryNumberOfHouseholds = productCategoryNumberOfHouseholds;
+    }
 
     public String getProductCategoryInterior() {
         return productCategoryInterior;
     }
 
-    public void setProductCategoryInterior(String productCategoryInterior) { this.productCategoryInterior = productCategoryInterior; }
+    public void setProductCategoryInterior(String productCategoryInterior) {
+        this.productCategoryInterior = productCategoryInterior;
+    }
 
     public String getProductName() {
         return productName;
@@ -91,9 +99,13 @@ public class PostWriterDto {
         this.productMainImg = productMainImg;
     }
 
-    public MultipartFile[] getProductImg() { return productImg; }
+    public MultipartFile[] getProductImg() {
+        return productImg;
+    }
 
-    public void setProductImg(MultipartFile[] productImg) { this.productImg = productImg; }
+    public void setProductImg(MultipartFile[] productImg) {
+        this.productImg = productImg;
+    }
 
     public String getProductComment() {
         return productComment;
@@ -101,5 +113,21 @@ public class PostWriterDto {
 
     public void setProductComment(String productComment) {
         this.productComment = productComment;
+    }
+
+    public String getImg_url_inner() {
+        return img_url_inner;
+    }
+
+    public void setImg_url_inner(String img_url_inner) {
+        this.img_url_inner = img_url_inner;
+    }
+
+    public String getImg_url_main() {
+        return img_url_main;
+    }
+
+    public void setImg_url_main(String img_url_main) {
+        this.img_url_main = img_url_main;
     }
 }

@@ -1,12 +1,14 @@
 package our.example.furniture.dto;
 
-public class ReviewDto {
+public class ReviewDTO extends CommonDTO {
     private int product_no;
     private String review_userNickname;
     private String review_comment;
     private String review_size;
     private String review_satisfaction;
-    private String current_date;
+    private String review_color;
+    private String create_date;
+    private int total_review_num;
 
     public int getProduct_no() {
         return product_no;
@@ -48,11 +50,27 @@ public class ReviewDto {
         this.review_size = review_size;
     }
 
-    public String getCurrent_date() {
-        return current_date;
+    public String getReview_color() {
+        return review_color;
     }
 
-    public void setCurrent_date(String current_date) {
-        this.current_date = current_date;
+    public void setReview_color(String review_color) {
+        this.review_color = review_color;
+    }
+
+    public String getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
+    }
+
+    public int getTotal_review_num() {
+        return total_review_num;
+    }
+
+    public void setTotal_review_num(int total_review_num) {
+        this.total_review_num = total_review_num;
     }
 }
