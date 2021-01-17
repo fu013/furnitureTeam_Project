@@ -35,6 +35,7 @@ CREATE TABLE Product_InnerImages(
 );
 
 CREATE TABLE Product_Review(
+	comment_no number(10) not null PRIMARY KEY,
 	product_no number(10) not null,
 	review_userNickname varchar2(40) null,
 	review_comment varchar2(500) not null,

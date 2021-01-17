@@ -6,5 +6,5 @@ import our.example.furniture.dto.UserRegisterDto;
 
 @Mapper
 public interface LoginMapper {
-    UserRegisterDto overlapLogin(UserRegisterDto userRegisterDto);
+    String overlapLogin(UserRegisterDto userRegisterDto);
 }

@@ -2,6 +2,7 @@ package our.example.furniture.dto;
 
 public class ReviewDTO extends CommonDTO {
     private int product_no;
+    private int comment_no;
     private String review_userNickname;
     private String review_comment;
     private String review_size;
@@ -72,5 +73,13 @@ public class ReviewDTO extends CommonDTO {
 
     public void setTotal_review_num(int total_review_num) {
         this.total_review_num = total_review_num;
+    }
+
+    public int getComment_no() {
+        return comment_no;
+    }
+
+    public void setComment_no(int comment_no) {
+        this.comment_no = comment_no;
     }
 }

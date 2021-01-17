@@ -20,11 +20,16 @@ public interface PostMapper {
     List<PostDTO> SelectPostImages(PostDTO params);
 
     // 게시물 조회 및 Pagination Method
-    public List<PostDTO> selectPostList(PostDTO params);
-    public int selectPostTotalCount(PostDTO params);
+    List<PostDTO> selectPostList(PostDTO params);
+    int selectPostTotalCount(PostDTO params);
 
     // 댓글 등록 & 조회
     void WriteComment(ReviewDTO params);
     List<ReviewDTO> ViewComment(ReviewDTO params);
-    public int selectPostReviewTotalCountThisPage(ReviewDTO params);
+    int selectPostReviewTotalCountThisPage(ReviewDTO params);
+
+    // 댓글 수정 & 삭제
+    void DeleteComment(ReviewFixDeleteDTO params);
+    void UpdateComment(ReviewFixDeleteDTO params);
+    String ViewAfterUpdateComment(ReviewFixDeleteDTO params);
 }

@@ -49,11 +49,11 @@ public class PostController {
     public String postInfo(@RequestParam("post_no") int post_no, PostDTO postDTO, ReviewDTO params, Model model) {
         postDTO.setProduct_no(post_no);
         params.setProduct_no(post_no);
-        int totalReviewNumThisPage = postMapper.selectPostReviewTotalCountThisPage(params);
         params.setRecordsPerPage(5);
-        params.setTotal_review_num(totalReviewNumThisPage);
         params.setIs_Post_no(true);
         params.getPost_no(post_no);
+        int totalReviewNumThisPage = postMapper.selectPostReviewTotalCountThisPage(params);
+        params.setTotal_review_num(totalReviewNumThisPage);
         PostDTO postInfo = postMapper.SelectPost(postDTO);
         List<PostDTO> postImages = postMapper.SelectPostImages(postDTO);
         // 이미지가 Null 일 경우, default 이미지로 null.gif 를 src 로 등록
@@ -61,7 +61,6 @@ public class PostController {
             String a = "img/null.gif";
             postInfo.setImg_url_main(a);
         }
-        postInfo.getProduct_no();
         List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
         model.addAttribute("postInfo", postInfo);
         model.addAttribute("params", params);
@@ -69,13 +68,28 @@ public class PostController {
         model.addAttribute("reviewInfo", reviewInfo);
         return "postInfo";
     }
-
     // 댓글 AJAX 요청 응답 API
     @ResponseBody
     @PostMapping("/postReviewInfo")
-    public List<ReviewDTO> ReqReview(ReviewDTO params, Model model) {
+    public List<ReviewDTO> ReqReview(ReviewDTO params) {
         postMapper.WriteComment(params);
         List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
         return reviewInfo;
+    }
+    // 댓글 수정 API
+    @ResponseBody
+    @PostMapping("/postReviewInfoFix")
+    public String FixReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
+        postMapper.UpdateComment(reviewFixDeleteDTO);
+        String result = postMapper.ViewAfterUpdateComment(reviewFixDeleteDTO);
+        return result;
+    }
+    // 댓글 삭제
+    @ResponseBody
+    @PostMapping("/postReviewInfoDelete")
+    public String DeleteReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
+        postMapper.DeleteComment(reviewFixDeleteDTO);
+        String check = "댓글이 삭제되었습니다.";
+        return check;
     }
 }
