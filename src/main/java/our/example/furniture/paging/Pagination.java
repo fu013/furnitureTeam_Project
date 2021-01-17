@@ -51,8 +51,6 @@ public class Pagination {
                     .queryParam("currentPageNo", pageNo)
                     .queryParam("recordsPerPage", recordsPerPage)
                     .queryParam("pageSize", pageSize)
-                    .queryParam("searchType", searchType)
-                    .queryParam("searchKeyword", searchKeyword)
                     .build()
                     .encode();
         }
