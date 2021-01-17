@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
-<<<<<<< HEAD
     @Autowired
     private LoginMapper loginMapper;
     private Log log = LogFactory.getLog(this.getClass());
@@ -28,27 +27,11 @@ public class LoginController {
         return "login";
     }
 
-=======
-	@Autowired
-    private LoginMapper loginMapper;
-	private Log log = LogFactory.getLog(this.getClass());
-
-// login[로그인] :: URL 매핑
-    @GetMapping("/login")
-    public String login(Model model) {
-    	return "login";
-    }
-    
->>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
     @ResponseBody
     @PostMapping("/loginSuccess")
     public UserRegisterDto loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
         UserRegisterDto result = loginMapper.overlapLogin(userRegisterDto);
-<<<<<<< HEAD
         if (result != null) { // 로그인 성공
-=======
-    	if (result != null) { // 로그인 성공
->>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
             String userName = userRegisterDto.getUserRegisterId();
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", userName);
@@ -60,10 +43,6 @@ public class LoginController {
         } else { // 로그인 실패
             log.info("아이디나 비밀번호가 맞지않아 응답값이 Null 입니다.");
         }
-<<<<<<< HEAD
         return result;
-=======
-    	return result;
->>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
     }
 }
