@@ -5,8 +5,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
         >
 <mapper namespace = "our.example.furniture.repository.LoginMapper">
+<<<<<<< HEAD
     <select id="overlapLogin" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType="our.example.furniture.dto.UserRegisterDto">
         SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
         AND userRegisterPassword = #{userRegisterPassword}
     </select>
+=======
+	<select id="overlapLogin" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType="our.example.furniture.dto.UserRegisterDto">
+		SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
+		AND userRegisterPassword = #{userRegisterPassword}
+	</select>
+>>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
 </mapper>

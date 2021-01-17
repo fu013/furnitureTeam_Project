@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // 로그인 AJAX 요청
+=======
+>>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
 $(document).ready(function() {
 	$("#loginSuccess").on('click', function (e) {
 		const id = document.getElementById("loginId");
@@ -25,7 +28,11 @@ $(document).ready(function() {
                 data: login_data_json,
 				url : '/loginSuccess',
                 dataType: "json",
+<<<<<<< HEAD
 				success: function(data) {
+=======
+				success: function() {
+>>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
                     console.log(data);
                     alert("로그인에 성공했습니다.");
                 }, error: function(e) {
