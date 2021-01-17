@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 // 로그인 AJAX 요청
-=======
->>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
 $(document).ready(function() {
 	$("#loginSuccess").on('click', function (e) {
 		const id = document.getElementById("loginId");
