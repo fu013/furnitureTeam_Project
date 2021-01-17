@@ -60,22 +60,22 @@
                 <a class="targetInfo" href="#a" style=" border: 1px solid black; font-size: 20px; color: black;">상품정보</a>
             </li>
             <li>
-                <a class="tabReview" href="#a" style=" color: black; ">구매후기( )</a>
+                <a class="tabReview" href="#a" style=" color: black;" th:text="'구매후기 ( ' + ${params.getTotal_review_num()} + ' )'"></a>
             </li>
         </ul>
     </div>
     <div class="detail_info">
-        <p>상품 설명글</p>
         <div class='img_upload' alt='다중 내부 이미지'>
             <img th:each="postImages : ${postImages}" th:src="${postImages.getImg_url_inner()}"/>
         </div>
+        <p th:if="${postInfo.getProductComment() != null}" th:text="'상품 설명글 : ' + ${postInfo.getProductComment()}"></p>
         <div class="tab_div" id="tab_back">
             <ul class="tab_menu">
                 <li>
                     <a class="tabContent" href="#a" style=" color: black;">상품정보</a>
                 </li>
                 <li>
-                    <a class="targetReview" href="#a" style=" border: 1px solid black; font-size: 20px; color: black;"></a>
+                    <a class="targetReview" href="#a" style=" border: 1px solid black; font-size: 20px; color: black;" th:text="'구매후기 ( ' + ${params.getTotal_review_num()} + ' )'"></a>
                 </li>
             </ul>
         </div>
@@ -85,6 +85,7 @@
                 <h4 class="color" th:text="'상품 컬러 : ' + ${reviewInfo.getReview_color()}"></h4>
                 <p class="user_nickname">유저닉네임 : 미정 </p>
                 <p class="review_satisfaction" th:text="'만족도 : ' + ${reviewInfo.getReview_satisfaction()}"></p>
+                <input type="hidden" class="comment_no" th:value="${reviewInfo.getComment_no()}"/>
                 <button type='button' class='fix_button'>수정</button>
                 <button type='button' class='delete_button'>삭제</button>
                 <h5 class="content" th:text="'코멘트 = ' + ${reviewInfo.getReview_comment()}"></h5>

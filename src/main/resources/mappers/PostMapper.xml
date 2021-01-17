@@ -32,8 +32,8 @@
         </foreach>
     </insert>
     <insert id="WriteComment" parameterType="our.example.furniture.dto.ReviewDTO">
-        INSERT INTO Product_Review(product_no, review_satisfaction, review_comment, review_size, review_color)
-        VALUES (#{product_no}, #{review_satisfaction}, #{review_comment}, #{review_size}, #{review_color})
+        INSERT INTO Product_Review(comment_no, product_no, review_satisfaction, review_comment, review_size, review_color)
+        VALUES (REVIEW_AUTO_INCREMENT.NEXTVAL, #{product_no}, #{review_satisfaction}, #{review_comment}, #{review_size}, #{review_color})
     </insert>
 
     <!-- 데이터베이스 상품관련 데이터 SELECT QUERY -->
@@ -46,7 +46,7 @@
     <select id="SelectPost" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
         SELECT
         Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
-        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productColor, Product_MainImg.img_url_main
+        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productComment, Product.productColor, Product_MainImg.img_url_main
         FROM
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
         WHERE Product.Product_No = #{product_no}
@@ -81,5 +81,30 @@
         FROM
         Product_Review
         WHERE Product_Review.product_no = #{product_no} ORDER BY create_date DESC
+    </select>
+
+    <!-- 데이터베이스 댓글 삭제 & 수정 QUERY -->
+    <update id="UpdateComment" parameterType="our.example.furniture.dto.ReviewFixDeleteDTO">
+        UPDATE
+        Product_Review
+        SET
+        review_comment = #{fixed_review_comment}
+        WHERE
+        Product_Review.comment_no = #{fix_comment_no}
+    </update>
+    <delete id="DeleteComment" parameterType="our.example.furniture.dto.ReviewFixDeleteDTO">
+        DELETE
+        FROM
+        Product_Review
+        WHERE
+        Product_Review.comment_no = #{delete_comment_no}
+    </delete>
+    <select id="ViewAfterUpdateComment" parameterType="our.example.furniture.dto.ReviewFixDeleteDTO" resultType="String">
+        SELECT
+        review_comment
+        FROM
+        Product_Review
+        WHERE
+        Product_Review.comment_no = #{fix_comment_no}
     </select>
 </mapper>

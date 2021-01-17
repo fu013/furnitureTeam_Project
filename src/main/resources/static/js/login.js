@@ -27,13 +27,9 @@ $(document).ready(function() {
 				type: "post",
                 data: login_data_json,
 				url : '/loginSuccess',
-                dataType: "json",
-<<<<<<< HEAD
+                dataType: "text",
 				success: function(data) {
-=======
-				success: function() {
->>>>>>> 70e244beb6ab58e2d28f04335c231ac8275930a6
-                    console.log(data);
+                    location.href = "/";
                     alert("로그인에 성공했습니다.");
                 }, error: function(e) {
                     alert("로그인에 실패했습니다.");

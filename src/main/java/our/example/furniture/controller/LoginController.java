@@ -29,8 +29,8 @@ public class LoginController {
 
     @ResponseBody
     @PostMapping("/loginSuccess")
-    public UserRegisterDto loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
-        UserRegisterDto result = loginMapper.overlapLogin(userRegisterDto);
+    public String loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
+        String result = loginMapper.overlapLogin(userRegisterDto);
         if (result != null) { // 로그인 성공
             String userName = userRegisterDto.getUserRegisterId();
             HttpSession session = request.getSession();
