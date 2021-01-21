@@ -15,6 +15,9 @@ public interface PostMapper {
     void InsertInnerImages(List<InnerImagesInfoDto> params) throws IOException;
     void InsertMainImage(List<MainImageInfoDto> params) throws IOException;
 
+    // 게시물 조회수 카운트
+    void UpdateProductView(PostDTO params);
+
     // 게시물 상세페이지에 데이터 조회하는 Method
     PostDTO SelectPost(PostDTO params);
     List<PostDTO> SelectPostImages(PostDTO params);
@@ -32,4 +35,7 @@ public interface PostMapper {
     void DeleteComment(ReviewFixDeleteDTO params);
     void UpdateComment(ReviewFixDeleteDTO params);
     String ViewAfterUpdateComment(ReviewFixDeleteDTO params);
+
+    // 최근 본 페이지 Select
+    PostDTO selectViewPostList(PostDTO params);
 }

@@ -9,8 +9,10 @@ CREATE TABLE Product(
 	productSize varchar2(20) not null,
 	productColor varchar2(20) not null,
 	productComment varchar(1000) NULL,
+	productView number(10) DEFAULT 0,
 	create_date date default sysdate
 );
+ALTER TABLE Product ADD productView number(10) DEFAULT 0;
 
 CREATE TABLE Product_MainImg(
 	product_no number(10) not null,

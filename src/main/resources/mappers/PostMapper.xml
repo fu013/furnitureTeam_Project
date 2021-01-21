@@ -9,9 +9,8 @@
     <!-- INCLUDE -->
     <sql id="select_indexViewPost">
         Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
-        Product.productName, Product.productPrice, Product_MainImg.img_url_main
+        Product.productName, Product.productPrice, Product.productView, Product_MainImg.img_url_main
     </sql>
-
     <!-- 데이터베이스 상품관련 데이터 INSERT QUERY -->
     <insert id="insertProductInfo">
         INSERT INTO product(product_no, productCategoryHomeScale, productCategoryNumberOfHouseholds,
@@ -35,6 +34,9 @@
         INSERT INTO Product_Review(comment_no, product_no, review_satisfaction, review_comment, review_size, review_color)
         VALUES (REVIEW_AUTO_INCREMENT.NEXTVAL, #{product_no}, #{review_satisfaction}, #{review_comment}, #{review_size}, #{review_color})
     </insert>
+    <update id="UpdateProductView" parameterType="our.example.furniture.dto.PostDTO">
+        UPDATE Product SET productView = #{productView} + 1 WHERE Product_no = #{product_no}
+    </update>
 
     <!-- 데이터베이스 상품관련 데이터 SELECT QUERY -->
     <select id="SelectPostImages" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
@@ -46,12 +48,11 @@
     <select id="SelectPost" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
         SELECT
         Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
-        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productComment, Product.productColor, Product_MainImg.img_url_main
+        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productComment, Product.productView, Product.productColor, Product_MainImg.img_url_main
         FROM
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
         WHERE Product.Product_No = #{product_no}
     </select>
-
     <!-- 데이터베이스 Pagination 관련 데이터 QUERY -->
     <select id="selectPostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
         SELECT
@@ -60,6 +61,15 @@
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
         ORDER BY Product.Product_no DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
+    <!-- 최근 본 페이지 조회 -->
+    <select id="selectViewPostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        <include refid="select_indexViewPost"/>
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE Product.Product_No = #{product_no}
+        ORDER BY Product.Product_no DESC
     </select>
     <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
         SELECT

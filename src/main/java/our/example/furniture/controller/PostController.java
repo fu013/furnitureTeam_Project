@@ -2,6 +2,7 @@ package our.example.furniture.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,11 @@ import our.example.furniture.repository.*;
 import our.example.furniture.service.PostReviewService;
 import our.example.furniture.service.UploadInnerImages;
 import our.example.furniture.service.UploadMainImage;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -46,7 +52,7 @@ public class PostController {
 
     // 상품 상세페이지
     @GetMapping("/postInfo")
-    public String postInfo(@RequestParam("post_no") int post_no, PostDTO postDTO, ReviewDTO params, Model model) {
+    public String postInfo(@RequestParam("post_no") int post_no, PostDTO postDTO, ReviewDTO params, HttpServletResponse response, HttpServletRequest request, Model model) {
         postDTO.setProduct_no(post_no);
         params.setProduct_no(post_no);
         params.setRecordsPerPage(5);
@@ -61,6 +67,20 @@ public class PostController {
             String a = "img/null.gif";
             postInfo.setImg_url_main(a);
         }
+        // 쿠키 조회
+        String ViewCookieName = "ViewPostName" + postInfo.getProduct_no();
+        Cookie[] cookies = request.getCookies();
+        HashMap<String, String> CookieMap = new HashMap<String, String>();
+        for(Cookie cookie:cookies) {
+            CookieMap.put(cookie.getName(), cookie.getValue());
+        }
+        if(CookieMap.get(ViewCookieName) == null) {
+            Cookie storeViewPostNameCookie = new Cookie(ViewCookieName, postInfo.getProductName());
+            storeViewPostNameCookie.setMaxAge(60 * 60 * 24);
+            storeViewPostNameCookie.setComment("Post 조회수 판별 쿠키(1일)");
+            response.addCookie(storeViewPostNameCookie);
+            postMapper.UpdateProductView(postInfo);
+        }
         List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
         model.addAttribute("postInfo", postInfo);
         model.addAttribute("params", params);
@@ -71,25 +91,25 @@ public class PostController {
     // 댓글 AJAX 요청 응답 API
     @ResponseBody
     @PostMapping("/postReviewInfo")
-    public List<ReviewDTO> ReqReview(ReviewDTO params) {
-        postMapper.WriteComment(params);
-        List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
-        return reviewInfo;
-    }
+        public List<ReviewDTO> ReqReview(ReviewDTO params) {
+            postMapper.WriteComment(params);
+            List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
+            return reviewInfo;
+        }
     // 댓글 수정 API
     @ResponseBody
     @PostMapping("/postReviewInfoFix")
-    public String FixReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
-        postMapper.UpdateComment(reviewFixDeleteDTO);
-        String result = postMapper.ViewAfterUpdateComment(reviewFixDeleteDTO);
-        return result;
-    }
+        public String FixReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
+            postMapper.UpdateComment(reviewFixDeleteDTO);
+            String result = postMapper.ViewAfterUpdateComment(reviewFixDeleteDTO);
+            return result;
+        }
     // 댓글 삭제
     @ResponseBody
     @PostMapping("/postReviewInfoDelete")
-    public String DeleteReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
-        postMapper.DeleteComment(reviewFixDeleteDTO);
-        String check = "댓글이 삭제되었습니다.";
-        return check;
-    }
+        public String DeleteReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
+            postMapper.DeleteComment(reviewFixDeleteDTO);
+            String check = "댓글이 삭제되었습니다.";
+            return check;
+        }
 }

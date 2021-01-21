@@ -5,39 +5,14 @@
             <h1>최근 본 페이지</h1>
         </div>
         <ul class="itemUl">
-            <li class="itemLi">
+            <li class="itemLi" th:each="viewPostList : ${viewPostList}">
                 <a href="#" class="itemLiLink">
                     <div class="imgBox">
-                        <img src="https://source.unsplash.com/1400x300/?random" style="width: 100%; height:100%;"/>
+                        <img th:src="${viewPostList.getImg_url_main()}" style="width: 100%; height:100%;"/>
                     </div>
                     <ul class="productUl">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
-                </a>
-            </li>
-            <li class="itemLi">
-                <a href="#" class="itemLiLink">
-                    <div class="imgBox">
-                        <img src="https://source.unsplash.com/1400x300/?random" style="width: 100%; height:100%;"/>
-                    </div>
-                    <ul class="productUl">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
-                </a>
-            </li>
-            <li class="itemLi">
-                <a href="#" class="itemLiLink">
-                    <div class="imgBox">
-                        <img src="https://source.unsplash.com/1400x300/?random" style="width: 100%; height:100%;"/>
-                    </div>
-                    <ul class="productUl">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
+                        <li th:text="'상품명 : ' + ${viewPostList.getProductName()}"></li>
+                        <li th:text="'상품가격 : ' + ${viewPostList.getProductPrice()} + '원'"></li>
                     </ul>
                 </a>
             </li>
