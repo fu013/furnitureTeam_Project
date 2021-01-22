@@ -11,7 +11,9 @@ public class UserRegisterDto {
     private String userRegisterPhone1;
     private String userRegisterPhone2;
     private String userRegisterPhone3;
-
+    private String loginId;
+    private String loginPassword;
+    private String idOverlapCheck;
 
     public String getUserRegisterId() {
         return userRegisterId;
@@ -91,5 +93,29 @@ public class UserRegisterDto {
 
     public void setUserRegisterPhone3(String userRegisterPhone3) {
         this.userRegisterPhone3 = userRegisterPhone3;
+    }
+
+    public String getIdOverlapCheck() {
+        return idOverlapCheck;
+    }
+
+    public void setIdOverlapCheck(String idOverlapCheck) {
+        this.idOverlapCheck = idOverlapCheck;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
+
+    public String getLoginPassword() {
+        return loginPassword;
+    }
+
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
     }
 }

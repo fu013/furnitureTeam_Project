@@ -1,3 +1,4 @@
+user_id 테이블에 넣기
 CREATE TABLE Product(
 	product_no number(10) not null PRIMARY KEY,
 	productCategoryHomeScale varchar2(20)  not null,
@@ -10,6 +11,8 @@ CREATE TABLE Product(
 	productColor varchar2(20) not null,
 	productComment varchar(1000) NULL,
 	productView number(10) DEFAULT 0,
+	CONSTRAINTS FK_userRegisterId FOREIGN KEY(userRegisterId)
+		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
 	create_date date default sysdate
 );
 ALTER TABLE Product ADD productView number(10) DEFAULT 0;
@@ -48,12 +51,21 @@ CREATE TABLE Product_Review(
 	CONSTRAINTS FK2_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
-CREATE TABLE MEMO (
-	IDX NUMBER(8,0) NOT NULL PRIMARY KEY,
-	NAME VARCHAR2(30 BYTE) NOT NULL,
-	MSG VARCHAR2(100 BYTE) NULL,
-	WDATE DATE NULL
-);
+
+create table userRegisterTable(
+    userRegisterId varchar2(20) not null PRIMARY KEY,
+    userRegisterPassword varchar2(20) not null,
+    userRegisterRePassword varchar2(20) not null,
+    userRegisterName varchar2(20) not null,
+    userRegisterBirth date not null,
+    userRegisterGender varchar2(6) not null,
+    userRegisterEmail varchar2(50) not null,
+    userRegisterPhone1 number(3) not null,
+    userRegisterPhone2 number(4) not null,
+    userRegisterPhone3 number(4) not null,
+    create_date date default sysdate
+)
+
 CREATE MEMO_IDX_SEQ
   START WITH 1
   INCREMENT BY 1
