@@ -42,13 +42,9 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", userName);
             session.setMaxInactiveInterval(60*60);
-        /*
-            String name = (String) session.getAttribute("loginUser");
-            log.info("세션에 로그인 되었습니다.");
-            log.info("세션정보 확인 = " + name);
-        */
+            result = "로그인에 성공했습니다.";
         } else { // 로그인 실패
-            log.info("아이디나 비밀번호가 맞지않아 응답값이 Null 입니다.");
+            result = "아이디나 비밀번호가 일치하지않아 로그인에 실패했습니다.";
         }
         return result;
     }

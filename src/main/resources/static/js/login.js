@@ -27,9 +27,7 @@ $(document).ready(function() {
                 dataType: "text",
 				success: function(data) {
                     location.href = "/";
-                    alert("로그인에 성공했습니다.");
-                }, error: function(e) {
-                    alert("로그인에 실패했습니다.");
+                    alert(data);
                 }
 			});
 		}

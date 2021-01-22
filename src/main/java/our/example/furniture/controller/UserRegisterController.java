@@ -22,7 +22,7 @@ public class UserRegisterController {
     // 등록 성공시 Data Insert
     @PostMapping("/userRegisterSuccess")
     public String temp2(UserRegisterDto userRegisterDto) {
-        userRegisterMapper.insertRegister(userRegisterDto);
+        userRegisterMapper.insertUserRegister(userRegisterDto);
         return "index";
     }
     // 로그인 중복 체크

@@ -6,6 +6,6 @@ import our.example.furniture.dto.UserRegisterDto;
 // 회원가입 관련 Mapper
 @Mapper
 public interface UserRegisterMapper {
-	void insertRegister(UserRegisterDto userRegisterDto);
+	void insertUserRegister(UserRegisterDto userRegisterDto);
 	String idOverlap(UserRegisterDto userRegisterDto);
 }
