@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import our.example.furniture.dto.InnerImagesInfoDto;
-import our.example.furniture.dto.PostWriterDto;
+import our.example.furniture.dto.PostDTO;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
@@ -37,8 +37,8 @@ public class UploadInnerImages {
     }
 
     // 메인 이미지(단일) 파일 images/main 폴더에 데이터 저장
-    public static boolean writeFile(PostWriterDto postWriterDto, String saveFileName, String SAVE_PATH) throws IOException {
-        byte[] data = postWriterDto.getProductMainImg().getBytes();
+    public static boolean writeFile(PostDTO postDTO, String saveFileName, String SAVE_PATH) throws IOException {
+        byte[] data = postDTO.getProductMainImg().getBytes();
         FileOutputStream fos = new FileOutputStream(SAVE_PATH + "/" + saveFileName);
         fos.write(data);
         fos.close();
@@ -46,10 +46,10 @@ public class UploadInnerImages {
     }
 
 
-    public List<InnerImagesInfoDto> InnerImagesLogic(PostWriterDto postWriterDto) throws IOException {
+    public List<InnerImagesInfoDto> InnerImagesLogic(PostDTO postDTO) throws IOException {
 
         // 이너 이미지 배열 형식으로 데이터 받아오기
-        MultipartFile[] images = postWriterDto.getProductImg();
+        MultipartFile[] images = postDTO.getProductImg();
 
         // 이너 이미지(다중) - 데이터 담을 리스트(HashMap Data) 생성
         List<InnerImagesInfoDto> imagesList = new ArrayList<>();

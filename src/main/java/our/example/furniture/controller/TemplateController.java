@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import our.example.furniture.dto.*;
-import our.example.furniture.paging.Pagination;
-import our.example.furniture.paging.PaginationInfo;
 import our.example.furniture.repository.*;
 import our.example.furniture.service.PostService;
 
@@ -25,8 +23,8 @@ public class TemplateController {
 
     // index[홈페이지] :: Template Mapping
     @GetMapping("/")
-    public String openPostList(@ModelAttribute("params") SelectedPostDto params, Model model) {
-        List<SelectedPostDto> postList = postService.getPostList(params);
+    public String openPostList(@ModelAttribute("params") PostDTO params, Model model) {
+        List<PostDTO> postList = postService.getPostList(params);
         model.addAttribute("postList", postList);
         for(int i = 0; i < postList.size(); i++) {
             if(postList.get(i).getImg_url_main() == null) {
@@ -41,8 +39,8 @@ public class TemplateController {
     public String postWriter(Model model) { return "postWriter"; }
 
     // register[회원가입] :: Template Mapping
-    @GetMapping("/register")
+    @GetMapping("/userRegister")
     public String register(Model model) {
-        return "register";
+        return "userRegister";
     }
 }

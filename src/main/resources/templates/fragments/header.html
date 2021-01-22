@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <header th:fragment="fragment-header" class="header">
-        <div class="nav">
-            <div class="logo">
-                <a href="/">
-                    <img src="img/logo.png"/>
-                </a>
-            </div>
-            <ul class="menu">
-                <li>
-                    <a href="./postWriter">글쓰기</a>
-                </li>
-                <li>
-                    <a href="./userRegister">회원가입</a>
-                </li>
-                <li>
-                    <a href="login">로그인</a>
-                </li>
-            </ul>
+<header th:fragment="fragment-header" class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="/">
+                <img src="img/logo.png"/>
+            </a>
         </div>
-    </header>
+        <!--로그인 Header-->
+        <ul class="menu" th:if="${!session.isEmpty()}">
+            <li>
+                <a href="./Basket">장바구니</a>
+            </li>
+            <li>
+                <a href="./myPage_CurrentView">마이페이지</a>
+            </li>
+            <li>
+                <a href="./postWriter">글쓰기</a>
+            </li>
+            <li>
+                <a href="./logout">로그아웃</a>
+            </li>
+        </ul>
+        <!--비로그인 Header-->
+        <ul class="menu" th:if="${session.isEmpty()}">
+            <li>
+                <a href="./Basket">장바구니</a>
+            </li>
+            <li>
+                <a href="./userRegister">회원가입</a>
+            </li>
+            <li>
+                <a href="./login">로그인</a>
+            </li>
+        </ul>
+    </div>
+</header>
 </html>

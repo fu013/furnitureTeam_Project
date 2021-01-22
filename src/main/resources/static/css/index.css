@@ -34,7 +34,7 @@
         margin: 0 10px;
     }
     .sliderBox {
-        background-image: url('https://source.unsplash.com/1400x300/?christmas');
+        background-image: url('https://source.unsplash.com/1400x300/?winter');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         height: 300px;
@@ -111,7 +111,7 @@
         padding: 20px;
         border-bottom: 1px solid black;
     }
-    .bodyWrapper > section > .view > .filterBox > .wayBox {
+    .bodyWrapper > section > .view > .filterBox > .orderBox {
         display: inline-block;
         position: absolute;
         top: 30px;
@@ -125,9 +125,10 @@
         position: relative;
     }
     .bodyWrapper > section > .view > .filterBox > .searchBox > #searchBar {
-        width: 100%;
-        height: 46px;
-        padding: 11px 20px 13px 68px;
+        width: 84%;
+        height: 26px;
+        /* line-height: 26px; */
+        padding: 11px 20px 9px 58px;
         font-size: 22px;
         letter-spacing: 3px;
         color: #373737;
@@ -137,8 +138,8 @@
     }
     .bodyWrapper > section > .view > .filterBox > .searchBox > .sub-search-icon {
         position: absolute;
-        top: 2px;
-        left: 20px;
+        top: 5px;
+        left: 16px;
         font-size: 28px;
     }
 
@@ -155,6 +156,7 @@
     }
     .bodyWrapper > aside > h1 {
         font-size: 2rem;
+        margin: 0;
         padding: 10px;
         text-align: center;
         border-bottom: 1px solid black;
@@ -183,7 +185,7 @@
     .bodyWrapper > section > .view > .itemUl > .itemLi:nth-child(3n) {
         margin-right: 0;
     }
-    .bodyWrapper > section > .view > .itemUl > .itemLi > a > .imgBox {
+    .bodyWrapper > section .imgBox {
         width: 100%;
         height: 240px;
         display: inline-block;
@@ -201,11 +203,6 @@
         height: 250px;
         line-height: 300px;
     }
-    .pagination {
-        align-items: center;
-        justify-content: center;
-        margin-top: 30px;
-    }
     footer > i {
         font-size: 100px;
         margin-right: 40px;
@@ -220,5 +217,43 @@
         width: 100%;
     }
     .active > a {
-        background: #e19669;
+        background: bisque;
+    }
+
+    .page-link {
+        position: relative;
+        display: block;
+        color: #0d6efd;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        padding: .375rem .75rem;
+    }
+    .pagination {
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+    }
+    .text-center {
+        text-align: center!important;
+    }
+    .active > a {
+        background: bisque;
+    }
+    .page-item:last-child .page-link {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+    }
+    .page-link:hover {
+        z-index: 2;
+        color: #0a58ca;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
+    .page-item:not(:first-child) .page-link {
+        margin-left: -1px;
     }

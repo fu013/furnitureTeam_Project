@@ -14,4 +14,7 @@
 		#{userRegisterName}, #{userRegisterBirth}, #{userRegisterGender}, #{userRegisterEmail},
 		#{userRegisterPhone1}, #{userRegisterPhone2}, #{userRegisterPhone3})
 	</insert>
+	<select id="idOverlap" resultType="String" parameterType="our.example.furniture.dto.UserRegisterDto">
+	SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{idOverlapCheck} 
+	</select>
 </mapper>

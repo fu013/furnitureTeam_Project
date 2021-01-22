@@ -1,3 +1,4 @@
+// 로그인 AJAX 요청
 $(document).ready(function() {
 	$("#loginSuccess").on('click', function (e) {
 		const id = document.getElementById("loginId");
@@ -23,9 +24,9 @@ $(document).ready(function() {
 				type: "post",
                 data: login_data_json,
 				url : '/loginSuccess',
-                dataType: "json",
-				success: function() {
-                    console.log(data);
+                dataType: "text",
+				success: function(data) {
+                    location.href = "/";
                     alert("로그인에 성공했습니다.");
                 }, error: function(e) {
                     alert("로그인에 실패했습니다.");

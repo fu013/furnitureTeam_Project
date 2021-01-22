@@ -7,18 +7,37 @@ window.onload = function() {
 	var nameJ = /^[가-힣]{2,6}$/;
 	// 핸드폰번호는 숫자로 3~4자리만 가능
 	var phoneJ = /^[0-9]{3,4}$/;
+	
+	var id = document.getElementById("userRegisterId");
+	var pw = document.getElementById("userRegisterPassword");
+	var pw2 = document.getElementById("userRegisterRePassword");
+	var name = document.getElementById("userRegisterName");
+	var birth = document.getElementById("userRegisterBirth");
+	var gender = document.getElementById("userRegisterGender");
+	var email = document.getElementById("userRegisterEmail");
+	var phone1 = document.getElementById("userRegisterPhone1");
+	var phone2 = document.getElementById("userRegisterPhone2");
+	var phone3 = document.getElementById("userRegisterPhone3");
+		
+		
+	$("#idOverlap").on('click', function(e) {
+      const idVal = $("#userRegisterId").val();
+      const idOverlap_data_json = {
+         "idOverlapCheck" : idVal
+      };
+      $.ajax({
+         type : "post",
+         data : idOverlap_data_json,
+         url : '/idOverlapCheck',
+         dataType : "text",
+         success : function(data) {
+            alert(data);
+         }
+      });
+   });
 
 	$("#userRegisterSuccess").on('click', function(e) {
-		var id = document.getElementById("userRegisterId");
-		var pw = document.getElementById("userRegisterPassword");
-		var pw2 = document.getElementById("userRegisterRePassword");
-		var name = document.getElementById("userRegisterName");
-		var birth = document.getElementById("userRegisterBirth");
-		var gender = document.getElementById("userRegisterGender");
-		var email = document.getElementById("userRegisterEmail");
-		var phone1 = document.getElementById("userRegisterPhone1");
-		var phone2 = document.getElementById("userRegisterPhone2");
-		var phone3 = document.getElementById("userRegisterPhone3");
+		
 
 		if (id.value == "") {
 			alert("아이디를 입력해 주세요");
@@ -130,3 +149,6 @@ window.onload = function() {
 		}
 	})
 }
+
+
+   

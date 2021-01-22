@@ -19,6 +19,12 @@ public class Pagination {
     // 검색 유형
     private String searchType;
 
+    // post_no 존재유무
+    private boolean Is_Post_no;
+
+    // 게시물 post_no
+    private int post_no;
+
     // 생성자
     public Pagination() {
         this.currentPageNo = 1;
@@ -28,16 +34,26 @@ public class Pagination {
 
     // 스프링에서 제공해주는 UriComponents 클래스를 사용하면 URI 를 더욱 효율적으로 처리할 수 있다. <쿼리스트링 생성>
     public String makeQueryString(int pageNo) {
+        UriComponents uriComponents;
+        if (!Is_Post_no) {
+            uriComponents = UriComponentsBuilder.newInstance()
+                    .queryParam("currentPageNo", pageNo)
+                    .queryParam("recordsPerPage", recordsPerPage)
+                    .queryParam("pageSize", pageSize)
+                    .queryParam("searchType", searchType)
+                    .queryParam("searchKeyword", searchKeyword)
+                    .build()
+                    .encode();
 
-        UriComponents uriComponents = UriComponentsBuilder.newInstance()
-                .queryParam("currentPageNo", pageNo)
-                .queryParam("recordsPerPage", recordsPerPage)
-                .queryParam("pageSize", pageSize)
-                .queryParam("searchType", searchType)
-                .queryParam("searchKeyword", searchKeyword)
-                .build()
-                .encode();
-
+        } else {
+            uriComponents = UriComponentsBuilder.newInstance()
+                    .queryParam("post_no", post_no)
+                    .queryParam("currentPageNo", pageNo)
+                    .queryParam("recordsPerPage", recordsPerPage)
+                    .queryParam("pageSize", pageSize)
+                    .build()
+                    .encode();
+        }
         return uriComponents.toUriString();
     }
 
@@ -83,5 +99,21 @@ public class Pagination {
 
     public void setSearchType(String searchType) {
         this.searchType = searchType;
+    }
+
+    public boolean isIs_Post_no() {
+        return Is_Post_no;
+    }
+
+    public void setIs_Post_no(boolean is_Post_no) {
+        Is_Post_no = is_Post_no;
+    }
+
+    public int getPost_no(int post_no) {
+        return this.post_no;
+    }
+
+    public void setPost_no(int post_no) {
+        this.post_no = post_no;
     }
 }

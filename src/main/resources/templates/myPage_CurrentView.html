@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Furniture</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/myPage.css}"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<header th:replace="/fragments/header.html :: fragment-header"></header>
+<div style="padding: 20px;">
+    <div class="myInfo">
+        <ul>
+            <li>회원 등급 : 골드 &nbsp;&nbsp; | </li>
+            <li>업로드한 게시물 개수 : 10개 &nbsp;&nbsp; | </li>
+            <li>찜한 게시물 개수 : 10개 </li>
+        </ul>
+    </div>
+    <div class="bodyWrapper">
+        <section>
+            <div class="category">
+                <h1>마이 메뉴</h1>
+                <ul>
+                    <li>
+                        <a href="myPage_CurrentView"><span>최근 본 페이지</span></a>
+                    </li>
+                    <li>
+                        <span>좋아요한 게시물</span>
+                    </li>
+                    <li>
+                        <span>업로드한 게시물</span>
+                    </li>
+                    <li>
+                        <span>찜 목록</span>
+                    </li>
+                    <li>
+                        <span>회원정보수정</span>
+                    </li>
+                    <li>
+                        <span>회원탈퇴</span>
+                    </li>
+                </ul>
+            </div>
+            <div th:replace="/MyPageFragments/CurrentView.html :: MyPage-CurrentView"></div>
+        </section>
+        <aside>
+            <h1>광고</h1>
+            <div class="advertisementBox">
+            </div>
+        </aside>
+    </div>
+</div>
+<footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+</body>
+</html>
