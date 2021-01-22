@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import org.springframework.web.servlet.ModelAndView;
 import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.LoginMapper;
-
-import javax.script.ScriptContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,7 +35,7 @@ public class LoginController {
     public String loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
         String result = loginMapper.overlapLogin(userRegisterDto);
         if (result != null) { // 로그인 성공
-            String userName = userRegisterDto.getUserRegisterId();
+            String userName = userRegisterDto.getLoginId();
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", userName);
             session.setMaxInactiveInterval(60*60);

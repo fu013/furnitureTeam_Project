@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import our.example.furniture.dto.*;
-import our.example.furniture.paging.Pagination;
-import our.example.furniture.paging.PaginationInfo;
 import our.example.furniture.repository.*;
 import our.example.furniture.service.PostService;
 
@@ -41,8 +39,8 @@ public class TemplateController {
     public String postWriter(Model model) { return "postWriter"; }
 
     // register[회원가입] :: Template Mapping
-    @GetMapping("/register")
+    @GetMapping("/userRegister")
     public String register(Model model) {
-        return "register";
+        return "userRegister";
     }
 }

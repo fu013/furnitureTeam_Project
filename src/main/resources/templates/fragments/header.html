@@ -10,6 +10,9 @@
             <!--로그인 Header-->
             <ul class="menu" th:if="${!session.isEmpty()}">
                 <li>
+                    <a href="./Basket">장바구니</a>
+                </li>
+                <li>
                     <a href="./myPage_CurrentView">마이페이지</a>
                 </li>
                 <li>
@@ -22,7 +25,10 @@
             <!--비로그인 Header-->
             <ul class="menu" th:if="${session.isEmpty()}">
                 <li>
-                    <a href="./register">회원가입</a>
+                    <a href="./Basket">장바구니</a>
+                </li>
+                <li>
+                    <a href="./userRegister">회원가입</a>
                 </li>
                 <li>
                     <a href="./login">로그인</a>
