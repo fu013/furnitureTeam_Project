@@ -26,32 +26,24 @@ public class LoginController {
     private LoginMapper loginMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
-    // login[로그인] :: URL 매핑
-    @GetMapping("/login")
-    public String login(Model model) {
-        return "login";
-    }
-
     // 로그인 요청
     @ResponseBody
     @PostMapping("/loginSuccess")
     public String loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
         String result = loginMapper.overlapLogin(userRegisterDto);
-        if (result != null) { // 로그인 성공
+        // 로그인 성공
+        if (result != null) {
             String userName = userRegisterDto.getUserRegisterId();
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", userName);
             session.setMaxInactiveInterval(60*60);
-        /*
-            String name = (String) session.getAttribute("loginUser");
-            log.info("세션에 로그인 되었습니다.");
-            log.info("세션정보 확인 = " + name);
-        */
-        } else { // 로그인 실패
+        // 로그인 실패
+        } else {
             log.info("아이디나 비밀번호가 맞지않아 응답값이 Null 입니다.");
         }
         return result;
     }
+
     // 로그아웃 요청
     @GetMapping("/logout")
     public void logout(HttpSession session, HttpServletResponse response) throws IOException {

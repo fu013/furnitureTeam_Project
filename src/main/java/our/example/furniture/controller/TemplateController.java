@@ -34,6 +34,11 @@ public class TemplateController {
         }
         return "index";
     }
+
+    // login[로그인] :: URL 매핑
+    @GetMapping("/login")
+    public String login(Model model) { return "login"; }
+
     // postWriter[글쓰기] :: Template Mapping
     @GetMapping("/postWriter")
     public String postWriter(Model model) { return "postWriter"; }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import our.example.furniture.dto.PostDTO;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
