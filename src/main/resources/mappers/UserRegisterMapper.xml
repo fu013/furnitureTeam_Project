@@ -6,12 +6,12 @@
         >
 <mapper namespace = "our.example.furniture.repository.UserRegisterMapper">
 	<insert id = "insertUserRegister">
-		INSERT INTO userRegisterTable(userRegisterId, userRegisterPassword, userRegisterRePassword,
-		userRegisterName, userRegisterBirth, userRegisterGender, userRegisterEmail,
-		userRegisterPhone1, userRegisterPhone2, userRegisterPhone3)
-		VALUES(#{userRegisterId}, #{userRegisterPassword}, #{userRegisterRePassword},
-		#{userRegisterName}, #{userRegisterBirth}, #{userRegisterGender}, #{userRegisterEmail},
-		#{userRegisterPhone1}, #{userRegisterPhone2}, #{userRegisterPhone3})
+		INSERT INTO registerTable(registerId, registerPassword, registerRePassword,
+		registerName, registerBirth, registerGender, registerEmail,
+		registerPhone1, registerPhone2, registerPhone3)
+		VALUES(#{registerId}, #{registerPassword}, #{registerRePassword},
+		#{registerName}, #{registerBirth}, #{registerGender}, #{registerEmail},
+		#{registerPhone1}, #{registerPhone2}, #{registerPhone3})
 	</insert>
 	<select id = "idOverlap" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
 		SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{idOverlapCheck}

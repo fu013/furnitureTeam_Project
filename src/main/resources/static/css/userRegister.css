@@ -8,7 +8,7 @@
     .registerWrapper {  margin: 50px auto 75px; width: 1400px; }
     .registerWrapper h2 { border-bottom: 1px solid black; padding-bottom: 20px; font-weight: 300; }
 
-    .container { padding: 0px; border-bottom: 1px solid black; margin: 0 auto 15px; position: relative; width: 1100px; }
+    .container { padding: 0px; margin: 0 auto 15px; position: relative; width: 1100px; }
 
     /* input type 전체 설정 */
     input[type=text],
@@ -43,6 +43,6 @@
 
     /* 취소, 가입하기 설정 */
     .btnCancel { background: #fff; width: 100px; height: 40px; line-height: 40px; color: black; text-align: center; display: inline-block; border-radius: 3px; }
-    .btnRegister { background: black; width: 100px; height: 40px; line-height: 40px; color: #fff; text-align: center; display: inline-block; border-radius: 3px; }
+    .btnUserRegister { background: black; width: 100px; height: 40px; line-height: 40px; color: #fff; text-align: center; display: inline-block; border-radius: 3px; }
     .txtCenter { text-align: center; padding: 1rem 0 0; margin-bottom : 2rem;}
     .colValue { width: 200px; }

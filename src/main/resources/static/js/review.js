@@ -41,6 +41,7 @@ $(document).ready(function() {
         }
     });
 });
+
 // 댓글 수정 & 삭제
 $(document).ready(function() {
     $(document).on("click", ".fix_button", function(){
@@ -75,6 +76,7 @@ $(document).ready(function() {
                }
             });
         });
+
         // 댓글: 수정-취소
         $(document).on("click", ".cancel_fix", function(){
             $(this).hide();
@@ -84,7 +86,8 @@ $(document).ready(function() {
             $(this).siblings('.fix_button').show();
         });
     });
-    // 댓글: 삭제-활성화1
+
+    // 댓글: 삭제-활성화 1
     $(document).on("click", ".delete_button", function(){
         let delete_real = $(this).siblings('.real_delete_button').val();
         if(delete_real) {
@@ -117,6 +120,23 @@ $(document).ready(function() {
             $(this).siblings('.real_delete_button').hide();
             $(this).siblings('.delete_button').show();
             $(this).siblings('.fix_button').show();
+        });
+    });
+
+    // 장바구니 등록
+    $(".basket").on('click', function () {
+        const product_no = $("#review_productNo").val();
+        const basket_data_json = {
+            "basketProductNum": product_no
+        };
+        $.ajax({
+            type: "post",
+            data: basket_data_json,
+            url: "/basketRegister",
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            }
         });
     });
 });

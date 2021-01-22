@@ -1,7 +1,4 @@
 package our.example.furniture.controller;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.UserRegisterMapper;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserRegisterController {
@@ -25,6 +22,7 @@ public class UserRegisterController {
         userRegisterMapper.insertUserRegister(userRegisterDto);
         return "index";
     }
+
     // 로그인 중복 체크
     @ResponseBody
     @PostMapping("/idOverlapCheck")

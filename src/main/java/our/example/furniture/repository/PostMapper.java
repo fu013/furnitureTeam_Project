@@ -36,6 +36,6 @@ public interface PostMapper {
     void UpdateComment(ReviewFixDeleteDTO params);
     String ViewAfterUpdateComment(ReviewFixDeleteDTO params);
 
-    // 최근 본 페이지 Select
+    // 장바구니 및 최근 본 페이지 Select
     PostDTO selectViewPostList(PostDTO params);
 }

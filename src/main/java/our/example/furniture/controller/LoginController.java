@@ -26,18 +26,13 @@ public class LoginController {
     private LoginMapper loginMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
-    // login[로그인] :: URL 매핑
-    @GetMapping("/login")
-    public String login(Model model) {
-        return "login";
-    }
-
     // 로그인 요청
     @ResponseBody
     @PostMapping("/loginSuccess")
     public String loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
         String result = loginMapper.overlapLogin(userRegisterDto);
-        if (result != null) { // 로그인 성공
+        // 로그인 성공
+        if (result != null) {
             String userName = userRegisterDto.getUserRegisterId();
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", userName);
@@ -48,6 +43,7 @@ public class LoginController {
         }
         return result;
     }
+
     // 로그아웃 요청
     @GetMapping("/logout")
     public void logout(HttpSession session, HttpServletResponse response) throws IOException {
