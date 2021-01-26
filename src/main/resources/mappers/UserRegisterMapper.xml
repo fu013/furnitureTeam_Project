@@ -4,7 +4,6 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
         >
-        
 <mapper namespace = "our.example.furniture.repository.UserRegisterMapper">
 	<insert id = "insertUserRegister">
 		INSERT INTO userRegisterTable(userRegisterId, userRegisterPassword, userRegisterRePassword,
@@ -14,7 +13,7 @@
 		#{userRegisterName}, #{userRegisterBirth}, #{userRegisterGender}, #{userRegisterEmail},
 		#{userRegisterPhone1}, #{userRegisterPhone2}, #{userRegisterPhone3})
 	</insert>
-	<select id="idOverlap" resultType="String" parameterType="our.example.furniture.dto.UserRegisterDto">
-	SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{idOverlapCheck} 
+	<select id = "idOverlap" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
+		SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{idOverlapCheck}
 	</select>
 </mapper>

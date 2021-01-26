@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 // Mybatis & Spring 연동 Configuration
 @Configuration
+// 매퍼 경로 패키지 설정
 @MapperScan(basePackages = "our.example.furniture.repository")
 public class MyBatisConfiguration {
     @Bean
@@ -21,7 +22,7 @@ public class MyBatisConfiguration {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         var sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        // 쿼리가 정의된 xml 파일들의 위치 지정
+        // *mapper.xml 경로 설정
         sqlSessionFactoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*.xml")
         );
