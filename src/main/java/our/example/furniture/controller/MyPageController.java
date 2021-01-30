@@ -7,11 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.PostDTO;
+import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -21,6 +25,8 @@ public class MyPageController {
     private PostMapper postMapper;
     @Autowired
     private PostService postService;
+    @Autowired
+    private MyPageMapper myPageMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
     // CurrentView URL 매핑
@@ -29,5 +35,31 @@ public class MyPageController {
         List<PostDTO> viewPostList = postService.getViewPostList(params, response, request);
         model.addAttribute("viewPostList", viewPostList);
         return "myPage_CurrentView";
+    }
+    
+    // Dibs URL 매핑
+    @GetMapping("myPage_Dibs")
+    public String dibs(Model model) {
+        return "myPage_Dibs";
+    }
+
+    // 찜목록 요청값 DB에 저장
+    @ResponseBody
+    @PostMapping("/dibsSuccess")
+    public String dibsSuccess(PostDTO params, HttpSession session) {
+        int checkDibs = myPageMapper.CheckDibs(params);
+        String result = "";
+        if(session.getAttribute("loginUser") == null) {
+            result = "로그인이 필요한 서비스입니다.";
+        } else {
+            if(checkDibs == 0) {
+                params.setUserLoginId(session.getAttribute("loginUser").toString());
+                myPageMapper.InsertDibs(params);
+                result = "찜 목록에 추가되었습니다.";
+            } else {
+                result = "이미 찜목록에 추가된 상품입니다.";
+            }
+        }
+        return result;
     }
 }
