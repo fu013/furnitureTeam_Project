@@ -39,7 +39,9 @@ public class MyPageController {
     
     // Dibs URL 매핑
     @GetMapping("myPage_Dibs")
-    public String dibs(Model model) {
+    public String dibs(@ModelAttribute("params") PostDTO params, Model model) {
+        List<PostDTO> SelectPostList = postService.getPostList(params);
+        model.addAttribute("SelectPostList", SelectPostList);
         return "myPage_Dibs";
     }
 
