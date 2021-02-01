@@ -87,10 +87,12 @@
         text-align: left;
     }
     .bodyWrapper > section > .category > ul > li .productCategoryPrice {
+        text-align: center;
         width: 60%;
         margin-top: 10px;
     }
     .bodyWrapper > section > .category > ul > li #productCategoryPriceButton {
+        text-align: center;
         background: black;
         box-sizing: border-box;
         font-size: 20px;

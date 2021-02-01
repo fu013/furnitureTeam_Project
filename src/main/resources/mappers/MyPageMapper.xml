@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        >
+<mapper namespace="our.example.furniture.repository.MyPageMapper">
+    <insert id="InsertDibs">
+        INSERT INTO Product_Dibs(product_no, userRegisterId)
+        VALUES(#{product_no}, #{userLoginId})
+    </insert>
+    <select id="CheckDibs" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
+        select count(*) from Product_Dibs where product_no = #{product_no}
+    </select>
+</mapper>

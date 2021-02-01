@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script th:src="@{/js/postInfo.js}"></script>
     <script th:src="@{/js/review.js}"></script>
+    <script th:src="@{/js/like.js}"></script>
 </head>
 <body>
 <header th:replace="/fragments/header.html :: fragment-header"></header>
@@ -22,29 +23,32 @@
         <div class="read_section">
             <ul>
                 <li class="info_title">
-                    <h5 class="title" th:text="'Title : ' + ${postInfo.getProductName()}"></h5>
+                    <h5 class="title" th:text="'상품명 : ' + ${postInfo.getProductName()}"></h5>
                     <p class="size"></p>
-                    <span style="font-size: 12px;" th:text="'Tags : ' + ${postInfo.getProductCategoryHomeScale()} + ', ' + ${postInfo.getProductCategoryNumberOfHouseholds()} + ', ' + ${postInfo.getProductCategoryInterior()}"></span>
+                    <span style="font-size: 12px;" th:text="'#Tags : ' + ${postInfo.getProductCategoryHomeScale()} + ', ' + ${postInfo.getProductCategoryNumberOfHouseholds()} + ', ' + ${postInfo.getProductCategoryInterior()}"></span>
                     <hr>
                 </li>
-                <li class="explanation" th:text="'Guideline : ' + ${postInfo.getProductGuideline()}"></li>
-                <li class="colour" th:text="'Colour : ' + ${postInfo.getProductColor()}"></li>
-                <li class="size_2">Size : <span class="size_box" th:text="${postInfo.getProductSize()}"></span></li>
-                <li style="padding-bottom: 20px; font-size: 0.8rem;">View : </li>
-                <li style="padding-bottom: 20px; font-size: 0.8rem;">Like : </li>
+                <li class="explanation" th:text="'가이드라인 : ' + ${postInfo.getProductGuideline()}"></li>
+                <li class="colour" th:text="'색상 : ' + ${postInfo.getProductColor()}"></li>
+                <li class="size_2">사이즈 : <span class="size_box" th:text="${postInfo.getProductSize()}"></span></li>
+                <li style="padding-bottom: 20px; font-size: 0.8rem;" th:text="'조회수 : ' + ${postInfo.getProductView() + '회'}"></li>
+                <li style="padding-bottom: 20px; font-size: 0.8rem;"><i class="xi-heart-o"></i><span> : 0 </span></li>
                 <li class="price"><h4 style="margin: 0;" th:text="'price : ' + ${postInfo.getProductPrice()} + ' Won'"></h4>
                 <li class="total_price">Total :<h4>0</h4> Won</li>
 
                 <li class="like">
-                    <button type="button" class="like_button">좋아요</button>
+                    <button type="button" class="like_button"><i class="xi-heart-o" style="font-size: 2rem; color: black;" id="likeIcon"></i><p style="margin-top: 8px;">좋아요</p></button>
                 </li>
 
                 <li class="jjim_li">
-                    <button class="jjim_button">찜하기</button>
+                    <button class="jjim_button"><i class="xi-gift-o" style="font-size: 2rem; color: black;" id="dibsIcon"></i><p style="margin-top: 8px;">찜하기</p></button>
                 </li>
 
                 <li class="basket_li">
-                    <button type="button" class="basket" id="basket_button">장바구니</button>
+                    <button type="button" class="basket" id="basket_button"><i class="xi-cart-o" style="font-size: 2rem; color: black;" id="basketIcon"></i><p style="margin-top: 8px;">장바구니</p></button>
+                </li>
+                <li class="basket_li">
+                    <button type="button" class="basket" id="basket_button"><i class="xi-cart" style="font-size: 2rem; color: black;" id="basketIcon"></i><p style="margin-top: 8px;">장바구니</p></button>
                 </li>
                 <li class="purchase_li">
                     <button class="purchase_button">주문기능은 없습니다</button>

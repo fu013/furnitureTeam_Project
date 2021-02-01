@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PostDTO extends CommonDTO {
     private int product_no;
+    private String userLoginId;
     private String productCategoryHomeScale;
     private String productCategoryNumberOfHouseholds;
     private String productCategoryInterior;
@@ -20,6 +21,15 @@ public class PostDTO extends CommonDTO {
     private int productView;
 
     // GETTER & SETTER
+
+    public String getUserLoginId() {
+        return userLoginId;
+    }
+
+    public void setUserLoginId(String userLoginId) {
+        this.userLoginId = userLoginId;
+    }
+
     public int getProduct_no() {
         return product_no;
     }

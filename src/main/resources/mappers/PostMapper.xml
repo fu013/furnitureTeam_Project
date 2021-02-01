@@ -14,9 +14,9 @@
     <!-- 데이터베이스 상품관련 데이터 INSERT QUERY -->
     <insert id="insertProductInfo">
         INSERT INTO product(product_no, productCategoryHomeScale, productCategoryNumberOfHouseholds,
-        productCategoryInterior, productName, productPrice, productGuideline, productSize, productColor, productComment)
+        productCategoryInterior, productName, productPrice, productGuideline, productSize, productColor, productComment, userRegisterId)
         VALUES(PRODUCT_AUTO_I.NEXTVAL, #{productCategoryHomeScale}, #{productCategoryNumberOfHouseholds}, #{productCategoryInterior},
-        #{productName}, #{productPrice}, #{productGuideline}, #{productSize}, #{productColor}, #{productComment})
+        #{productName}, #{productPrice}, #{productGuideline}, #{productSize}, #{productColor}, #{productComment}, #{userLoginId})
     </insert>
     <insert id="InsertInnerImages" parameterType="java.util.List">
         <foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
