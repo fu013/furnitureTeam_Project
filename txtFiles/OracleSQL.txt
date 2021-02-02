@@ -1,3 +1,16 @@
+CREATE TABLE userRegisterTable(
+    userRegisterId varchar2(20) not null PRIMARY KEY,
+    userRegisterPassword varchar2(20) not null,
+    userRegisterRePassword varchar2(20) not null,
+    userRegisterName varchar2(20) not null,
+    userRegisterBirth date not null,
+    userRegisterGender varchar2(6) not null,
+    userRegisterEmail varchar2(50) not null,
+    userRegisterPhone1 number(3) not null,
+    userRegisterPhone2 number(4) not null,
+    userRegisterPhone3 number(4) not null,
+    create_date date default sysdate
+);
 CREATE TABLE Product(
 	product_no number(10) not null PRIMARY KEY,
 	productCategoryHomeScale varchar2(20)  not null,
@@ -11,23 +24,11 @@ CREATE TABLE Product(
 	productComment varchar(1000) NULL,
 	productView number(10) DEFAULT 0,
 	userRegisterId varchar2(20) not null,
+	likeNum number(10) DEFAULT 0,
 	create_date date default sysdate,
 	CONSTRAINTS FK_userRegisterId  FOREIGN KEY(userRegisterId )
 		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
 );
-
-ALTER TABLE Product ADD userRegisterId varchar2(20) not null;
-
-CREATE TABLE Product_Dibs(
-	product_no number(10) not null PRIMARY KEY,
-	userRegisterId varchar2(20) not null,
-	create_date date default sysdate,
-	CONSTRAINTS FK_Dibs_product_no FOREIGN KEY(product_no)
-		REFERENCES Product(product_no) ON DELETE CASCADE,
-	CONSTRAINTS FK_Dibs_userRegisterId FOREIGN KEY(userRegisterId)
-		REFERENCES userRegisterTable(userRegisterId ) ON DELETE CASCADE
-);
-INSERT INTO Product_Dibs(product_no, productName, productPrice, img_url_main) VALUES(#{product_no}, )
 CREATE TABLE Product_MainImg(
 	product_no number(10) not null,
 	img_saveName varchar2(30) not null,
@@ -38,7 +39,6 @@ CREATE TABLE Product_MainImg(
 	CONSTRAINTS FK_product_no_2 FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
-
 CREATE TABLE Product_InnerImages(
 	product_no number(10) not null,
 	img_saveName varchar2(30) not null,
@@ -48,6 +48,16 @@ CREATE TABLE Product_InnerImages(
 	create_date date default sysdate,
 	CONSTRAINTS FK_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
+);
+CREATE TABLE Product_Dibs(
+	dibs_no number(10) not null primary key,
+	product_no number(10) not null,
+	userRegisterId varchar2(20) not null,
+	create_date date default sysdate,
+	CONSTRAINTS FK_Dibs_product_no FOREIGN KEY(product_no)
+		REFERENCES Product(product_no) ON DELETE CASCADE,
+	CONSTRAINTS FK_Dibs_userRegisterId FOREIGN KEY(userRegisterId)
+		REFERENCES userRegisterTable(userRegisterId ) ON DELETE CASCADE
 );
 CREATE TABLE Product_Review(
 	comment_no number(10) not null PRIMARY KEY,
@@ -62,27 +72,14 @@ CREATE TABLE Product_Review(
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
 CREATE TABLE PRODUCT_LIKE(
-	product_no number(10) not null PRIMARY KEY,
+	like_no number(10) not null,
+	product_no number(10) not null,
 	userRegisterId varchar2(20) not null,
-	ikeYN CHAR(1) DEFAULT 0,
 	create_date date default sysdate,
 	CONSTRAINT FK1_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE,
 	CONSTRAINT FK2_userRegisterId FOREIGN KEY(userRegisterId)
 		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
-);
-CREATE TABLE userRegisterTable(
-    userRegisterId varchar2(20) not null PRIMARY KEY,
-    userRegisterPassword varchar2(20) not null,
-    userRegisterRePassword varchar2(20) not null,
-    userRegisterName varchar2(20) not null,
-    userRegisterBirth date not null,
-    userRegisterGender varchar2(6) not null,
-    userRegisterEmail varchar2(50) not null,
-    userRegisterPhone1 number(3) not null,
-    userRegisterPhone2 number(4) not null,
-    userRegisterPhone3 number(4) not null,
-    create_date date default sysdate
 );
 CREATE TABLE PRODUCT_LIKE(
 	product_no number(10) not null PRIMARY KEY,
@@ -107,6 +104,18 @@ CREATE SEQUENCE REVIEW_AUTO_I
   MAXVALUE 1000000000
   NOCACHE;
 CREATE SEQUENCE USER_AUTO_I
+  START WITH 1
+  INCREMENT BY 1
+  MINVALUE 1
+  MAXVALUE 1000000000
+  NOCACHE;
+CREATE SEQUENCE DIBS_AUTO_I
+  START WITH 1
+  INCREMENT BY 1
+  MINVALUE 1
+  MAXVALUE 1000000000
+  NOCACHE;
+CREATE SEQUENCE like_AUTO_I
   START WITH 1
   INCREMENT BY 1
   MINVALUE 1

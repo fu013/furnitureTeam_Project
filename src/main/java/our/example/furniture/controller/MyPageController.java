@@ -40,9 +40,9 @@ public class MyPageController {
     
     // Dibs URL 매핑
     @GetMapping("myPage_Dibs")
-    public String dibs(@ModelAttribute("params") PostDTO params, Model model) {
-        List<PostDTO> selectPostList = postService.getPostList(params);
-        model.addAttribute("selectPostList", selectPostList);
+    public String dibs(@ModelAttribute("params") PostDTO params, HttpSession session, Model model) {
+        List<PostDTO> selectDibsPostList = postService.getDibsPostList(params, session);
+        model.addAttribute("selectDibsPostList", selectDibsPostList);
         return "myPage_Dibs";
     }
 
@@ -50,13 +50,13 @@ public class MyPageController {
     @ResponseBody
     @PostMapping("/dibsSuccess")
     public String dibsSuccess(PostDTO params, HttpSession session) {
-        int checkDibs = myPageMapper.CheckDibs(params);
         String result = "";
         if(session.getAttribute("loginUser") == null) {
             result = "로그인이 필요한 서비스입니다.";
         } else {
+            params.setUserLoginId(session.getAttribute("loginUser").toString());
+            int checkDibs = myPageMapper.CheckDibs(params);
             if(checkDibs == 0) {
-                params.setUserLoginId(session.getAttribute("loginUser").toString());
                 myPageMapper.InsertDibs(params);
                 result = "찜 목록에 추가되었습니다.";
             } else {
@@ -67,8 +67,19 @@ public class MyPageController {
     }
     @ResponseBody
     @PostMapping("/like")
-    public String Like(PostDTO postDTO, Model model) {
-        return null;
+    public String Like(PostDTO params, HttpSession session, Model model) {
+        String result = "";
+        if(session.getAttribute("loginUser") == null) {
+            result = "로그인이 필요한 서비스입니다.";
+        } else {
+            params.setUserLoginId(session.getAttribute("loginUser").toString());
+            int checkLike = myPageMapper.CheckLike(params);
+            if(checkLike == 0) {
+                myPageMapper.InsertLike(params);
+                result = "좋아요가 등록되었습니다.";
+            }
+        }
+        return result;
     }
     @ResponseBody
     @PostMapping("/likeDelete")
