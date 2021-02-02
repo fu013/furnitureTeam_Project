@@ -13,6 +13,7 @@ import our.example.furniture.dto.PostDTO;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,14 +37,16 @@ public class MyPageController {
         model.addAttribute("viewPostList", viewPostList);
         return "myPage_CurrentView";
     }
-
+    
     // Dibs URL 매핑
     @GetMapping("myPage_Dibs")
-    public String dibs(Model model) {
+    public String dibs(@ModelAttribute("params") PostDTO params, Model model) {
+        List<PostDTO> selectPostList = postService.getPostList(params);
+        model.addAttribute("selectPostList", selectPostList);
         return "myPage_Dibs";
     }
 
-    // 찜목록 요청값
+    // 찜목록 요청값 DB에 저장
     @ResponseBody
     @PostMapping("/dibsSuccess")
     public String dibsSuccess(PostDTO params, HttpSession session) {
@@ -53,10 +56,9 @@ public class MyPageController {
             result = "로그인이 필요한 서비스입니다.";
         } else {
             if(checkDibs == 0) {
-                String userLoginId = session.getAttribute("loginUser").toString();
-                result = "찜 목록에 추가되었습니다.";
-                params.setUserLoginId(userLoginId);
+                params.setUserLoginId(session.getAttribute("loginUser").toString());
                 myPageMapper.InsertDibs(params);
+                result = "찜 목록에 추가되었습니다.";
             } else {
                 result = "이미 찜목록에 추가된 상품입니다.";
             }

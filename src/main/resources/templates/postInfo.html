@@ -13,6 +13,7 @@
     <script th:src="@{/js/postInfo.js}"></script>
     <script th:src="@{/js/review.js}"></script>
     <script th:src="@{/js/like.js}"></script>
+    <script th:src="@{/js/dibs.js}"></script>
 </head>
 <body>
 <header th:replace="/fragments/header.html :: fragment-header"></header>
@@ -40,9 +41,8 @@
                     <button type="button" class="like_button"><i class="xi-heart-o" style="font-size: 2rem; color: black;" id="likeIcon"></i><p style="margin-top: 8px;">좋아요</p></button>
                 </li>
 
-                <li class="jjim_li">
-                    <button class="jjim_button"><i class="xi-gift-o" style="font-size: 2rem; color: black;" id="dibsIcon"></i><p style="margin-top: 8px;">찜하기</p></button>
-                </li>
+                <li class="dibs_li">
+                    <button class="dibs_button"><i class="xi-gift-o" style="font-size: 2rem; color: black;" id="dibsIcon"></i><p style="margin-top: 8px;">찜하기</p></button>
 
                 <li class="basket_li">
                     <button type="button" class="basket" id="basket_button"><i class="xi-cart-o" style="font-size: 2rem; color: black;" id="basketIcon"></i><p style="margin-top: 8px;">장바구니</p></button>
@@ -111,6 +111,7 @@
                 <button type="button" id="review_button" name="review_button" style="position: absolute; right:18px; top: 140px; width: 80px; height: 40px; line-height: 40px; background: white;">댓글등록</button>
             </div>
         </div>
+    </div>
         <th:block layout:frament="paging">
             <nav th:replace="/fragments/pagination.html :: pagination"></nav>
         </th:block>

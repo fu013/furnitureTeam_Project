@@ -11,6 +11,7 @@ import our.example.furniture.dto.*;
 import our.example.furniture.repository.*;
 import our.example.furniture.service.PostService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -23,7 +24,7 @@ public class TemplateController {
 
     // index[홈페이지] :: Template Mapping
     @GetMapping("/")
-    public String openPostList(@ModelAttribute("params") PostDTO params, Model model) {
+    public String openPostList(@ModelAttribute("params") PostDTO params, Model model, HttpSession session) {
         List<PostDTO> postList = postService.getPostList(params);
         model.addAttribute("postList", postList);
         for(int i = 0; i < postList.size(); i++) {
