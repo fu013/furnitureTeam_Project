@@ -22,7 +22,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
-
 @Controller
 public class PostController {
     @Autowired
@@ -128,9 +127,16 @@ public class PostController {
     @ResponseBody
     @PostMapping("/basketRegister")
     public String BasketRegister(int basketProductNum, HttpSession session) {
-        session.setAttribute(String.valueOf(basketProductNum), basketProductNum);
-        session.setMaxInactiveInterval(60*60);
-        String result = "장바구니에 등록되었습니다.";
+        String result = "";
+        String basketProductNumToString = Integer.toString(basketProductNum);
+        Object inspect = session.getAttribute(basketProductNumToString);
+        if(inspect != null) {
+            result = "이미 장바구니에 등록되있습니다.";
+        } else {
+            session.setAttribute(basketProductNumToString, basketProductNum);
+            session.setMaxInactiveInterval(60*60);
+            result = "장바구니에 등록되었습니다.";
+        }
         return result;
     }
 

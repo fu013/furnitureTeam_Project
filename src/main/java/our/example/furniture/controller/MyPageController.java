@@ -65,7 +65,6 @@ public class MyPageController {
         }
         return result;
     }
-
     @ResponseBody
     @PostMapping("/like")
     public String Like(PostDTO postDTO, Model model) {

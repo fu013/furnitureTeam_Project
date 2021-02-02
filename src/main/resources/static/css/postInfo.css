@@ -9,10 +9,10 @@
     section { margin: 100px 0 100px; text-align: center; }
     section .info_wrapper { width: 1200px; display: inline-block; }
 
-    section .img_section { box-sizing: border-box; padding: 20px 50px 0 0;  display: inline-block; width: 525px; height: 525px;}
+    section .img_section { box-sizing: border-box; padding: 20px 50px 0 0;  display: inline-block; width: 505px; height: 505px;}
     section .img_section img {  width: 100%; height: 100%; display: inline-block; }
 
-    section .read_section { box-sizing: border-box; display: inline-block; text-align: left; width: 450px; position: relative; top: -205px; }
+    section .read_section { box-sizing: border-box; display: inline-block; text-align: left; width: 450px; position: relative; top: -180px; }
     section .read_section ul { display: inline-block; padding: 0 0 0 75px; width: 400px; }
     section .read_section .info_title h5 { margin: 0; padding: 0; }
     section .read_section .price,
@@ -30,12 +30,11 @@
     section .read_section .info_title hr { border-bottom: 0.1px solid black; }
     section .read_section .explanation { font-size: 0.6rem; padding-bottom: 30px; }
     section .read_section .total_price { padding-top: 20px; right: -28px; font-size: 0.8rem; position: absolute; }
-    section .read_section .like_button { position: absolute; bottom: -102px; width: 80px; height: 50px; left: 239px; background: none; appearance: none; border: none; color: none; outline: none; }
-    section .read_section .like_button:hover { color: coral; }
-    section .read_section .jjim_button { position: absolute; bottom: -102px; width: 80px; height: 50px; color: black; background: #fff; background: none; appearance: none; border: none; color: none; outline: none;  }
-    section .read_section .basket { position: absolute; bottom: -102px; width: 80px; height: 50px; left: 157px; color: black; background: #fff; background: none; appearance: none; border: none; color: none; outline: none;  }
+    section .read_section .like_button { position: absolute; bottom: -102px; width: 80px; height: 50px; left: 239px; color: black; background: #fff; }
+    section .read_section .dibs_button { position: absolute; bottom: -102px; width: 80px; height: 50px; color: black; background: #fff; }
+    section .read_section .basket { position: absolute; bottom: -102px; width: 80px; height: 50px; left: 157px; color: black; background: #fff; }
 
-    section .read_section .purchase_button { position: absolute; bottom: -185px; width: 400px; height: 50px; background: black; color: #fff; }
+    section .read_section .purchase_button { position: absolute; bottom: -155px; width: 400px; height: 50px; background: black; color: #fff; }
     section .tab_div { margin: 100px 0 50px 0; }
     section .tab_div > .tab_menu { margin: 0 auto; padding: 0; height: 60px; border-bottom: 1px solid #333; text-align: center; width: 1200px; }
     section .tab_div > .tab_menu > li { width: 49.99999%; float: left; }

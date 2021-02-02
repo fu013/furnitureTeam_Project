@@ -5,6 +5,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
         >
 <mapper namespace="our.example.furniture.repository.MyPageMapper">
+
     <!-- INCLUDE -->
     <sql id="select_indexViewPost">
         Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,

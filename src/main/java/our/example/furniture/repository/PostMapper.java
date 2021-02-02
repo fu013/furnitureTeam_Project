@@ -38,7 +38,4 @@ public interface PostMapper {
 
     // 장바구니 및 최근 본 페이지 Select
     PostDTO selectViewPostList(PostDTO params);
-
-    // 좋아요 등록 및 삭제
-
 }
