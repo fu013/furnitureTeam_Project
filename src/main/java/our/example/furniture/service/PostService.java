@@ -20,4 +20,7 @@ public interface PostService {
     // 페이징이 적용된 찜목록 리스트 가져오기
     public List<PostDTO> getDibsPostList(PostDTO params, HttpSession session);
 
+    // 페이징이 적용된 좋아요 리스트 가져오기
+    public List<PostDTO> getLikePostList(PostDTO params, HttpSession session);
+
 }

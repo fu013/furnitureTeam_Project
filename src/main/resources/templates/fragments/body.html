@@ -75,7 +75,7 @@
                                 <li th:text="'상품명 : ' + ${postList.getProductName()}">상품명</li>
                                 <li th:text="'상품가격 : ' + ${postList.getProductPrice()} + '원'">상품가격</li>
                                 <li th:text="'조회수 : ' + ${postList.getProductView()}"></li>
-                                <li> 추천수 : </li>
+                                <li th:text="'추천수 : ' + ${postList.getLikeNum()}"></li>
                                 <li th:text="'태그 : ' + ${postList.getProductCategoryHomeScale()} + ' | ' + ${postList.getProductCategoryNumberOfHouseholds()} + ' | ' + ${postList.getProductCategoryInterior()}">태그</li>
                             </ul>
                         </a>

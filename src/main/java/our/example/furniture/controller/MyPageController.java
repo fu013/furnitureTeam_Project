@@ -45,6 +45,13 @@ public class MyPageController {
         model.addAttribute("selectDibsPostList", selectDibsPostList);
         return "myPage_Dibs";
     }
+    // 좋아요 매핑
+    @GetMapping("myPage_Like")
+    public String like(@ModelAttribute("params") PostDTO params, HttpSession session, Model model) {
+        List<PostDTO> selectLikePostList = postService.getLikePostList(params, session);
+        model.addAttribute("selectLikePostList", selectLikePostList);
+        return "myPage_Like";
+    }
 
     // 찜목록 요청값 DB에 저장
     @ResponseBody
@@ -60,7 +67,8 @@ public class MyPageController {
                 myPageMapper.InsertDibs(params);
                 result = "찜 목록에 추가되었습니다.";
             } else {
-                result = "이미 찜목록에 추가된 상품입니다.";
+                myPageMapper.DeleteDibs(params);
+                result = "찜 목록에서 삭제되었습니다.";
             }
         }
         return result;
@@ -76,14 +84,14 @@ public class MyPageController {
             int checkLike = myPageMapper.CheckLike(params);
             if(checkLike == 0) {
                 myPageMapper.InsertLike(params);
+                myPageMapper.UpdateLike(params);
                 result = "좋아요가 등록되었습니다.";
+            } else {
+                myPageMapper.DeleteLike(params);
+                myPageMapper.UpdateLike(params);
+                result = "좋아요에서 삭제되었습니다.";
             }
         }
         return result;
-    }
-    @ResponseBody
-    @PostMapping("/likeDelete")
-    public String LikeDelete(PostDTO postDTO, Model model) {
-        return null;
     }
 }

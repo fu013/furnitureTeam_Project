@@ -34,6 +34,8 @@ public class PostController {
     private PostService postService;
     @Autowired
     private PostReviewService postReviewService;
+    @Autowired
+    private MyPageMapper myPageMapper;
 
     private Log log = LogFactory.getLog(this.getClass());
 
@@ -59,7 +61,7 @@ public class PostController {
 
     // 상품 상세페이지
     @GetMapping("/postInfo")
-    public String postInfo(@RequestParam("post_no") int post_no, PostDTO postDTO, ReviewDTO params, HttpServletResponse response, HttpServletRequest request, Model model) {
+    public String postInfo(@RequestParam("post_no") int post_no, PostDTO postDTO, ReviewDTO params, HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model) {
         postDTO.setProduct_no(post_no);
         params.setProduct_no(post_no);
         params.setRecordsPerPage(5);
@@ -89,6 +91,24 @@ public class PostController {
             postMapper.UpdateProductView(postInfo);
         }
         List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
+
+        /* 장바구니 여부, 좋아요 여부, 찜목록 여부 */
+        String basketSessionId = Integer.toString(postInfo.getProduct_no());
+        if (session.getAttribute(basketSessionId) != null) {
+            postInfo.setBasketYn(true);
+        }
+        if(session.getAttribute("loginUser") != null) {
+            postDTO.setUserLoginId(session.getAttribute("loginUser").toString());
+            int checkLike = myPageMapper.CheckLike(postDTO);
+            int checkDib = myPageMapper.CheckDibs(postDTO);
+            if(checkLike > 0) {
+                postInfo.setLikeYn(true);
+            }
+            if(checkDib > 0) {
+                postInfo.setDibYn(true);
+            }
+        }
+
         model.addAttribute("postInfo", postInfo);
         model.addAttribute("params", params);
         model.addAttribute("postImages", postImages);

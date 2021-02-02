@@ -37,6 +37,19 @@
         ORDER BY Product.Product_no DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
     </select>
+    <!-- 좋아요 조회-->
+    <select id="SelectLikePost" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        Product.productName, Product.productPrice, Product_MainImg.img_url_main, Product_Like.product_no
+        FROM
+        Product
+        LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        LEFT OUTER JOIN Product_Like ON Product.product_no = Product_Like.product_no
+        WHERE Product.Product_no = product_Like.product_no AND product_Like.userRegisterId = #{userLoginId}
+        ORDER BY Product.Product_no DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
+
     <!-- 찜목록 게시물 개수(로그인 유저의)-->
     <select id="SelectDibsPostCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
         SELECT
@@ -45,4 +58,39 @@
         Product_Dibs
         WHERE userRegisterId = #{userLoginId}
     </select>
+    <!-- 좋아요 게시물 개수(로그인 유저의)-->
+    <select id="SelectLikePostCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
+        SELECT
+        Count(*)
+        FROM
+        Product_Like
+        WHERE userRegisterId = #{userLoginId}
+    </select>
+
+    <!-- 찜 삭제 -->
+    <delete id="DeleteDibs" parameterType="our.example.furniture.dto.PostDTO">
+        DELETE
+        FROM
+        Product_dibs
+        WHERE
+        Product_dibs.product_no = #{product_no} AND Product_dibs.userRegisterId = #{userLoginId}
+    </delete>
+    <!-- 좋아요 삭제 -->
+    <delete id="DeleteLike" parameterType="our.example.furniture.dto.PostDTO">
+        DELETE
+        FROM
+        PRODUCT_LIKE
+        WHERE
+        Product_like.product_no = #{product_no} AND Product_like.userRegisterId = #{userLoginId}
+    </delete>
+
+    <!-- 게시물 테이블에 좋아요 상태 변경 -->
+    <update id="UpdateLike" parameterType="our.example.furniture.dto.PostDTO">
+        UPDATE
+        Product
+        SET
+        likeNum = (SELECT Count(*) from Product_Like)
+        WHERE
+        Product.Product_no = #{product_no}
+    </update>
 </mapper>

@@ -9,7 +9,7 @@
     <!-- INCLUDE -->
     <sql id="select_indexViewPost">
         Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
-        Product.productName, Product.productPrice, Product.productView, Product.productColor, Product.productSize, Product_MainImg.img_url_main
+        Product.productName, Product.productPrice, Product.productView, Product.productColor, Product.productSize, Product_MainImg.img_url_main, Product.likeNum
     </sql>
     <!-- 데이터베이스 상품관련 데이터 INSERT QUERY -->
     <insert id="insertProductInfo">
@@ -48,7 +48,7 @@
     <select id="SelectPost" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
         SELECT
         Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
-        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productComment, Product.productView, Product.productColor, Product_MainImg.img_url_main
+        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productComment, Product.productView, Product.productColor, Product_MainImg.img_url_main, Product.likeNum
         FROM
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
         WHERE Product.Product_No = #{product_no}
@@ -59,7 +59,7 @@
         <include refid="select_indexViewPost"/>
         FROM
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
-        ORDER BY Product.Product_no DESC
+        ORDER BY Product.create_date DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
     </select>
     <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
