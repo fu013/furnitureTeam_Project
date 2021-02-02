@@ -10,5 +10,5 @@ public interface MyPageMapper {
     // 찜목록 등록 & 취소
     void InsertDibs(PostDTO params);
     int CheckDibs(PostDTO params);
-    void SelectPostList(PostDTO params);
+    void selectPostList(PostDTO params);
 }

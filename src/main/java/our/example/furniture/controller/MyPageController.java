@@ -13,6 +13,7 @@ import our.example.furniture.dto.PostDTO;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,8 +41,8 @@ public class MyPageController {
     // Dibs URL 매핑
     @GetMapping("myPage_Dibs")
     public String dibs(@ModelAttribute("params") PostDTO params, Model model) {
-        List<PostDTO> SelectPostList = postService.getPostList(params);
-        model.addAttribute("SelectPostList", SelectPostList);
+        List<PostDTO> selectPostList = postService.getPostList(params);
+        model.addAttribute("selectPostList", selectPostList);
         return "myPage_Dibs";
     }
 
