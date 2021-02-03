@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.PostDTO;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
+import our.example.furniture.service.MyPageService;
 import our.example.furniture.service.PostService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ public class MyPageController {
     private PostService postService;
     @Autowired
     private MyPageMapper myPageMapper;
+    @Autowired
+    private MyPageService myPageService;
     private Log log = LogFactory.getLog(this.getClass());
 
     // CurrentView URL 매핑
@@ -40,9 +43,9 @@ public class MyPageController {
     
     // Dibs URL 매핑
     @GetMapping("myPage_Dibs")
-    public String dibs(@ModelAttribute("params") PostDTO params, Model model) {
-        List<PostDTO> selectPostList = postService.getPostList(params);
-        model.addAttribute("selectPostList", selectPostList);
+    public String dibs(@ModelAttribute("params") PostDTO params, HttpSession session, Model model) {
+        List<PostDTO> dibsPostList = myPageService.getDibsPostList(params, session);
+        model.addAttribute("dibsPostList", dibsPostList);
         return "myPage_Dibs";
     }
 
