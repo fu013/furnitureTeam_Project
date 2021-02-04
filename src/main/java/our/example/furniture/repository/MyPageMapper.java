@@ -23,4 +23,8 @@ public interface MyPageMapper {
     int CheckLike(PostDTO params);
     List<PostDTO> SelectLikePost(PostDTO params);
     int SelectLikePostCount(PostDTO params);
+
+    // 자신이 등록한 게시물 조회
+    List<PostDTO> SelectUploadPost(PostDTO params);
+    int SelectUploadPostCount(PostDTO params);
 }

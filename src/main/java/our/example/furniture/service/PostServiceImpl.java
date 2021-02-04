@@ -168,4 +168,26 @@ public class PostServiceImpl implements PostService  {
         }
         return postLikeList;
     }
+
+    @Override
+    public List<PostDTO> getUploadPostList(PostDTO params, HttpSession session) {
+        params.setUserLoginId(session.getAttribute("loginUser").toString());
+        List<PostDTO> postUploadList = Collections.emptyList();
+        int postUploadTotalCount = myPageMapper.SelectUploadPostCount(params);
+
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(postUploadTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+        if (postUploadTotalCount > 0) {
+            postUploadList = myPageMapper.SelectUploadPost(params);
+        }
+        for(int i = 0; i < postUploadList.size(); i++) {
+            if(postUploadList.get(i).getImg_url_main() == null) {
+                String a = "img/null.gif";
+                postUploadList.get(i).setImg_url_main(a);
+            }
+        }
+        return postUploadList;
+    }
 }

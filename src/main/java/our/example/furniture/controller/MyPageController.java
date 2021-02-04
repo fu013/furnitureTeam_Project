@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.PostDTO;
+import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
@@ -17,6 +18,8 @@ import our.example.furniture.service.PostService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 
@@ -32,25 +35,101 @@ public class MyPageController {
 
     // CurrentView URL 매핑
     @GetMapping("myPage_CurrentView")
-    public String CurrentView(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpServletRequest request, Model model) {
-        List<PostDTO> viewPostList = postService.getViewPostList(params, response, request);
-        model.addAttribute("viewPostList", viewPostList);
+    public String CurrentView(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> viewPostList = postService.getViewPostList(params, response, request);
+            model.addAttribute("viewPostList", viewPostList);
+        }
         return "myPage_CurrentView";
     }
     
     // Dibs URL 매핑
     @GetMapping("myPage_Dibs")
-    public String dibs(@ModelAttribute("params") PostDTO params, HttpSession session, Model model) {
-        List<PostDTO> selectDibsPostList = postService.getDibsPostList(params, session);
-        model.addAttribute("selectDibsPostList", selectDibsPostList);
+    public String dibs(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> selectDibsPostList = postService.getDibsPostList(params, session);
+            model.addAttribute("selectDibsPostList", selectDibsPostList);
+        }
         return "myPage_Dibs";
     }
     // 좋아요 매핑
     @GetMapping("myPage_Like")
-    public String like(@ModelAttribute("params") PostDTO params, HttpSession session, Model model) {
-        List<PostDTO> selectLikePostList = postService.getLikePostList(params, session);
-        model.addAttribute("selectLikePostList", selectLikePostList);
+    public String like(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> selectLikePostList = postService.getLikePostList(params, session);
+            model.addAttribute("selectLikePostList", selectLikePostList);
+        }
         return "myPage_Like";
+    }
+
+    // 업로드한 게시믈 매핑
+    @GetMapping("myPage_UploadPost")
+    public String myPage_UploadPost(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> selectUploadPostList = postService.getUploadPostList(params, session);
+            model.addAttribute("selectUploadPostList", selectUploadPostList);
+        }
+        return "myPage_UploadPost";
+    }
+    // 회원정봇 수정 매핑
+    @GetMapping("myPage_UserInfoFix")
+    public String myPage_UserInfoFix(HttpSession session, HttpServletResponse response) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        }
+        return "myPage_UserInfoFix";
+    }
+    // 회원탈퇴 URL 매핑
+    @GetMapping("myPage_UserWithdrawal")
+    public String myPage_UserWithdrawal(HttpSession session, HttpServletResponse response) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        }
+        return "myPage_UserWithdrawal";
     }
 
     // 찜목록 요청값 DB에 저장

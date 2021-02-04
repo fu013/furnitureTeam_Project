@@ -49,6 +49,17 @@
         ORDER BY Product.Product_no DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
     </select>
+    <!-- 업로드한 게시물 조회-->
+    <select id="SelectUploadPost" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        Product.productName, Product.productPrice, Product_MainImg.img_url_main, Product.product_no
+        FROM
+        Product
+        LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE Product.userRegisterId = #{userLoginId}
+        ORDER BY Product.Product_no DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
 
     <!-- 찜목록 게시물 개수(로그인 유저의)-->
     <select id="SelectDibsPostCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
@@ -64,6 +75,14 @@
         Count(*)
         FROM
         Product_Like
+        WHERE userRegisterId = #{userLoginId}
+    </select>
+    <!-- 현재 로그인 유저가 등록한 게시물 개수 -->
+    <select id="SelectUploadPostCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
+        SELECT
+        Count(*)
+        FROM
+        Product
         WHERE userRegisterId = #{userLoginId}
     </select>
 
