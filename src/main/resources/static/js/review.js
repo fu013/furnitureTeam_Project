@@ -122,21 +122,4 @@ $(document).ready(function() {
             $(this).siblings('.fix_button').show();
         });
     });
-
-    // 장바구니 등록
-    $(".basket").on('click', function () {
-        const product_no = $("#review_productNo").val();
-        const basket_data_json = {
-            "basketProductNum": product_no
-        };
-        $.ajax({
-            type: "post",
-            data: basket_data_json,
-            url: "/basketRegister",
-            dataType: "text",
-            success: function (data) {
-                alert(data);
-            }
-        });
-    });
 });

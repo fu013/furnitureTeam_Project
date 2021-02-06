@@ -14,6 +14,7 @@ public class UserRegisterDto {
     private String loginId;
     private String loginPassword;
     private String idOverlapCheck;
+    private String emailOverlapCheck;
 
     public String getUserRegisterId() {
         return userRegisterId;
@@ -117,5 +118,13 @@ public class UserRegisterDto {
 
     public void setIdOverlapCheck(String idOverlapCheck) {
         this.idOverlapCheck = idOverlapCheck;
+    }
+
+    public String getEmailOverlapCheck() {
+        return emailOverlapCheck;
+    }
+
+    public void setEmailOverlapCheck(String emailOverlapCheck) {
+        this.emailOverlapCheck = emailOverlapCheck;
     }
 }

@@ -17,4 +17,13 @@ public interface PostService {
     // 장바구니에 등록된 게시물 리스트 가져오기
     public List<PostDTO> getBasketPostList(PostDTO params, HttpSession session);
 
+    // 페이징이 적용된 찜목록 리스트 가져오기
+    public List<PostDTO> getDibsPostList(PostDTO params, HttpSession session);
+
+    // 페이징이 적용된 좋아요 리스트 가져오기
+    public List<PostDTO> getLikePostList(PostDTO params, HttpSession session);
+
+    // 페이징이 적용된 자신이 등록한 게시물 리스트 가져오기
+    public List<PostDTO> getUploadPostList(PostDTO params, HttpSession session);
+
 }

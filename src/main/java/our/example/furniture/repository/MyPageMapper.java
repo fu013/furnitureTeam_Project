@@ -9,15 +9,22 @@ import java.util.List;
 @Mapper
 public interface MyPageMapper {
 
-    // 찜목록 등록
+    // 찜목록 조회 & 등록 & 취소
     void InsertDibs(PostDTO params);
-
-    // 찜목록 중복 확인
+    void DeleteDibs(PostDTO params);
     int CheckDibs(PostDTO params);
+    List<PostDTO> SelectDibsPost(PostDTO params);
+    int SelectDibsPostCount(PostDTO params);
 
-    // 찜목록 Select
-    List<PostDTO> selectDibsPost(PostDTO params);
+    // 좋아요 조회 & 등록 & 삭제
+    void InsertLike(PostDTO params);
+    void DeleteLike(PostDTO params);
+    void UpdateLike(PostDTO params);
+    int CheckLike(PostDTO params);
+    List<PostDTO> SelectLikePost(PostDTO params);
+    int SelectLikePostCount(PostDTO params);
 
-    // 찜목록 조회 및 Pagination Method
-    int selectDibsPostTotalCount(PostDTO params);
+    // 자신이 등록한 게시물 조회
+    List<PostDTO> SelectUploadPost(PostDTO params);
+    int SelectUploadPostCount(PostDTO params);
 }

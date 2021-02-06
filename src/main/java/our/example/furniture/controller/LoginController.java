@@ -52,7 +52,7 @@ public class LoginController {
         PrintWriter out = response.getWriter();
         out.println("<script>");
         out.println("alert('로그아웃되었습니다.');");
-        out.println("location.href=document.referrer;");
+        out.println("location.href='/';");
         out.println("</script>");
         out.close();
     }

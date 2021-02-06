@@ -44,18 +44,20 @@
 
                             <!-- 장바구니 상품 -->
                             <tr class="basket_product_tr" th:each="basketPostList : ${basketPostList}">
-                                <td class="inner_td">
-                                    <input type="checkbox" class="inner_checkbox" name="basket_item_s" style="margin: 0; padding: 0;"/>
-                                    <img class="basket_item_img" th:src="${basketPostList.getImg_url_main()}">
-                                </td>
-                                <td class="basket_item_num" th:text="${basketPostList.getProduct_no()}"></td>
-                                <td class="basket_item_category" th:text="${basketPostList.getProductCategoryHomeScale()}"></td>
-                                <td class="basket_item_name" th:text="${basketPostList.getProductName()}"></td>
-                                <td class="basket_item_price" th:text="${basketPostList.getProductPrice()}" style="font-size: 15px;">
-                                    <text>원</text>
-                                </td>
-                                <td class="basket_item_size" th:text="${basketPostList.getProductSize()}"></td>
-                                <td class="basket_item_color" th:text="${basketPostList.getProductColor()}"></td>
+                                    <td class="inner_td">
+                                        <input type="checkbox" class="inner_checkbox" name="basket_item_s" style="margin: 0; padding: 0;"/>
+                                        <a th:href="'postInfo?post_no=' + ${basketPostList.getProduct_no()}">
+                                            <img class="basket_item_img" th:src="${basketPostList.getImg_url_main()}">
+                                        </a>
+                                    </td>
+                                    <td class="basket_item_num" th:text="${basketPostList.getProduct_no()}"></td>
+                                    <td class="basket_item_category" th:text="${basketPostList.getProductCategoryHomeScale()}"></td>
+                                    <td class="basket_item_name" th:text="${basketPostList.getProductName()}"></td>
+                                    <td class="basket_item_price" th:text="${basketPostList.getProductPrice()}" style="font-size: 15px;">
+                                        <text>원</text>
+                                    </td>
+                                    <td class="basket_item_size" th:text="${basketPostList.getProductSize()}"></td>
+                                    <td class="basket_item_color" th:text="${basketPostList.getProductColor()}"></td>
                             </tr>
                         </table>
 

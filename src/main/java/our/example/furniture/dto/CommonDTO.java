@@ -13,6 +13,15 @@ public class CommonDTO extends Pagination {
     // 삭제 여부
     private String deleteYn;
 
+    // 좋아요 여부
+    private boolean likeYn;
+
+    // 찜 여부
+    private boolean dibYn;
+
+    // 장바구니 여부
+    private boolean basketYn;
+
     // 등록일
     private LocalDateTime insertTime;
 
@@ -60,5 +69,29 @@ public class CommonDTO extends Pagination {
 
     public void setDeleteTime(LocalDateTime deleteTime) {
         this.deleteTime = deleteTime;
+    }
+
+    public boolean isLikeYn() {
+        return likeYn;
+    }
+
+    public void setLikeYn(boolean likeYn) {
+        this.likeYn = likeYn;
+    }
+
+    public boolean isDibYn() {
+        return dibYn;
+    }
+
+    public void setDibYn(boolean dibYn) {
+        this.dibYn = dibYn;
+    }
+
+    public boolean isBasketYn() {
+        return basketYn;
+    }
+
+    public void setBasketYn(boolean basketYn) {
+        this.basketYn = basketYn;
     }
 }
