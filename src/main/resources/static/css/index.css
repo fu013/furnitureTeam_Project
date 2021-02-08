@@ -89,6 +89,7 @@
     .bodyWrapper > section > .category > ul > li .productCategoryPrice {
         width: 60%;
         margin-top: 10px;
+        text-align: center;
     }
     .bodyWrapper > section > .category > ul > li #productCategoryPriceButton {
         background: black;
@@ -100,6 +101,7 @@
     }
     .bodyWrapper > section > .category > ul > li > select {
         margin-left: 10px;
+        width: 80px;
     }
     .bodyWrapper > section > .view {
        border: 1px solid black;
