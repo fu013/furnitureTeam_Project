@@ -1,15 +1,13 @@
 package our.example.furniture.controller;
-import org.apache.catalina.Session;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.UserRegisterMapper;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -49,7 +47,7 @@ public class UserRegisterController {
         }
         return result;
     }
-    // 기존 비밀번호가 일치하는지 체크
+    // 기존 비밀번호가 맞는지 체크(인증 절차)
     @ResponseBody
     @PostMapping("/passwordCheck")
     public String passwordCheck(UserRegisterDto userRegisterDto, HttpSession session) {
@@ -62,7 +60,7 @@ public class UserRegisterController {
         }
         return result;
     }
-
+    // 회원정보 수정 요청에 대한 응답
     @ResponseBody
     @PostMapping("/userInfoChange")
     public String userInfoChange(UserRegisterDto userRegisterDto, HttpSession session) {
@@ -70,6 +68,7 @@ public class UserRegisterController {
         userRegisterMapper.userInfoChange(userRegisterDto);
         return "회원정보가 수정되었습니다(자동 재로그인).";
     }
+    // 회원정보 탈퇴 요청에 대한 응답
     @ResponseBody
     @PostMapping("/userWithdrawal")
     public String userWithdrawal(UserRegisterDto userRegisterDto) {

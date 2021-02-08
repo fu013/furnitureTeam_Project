@@ -13,8 +13,15 @@ public class Pagination {
     // 화면 하단에 출력할 페이지 사이즈
     private int pageSize;
 
-    // 검색 키워드
-    private String searchKeyword;
+    // 검색 카테고리 - 1
+    private String cat1;
+
+    // 검색 카테고리 - 2
+    private String cat2;
+
+    // 검색 카테고리 - 3
+    private String cat3;
+
 
     // 검색 유형
     private String searchType;
@@ -33,7 +40,7 @@ public class Pagination {
     }
 
     // 스프링에서 제공해주는 UriComponents 클래스를 사용하면 URI 를 더욱 효율적으로 처리할 수 있다. <쿼리스트링 생성>
-    public String makeQueryString(int pageNo) {
+    public String makeQueryString(int pageNo, String searchType) {
         UriComponents uriComponents;
         if (!Is_Post_no) {
             uriComponents = UriComponentsBuilder.newInstance()
@@ -41,7 +48,9 @@ public class Pagination {
                     .queryParam("recordsPerPage", recordsPerPage)
                     .queryParam("pageSize", pageSize)
                     .queryParam("searchType", searchType)
-                    .queryParam("searchKeyword", searchKeyword)
+                    .queryParam("cat1", cat1)
+                    .queryParam("cat2", cat2)
+                    .queryParam("cat3", cat3)
                     .build()
                     .encode();
 
@@ -85,14 +94,6 @@ public class Pagination {
         this.pageSize = pageSize;
     }
 
-    public String getSearchKeyword() {
-        return searchKeyword;
-    }
-
-    public void setSearchKeyword(String searchKeyword) {
-        this.searchKeyword = searchKeyword;
-    }
-
     public String getSearchType() {
         return searchType;
     }
@@ -115,5 +116,33 @@ public class Pagination {
 
     public void setPost_no(int post_no) {
         this.post_no = post_no;
+    }
+
+    public String getCat1() {
+        return cat1;
+    }
+
+    public void setCat1(String cat1) {
+        this.cat1 = cat1;
+    }
+
+    public String getCat2() {
+        return cat2;
+    }
+
+    public void setCat2(String cat2) {
+        this.cat2 = cat2;
+    }
+
+    public String getCat3() {
+        return cat3;
+    }
+
+    public void setCat3(String cat3) {
+        this.cat3 = cat3;
+    }
+
+    public int getPost_no() {
+        return post_no;
     }
 }

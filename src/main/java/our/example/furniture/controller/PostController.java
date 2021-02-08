@@ -39,19 +39,19 @@ public class PostController {
 
     private Log log = LogFactory.getLog(this.getClass());
 
-    // 상품 게시글 작성
+    // 상품 게시글 작성 POST 요청 처리
     @PostMapping("/productRegister")
     public String productRegister(PostDTO postDTO, HttpSession session) throws Exception {
         String userLoginId = session.getAttribute("loginUser").toString();
         postDTO.setUserLoginId(userLoginId);
         postMapper.insertProductInfo(postDTO);
-        // 메인 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
+        // 메인 이미지에 요청값이 있는지 검사하고, 있을 경우에만 Mapper SQL 실행
         if(!postDTO.getProductMainImg().isEmpty()) {
             List<MainImageInfoDto> MainImageLogic = uploadMainImage.MainImageLogic(postDTO);
             postMapper.InsertMainImage(MainImageLogic);
         }
 
-        // 내부 이미지에 요청값이 있는지 검사하고, DB에 값을 넣어주는 로직
+        // 내부 이미지에 요청값이 있는지 검사하고, 있을 경우에만 Mapper SQL 실행
         if(postDTO.getProductImg().length >= 1 && !postDTO.getProductImg()[0].isEmpty()) {
             List<InnerImagesInfoDto> InnerImageLogic = uploadInnerImages.InnerImagesLogic(postDTO);
             postMapper.InsertInnerImages(InnerImageLogic);
@@ -59,9 +59,11 @@ public class PostController {
         return "index";
     }
 
-    // 상품 상세페이지
+    // 상품 상세페이지 URL 요청처리 (상품 및 댓글 조회)
     @GetMapping("/postInfo")
     public String postInfo(@RequestParam("post_no") int post_no, PostDTO postDTO, ReviewDTO params, HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model) {
+
+        // 기본 상품 DTO 값 세팅
         postDTO.setProduct_no(post_no);
         params.setProduct_no(post_no);
         params.setRecordsPerPage(5);
@@ -71,12 +73,14 @@ public class PostController {
         params.setTotal_review_num(totalReviewNumThisPage);
         PostDTO postInfo = postMapper.SelectPost(postDTO);
         List<PostDTO> postImages = postMapper.SelectPostImages(postDTO);
+
         // 이미지가 Null 일 경우, default 이미지로 null.gif 를 src 로 등록
         if(postInfo.getImg_url_main() == null) {
             String a = "img/null.gif";
             postInfo.setImg_url_main(a);
         }
-        // 쿠키 조회
+
+        // 해당 상품의 쿠키값 조회, 쿠키 값이 없다면 조회수 판별 쿠키(1일)짜리 추가
         String ViewCookieName = "ViewPostName" + postInfo.getProduct_no();
         Cookie[] cookies = request.getCookies();
         HashMap<String, String> CookieMap = new HashMap<String, String>();
@@ -116,7 +120,7 @@ public class PostController {
         return "postInfo";
     }
 
-    // 댓글 요청값 저장-응답
+    // 댓글 요청에 대한 값 저장 및 응답
     @ResponseBody
     @PostMapping("/postReviewInfo")
     public List<ReviewDTO> ReqReview(ReviewDTO params) {
@@ -125,7 +129,7 @@ public class PostController {
         return reviewInfo;
     }
 
-    // 댓글 수정
+    // 댓글 수정 요청에 대한 값 저장 및 응답
     @ResponseBody
     @PostMapping("/postReviewInfoFix")
     public String FixReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
@@ -134,7 +138,7 @@ public class PostController {
         return result;
     }
 
-    // 댓글 삭제
+    // 댓글 삭제 요청에 대한 값 저장 및 응답
     @ResponseBody
     @PostMapping("/postReviewInfoDelete")
     public String DeleteReview(ReviewFixDeleteDTO reviewFixDeleteDTO) {
@@ -143,7 +147,7 @@ public class PostController {
         return check;
     }
 
-    // 장바구니 등록
+    // 장바구니 데이터 세션에 값 등록(세션키 명 : 포스트번호(String 변환), 세션 값 또한 포스트번호지만 int 형 그대로)
     @ResponseBody
     @PostMapping("/basketRegister")
     public String BasketRegister(int basketProductNum, HttpSession session) {

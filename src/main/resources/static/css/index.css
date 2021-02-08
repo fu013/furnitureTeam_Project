@@ -125,9 +125,8 @@
         position: relative;
     }
     .bodyWrapper > section > .view > .filterBox > .searchBox > #searchBar {
-        width: 84%;
+        width: 78%;
         height: 26px;
-        /* line-height: 26px; */
         padding: 11px 20px 9px 58px;
         font-size: 22px;
         letter-spacing: 3px;
@@ -189,7 +188,6 @@
         width: 100%;
         height: 240px;
         display: inline-block;
-        border: 1px solid black;
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi > a > .productUl {
         display: inline-block;
@@ -256,4 +254,10 @@
     }
     .page-item:not(:first-child) .page-link {
         margin-left: -1px;
+    }
+    .on {
+        border-bottom: 1px solid black;
+    }
+    .order {
+        margin-left: 10px;
     }

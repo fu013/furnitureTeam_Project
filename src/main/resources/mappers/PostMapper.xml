@@ -59,7 +59,7 @@
         <include refid="select_indexViewPost"/>
         FROM
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
-        ORDER BY Product.create_date DESC
+        ORDER BY ${searchType} DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
     </select>
     <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">

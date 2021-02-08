@@ -81,16 +81,6 @@ CREATE TABLE PRODUCT_LIKE(
 	CONSTRAINT FK2_userRegisterId FOREIGN KEY(userRegisterId)
 		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
 );
-CREATE TABLE PRODUCT_LIKE(
-	product_no number(10) not null PRIMARY KEY,
-	userRegisterId varchar2(20) not null,
-	ikeYN CHAR(1) DEFAULT 0,
-	create_date date default sysdate,
-	CONSTRAINT FK1_product_no FOREIGN KEY(product_no)
-		REFERENCES Product(product_no) ON DELETE CASCADE,
-	CONSTRAINT FK2_userRegisterId FOREIGN KEY(userRegisterId)
-		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
-);
 CREATE SEQUENCE PRODUCT_AUTO_I
   START WITH 1
   INCREMENT BY 1

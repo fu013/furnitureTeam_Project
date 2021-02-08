@@ -59,10 +59,12 @@
                                 </label>
                             </span>
                     </div>
-                    <div class="orderBox">
-                        <span class="title">정렬방식 : </span>
-                        최신순 <input type="radio" name="filter" value="priceDesc" class="filterPrice" checked />
-                        가격순 <input type="radio" name="filter" value="dateDesc" class="filterDate" />
+                    <div class="orderBox" th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}">
+                        <span class="title"><i class="xi-align-justify"></i></span>
+                        <a href="javascript:void(0)" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo, 'product_no')} ]])" class="order product_no" style="margin-left: 0;">최신순</a>
+                        <a href="javascript:void(0)" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo, 'productPrice')} ]])" class="order productPrice">가격순</a>
+                        <a href="javascript:void(0)" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo, 'likeNum')} ]])" class="order likeNum">추천순</a>
+                        <a href="javascript:void(0)" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo, 'productView')} ]])" class="order productView">조회순</a>
                     </div>
                 </div>
                 <ul class="itemUl">

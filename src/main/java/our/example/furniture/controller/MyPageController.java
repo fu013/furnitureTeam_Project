@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.PostDTO;
-import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,9 +31,9 @@ public class MyPageController {
     private MyPageMapper myPageMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
-    // CurrentView URL 매핑
+    // myPage_CurrentView(최근 본 페이지) url 요청 처리
     @GetMapping("myPage_CurrentView")
-    public String CurrentView(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model) throws IOException {
+    public String myPage_CurrentView(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model) throws IOException {
         if(session.getAttribute("loginUser") == null) {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();
@@ -51,9 +49,9 @@ public class MyPageController {
         return "myPage_CurrentView";
     }
     
-    // Dibs URL 매핑
+    // myPage_Dibs(찜 목록) 요청 처리
     @GetMapping("myPage_Dibs")
-    public String dibs(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
+    public String myPage_Dibs(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
         if(session.getAttribute("loginUser") == null) {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();
@@ -68,7 +66,7 @@ public class MyPageController {
         }
         return "myPage_Dibs";
     }
-    // 좋아요 매핑
+    // myPage_Like(좋아요한 페이지) url 요청 처리
     @GetMapping("myPage_Like")
     public String like(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
         if(session.getAttribute("loginUser") == null) {
@@ -86,7 +84,7 @@ public class MyPageController {
         return "myPage_Like";
     }
 
-    // 업로드한 게시믈 매핑
+    // myPage_UploadPost(업로드한 게시물) url 요청 처리
     @GetMapping("myPage_UploadPost")
     public String myPage_UploadPost(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
         if(session.getAttribute("loginUser") == null) {
@@ -103,7 +101,7 @@ public class MyPageController {
         }
         return "myPage_UploadPost";
     }
-    // 회원정봇 수정 매핑
+    // myPage_UserInfoFix(회원정보수정) url 요청 처리
     @GetMapping("myPage_UserInfoFix")
     public String myPage_UserInfoFix(HttpSession session, HttpServletResponse response) throws IOException {
         if(session.getAttribute("loginUser") == null) {
@@ -117,7 +115,7 @@ public class MyPageController {
         }
         return "myPage_UserInfoFix";
     }
-    // 회원탈퇴 URL 매핑
+    // myPage_UserWithdrawal(회원탈퇴) url 요청 처리
     @GetMapping("myPage_UserWithdrawal")
     public String myPage_UserWithdrawal(HttpSession session, HttpServletResponse response) throws IOException {
         if(session.getAttribute("loginUser") == null) {
@@ -132,7 +130,7 @@ public class MyPageController {
         return "myPage_UserWithdrawal";
     }
 
-    // 찜목록 요청값 DB에 저장
+    // 찜 목록 버튼 클릭시, 아이콘 색깔에 따른 요청 처리
     @ResponseBody
     @PostMapping("/dibsSuccess")
     public String dibsSuccess(PostDTO params, HttpSession session) {
@@ -152,6 +150,8 @@ public class MyPageController {
         }
         return result;
     }
+
+    // 좋아요 버튼 클릭시, 아이콘 색깔에 따른 요청 처리
     @ResponseBody
     @PostMapping("/like")
     public String Like(PostDTO params, HttpSession session, Model model) {

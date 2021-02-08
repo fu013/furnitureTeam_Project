@@ -25,10 +25,8 @@ public class PostServiceImpl implements PostService  {
 
     @Override
     public List<PostDTO> getPostList(PostDTO params) {
-
         List<PostDTO> postList = Collections.emptyList();
         int postTotalCount = postMapper.selectPostTotalCount(params);
-
         PaginationInfo paginationInfo = new PaginationInfo(params);
         paginationInfo.setTotalRecordCount(postTotalCount);
 

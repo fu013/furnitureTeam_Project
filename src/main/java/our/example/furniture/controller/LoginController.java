@@ -8,12 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import org.springframework.web.servlet.ModelAndView;
 import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.LoginMapper;
-
-import javax.script.ScriptContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,25 +22,25 @@ public class LoginController {
     private LoginMapper loginMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
-    // 로그인 요청
+    // 로그인 POST 요청처리
     @ResponseBody
     @PostMapping("/loginSuccess")
     public String loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
         String result = loginMapper.overlapLogin(userRegisterDto);
-        // 로그인 성공
+        // 로그인 성공시, 세션에 로그인 데이터 추가(60분)
         if (result != null) {
             String userName = userRegisterDto.getUserRegisterId();
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", userName);
             session.setMaxInactiveInterval(60*60);
             result = "로그인에 성공했습니다.";
-        } else { // 로그인 실패
+        } else { // 로그인 실패시
             result = "아이디나 비밀번호가 일치하지않아 로그인에 실패했습니다.";
         }
         return result;
     }
 
-    // 로그아웃 요청
+    // 로그아웃 POST 요청처리, 세션에 있는 모든 데이터 삭제(장바구니, 로그인 등)
     @GetMapping("/logout")
     public void logout(HttpSession session, HttpServletResponse response) throws IOException {
         session.invalidate();
