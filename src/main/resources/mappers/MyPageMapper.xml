@@ -108,7 +108,7 @@
         UPDATE
         Product
         SET
-        likeNum = (SELECT Count(*) from Product_Like)
+        likeNum = (SELECT Count(*) from Product_Like WHERE Product_Like.Product_no = #{product_no})
         WHERE
         Product.Product_no = #{product_no}
     </update>
