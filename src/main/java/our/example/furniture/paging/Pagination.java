@@ -22,6 +22,11 @@ public class Pagination {
     // 검색 카테고리 - 3
     private String cat3;
 
+    // 최소 가격
+    private int minPrice;
+
+    // 최대 가격
+    private int maxPrice;
 
     // 검색 유형
     private String searchType;
@@ -40,7 +45,7 @@ public class Pagination {
     }
 
     // 스프링에서 제공해주는 UriComponents 클래스를 사용하면 URI 를 더욱 효율적으로 처리할 수 있다. <쿼리스트링 생성>
-    public String makeQueryString(int pageNo, String searchType) {
+    public String makeQueryString(int pageNo, String searchType, String cat1, String cat2, String cat3, int minPrice, int maxPrice) {
         UriComponents uriComponents;
         if (!Is_Post_no) {
             uriComponents = UriComponentsBuilder.newInstance()
@@ -51,9 +56,10 @@ public class Pagination {
                     .queryParam("cat1", cat1)
                     .queryParam("cat2", cat2)
                     .queryParam("cat3", cat3)
+                    .queryParam("minPrice", minPrice)
+                    .queryParam("maxPrice", maxPrice)
                     .build()
                     .encode();
-
         } else {
             uriComponents = UriComponentsBuilder.newInstance()
                     .queryParam("post_no", post_no)
@@ -144,5 +150,21 @@ public class Pagination {
 
     public int getPost_no() {
         return post_no;
+    }
+
+    public int getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(int minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public int getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(int maxPrice) {
+        this.maxPrice = maxPrice;
     }
 }

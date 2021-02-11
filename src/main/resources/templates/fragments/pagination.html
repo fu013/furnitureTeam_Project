@@ -2,19 +2,19 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
     <nav th:fragment="pagination" th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}" aria-label="Page navigation" class="text-center">
         <ul class="pagination">
-            <li th:if="*{hasPreviousBlock == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1, params.searchType)} ]])" class="page-item">
+            <li th:if="*{hasPreviousBlock == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1, params.searchType, params.cat1, params.cat2, params.cat3, params.minPrice, params.maxPrice)} ]])" class="page-item">
                 <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true" class="page-link">&laquo;</span></a>
             </li>
-            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo - 1, params.searchType)} ]])" class="page-item">
+            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo - 1, params.searchType, params.cat1, params.cat2, params.cat3, params.minPrice, params.maxPrice)} ]])" class="page-item">
                 <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true" class="page-link">&lsaquo;</span></a>
             </li>
             <li th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo == params.currentPageNo} ? 'active'" class="page-item">
-                <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo, params.searchType)} ]])" class="page-link"></a>
+                <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo, params.searchType, params.cat1, params.cat2, params.cat3, params.minPrice, params.maxPrice)} ]])" class="page-link"></a>
             </li>
-            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo + 1, params.searchType)} ]])" class="page-item">
+            <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(params.currentPageNo + 1, params.searchType, params.cat1, params.cat2, params.cat3, params.minPrice, params.maxPrice)} ]])" class="page-item">
                 <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true" class="page-link">&rsaquo;</span></a>
             </li>
-            <li th:if="*{hasNextBlock == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount, params.searchType)} ]])" class="page-item">
+            <li th:if="*{hasNextBlock == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount, params.searchType, params.cat1, params.cat2, params.cat3, params.minPrice, params.maxPrice)} ]])" class="page-item">
                 <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true" class="page-link">&raquo;</span></a>
             </li>
         </ul>

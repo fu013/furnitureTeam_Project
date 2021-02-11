@@ -58,4 +58,8 @@ $(document).ready(function () {
            var string = uiProductPrice[i].innerHTML;
            uiProductPrice[i].innerHTML = "가격 : " + string.format() + " 원";
         }
+
+        $("#productCategoryNumberOfHouseholds, #productCategoryHomeScale, #productCategoryInterior").on('change', function() {
+            $('#categoryForm').submit();
+        });
 });

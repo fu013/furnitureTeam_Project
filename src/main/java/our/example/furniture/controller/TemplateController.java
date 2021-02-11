@@ -15,7 +15,10 @@ import our.example.furniture.repository.*;
 import our.example.furniture.service.PostService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -28,22 +31,12 @@ public class TemplateController {
 
     // index url 요청시 template/index.html 로 DOM 랜더링 및 전체 게시물 조회 리스트 뿌리기
     @RequestMapping("/")
-    public String openPostList(@ModelAttribute("params") PostDTO params, @RequestParam("searchType") @Nullable String searchType, Model model, HttpSession session) {
+    public String openPostList(@ModelAttribute("params") PostDTO params, Model model, HttpSession session, HttpServletResponse response, HttpServletRequest request, @RequestParam("searchType") @Nullable String searchType, @RequestParam("cat1") @Nullable String cat1, @RequestParam("cat2") @Nullable String cat2, @RequestParam("cat3") @Nullable String cat3, @RequestParam(value = "minPrice", required = false) Integer minPrice, @RequestParam(value = "maxPrice", required = false) Integer maxPrice) throws IOException {
         // 최신순, 가격순, 추천순, 조회순에 대한 파라미터를 받아서, 페이지네이션에도 searchType 을 정해주어 페이지 이동(페이징)을 해도 필터링이 풀리지않고 적용되도록한다.
-        if (searchType != null) {
-            if (searchType.contains("productView")) {
-                params.setSearchType("productView");
-            } else if (searchType.contains("productPrice")) {
-                params.setSearchType("productPrice");
-            } else if (searchType.contains("product_no")) {
-                params.setSearchType("product_no");
-            } else if (searchType.contains("likeNum")) {
-                params.setSearchType("likeNum");
-            }
-        } else {
+        if (searchType == null) {
             params.setSearchType("product_no");
         }
-
+        log.info(params.getMinPrice());
         List<PostDTO> postList = postService.getPostList(params);
         model.addAttribute("postList", postList);
         for(int i = 0; i < postList.size(); i++) {

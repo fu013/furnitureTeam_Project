@@ -21,6 +21,7 @@ public class PostDTO extends CommonDTO {
     private int productView;
     private int likeNum;
 
+
     // GETTER & SETTER
 
     public String getUserLoginId() {
@@ -154,4 +155,5 @@ public class PostDTO extends CommonDTO {
     public int getLikeNum() { return likeNum; }
 
     public void setLikeNum(int likeNum) { this.likeNum = likeNum; }
+
 }
