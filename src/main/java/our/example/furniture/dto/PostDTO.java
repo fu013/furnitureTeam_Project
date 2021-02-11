@@ -19,6 +19,8 @@ public class PostDTO extends CommonDTO {
     private String img_url_inner;
     private String img_url_main;
     private int productView;
+    private int likeNum;
+
 
     // GETTER & SETTER
 
@@ -149,4 +151,9 @@ public class PostDTO extends CommonDTO {
     public void setProductView(int productView) {
         this.productView = productView;
     }
+
+    public int getLikeNum() { return likeNum; }
+
+    public void setLikeNum(int likeNum) { this.likeNum = likeNum; }
+
 }

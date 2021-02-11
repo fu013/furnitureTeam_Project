@@ -1,4 +1,16 @@
-user_id 테이블에 넣기
+CREATE TABLE userRegisterTable(
+    userRegisterId varchar2(20) not null PRIMARY KEY,
+    userRegisterPassword varchar2(20) not null,
+    userRegisterRePassword varchar2(20) not null,
+    userRegisterName varchar2(20) not null,
+    userRegisterBirth date not null,
+    userRegisterGender varchar2(6) not null,
+    userRegisterEmail varchar2(50) not null,
+    userRegisterPhone1 number(3) not null,
+    userRegisterPhone2 number(4) not null,
+    userRegisterPhone3 number(4) not null,
+    create_date date default sysdate
+);
 CREATE TABLE Product(
 	product_no number(10) not null PRIMARY KEY,
 	productCategoryHomeScale varchar2(20)  not null,
@@ -11,12 +23,12 @@ CREATE TABLE Product(
 	productColor varchar2(20) not null,
 	productComment varchar(1000) NULL,
 	productView number(10) DEFAULT 0,
-	CONSTRAINTS FK_use FOREIGN KEY(product_no)
-		REFERENCES Product(product_no) ON DELETE CASCADE
-	create_date date default sysdate
+	userRegisterId varchar2(20) not null,
+	likeNum number(10) DEFAULT 0,
+	create_date date default sysdate,
+	CONSTRAINTS FK_userRegisterId  FOREIGN KEY(userRegisterId )
+		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
 );
-ALTER TABLE Product ADD productView number(10) DEFAULT 0;
-
 CREATE TABLE Product_MainImg(
 	product_no number(10) not null,
 	img_saveName varchar2(30) not null,
@@ -27,7 +39,6 @@ CREATE TABLE Product_MainImg(
 	CONSTRAINTS FK_product_no_2 FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
-
 CREATE TABLE Product_InnerImages(
 	product_no number(10) not null,
 	img_saveName varchar2(30) not null,
@@ -38,7 +49,16 @@ CREATE TABLE Product_InnerImages(
 	CONSTRAINTS FK_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
-
+CREATE TABLE Product_Dibs(
+	dibs_no number(10) not null primary key,
+	product_no number(10) not null,
+	userRegisterId varchar2(20) not null,
+	create_date date default sysdate,
+	CONSTRAINTS FK_Dibs_product_no FOREIGN KEY(product_no)
+		REFERENCES Product(product_no) ON DELETE CASCADE,
+	CONSTRAINTS FK_Dibs_userRegisterId FOREIGN KEY(userRegisterId)
+		REFERENCES userRegisterTable(userRegisterId ) ON DELETE CASCADE
+);
 CREATE TABLE Product_Review(
 	comment_no number(10) not null PRIMARY KEY,
 	product_no number(10) not null,
@@ -51,18 +71,54 @@ CREATE TABLE Product_Review(
 	CONSTRAINTS FK2_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
 );
-
-CREATE MEMO_IDX_SEQ
+CREATE TABLE PRODUCT_LIKE(
+	like_no number(10) not null,
+	product_no number(10) not null,
+	userRegisterId varchar2(20) not null,
+	create_date date default sysdate,
+	CONSTRAINT FK1_product_no FOREIGN KEY(product_no)
+		REFERENCES Product(product_no) ON DELETE CASCADE,
+	CONSTRAINT FK2_userRegisterId FOREIGN KEY(userRegisterId)
+		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
+);
+CREATE SEQUENCE PRODUCT_AUTO_I
   START WITH 1
   INCREMENT BY 1
+  MINVALUE 1
+  MAXVALUE 1000000000
+  NOCACHE;
+CREATE SEQUENCE REVIEW_AUTO_I
+  START WITH 1
+  INCREMENT BY 1
+  MINVALUE 1
+  MAXVALUE 1000000000
+  NOCACHE;
+CREATE SEQUENCE USER_AUTO_I
+  START WITH 1
+  INCREMENT BY 1
+  MINVALUE 1
+  MAXVALUE 1000000000
+  NOCACHE;
+CREATE SEQUENCE DIBS_AUTO_I
+  START WITH 1
+  INCREMENT BY 1
+  MINVALUE 1
+  MAXVALUE 1000000000
+  NOCACHE;
+CREATE SEQUENCE like_AUTO_I
+  START WITH 1
+  INCREMENT BY 1
+  MINVALUE 1
+  MAXVALUE 1000000000
   NOCACHE;
 
+<SQL문 연습>
+ALTER TABLE Product ADD productView number(10) DEFAULT 0;
+ALTER TABLE Product ADD CONSTRAINT FK_userRegisterId FOREIGN KEY(userRegisterId) REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE;
 INERT INTO MEMO(IDX, WDATE) VALUES (MEMO.NEXTVAL, TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi:ss'));
 SELECT * FROM ALL_CONSTRAINTS WHERE TABLE_NAME = 'MEMO';
 CREATE INDEX NAME_INDEX ON MEMO(NAME);
-
 SELECT employee_id, emp_name, manager_id from Employees
-
 SELECT Count(department_id), AVG(Salary), MAX(Salary), MIN(Salary)
 FROM Employees
 GROUP BY department_id;

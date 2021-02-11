@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import our.example.furniture.dto.PostDTO;
 import our.example.furniture.paging.PaginationInfo;
+import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 
 import javax.servlet.http.Cookie;
@@ -19,13 +20,13 @@ import java.util.List;
 public class PostServiceImpl implements PostService  {
     @Autowired
     private PostMapper postMapper;
+    @Autowired
+    private MyPageMapper myPageMapper;
 
     @Override
     public List<PostDTO> getPostList(PostDTO params) {
-
         List<PostDTO> postList = Collections.emptyList();
         int postTotalCount = postMapper.selectPostTotalCount(params);
-
         PaginationInfo paginationInfo = new PaginationInfo(params);
         paginationInfo.setTotalRecordCount(postTotalCount);
 
@@ -120,5 +121,71 @@ public class PostServiceImpl implements PostService  {
             }
         }
         return basketPostListOffsetApplied;
+    }
+
+    @Override
+    public List<PostDTO> getDibsPostList(PostDTO params, HttpSession session) {
+        params.setUserLoginId(session.getAttribute("loginUser").toString());
+        List<PostDTO> postDibsList = Collections.emptyList();
+        int postDibsTotalCount = myPageMapper.SelectDibsPostCount(params);
+
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(postDibsTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+        if (postDibsTotalCount > 0) {
+            postDibsList = myPageMapper.SelectDibsPost(params);
+        }
+        for(int i = 0; i < postDibsList.size(); i++) {
+            if(postDibsList.get(i).getImg_url_main() == null) {
+                String a = "img/null.gif";
+                postDibsList.get(i).setImg_url_main(a);
+            }
+        }
+        return postDibsList;
+    }
+
+    @Override
+    public List<PostDTO> getLikePostList(PostDTO params, HttpSession session) {
+        params.setUserLoginId(session.getAttribute("loginUser").toString());
+        List<PostDTO> postLikeList = Collections.emptyList();
+        int postLikeTotalCount = myPageMapper.SelectLikePostCount(params);
+
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(postLikeTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+        if (postLikeTotalCount > 0) {
+            postLikeList = myPageMapper.SelectLikePost(params);
+        }
+        for(int i = 0; i < postLikeList.size(); i++) {
+            if(postLikeList.get(i).getImg_url_main() == null) {
+                String a = "img/null.gif";
+                postLikeList.get(i).setImg_url_main(a);
+            }
+        }
+        return postLikeList;
+    }
+
+    @Override
+    public List<PostDTO> getUploadPostList(PostDTO params, HttpSession session) {
+        params.setUserLoginId(session.getAttribute("loginUser").toString());
+        List<PostDTO> postUploadList = Collections.emptyList();
+        int postUploadTotalCount = myPageMapper.SelectUploadPostCount(params);
+
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(postUploadTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+        if (postUploadTotalCount > 0) {
+            postUploadList = myPageMapper.SelectUploadPost(params);
+        }
+        for(int i = 0; i < postUploadList.size(); i++) {
+            if(postUploadList.get(i).getImg_url_main() == null) {
+                String a = "img/null.gif";
+                postUploadList.get(i).setImg_url_main(a);
+            }
+        }
+        return postUploadList;
     }
 }

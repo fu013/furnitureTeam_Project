@@ -13,10 +13,11 @@ import our.example.furniture.dto.PostDTO;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 
@@ -30,37 +31,144 @@ public class MyPageController {
     private MyPageMapper myPageMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
-    // CurrentView URL 매핑
+    // myPage_CurrentView(최근 본 페이지) url 요청 처리
     @GetMapping("myPage_CurrentView")
-    public String CurrentView(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpServletRequest request, Model model) {
-        List<PostDTO> viewPostList = postService.getViewPostList(params, response, request);
-        model.addAttribute("viewPostList", viewPostList);
+    public String myPage_CurrentView(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> viewPostList = postService.getViewPostList(params, response, request);
+            model.addAttribute("viewPostList", viewPostList);
+        }
         return "myPage_CurrentView";
     }
     
-    // Dibs URL 매핑
+    // myPage_Dibs(찜 목록) 요청 처리
     @GetMapping("myPage_Dibs")
-    public String dibs(@ModelAttribute("params") PostDTO params, Model model) {
-        List<PostDTO> selectPostList = postService.getPostList(params);
-        model.addAttribute("selectPostList", selectPostList);
+    public String myPage_Dibs(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> selectDibsPostList = postService.getDibsPostList(params, session);
+            model.addAttribute("selectDibsPostList", selectDibsPostList);
+        }
         return "myPage_Dibs";
     }
+    // myPage_Like(좋아요한 페이지) url 요청 처리
+    @GetMapping("myPage_Like")
+    public String like(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> selectLikePostList = postService.getLikePostList(params, session);
+            model.addAttribute("selectLikePostList", selectLikePostList);
+        }
+        return "myPage_Like";
+    }
 
-    // 찜목록 요청값 DB에 저장
+    // myPage_UploadPost(업로드한 게시물) url 요청 처리
+    @GetMapping("myPage_UploadPost")
+    public String myPage_UploadPost(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        } else {
+            List<PostDTO> selectUploadPostList = postService.getUploadPostList(params, session);
+            model.addAttribute("selectUploadPostList", selectUploadPostList);
+        }
+        return "myPage_UploadPost";
+    }
+    // myPage_UserInfoFix(회원정보수정) url 요청 처리
+    @GetMapping("myPage_UserInfoFix")
+    public String myPage_UserInfoFix(HttpSession session, HttpServletResponse response) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        }
+        return "myPage_UserInfoFix";
+    }
+    // myPage_UserWithdrawal(회원탈퇴) url 요청 처리
+    @GetMapping("myPage_UserWithdrawal")
+    public String myPage_UserWithdrawal(HttpSession session, HttpServletResponse response) throws IOException {
+        if(session.getAttribute("loginUser") == null) {
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('로그인이 필요한 서비스입니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        }
+        return "myPage_UserWithdrawal";
+    }
+
+    // 찜 목록 버튼 클릭시, 아이콘 색깔에 따른 요청 처리
     @ResponseBody
     @PostMapping("/dibsSuccess")
     public String dibsSuccess(PostDTO params, HttpSession session) {
-        int checkDibs = myPageMapper.CheckDibs(params);
         String result = "";
         if(session.getAttribute("loginUser") == null) {
             result = "로그인이 필요한 서비스입니다.";
         } else {
+            params.setUserLoginId(session.getAttribute("loginUser").toString());
+            int checkDibs = myPageMapper.CheckDibs(params);
             if(checkDibs == 0) {
-                params.setUserLoginId(session.getAttribute("loginUser").toString());
                 myPageMapper.InsertDibs(params);
                 result = "찜 목록에 추가되었습니다.";
             } else {
-                result = "이미 찜목록에 추가된 상품입니다.";
+                myPageMapper.DeleteDibs(params);
+                result = "찜 목록에서 삭제되었습니다.";
+            }
+        }
+        return result;
+    }
+
+    // 좋아요 버튼 클릭시, 아이콘 색깔에 따른 요청 처리
+    @ResponseBody
+    @PostMapping("/like")
+    public String Like(PostDTO params, HttpSession session, Model model) {
+        String result = "";
+        if(session.getAttribute("loginUser") == null) {
+            result = "로그인이 필요한 서비스입니다.";
+        } else {
+            params.setUserLoginId(session.getAttribute("loginUser").toString());
+            int checkLike = myPageMapper.CheckLike(params);
+            if(checkLike == 0) {
+                myPageMapper.InsertLike(params);
+                myPageMapper.UpdateLike(params);
+                result = "좋아요가 등록되었습니다.";
+            } else {
+                myPageMapper.DeleteLike(params);
+                myPageMapper.UpdateLike(params);
+                result = "좋아요에서 삭제되었습니다.";
             }
         }
         return result;

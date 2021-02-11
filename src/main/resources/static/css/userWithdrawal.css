@@ -1,0 +1,11 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Karla|Open+Sans:300,400,700&display=swap');
+html { font-size: 20px; }
+body { font-size: 1rem; margin: 0; padding: 0; background: #fff; font-weight: normal; font-family: 'Open Sans'; }
+li { list-style: none; }
+a { text-decoration: none; }
+
+.content .withdrawal { font-size: 0.7rem; color: #888; }
+.content .withdrawal_reason { height: 160px; width: 100%; margin-top: 20px; padding: 20px; font-size: 0.7rem; }
+.content button { margin-top: 30px; width: 130px; height: 45px; line-height: 45px; }
+.content .user_withdrawal_button { background: #fff; color: black; }

@@ -8,6 +8,7 @@
     <title>Furniture</title>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" th:href="@{/css/myPage.css}"/>
+    <link rel="stylesheet" th:href="@{/css/userInfoFix.css}"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
@@ -46,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-            <div th:replace="/MyPageFragments/CurrentView.html :: MyPage-CurrentView"></div>
+            <div th:replace="/MyPageFragments/UserInfoFix.html :: MyPage-UserInfoFix"></div>
         </section>
         <aside>
             <h1>광고</h1>
@@ -57,4 +58,5 @@
 </div>
 <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
 </body>
+<script th:src="@{/js/userInfoFix.js}"></script>
 </html>
