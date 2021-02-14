@@ -15,7 +15,7 @@
 <body>
 <div th:replace="/fragments/header.html :: fragment-header"></div>
 <div class="userRegisterWrapper">
-	<h2 style="text-align: center; letter-spacing: 5px;">회원가입</h2>
+	<h2 style="letter-spacing: 5px;">회원가입</h2>
 	<div class = "container">
 		<form id = "userRegisterForm" method = "post">
 			<table style="margin: 0 auto;">
@@ -64,8 +64,9 @@
 
 				<tr> <!-- 이메일 -->
 					<th><label for = "userRegisterEmail">이메일</label></th>
-					<td><input type = "text" id = "userRegisterEmail" name = "userRegisterEmail" placeholder="이메일을 입력하세요"></td>
-
+					<td><input type = "text" id = "userRegisterEmail" name = "userRegisterEmail" placeholder="이메일을 입력하세요">
+						<button id="emailOverlap" type="button">중복확인</button>
+					</td>
 				</tr>
 
 				<tr> <!-- 전화번호 -->

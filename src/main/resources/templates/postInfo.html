@@ -53,10 +53,10 @@
                     </button>
                 </li>
                 <li class="dibs_li">
-                    <button class="dibs_button" th:if="${postInfo.isDibYn() == false}">
+                    <button class="dibs_button" th:if="${postInfo.isDibYn() == false}" style="cursor: pointer;">
                         <i class="xi-gift-o" style="font-size: 2rem; color: black;" id="dibsIcon"></i><p style="margin-top: 8px;"></p>
                     </button>
-                    <button class="dibs_button" th:if="${postInfo.isDibYn() == true}">
+                    <button class="dibs_button" th:if="${postInfo.isDibYn() == true}" style="cursor: pointer;">
                         <i class="xi-gift" style="font-size: 2rem; color: black;" id="dibsIcon"></i><p style="margin-top: 8px;"></p>
                     </button>
                 </li>
@@ -122,7 +122,7 @@
             </div>
         </div>
     </div>
-    <th:block layout:frament="paging">
+    <th:block layout:fragment="paging">
         <nav th:replace="/fragments/pagination.html :: pagination"></nav>
     </th:block>
     <!-- 버튼클릭시 상태에 맞는 현재페이지 쿼리스트링 값 변경 -->

@@ -15,6 +15,17 @@ public class UserRegisterDto {
     private String loginPassword;
     private String idOverlapCheck;
     private String emailOverlapCheck;
+    private String findUserIdName;
+    private String findUserIdEmail;
+    private String findUserIdPhone1;
+    private String findUserIdPhone2;
+    private String findUserIdPhone3;
+    private String findUserPasswordId;
+    private String findUserPasswordName;
+    private String findUserPasswordEmail;
+    private String findUserPasswordPhone1;
+    private String findUserPasswordPhone2;
+    private String findUserPasswordPhone3;
 
     public String getUserRegisterId() {
         return userRegisterId;
@@ -126,5 +137,93 @@ public class UserRegisterDto {
 
     public void setEmailOverlapCheck(String emailOverlapCheck) {
         this.emailOverlapCheck = emailOverlapCheck;
+    }
+
+    public String getFindUserIdName() {
+        return findUserIdName;
+    }
+
+    public void setFindUserIdName(String findUserIdName) {
+        this.findUserIdName = findUserIdName;
+    }
+
+    public String getFindUserIdEmail() {
+        return findUserIdEmail;
+    }
+
+    public void setFindUserIdEmail(String findUserIdEmail) {
+        this.findUserIdEmail = findUserIdEmail;
+    }
+
+    public String getFindUserIdPhone1() {
+        return findUserIdPhone1;
+    }
+
+    public void setFindUserIdPhone1(String findUserIdPhone1) {
+        this.findUserIdPhone1 = findUserIdPhone1;
+    }
+
+    public String getFindUserIdPhone2() {
+        return findUserIdPhone2;
+    }
+
+    public void setFindUserIdPhone2(String findUserIdPhone2) {
+        this.findUserIdPhone2 = findUserIdPhone2;
+    }
+
+    public String getFindUserIdPhone3() {
+        return findUserIdPhone3;
+    }
+
+    public void setFindUserIdPhone3(String findUserIdPhone3) {
+        this.findUserIdPhone3 = findUserIdPhone3;
+    }
+
+    public String getFindUserPasswordId() {
+        return findUserPasswordId;
+    }
+
+    public void setFindUserPasswordId(String findUserPasswordId) {
+        this.findUserPasswordId = findUserPasswordId;
+    }
+
+    public String getFindUserPasswordName() {
+        return findUserPasswordName;
+    }
+
+    public void setFindUserPasswordName(String findUserPasswordName) {
+        this.findUserPasswordName = findUserPasswordName;
+    }
+
+    public String getFindUserPasswordEmail() {
+        return findUserPasswordEmail;
+    }
+
+    public void setFindUserPasswordEmail(String findUserPasswordEmail) {
+        this.findUserPasswordEmail = findUserPasswordEmail;
+    }
+
+    public String getFindUserPasswordPhone1() {
+        return findUserPasswordPhone1;
+    }
+
+    public void setFindUserPasswordPhone1(String findUserPasswordPhone1) {
+        this.findUserPasswordPhone1 = findUserPasswordPhone1;
+    }
+
+    public String getFindUserPasswordPhone2() {
+        return findUserPasswordPhone2;
+    }
+
+    public void setFindUserPasswordPhone2(String findUserPasswordPhone2) {
+        this.findUserPasswordPhone2 = findUserPasswordPhone2;
+    }
+
+    public String getFindUserPasswordPhone3() {
+        return findUserPasswordPhone3;
+    }
+
+    public void setFindUserPasswordPhone3(String findUserPasswordPhone3) {
+        this.findUserPasswordPhone3 = findUserPasswordPhone3;
     }
 }

@@ -8,12 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import org.springframework.web.servlet.ModelAndView;
 import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.LoginMapper;
 
-import javax.script.ScriptContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -55,5 +52,31 @@ public class LoginController {
         out.println("location.href='/';");
         out.println("</script>");
         out.close();
+    }
+
+    // 아이디 찾기
+    @ResponseBody
+    @PostMapping("/findUserId")
+    public String findUserId(UserRegisterDto userRegisterDto) {
+        String result = loginMapper.findId(userRegisterDto);
+        if(result == null) {
+            result = "일치하는 정보가 없습니다.";
+        } else {
+            result = "회원님의 아이디는 " + loginMapper.findId(userRegisterDto) + " 입니다.";
+        }
+        return result;
+    }
+
+    // 비밀번호 찾기
+    @ResponseBody
+    @PostMapping("/findUserPassword")
+    public String findUserPassword(UserRegisterDto userRegisterDto) {
+        String result = loginMapper.findPassword(userRegisterDto);
+        if(result == null) {
+            result = "일치하는 정보가 없습니다.";
+        } else {
+            result = "회원님의 비밀번호는 " + loginMapper.findPassword(userRegisterDto) + " 입니다.";
+        }
+        return result;
     }
 }

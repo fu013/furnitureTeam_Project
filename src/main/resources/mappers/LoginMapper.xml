@@ -9,4 +9,20 @@
         SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
         AND userRegisterPassword = #{userRegisterPassword}
     </select>
+    <select id="findId" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
+        SELECT userRegisterId FROM userRegisterTable WHERE userRegisterName = #{userRegisterName}
+        AND userRegisterEmail = #{userRegisterEmail}
+        AND userRegisterPhone1 = #{userRegisterPhone1}
+        AND userRegisterPhone2 = #{userRegisterPhone2}
+        AND userRegisterPhone3 = #{userRegisterPhone3}
+    </select>
+
+    <select id="findPassword" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
+        SELECT userRegisterPassword FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
+        AND userRegisterName = #{userRegisterName}
+        AND userRegisterEmail = #{userRegisterEmail}
+        AND userRegisterPhone1 = #{userRegisterPhone1}
+        AND userRegisterPhone2 = #{userRegisterPhone2}
+        AND userRegisterPhone3 = #{userRegisterPhone3}
+    </select>
 </mapper>

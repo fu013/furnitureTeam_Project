@@ -6,7 +6,7 @@ li { list-style : none; }
 a { text-decoration : none; }
 
 .loginWrapper { margin : 140px auto; width : 350px; }
-.loginWrapper h2 { font-weight : 300; text-align: center; }
+.loginWrapper h2 { border-bottom: 1px solid black; padding-bottom: 30px; font-weight: 300; }
 .loginWrapper p { font-size : 10px; text-align : center; }
 .loginWrapper p:last-child { margin-top : 1rem; }
 

@@ -1,15 +1,13 @@
 package our.example.furniture.controller;
-import org.apache.catalina.Session;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.UserRegisterMapper;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -76,4 +74,6 @@ public class UserRegisterController {
         userRegisterMapper.userInfoDelete(userRegisterDto);
         return "회원탈퇴가 완료되었습니다.";
     }
+
+
 }

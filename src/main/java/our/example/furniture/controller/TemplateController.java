@@ -46,7 +46,14 @@ public class TemplateController {
 
     // register[회원가입] :: Template Mapping
     @GetMapping("/userRegister")
-    public String register(Model model) {
-        return "userRegister";
-    }
+    public String register(Model model) { return "userRegister"; }
+
+    // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
+    @GetMapping("/findUserId")
+    public String findUserId(Model model) { return "findUserId"; }
+    @GetMapping("/findUserPassword")
+    public String findUserPassword(Model model) { return "findUserPassword"; }
+    @GetMapping("/modifyUserPassword")
+    public String modifyUserPassword(Model model) { return "modifyUserPassword"; }
+
 }
