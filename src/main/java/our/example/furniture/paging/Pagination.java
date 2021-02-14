@@ -45,11 +45,11 @@ public class Pagination {
     }
 
     // 스프링에서 제공해주는 UriComponents 클래스를 사용하면 URI 를 더욱 효율적으로 처리할 수 있다. <쿼리스트링 생성>
-    public String makeQueryString(int pageNo, String searchType, String cat1, String cat2, String cat3, int minPrice, int maxPrice) {
+    public String makeQueryString(int currentPageNo, String searchType, String cat1, String cat2, String cat3, int minPrice, int maxPrice) {
         UriComponents uriComponents;
         if (!Is_Post_no) {
             uriComponents = UriComponentsBuilder.newInstance()
-                    .queryParam("currentPageNo", pageNo)
+                    .queryParam("currentPageNo", currentPageNo)
                     .queryParam("recordsPerPage", recordsPerPage)
                     .queryParam("pageSize", pageSize)
                     .queryParam("searchType", searchType)
@@ -63,7 +63,7 @@ public class Pagination {
         } else {
             uriComponents = UriComponentsBuilder.newInstance()
                     .queryParam("post_no", post_no)
-                    .queryParam("currentPageNo", pageNo)
+                    .queryParam("currentPageNo", currentPageNo)
                     .queryParam("recordsPerPage", recordsPerPage)
                     .queryParam("pageSize", pageSize)
                     .build()

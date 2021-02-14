@@ -62,7 +62,6 @@ public class PostController {
     // 상품 상세페이지 URL 요청처리 (상품 및 댓글 조회)
     @GetMapping("/postInfo")
     public String postInfo(@RequestParam("post_no") int post_no, PostDTO postDTO, ReviewDTO params, HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model) {
-
         // 기본 상품 DTO 값 세팅
         postDTO.setProduct_no(post_no);
         params.setProduct_no(post_no);

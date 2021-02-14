@@ -40,6 +40,38 @@ public class PostServiceImpl implements PostService  {
     }
 
     @Override
+    public List<PostDTO> getCategoryPostList(PostDTO params) {
+        List<PostDTO> postList = Collections.emptyList();
+        int postTotalCount = postMapper.selectCategoryPostTotalCount(params);
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(postTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+
+        if (postTotalCount > 0) {
+            postList = postMapper.selectCategoryPostList(params);
+        }
+
+        return postList;
+    }
+
+    @Override
+    public List<PostDTO> getPricePostList(PostDTO params) {
+        List<PostDTO> postList = Collections.emptyList();
+        int postTotalCount = postMapper.selectPricePostTotalCount(params);
+        PaginationInfo paginationInfo = new PaginationInfo(params);
+        paginationInfo.setTotalRecordCount(postTotalCount);
+
+        params.setPaginationInfo(paginationInfo);
+
+        if (postTotalCount > 0) {
+            postList = postMapper.selectPricePostList(params);
+        }
+
+        return postList;
+    }
+
+    @Override
     public List<PostDTO> getViewPostList(PostDTO params, HttpServletResponse response, HttpServletRequest request) {
 
         List<Integer> cookiePostList = new ArrayList<Integer>();

@@ -24,7 +24,11 @@ public interface PostMapper {
 
     // 게시물 조회 및 Pagination Method
     List<PostDTO> selectPostList(PostDTO params);
+    List<PostDTO> selectCategoryPostList(PostDTO params);
+    List<PostDTO> selectPricePostList(PostDTO params);
     int selectPostTotalCount(PostDTO params);
+    int selectCategoryPostTotalCount(PostDTO params);
+    int selectPricePostTotalCount(PostDTO params);
 
     // 댓글 등록 & 조회
     void WriteComment(ReviewDTO params);

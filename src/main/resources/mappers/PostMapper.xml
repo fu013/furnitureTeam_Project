@@ -62,11 +62,44 @@
         ORDER BY ${searchType} DESC
         OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
     </select>
+    <select id="selectCategoryPostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        <include refid="select_indexViewPost"/>
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3}
+        ORDER BY ${searchType} DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
+    <select id="selectPricePostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        <include refid="select_indexViewPost"/>
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3} AND Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
+        ORDER BY ${searchType} DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
     <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
         SELECT
         COUNT(*)
         FROM
         Product
+    </select>
+    <select id="selectCategoryPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        Product
+        WHERE Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3}
+    </select>
+    <select id="selectPricePostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        Product
+        WHERE
+        Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3} AND Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
     </select>
     <select id="ViewComment" parameterType="our.example.furniture.dto.ReviewDTO" resultType="our.example.furniture.dto.ReviewDTO">
         SELECT

@@ -36,8 +36,15 @@ public class TemplateController {
         if (searchType == null) {
             params.setSearchType("product_no");
         }
-        log.info(params.getMinPrice());
+        // 겟 카테고리 파라미터가 존재한다면
         List<PostDTO> postList = postService.getPostList(params);
+        if(cat1 != null && cat1 != "" && cat2 != "" && cat2 != null && cat3 != "" && cat3 != null) {
+            postList = postService.getCategoryPostList(params);
+        }
+        // 겟 가격 파라미터가 존재한다면
+        if(minPrice != null && minPrice >= 0 && maxPrice != null && maxPrice > 0) {
+            postList = postService.getPricePostList(params);
+        }
         model.addAttribute("postList", postList);
         for(int i = 0; i < postList.size(); i++) {
             if(postList.get(i).getImg_url_main() == null) {
