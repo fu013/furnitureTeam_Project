@@ -37,14 +37,48 @@
     <update id="UpdateProductView" parameterType="our.example.furniture.dto.PostDTO">
         UPDATE Product SET productView = #{productView} + 1 WHERE Product_no = #{product_no}
     </update>
-
     <!-- 데이터베이스 상품관련 데이터 SELECT QUERY -->
+    <select id="selectPostList" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        <include refid="select_indexViewPost"/>
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE 1 = 1
+        <!--
+            마이바티스는 해당 문서가 XML 이기 때문에 SAX Parser 가 동작하면서 "<" 같은 부등호 기호를 XML Parsing 대상으로 인식하기 떄문에
+            xml 대체 표현식으로 넣어줘야한다.
+         -->
+        <if test="minPrice gt 0 and maxPrice gt 0">
+            and Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
+        </if>
+        <if test="minPrice gt 0 and maxPrice == 0">
+            and Product.productPrice &gt; #{minPrice}
+        </if>
+        <if test="maxPrice gt 0 and minPrice == 0">
+            and Product.productPrice &lt; #{maxPrice}
+        </if>
+        <if test="searchN != null and searchN != ''">
+            and Product.productName LIKE #{searchN}
+        </if>
+        <if test="cat1 != null and cat1 != ''">
+            and Product.productCategoryNumberOfHouseholds = #{cat1}
+        </if>
+        <if test="cat2 != null and cat2 != ''">
+            and Product.productCategoryHomeScale = #{cat2}
+        </if>
+        <if test="cat3 != null and cat3 != ''">
+            and Product.productCategoryInterior = #{cat3}
+        </if>
+        ORDER BY ${searchType} DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
     <select id="SelectPostImages" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
         SELECT
         img_url_inner
         FROM
         Product_InnerImages WHERE Product_No = #{product_no}
     </select>
+    <!-- 데이터베이스 Pagination 관련 데이터 QUERY -->
     <select id="SelectPost" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
         SELECT
         Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
@@ -53,53 +87,33 @@
         Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
         WHERE Product.Product_No = #{product_no}
     </select>
-    <!-- 데이터베이스 Pagination 관련 데이터 QUERY -->
-    <select id="selectPostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
-        SELECT
-        <include refid="select_indexViewPost"/>
-        FROM
-        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
-        ORDER BY ${searchType} DESC
-        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
-    </select>
-    <select id="selectCategoryPostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
-        SELECT
-        <include refid="select_indexViewPost"/>
-        FROM
-        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
-        WHERE Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3}
-        ORDER BY ${searchType} DESC
-        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
-    </select>
-    <select id="selectPricePostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
-        SELECT
-        <include refid="select_indexViewPost"/>
-        FROM
-        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
-        WHERE Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3} AND Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
-        ORDER BY ${searchType} DESC
-        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
-    </select>
     <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
         SELECT
         COUNT(*)
         FROM
         Product
-    </select>
-    <select id="selectCategoryPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
-        SELECT
-        COUNT(*)
-        FROM
-        Product
-        WHERE Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3}
-    </select>
-    <select id="selectPricePostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
-        SELECT
-        COUNT(*)
-        FROM
-        Product
-        WHERE
-        Product.productCategoryNumberOfHouseholds = #{cat1} AND productCategoryHomeScale = #{cat2} AND productCategoryInterior = #{cat3} AND Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
+        WHERE 1 = 1
+        <if test="minPrice gt 0 and maxPrice gt 0">
+            and Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
+        </if>
+        <if test="minPrice gt 0 and maxPrice == 0">
+            and Product.productPrice &gt; #{minPrice}
+        </if>
+        <if test="maxPrice gt 0 and minPrice == 0">
+            and Product.productPrice &lt; #{maxPrice}
+        </if>
+        <if test="searchN != null and searchN != ''">
+            and Product.productName LIKE #{searchN}
+        </if>
+        <if test="cat1 != null and cat1 != ''">
+            and Product.productCategoryNumberOfHouseholds = #{cat1}
+        </if>
+        <if test="cat2 != null and cat2 != ''">
+            and Product.productCategoryHomeScale = #{cat2}
+        </if>
+        <if test="cat3 != null and cat3 != ''">
+            and Product.productCategoryInterior = #{cat3}
+        </if>
     </select>
     <select id="ViewComment" parameterType="our.example.furniture.dto.ReviewDTO" resultType="our.example.furniture.dto.ReviewDTO">
         SELECT
@@ -125,7 +139,6 @@
         WHERE Product.Product_No = #{product_no}
         ORDER BY Product.Product_no DESC
     </select>
-
     <!-- 데이터베이스 댓글 삭제 & 수정 QUERY -->
     <update id="UpdateComment" parameterType="our.example.furniture.dto.ReviewFixDeleteDTO">
         UPDATE

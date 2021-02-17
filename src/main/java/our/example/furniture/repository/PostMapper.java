@@ -1,10 +1,12 @@
 package our.example.furniture.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import our.example.furniture.dto.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 // 상품 게시물관련 Mapper
 @Mapper
@@ -24,11 +26,7 @@ public interface PostMapper {
 
     // 게시물 조회 및 Pagination Method
     List<PostDTO> selectPostList(PostDTO params);
-    List<PostDTO> selectCategoryPostList(PostDTO params);
-    List<PostDTO> selectPricePostList(PostDTO params);
     int selectPostTotalCount(PostDTO params);
-    int selectCategoryPostTotalCount(PostDTO params);
-    int selectPricePostTotalCount(PostDTO params);
 
     // 댓글 등록 & 조회
     void WriteComment(ReviewDTO params);

@@ -111,7 +111,6 @@ public class PostController {
                 postInfo.setDibYn(true);
             }
         }
-
         model.addAttribute("postInfo", postInfo);
         model.addAttribute("params", params);
         model.addAttribute("postImages", postImages);

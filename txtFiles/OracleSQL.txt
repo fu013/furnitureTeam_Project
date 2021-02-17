@@ -13,9 +13,9 @@ CREATE TABLE userRegisterTable(
 );
 CREATE TABLE Product(
 	product_no number(10) not null PRIMARY KEY,
-	productCategoryHomeScale varchar2(20)  not null,
-	productCategoryNumberOfHouseholds varchar2(20) not null,
-	productCategoryInterior varchar2(20) not null,
+	productCategoryHomeScale varchar2(20) null,
+	productCategoryNumberOfHouseholds varchar2(20) null,
+	productCategoryInterior varchar2(20) null,
 	productName varchar2(50) unique not null,
 	productPrice number(10) not null,
 	productGuideline varchar2(50) Null,

@@ -2,6 +2,11 @@ package our.example.furniture.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class PostDTO extends CommonDTO {
     private int product_no;
     private String userLoginId;
@@ -20,7 +25,7 @@ public class PostDTO extends CommonDTO {
     private String img_url_main;
     private int productView;
     private int likeNum;
-
+    private String searchN;
 
     // GETTER & SETTER
 
@@ -156,4 +161,11 @@ public class PostDTO extends CommonDTO {
 
     public void setLikeNum(int likeNum) { this.likeNum = likeNum; }
 
+    public String getSearchN() {
+        return searchN;
+    }
+
+    public void setSearchN(String searchN) {
+        this.searchN = searchN;
+    }
 }
