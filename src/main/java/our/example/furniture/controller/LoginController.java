@@ -70,13 +70,27 @@ public class LoginController {
     // 비밀번호 찾기
     @ResponseBody
     @PostMapping("/findUserPassword")
-    public String findUserPassword(UserRegisterDto userRegisterDto) {
+    public String findUserPassword(UserRegisterDto userRegisterDto, HttpSession session) {
         String result = loginMapper.findPassword(userRegisterDto);
         if(result == null) {
             result = "일치하는 정보가 없습니다.";
         } else {
-            result = "회원님의 비밀번호는 " + loginMapper.findPassword(userRegisterDto) + " 입니다.";
+            /*result = "회원님의 비밀번호는 " + loginMapper.findPassword(userRegisterDto) + " 입니다.";*/
+            session.setAttribute("tempUserId", userRegisterDto.getUserRegisterId());
+            session.setMaxInactiveInterval(60*60);
+            result = "회원님의 정보가 일치합니다.";
         }
+        return result;
+    }
+
+    // 비밀번호 수정
+    @ResponseBody
+    @PostMapping("/modifyUserPassword")
+    public String modifyPassword(UserRegisterDto userRegisterDto, HttpSession session) {
+        userRegisterDto.setUserRegisterId(session.getAttribute("tempUserId").toString());
+        String result = loginMapper.modifyPassword(userRegisterDto);
+        result = "회원님의 비밀번호가 변경되었습니다.";
+        session.invalidate();
         return result;
     }
 }

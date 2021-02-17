@@ -26,6 +26,8 @@ public class UserRegisterDto {
     private String findUserPasswordPhone1;
     private String findUserPasswordPhone2;
     private String findUserPasswordPhone3;
+    private String modifyPassword;
+    private String modifyRePassword;
 
     public String getUserRegisterId() {
         return userRegisterId;
@@ -225,5 +227,21 @@ public class UserRegisterDto {
 
     public void setFindUserPasswordPhone3(String findUserPasswordPhone3) {
         this.findUserPasswordPhone3 = findUserPasswordPhone3;
+    }
+
+    public String getModifyPassword() {
+        return modifyPassword;
+    }
+
+    public void setModifyPassword(String modifyPassword) {
+        this.modifyPassword = modifyPassword;
+    }
+
+    public String getModifyRePassword() {
+        return modifyRePassword;
+    }
+
+    public void setModifyRePassword(String modifyRePassword) {
+        this.modifyRePassword = modifyRePassword;
     }
 }

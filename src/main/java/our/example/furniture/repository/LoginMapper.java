@@ -11,5 +11,7 @@ public interface LoginMapper {
     String findId(UserRegisterDto userRegisterDto);
     // 비밀번호 찾기
     String findPassword(UserRegisterDto userRegisterDto);
+    // 비밀번호 수정
+    String modifyPassword(UserRegisterDto userRegisterDto);
 }
 

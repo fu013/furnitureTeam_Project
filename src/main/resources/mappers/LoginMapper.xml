@@ -25,4 +25,10 @@
         AND userRegisterPhone2 = #{userRegisterPhone2}
         AND userRegisterPhone3 = #{userRegisterPhone3}
     </select>
+
+    <select id="modifyPassword" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
+        UPDATE userRegisterTable
+        SET userRegisterPassword = #{userRegisterPassword}, userRegisterRePassword = #{userRegisterRePassword}
+        WHERE userRegisterId = #{userRegisterId}
+    </select>
 </mapper>
