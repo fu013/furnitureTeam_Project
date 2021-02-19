@@ -13,16 +13,52 @@ window.onload = function() {
               const idOverlap_data_json = {
                  "idOverlapCheck" : idVal
               };
-              $.ajax({
-                 type : "post",
-                 data : idOverlap_data_json,
-                 url : '/idOverlapCheck',
-                 dataType : "text",
-                 success : function(data) {
-                    alert(data);
-                 }
-              });
+              if (idVal == "") {
+                alert("아이디를 입력해주세요");
+                e.preventDefault;
+                return false;
+              } else if (idPwJ.test(idVal) == false) {
+    			alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다");
+    			e.preventDefault;
+    			return false;
+              } else {
+                $.ajax({
+                     type : "post",
+                     data : idOverlap_data_json,
+                     url : '/idOverlapCheck',
+                     dataType : "text",
+                     success : function(data) {
+                       alert(data);
+                     }
+                });
+              }
            });
+
+     $("#emailOverlap").on('click', function(e){
+            const emailVal = $("#userRegisterEmail").val();
+            const emailOverlap_data_json = {
+                "emailOverlapCheck" : emailVal
+            };
+            if (emailVal == "") {
+                alert("이메일을 입력해 주세요");
+                e.preventDefault;
+                return false;
+            } else if (emailJ.test(emailVal) == false) {
+                alert("이메일 양식에 맞게 입력해 주세요");
+                e.preventDefault;
+                return false;
+            } else {
+                $.ajax({
+                    type : "post",
+                    data : emailOverlap_data_json,
+                    url : '/emailOverlapCheck',
+                    dataType : "text",
+                    success : function(data) {
+                        alert(data);
+                    }
+                })
+            }
+     })
 
 	$("#userRegisterSuccess").on('click', function(e) {
 		var id = document.getElementById("userRegisterId");

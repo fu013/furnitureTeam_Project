@@ -1,31 +1,24 @@
 package our.example.furniture.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.ibatis.javassist.compiler.ast.Pair;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import our.example.furniture.dto.*;
-import our.example.furniture.repository.*;
-import our.example.furniture.service.PostService;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import our.example.furniture.dto.PostDTO;
+import our.example.furniture.repository.PostMapper;
+import our.example.furniture.service.PostService;
 
 @Controller
 public class TemplateController {
@@ -66,4 +59,12 @@ public class TemplateController {
     public String register(Model model) {
         return "userRegister";
     }
+    
+ // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
+    @GetMapping("/findUserId")
+    public String findUserId(Model model) { return "findUserId"; }
+    @GetMapping("/findUserPassword")
+    public String findUserPassword(Model model) { return "findUserPassword"; }
+    @GetMapping("/modifyUserPassword")
+    public String modifyUserPassword(Model model) { return "modifyUserPassword"; }
 }
