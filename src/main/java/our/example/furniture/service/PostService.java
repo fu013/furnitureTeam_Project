@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface PostService {
-    // 페이징이 적용된 게시물 리스트 가져오기
+    // 게시물 리스트 가져오기
     public List<PostDTO> getPostList(PostDTO params);
 
     // 페이징이 적용된 최근 24시간안에 조회했던 게시물 리스트 가져오기

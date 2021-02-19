@@ -83,13 +83,6 @@ public class UploadInnerImages {
             fos.write(data);
             fos.close();
         }
-
-        // imagesList 에 데이터가 잘들어왔는지 검사하는 로직
-        /*
-        for(int i = 0; i < imagesList.size(); i++){
-            log.info(imagesList.get(i));
-        }
-        */
         return imagesList;
     }
 }

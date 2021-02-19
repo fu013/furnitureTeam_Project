@@ -11,8 +11,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-    <header th:replace="/fragments/header.html :: fragment-header"></header>
-    <div th:replace="/fragments/body.html :: fragment-body"></div>
-    <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+<header th:replace="/fragments/header.html :: fragment-header"></header>
+<div th:replace="/fragments/body.html :: fragment-body"></div>
+<footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
 </body>
+<script th:src="@{/js/index.js}"></script>
 </html>

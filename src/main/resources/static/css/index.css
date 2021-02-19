@@ -67,30 +67,31 @@
         overflow: auto;
         flex: 0.25;
     }
-    .bodyWrapper > section > .category > h1 {
+    .bodyWrapper > section > .category h1 {
         font-size: 2rem;
         padding: 10px;
         text-align: center;
         margin: 0;
         border-bottom: 1px solid black;
     }
-    .bodyWrapper > section > .category > ul > li {
+    .bodyWrapper > section > .category ul > li {
         border-bottom: 1px solid black;
         padding: 20px;
         font-size: 15px;
         text-align: center;
     }
-    .bodyWrapper > section > .category > ul > li:nth-child(1),
-    .bodyWrapper > section > .category > ul > li:nth-child(2),
-    .bodyWrapper > section > .category > ul > li:nth-child(3) {
+    .bodyWrapper > section > .category ul > li:nth-child(1),
+    .bodyWrapper > section > .category ul > li:nth-child(2),
+    .bodyWrapper > section > .category ul > li:nth-child(3) {
         padding: 10px;
         text-align: left;
     }
-    .bodyWrapper > section > .category > ul > li .productCategoryPrice {
+    .bodyWrapper > section > .category ul > li .productCategoryPrice {
         width: 60%;
         margin-top: 10px;
+        text-align: center;
     }
-    .bodyWrapper > section > .category > ul > li #productCategoryPriceButton {
+    .bodyWrapper > section > .category ul > li #productCategoryPriceButton {
         background: black;
         box-sizing: border-box;
         font-size: 20px;
@@ -98,8 +99,9 @@
         padding: 5px;
         color: white;
     }
-    .bodyWrapper > section > .category > ul > li > select {
+    .bodyWrapper > section > .category ul > li > select {
         margin-left: 10px;
+        width: 80px;
     }
     .bodyWrapper > section > .view {
        border: 1px solid black;
@@ -125,9 +127,8 @@
         position: relative;
     }
     .bodyWrapper > section > .view > .filterBox > .searchBox > #searchBar {
-        width: 84%;
+        width: 78%;
         height: 26px;
-        /* line-height: 26px; */
         padding: 11px 20px 9px 58px;
         font-size: 22px;
         letter-spacing: 3px;
@@ -189,7 +190,6 @@
         width: 100%;
         height: 240px;
         display: inline-block;
-        border: 1px solid black;
     }
     .bodyWrapper > section > .view > .itemUl > .itemLi > a > .productUl {
         display: inline-block;
@@ -256,4 +256,10 @@
     }
     .page-item:not(:first-child) .page-link {
         margin-left: -1px;
+    }
+    .on {
+        border-bottom: 1px solid black;
+    }
+    .order {
+        margin-left: 10px;
     }

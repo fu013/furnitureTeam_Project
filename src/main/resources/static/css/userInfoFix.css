@@ -29,8 +29,6 @@ input::-webkit-input-placeholder{color:#373737; font-size:13px;}
  table.type1 tr:last-child th,
  table.type1 tr:last-child td { padding: 0 0 20px; }
 
- /*input[type="checkbox"] + label { font-size: 14px; color:#686; }
- input[type="checkbox"] + label:before {content: ""; display: inline-block; width: 20px; height: 20px; border: solid #ddd; margin: 0 10px 0 0; background: #f4f4f4;}*/
  .btn_cancel { background: #fff; width: 100px; height: 40px; line-height: 40px; color: black; text-align: center; display: inline-block; border-radius: 3px;}
  .btn_save { background: black; width: 100px; height: 40px; line-height: 40px; color: #fff; text-align: center; display: inline-block; border-radius: 3px;}
  .txt_center { text-align: center; padding: 1rem 0 0; }
@@ -41,8 +39,6 @@ input::-webkit-input-placeholder{color:#373737; font-size:13px;}
     width: 80px;
     background: #fff;
     height: 40px;
-    /* height: 60px; */
-    /* line-height: 60px; */
     right: -95px;
 }
 

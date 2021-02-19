@@ -7,11 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import our.example.furniture.dto.*;
-import our.example.furniture.repository.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import our.example.furniture.dto.PostDTO;
+import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -22,10 +26,15 @@ public class TemplateController {
     private PostMapper postMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
-    // index[홈페이지] :: Template Mapping
-    @GetMapping("/")
-    public String openPostList(@ModelAttribute("params") PostDTO params, Model model, HttpSession session) {
+    // index url 요청시 template/index.html 로 DOM 랜더링 및 전체 게시물 조회 리스트 뿌리기
+    @RequestMapping("/")
+    public String openPostList(@ModelAttribute("params") PostDTO params, Model model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        // 최신순, 가격순, 추천순, 조회순에 대한 파라미터를 받아서, 페이지네이션에도 searchType 을 정해주어 페이지 이동(페이징)을 해도 필터링이 풀리지않고 적용되도록한다.
+        if (params.getSearchType() == null) {
+            params.setSearchType("product_no");
+        }
         List<PostDTO> postList = postService.getPostList(params);
+
         model.addAttribute("postList", postList);
         for(int i = 0; i < postList.size(); i++) {
             if(postList.get(i).getImg_url_main() == null) {
@@ -36,17 +45,19 @@ public class TemplateController {
         return "index";
     }
 
-    // login[로그인] :: URL 매핑
+    // login url 요청시, template/login.html 로 DOM 랜더링
     @GetMapping("/login")
     public String login(Model model) { return "login"; }
 
-    // postWriter[글쓰기] :: Template Mapping
+    // postWriter url 요청시, template/login.html 로 DOM 랜더링
     @GetMapping("/postWriter")
     public String postWriter(Model model) { return "postWriter"; }
 
-    // register[회원가입] :: Template Mapping
+    // userRegister url 요청시, template/login.html 로 DOM 랜더링
     @GetMapping("/userRegister")
-    public String register(Model model) { return "userRegister"; }
+    public String register(Model model) {
+        return "userRegister";
+    }
 
     // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
     @GetMapping("/findUserId")

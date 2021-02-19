@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <div th:fragment="MyPage-UserWithdrawal" class="view">
-        <div class="titleBox">
-            <h1>회원탈퇴</h1>
-        </div>
-            <div class="content" style="width: 500px; margin: 0 auto; margin-bottom: 20px;">
-                <div class="withdrawal">
-                    <p>앞으로 더 나은 모습으로 고객님을 다시 만날 수 있도록 노력하겠습니다. 그동안 이용해주신 것을 진심으로 감사드립니다.</p>
-                    <textarea class="withdrawal_reason" placeholder="탈퇴사유"></textarea>
-                    <center>
-                        <button class="user_withdrawal_button" type="button">회원탈퇴</button>
-                        <input type="hidden" id="delete_user_id" th:value="${session['loginUser']}">
-                    </center>
-                </div>
-            </div>
+<div th:fragment="MyPage-UserWithdrawal" class="view">
+    <div class="titleBox">
+        <h1>회원탈퇴</h1>
+    </div>
+    <div class="content" style="width: 500px; margin: 0 auto; margin-bottom: 20px;">
+        <div class="withdrawal">
+            <p>앞으로 더 나은 모습으로 고객님을 다시 만날 수 있도록 노력하겠습니다. 그동안 이용해주신 것을 진심으로 감사드립니다.</p>
+            <textarea class="withdrawal_reason" placeholder="탈퇴사유"></textarea>
+            <center>
+                <button class="user_withdrawal_button" type="button">회원탈퇴</button>
+                <input type="hidden" id="delete_user_id" th:value="${session['loginUser']}">
+            </center>
         </div>
     </div>
+</div>
+</div>
 </html>

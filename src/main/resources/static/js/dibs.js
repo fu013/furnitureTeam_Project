@@ -1,5 +1,4 @@
 // 찜하기 등록
-
 $(document).ready(function () {
     const noVal = $("#review_productNo").val();
     	$(".dibs_button").click(function(e){
