@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>FurnitureTeam - sb, jb</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" th:href="@{css/core-style.css}">
+    <link rel="stylesheet" th:href="@{style.css}">
+    <style>
+        .single-product-wrapper .product-img img {
+            width: 100%;
+            height: 500px;
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+        }
+    </style>
+</head>
+<body>
+    <!-- Search Wrapper Area -->
+    <div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div th:replace="/fragments/mobileNav.html :: fragment-mobileNav"></div>
+
+        <!-- Header Area -->
+        <header th:replace="/fragments/header.html :: fragment-header"></header>
+
+        <!-- ##### Single Widget ##### -->
+        <div th:replace="/fragments/shopWidgets.html :: fragment-shopWidgets"></div>
+
+        <div class="amado_product_area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+                            <!-- Total Products -->
+                            <div class="total-products">
+                                <div class="view d-flex">
+                                    <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                            <!-- Sorting -->
+                            <div class="product-sorting d-flex">
+                                <div class="sort-by-date d-flex align-items-center mr-15">
+                                    <p>Sort by</p>
+                                    <form action="shop" method="get" id="searchTypeForm">
+                                        <input type="hidden" th:value="${params?.currentPageNo}" name="currentPageNo"/>
+                                        <input type="hidden" th:value="${params?.recordsPerPage}" name="recordsPerPage"/>
+                                        <input type="hidden" th:value="${params?.pageSize}" name="pageSize"/>
+                                        <input type="hidden" th:value="${params?.cat1}" name="cat1"/>
+                                        <input type="hidden" th:value="${params?.cat2}" name="cat2"/>
+                                        <input type="hidden" th:value="${params?.cat3}" name="cat3"/>
+                                        <select name="searchType" id="sortBydate">
+                                            <option th:selected="${params?.searchType eq 'product_no'}" value="product_no">최신순</option>
+                                            <option th:selected="${params?.searchType eq 'productPrice'}" value="productPrice">가격순</option>
+                                            <option th:selected="${params?.searchType eq 'likeNum'}" value="likeNum">추천순</option>
+                                            <option th:selected="${params?.searchType eq 'productView'}" value="productView">조회순</option>
+                                        </select>
+                                        <input type="hidden" th:value="${params?.minPrice}" name="minPrice"/>
+                                        <input type="hidden" th:value="${params?.maxPrice}" name="maxPrice"/>
+                                        <input type="hidden" th:value="${params?.searchN}" name="searchN"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Single Product Area -->
+                    <div class="col-12 col-sm-6 col-md-12 col-xl-6" th:each="postList : ${postList}">
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                <img th:src="${postList.getImg_url_main()}" alt="">
+                                <!-- Hover Thumb -->
+                                <img class="hover-img" src="img/product-img/product3.jpg" alt="">
+                            </div>
+
+                            <!-- Product Description -->
+                            <div class="product-description d-flex align-items-center justify-content-between">
+                                <!-- Product Meta Data -->
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <p class="product-price uiProductPrice" th:text="${postList.getProductPrice()}"></p>
+                                    <a th:href="'postInfo?post_no=' + ${postList.getProduct_no()}">
+                                        <h6 th:text="${postList.getProductName()}"></h6>
+                                        <p th:text=" '#' + ${postList.getProductCategoryNumberOfHouseholds()}+ ', ' + ${postList.getProductCategoryHomeScale()}+ ', ' + ${postList.getProductCategoryInterior()}">#tworoom, villa, Minimalistic</p>
+                                    </a>
+                                </div>
+                                <!-- Ratings & Cart -->
+                                <div class="ratings-cart text-right">
+                                    <a
+                                        href="#" class="color2" style="
+                                        width: 20px;
+                                        height: 20px;
+                                        display: inline-block;
+                                        border-radius: 50%;
+                                        background-color: #ffffff;
+                                        position: relative;
+                                        z-index: 1;
+                                        box-shadow: 0 0 3px rgb(0 0 0 / 15%);
+                                        background-color: #0315ff;
+                                        ">
+                                    </a>
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="cart">
+                                        <text style="position: relative; top: 3px;">
+                                            <span><i class="fa fa-eye" aria-hidden="true" style="color: #6b6b6b; font-size: 14px;"></i></span>
+                                            <span th:text="': ' + ${postList.getProductView()}"></span>
+                                            &nbsp;
+                                            <span><i class="fa fa-heart" aria-hidden="true" style="color: #6b6b6b; font-size: 14px;"></i></span>
+                                            <span th:text="': ' + ${postList.getLikeNum()}"></span>
+                                        </text>
+                                        &nbsp;
+                                        <a href="basket" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Pagination -->
+                        <th:block layout:fragment="paging">
+                            <nav th:replace="/fragments/pagination.html :: pagination"></nav>
+                        </th:block>
+                        <!-- 버튼클릭시 상태에 맞는 현재페이지 쿼리스트링 값 변경 -->
+                        <th:block layout:fragment="script">
+                            <script th:inline="javascript">
+                                /*<![CDATA[*/
+                                function movePage(uri, queryString) {
+                                    location.href = uri + queryString;
+                                }
+                                /*]]>*/
+                            </script>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### Footer Area ##### -->
+    <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+    <!-- Popper js -->
+    <script th:src="@{js/popper.min.js}"></script>
+    <!-- Bootstrap js -->
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- Plugins js -->
+    <script th:src="@{js/plugins.js}"></script>
+    <!-- Active js -->
+    <script th:src="@{js/active.js}"></script>
+    <!-- Index js -->
+    <script th:src="@{/js/index.js}"></script>
+</body>
+</html>

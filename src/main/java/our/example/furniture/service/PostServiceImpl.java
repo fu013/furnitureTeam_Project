@@ -3,7 +3,7 @@ package our.example.furniture.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import our.example.furniture.dto.PostDTO;
-import our.example.furniture.paging.PaginationInfo;
+import our.example.furniture.page.PaginationInfo;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 

@@ -16,9 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +40,8 @@ public class PostController {
     // 상품 게시글 작성 POST 요청 처리
     @PostMapping("/productRegister")
     public String productRegister(PostDTO postDTO, HttpSession session) throws Exception {
-        String userLoginId = session.getAttribute("loginUser").toString();
+        /*String userLoginId = session.getAttribute("loginUser").toString();*/
+        String userLoginId = "poow013";
         postDTO.setUserLoginId(userLoginId);
         postMapper.insertProductInfo(postDTO);
         // 메인 이미지에 요청값이 있는지 검사하고, 있을 경우에만 Mapper SQL 실행
@@ -95,7 +94,7 @@ public class PostController {
         }
         List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
 
-        /* 장바구니 여부, 좋아요 여부, 찜목록 여부 */
+        /* 장바구니 여부, 좋아요 여부, 찜목록 여부 *//*
         String basketSessionId = Integer.toString(postInfo.getProduct_no());
         if (session.getAttribute(basketSessionId) != null) {
             postInfo.setBasketYn(true);
@@ -110,7 +109,7 @@ public class PostController {
             if(checkDib > 0) {
                 postInfo.setDibYn(true);
             }
-        }
+        }*/
         model.addAttribute("postInfo", postInfo);
         model.addAttribute("params", params);
         model.addAttribute("postImages", postImages);

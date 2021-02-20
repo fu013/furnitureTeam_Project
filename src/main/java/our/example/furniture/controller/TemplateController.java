@@ -1,12 +1,5 @@
 package our.example.furniture.controller;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import our.example.furniture.dto.PostDTO;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.service.PostService;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class TemplateController {
@@ -28,13 +23,14 @@ public class TemplateController {
     private PostMapper postMapper;
     private Log log = LogFactory.getLog(this.getClass());
 
-    // index url 요청시 template/index.html 로 DOM 랜더링 및 전체 게시물 조회 리스트 뿌리기
-    @RequestMapping("/")
-    public String openPostList(@ModelAttribute("params") PostDTO params, Model model, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    // shop url 요청시 template/index.html 로 DOM 랜더링 및 전체 게시물 조회 리스트 뿌리기
+    @GetMapping("/shop")
+    public String openPostList(@ModelAttribute("params") PostDTO params, Model model) throws IOException {
         // 최신순, 가격순, 추천순, 조회순에 대한 파라미터를 받아서, 페이지네이션에도 searchType 을 정해주어 페이지 이동(페이징)을 해도 필터링이 풀리지않고 적용되도록한다.
         if (params.getSearchType() == null) {
             params.setSearchType("product_no");
         }
+        params.setRecordsPerPage(6);
         List<PostDTO> postList = postService.getPostList(params);
 
         model.addAttribute("postList", postList);
@@ -44,6 +40,12 @@ public class TemplateController {
                 postList.get(i).setImg_url_main(a);
             }
         }
+        return "shop";
+    }
+
+    // "/" url 요청시, template/index.html 로 DOM 랜더링
+    @RequestMapping("/")
+    public String index(Model model) {
         return "index";
     }
     // login url 요청시, template/login.html 로 DOM 랜더링
@@ -60,11 +62,11 @@ public class TemplateController {
         return "userRegister";
     }
     
- // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
+/* // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
     @GetMapping("/findUserId")
     public String findUserId(Model model) { return "findUserId"; }
     @GetMapping("/findUserPassword")
     public String findUserPassword(Model model) { return "findUserPassword"; }
     @GetMapping("/modifyUserPassword")
-    public String modifyUserPassword(Model model) { return "modifyUserPassword"; }
+    public String modifyUserPassword(Model model) { return "modifyUserPassword"; }*/
 }

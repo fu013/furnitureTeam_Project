@@ -11,7 +11,7 @@ window.onload = function(){
             contentType: false,
             cache: false,
             success: function (result) {
-                location.href="/";
+                location.href="/shop";
             },
             error: function (e) {
            }

@@ -1,141 +1,296 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="ko">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="viewport" content="width=device=width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Furniture</title>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/postInfo.css}"/>
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script th:src="@{/js/postInfo.js}"></script>
-    <script th:src="@{/js/review.js}"></script>
-    <script th:src="@{/js/dibs.js}"></script>
-    <script th:src="@{/js/like.js}"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>FurnitureTeam - sb, jb</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" th:href="@{css/core-style.css}">
 </head>
 <body>
-<header th:replace="/fragments/header.html :: fragment-header"></header>
-<div th:replace="/fragments/hiddenVal.html :: fragment-hiddenVal"></div>
-    <section>
-        <div class="info_wrapper">
-            <div class="img_section"><img th:src="${postInfo.getImg_url_main()}"/></div>
-            <div class="read_section">
-                <ul>
-                    <li class="info_title">
-                        <h5 class="title" th:text="'상품명 : ' + ${postInfo.getProductName()}"></h5>
-                        <p class="size"></p>
-                        <span style="font-size: 12px;" th:text="'Tags : ' + ${postInfo.getProductCategoryHomeScale()} + ', ' + ${postInfo.getProductCategoryNumberOfHouseholds()} + ', ' + ${postInfo.getProductCategoryInterior()}"></span>
-                        <hr>
-                    </li>
-                    <li class="explanation" th:text="'가이드라인 : ' + ${postInfo.getProductGuideline()}"></li>
-                    <li class="colour" th:text="'색깔 : ' + ${postInfo.getProductColor()}"></li>
-                    <li class="size_2">사이즈 : <span class="size_box" th:text="${postInfo.getProductSize()}"></span></li>
-                    <li style="padding-bottom: 20px; font-size: 0.8rem;" th:text="'조회수 : ' + ${postInfo.getProductView()}"></li>
-                    <li style="padding-bottom: 20px; font-size: 0.8rem;" th:text="'추천수 : ' + ${postInfo.getLikeNum()}"></li>
-                    <li class="price"><h4 style="margin: 0;" th:text="${postInfo.getProductPrice()}" class="productPrice"></h4>
-                    <li class="total_price">총 가격 :<h4>0</h4> 원</li>
-                    <li class="basket_li">
-                        <button type="button" class="basket" id="basket_button" th:if="${postInfo.isBasketYn() == false}">
-                            <i class="xi-cart-o" style="font-size: 2rem; color: black;" id="basketIcon"></i><p style="margin-top: 8px;"></p>
-                        </button>
-                        <button type="button" class="basket" id="basket_button" th:if="${postInfo.isBasketYn() == true}">
-                            <i class="xi-cart" style="font-size: 2rem; color: black;" id="basketIcon"></i><p style="margin-top: 8px;"></p>
-                        </button>
-                    </li>
-                    <li class="like_li">
-                        <button type="button" class="like_button" th:if="${postInfo.isLikeYn() == false}">
-                            <i class="xi-heart-o" style="font-size: 2rem; color: black;" id="likeIcon"></i><p style="margin-top: 8px;"></p>
-                        </button>
-                        <button type="button" class="like_button" th:if="${postInfo.isLikeYn() == true}">
-                            <i class="xi-heart" style="font-size: 2rem; color: black;" id="likeIcon"></i><p style="margin-top: 8px;"></p>
-                        </button>
-                    </li>
-                    <li class="dibs_li">
-                        <button class="dibs_button" th:if="${postInfo.isDibYn() == false}">
-                            <i class="xi-gift-o" style="font-size: 2rem; color: black;" id="dibsIcon"></i><p style="margin-top: 8px;"></p>
-                        </button>
-                        <button class="dibs_button" th:if="${postInfo.isDibYn() == true}">
-                            <i class="xi-gift" style="font-size: 2rem; color: black;" id="dibsIcon"></i><p style="margin-top: 8px;"></p>
-                        </button>
-                    </li>
-                    <li class="purchase_li">
-                        <button class="purchase_button">주문기능은 없습니다</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="tab_div">
-            <ul class="tab_menu">
-                <li>
-                    <a class="targetInfo" href="#a" style=" border: 1px solid black; font-size: 20px; color: black;">상품정보</a>
-                </li>
-                <li>
-                    <a class="tabReview" href="#a" style=" color: black;" th:text="'구매후기 ( ' + ${params.getTotal_review_num()} + ' )'"></a>
-                </li>
-            </ul>
-        </div>
-        <div class="detail_info">
-            <div class='img_upload' alt='다중 내부 이미지'>
-                <img th:each="postImages : ${postImages}" th:src="${postImages.getImg_url_inner()}"/>
-            </div>
-            <p th:if="${postInfo.getProductComment() != null}" th:text="'상품 설명글 : ' + ${postInfo.getProductComment()}"></p>
-            <div class="tab_div" id="tab_back">
-                <ul class="tab_menu">
-                    <li>
-                        <a class="tabContent" href="#a" style=" color: black;">상품정보</a>
-                    </li>
-                    <li>
-                        <a class="targetReview" href="#a" style=" border: 1px solid black; font-size: 20px; color: black;" th:text="'구매후기 ( ' + ${params.getTotal_review_num()} + ' )'"></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="review_spot">
-                <div class="simple_review" th:each="reviewInfo : ${reviewInfo}">
-                    <h4 class="size" th:text="'상품 사이즈 : ' + ${reviewInfo.getReview_size()}"></h4>
-                    <h4 class="color" th:text="'상품 컬러 : ' + ${reviewInfo.getReview_color()}"></h4>
-                    <p class="user_nickname">유저닉네임 : 미정 </p>
-                    <p class="review_satisfaction" th:text="'만족도 : ' + ${reviewInfo.getReview_satisfaction()}"></p>
-                    <input type="hidden" class="comment_no" th:value="${reviewInfo.getComment_no()}"/>
-                    <button type='button' class='fix_button'>수정</button>
-                    <button type='button' class='delete_button'>삭제</button>
-                    <h5 class="content" th:text="'코멘트 = ' + ${reviewInfo.getReview_comment()}"></h5>
-                    <p class='created_at'th:text="'작성시간 = ' + ${reviewInfo.getCreate_date()}"></p>
+    <!-- Search Wrapper Area -->
+
+    <div th:replace="/fragments/hiddenVal.html :: fragment-hiddenVal"></div>
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div th:replace="/fragments/mobileNav.html :: fragment-mobileNav"></div>
+
+        <!-- Header Area -->
+        <header th:replace="/fragments/header.html :: fragment-header"></header>
+
+        <!-- Product Details Area Start -->
+        <div class="single-product-area section-padding-100 clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-50">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                                <li class="breadcrumb-item"><a href="#">PostInfo</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${postInfo.getProductName()}"></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row mb-50">
+                    <div class="col-12 col-lg-7">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" th:src="${postInfo.getImg_url_main()}" th:style="'background-image:url(' + ${postInfo.getImg_url_main()} + ');'">
+                                    </li>
+                                    <li data-target="#product_details_slider" th:each="postImages, i: ${postImages}" th:src="${postImages.getImg_url_inner()}" th:data-slide-to="${i.count}" th:style="'background-image:url(' + ${postImages.getImg_url_inner()} + ');'">
+                                    </li>
+                                </ol>
+                                <!-- carousel-item도 슬라이더 개수만큼 생성 -->
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <a class="gallery_img" th:href="${postInfo.getImg_url_main()}">
+                                            <img class="d-block w-100" th:src="${postInfo.getImg_url_main()}" alt="First slide">
+                                        </a>
+                                    </div>
+                                    <div class="carousel-item" th:each="postImages : ${postImages}">
+                                        <a class="gallery_img">
+                                            <img class="d-block w-100" th:src="${postImages.getImg_url_inner()}" alt="Second slide">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price productPrice" th:text="${postInfo.getProductPrice()}"></p>
+                                <a href="product-details.html">
+                                    <h6 th:text="${postInfo.getProductName()}"></h6>
+                                </a>
+                                <!-- Ratings & Review -->
+                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="review">
+                                        <a href="#">
+                                            <span><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                            <span th:text="': ' + ${postInfo.getProductView()}"></span>
+                                            &nbsp;&nbsp;
+                                            <span><i class="fa fa-heart" aria-hidden="true"></i></span>
+                                            <span th:text="': ' + ${postInfo.getLikeNum()}"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Avaiable -->
+                                <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <h6>GuideLine</h6>
+                                <p th:text="${postInfo.getProductGuideline()} ? ${postInfo.getProductGuideline()} : '가이드라인 없음'"></p>
+                            </div>
+
+                            <div class="products--meta">
+                                <p><span>Color:</span> <span th:text="${postInfo.getProductColor()}"></span></p>
+                                <p><span>Tags:</span> <span th:text="${postInfo.getProductCategoryNumberOfHouseholds()}+ ', ' + ${postInfo.getProductCategoryHomeScale()}+ ', ' + ${postInfo.getProductCategoryInterior()}"></span></p>
+                                <p><span>Price:</span> <span class="productPrice2" th:text="${postInfo.getProductPrice()}"></span></p>
+                                <p>
+                                    <span>Share on:</span>
+                                    <span>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </span>
+                                </p>
+                            </div>
+
+                            <!-- Add to Cart Form -->
+                            <form class="cart clearfix" method="post" onSubmit="return false;">
+                                <div class="cart-btn d-flex mb-50">
+                                    <p>Qty</p>
+                                    <div class="quantity">
+                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                                <button type="button" name="basket" id="basket_button" value="5" class="btn amado-btn basket">Add To Cart</button>
+                                <button type="button" name="like" value="5" class="btn btn-primary amado-btn like_button" style="color: black;">
+                                    좋아요
+                                </button>
+                                <button type="button" name="dibs" value="5" class="btn btn-primary amado-btn dibs_button" style="color: black;">
+                                    찜하기
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- 댓글 등록 -->
-            <div class="review_register" style="border: 1px solid black; height: 200px; box-sizing: border-box; padding: 20px; text-align: left; position: relative;">
-                <textarea placeholder="댓글을 입력해주세요." id="review_comment" style="width: 100%; height: 60%; border: 1px solid black; margin: 0 -3px 0;"></textarea>
-                <div style="margin-top: 15px;">
-                        <span style="font-size: 15px;">
-                            상품만족도 조사:
-                            <select name="review_satisfaction" class="review_satisfaction" id="review_satisfaction" title="상품만족도조사" style="height: 30px;">
-                                <option value="★★★★★">★★★★★</option>
-                                <option value="★★★★☆">★★★★☆</option>
-                                <option value="★★★☆☆">★★★☆☆</option>
-                                <option value="★★☆☆☆">★★☆☆☆</option>
-                                <option value="★☆☆☆☆">★☆☆☆☆</option>
-                            </select>
-                        </span>
-                    <button type="button" id="review_button" name="review_button" style="position: absolute; right:18px; top: 140px; width: 80px; height: 40px; line-height: 40px; background: white;">댓글등록</button>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product_details_tab clearfix">
+                            <!-- Tabs -->
+                            <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
+                                <li class="nav-item">
+                                    <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
+                                </li>
+                            </ul>
+                            <!-- Tab Content -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="description">
+                                    <div class="description_area">
+                                        <p th:text="${postInfo.getProductComment()} ? ${postInfo.getProductComment()} : '설명 없음'" style="text-align: center;"></p>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="reviews">
+                                    <div class="reviews_area">
+                                        <ul>
+                                            <li class="review_spot">
+                                                <!-- 댓글하나 -->
+                                                <div class="single_user_review mb-15" th:each="reviewInfo : ${reviewInfo}">
+                                                    <div class="review-rating">
+                                                        <span style="margin-right: 2px;"th:each="starRepeat : *{#numbers.sequence( 1, reviewInfo.getReview_satisfaction())}">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span th:text="'for ' + ${reviewInfo.getReview_reason()}"></span>
+                                                    </div>
+                                                    <p class="content" style="margin: 5px 0;" th:text="${reviewInfo.getReview_comment()}"></p>
+                                                    <input type="hidden" class="comment_no" th:value="${reviewInfo.getComment_no()}"/>
+                                                    <button type='button' class='btn btn-primary fix_button smallBtn'>수정</button>
+                                                    <button type='button' class='btn btn-primary delete_button smallBtn'>삭제</button>
+                                                    <div class="review-details">
+                                                        <p>by <a href="#" th:text="${reviewInfo.getReview_userNickname()}"></a> on <span th:text="${reviewInfo.getCreate_date()}"></span></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <th:block layout:frament="paging">
+                                        <nav th:replace="/fragments/pagination.html :: pagination"></nav>
+                                    </th:block>
+                                    <!-- 버튼클릭시 상태에 맞는 현재페이지 쿼리스트링 값 변경 -->
+                                    <th:block layout:fragment="script">
+                                        <script th:inline="javascript">
+                                            /*<![CDATA[*/
+                                            function movePage(uri, queryString) {
+                                                location.href = uri + queryString;
+                                            }
+                                            /*]]>*/
+                                        </script>
+                                    </th:block>
+
+                                    <div class="submit_a_review_area mt-50">
+                                        <h4>Submit A Review</h4>
+                                        <form action="#" method="post" onSubmit="return false;">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group d-flex align-items-center">
+                                                        <span class="mr-15">Your Ratings:</span>
+                                                        <div class="stars">
+                                                            <input type="radio" name="review_satisfaction" class="star-1 review_satisfaction" id="star-1" value="1">
+                                                            <label class="star-1" for="star-1"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-2 review_satisfaction" id="star-2" value="2">
+                                                            <label class="star-2" for="star-2"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-3 review_satisfaction" id="star-3" value="3">
+                                                            <label class="star-3" for="star-3"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-4 review_satisfaction" id="star-4" value="4">
+                                                            <label class="star-4" for="star-4"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-5 review_satisfaction" id="star-5" value="5">
+                                                            <label class="star-5" for="star-5"></label>
+                                                            <span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="review_nickname">NickName</label>
+                                                        <input type="text" class="form-control" id="review_nickname" placeholder="닉네임을 입력하세요">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="review_reason">Reason for your rating</label>
+                                                        <select class="form-control" id="review_reason">
+                                                              <option value="Quality">Quality</option>
+                                                              <option value="Value">Value</option>
+                                                              <option value="Design">Design</option>
+                                                              <option value="Price">Price</option>
+                                                              <option value="Others">Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="review_comment">Comments</label>
+                                                        <textarea class="form-control" id="review_comment" rows="5" data-max-length="150" placeholder="150자 이내로 적어주세요."></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn alazea-btn" id="review_button">Submit Your Review</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <th:block layout:frament="paging">
-            <nav th:replace="/fragments/pagination.html :: pagination"></nav>
-        </th:block>
-        <!-- 버튼클릭시 상태에 맞는 현재페이지 쿼리스트링 값 변경 -->
-        <th:block layout:fragment="script">
-            <script th:inline="javascript">
-                    /*<![CDATA[*/
-                    function movePage(uri, queryString) {
-                        location.href = uri + queryString;
-                    }
-                    /*]]>*/
-                </script>
-        </th:block>
-    </section>
-<footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+        <!-- Product Details Area End -->
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+    <!-- ##### Footer Area ##### -->
+    <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+    <!-- Popper js -->
+    <script th:src="@{js/popper.min.js}"></script>
+    <!-- Bootstrap js -->
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- Plugins js -->
+    <script th:src="@{js/plugins.js}"></script>
+    <!-- Active js -->
+    <script th:src="@{js/active.js}"></script>
+    <!-- postWriter js -->
+    <script th:src="@{/js/postInfo.js}"></script>
+    <!-- review js -->
+    <script th:src="@{/js/review.js}"></script>
+    <!-- dibs js -->
+    <script th:src="@{/js/dibs.js}"></script>
+    <!-- like js -->
+    <script th:src="@{/js/like.js}"></script>
 </body>
+
 </html>
