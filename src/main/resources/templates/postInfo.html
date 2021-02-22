@@ -20,7 +20,6 @@
     <link rel="stylesheet" th:href="@{css/core-style.css}">
 </head>
 <body>
-    <!-- Search Wrapper Area -->
 
     <div th:replace="/fragments/hiddenVal.html :: fragment-hiddenVal"></div>
 
@@ -64,12 +63,12 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <a class="gallery_img" th:href="${postInfo.getImg_url_main()}">
-                                            <img class="d-block w-100" th:src="${postInfo.getImg_url_main()}" alt="First slide">
+                                            <img class="d-block w-100" th:src="${postInfo.getImg_url_main()}" alt="First slide" style="height: 59vh;">
                                         </a>
                                     </div>
                                     <div class="carousel-item" th:each="postImages : ${postImages}">
                                         <a class="gallery_img">
-                                            <img class="d-block w-100" th:src="${postImages.getImg_url_inner()}" alt="Second slide">
+                                            <img class="d-block w-100" th:src="${postImages.getImg_url_inner()}" alt="Second slide" style="height: 59vh;">
                                         </a>
                                     </div>
                                 </div>

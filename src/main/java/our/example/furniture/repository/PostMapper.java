@@ -40,4 +40,7 @@ public interface PostMapper {
 
     // 장바구니 및 최근 본 페이지 Select
     PostDTO selectViewPostList(PostDTO params);
+
+    // 인덱스 페이지 최근 올린 게시물 9개
+    List<PostDTO> indexPostList(PostDTO params);
 }

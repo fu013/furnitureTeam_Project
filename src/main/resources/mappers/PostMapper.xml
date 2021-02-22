@@ -163,4 +163,13 @@
         WHERE
         Product_Review.comment_no = #{fix_comment_no}
     </select>
+    <!-- 인덱스 페이지 최근 올린 게시물 9개 가져오기 -->
+    <select id="indexPostList" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        Product.product_no, Product.productName, Product.productPrice, Product_MainImg.img_url_main
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        ORDER BY Product.create_date DESC
+        OFFSET 0 ROWS FETCH NEXT 9 ROWS ONLY
+    </select>
 </mapper>

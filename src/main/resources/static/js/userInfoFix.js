@@ -63,9 +63,7 @@ function validatePhone3(){
 
 //   // 첫번쨰자리 010~ 019 가능 , 두번쨰 0~9 3,4자리, 3번쨰 무조건4자리
 window.onload = function() {
-
-
-    $("#check_repeat_email").on('click', function () {
+/*    $("#check_repeat_email").on('click', function () {
     let user_email = document.getElementById('user_email').value;
     if (mailJ.test(user_email) == false) {
       alert('메일 형식에 맞게 입력해주세요.');
@@ -109,7 +107,7 @@ window.onload = function() {
           }
         });
       }
-    });
+    });*/
 
     const register = document.getElementById('btn_save'); // 찾은 서브밋타입 버튼
     register.addEventListener('click', function(){ // 클릭했을때 onload + 클릭했을때니깐 클릭하기전에 모든걸 한번더 읽었을경우라는 전제가 포함된다.
@@ -120,7 +118,6 @@ window.onload = function() {
     let user_pw = document.getElementById('user_pw').value;
     let user_pw_c = document.getElementById('user_pw_c').value;
     let user_name = document.getElementById('user_name').value;
-    let user_birth = document.getElementById('user_birth').value;
     let user_email = document.getElementById('user_email').value;
     let user_phone1 = document.getElementById('user_phone1').value;
     let user_phone2 = document.getElementById('user_phone2').value;
@@ -133,12 +130,12 @@ window.onload = function() {
       document.getElementById('user_pw').focus();
       return false;
     }
+
     if(pwJ.test(user_pw) == false) {
     alert('비밀번호는 영문자로 시작하는 6~20자 영문자 또는 숫자로 이루어져 있어야 합니다.');
     document.getElementById('user_pw').focus();
     return false;
     }
-
 
     if(user_pw_c == '') {
       alert('비밀번호_확인을 입력해주세요.');
@@ -151,7 +148,6 @@ window.onload = function() {
       return false;
     }
 
-
     if(user_name == '') {
       alert('이름을 입력해주세요.');
       document.getElementById('user_name').focus();
@@ -160,13 +156,6 @@ window.onload = function() {
     if(nameJ.test(user_name) == false) {
       alert('이름은 2~6자리, 한글만 가능합니다.');
       document.getElementById('user_name').focus();
-      return false;
-    }
-
-
-    if(user_birth == '') {
-      alert('생년월일을 입력해주세요.');
-      document.getElementById('user_birth').focus();
       return false;
     }
 
@@ -180,7 +169,6 @@ window.onload = function() {
       document.getElementById('user_email').focus();
       return false;
     }
-
 
     if(user_phone1 == '' || user_phone2 == '' || user_phone3 == '') {
       alert('핸드폰번호를 입력해주세요.');
@@ -204,24 +192,11 @@ window.onload = function() {
       return false;
     }
 
-    if(document.getElementById('duplicate_check_email').value != '이 이메일은 사용가능합니다.') {
-      alert('이메일 중복검사를 안했거나 이메일이 중복입니다.');
-      document.getElementById('user_email').focus();
-      return false;
-    }
-    if(document.getElementById('duplicate_check_pw').value != '패스워드가 일치합니다.') {
-      alert('기존 비밀번호를 인증하지않았거나, 비밀번호가 일치하지 않습니다.');
-      document.getElementById('origin_password').focus();
-      return false;
-    }
-
 
     let user_fix_data_json = {
-      "userRegisterPassword":user_pw, "userRegisterName":user_name,
-      "userRegisterBirth":user_birth, "userRegisterEmail":user_email, "userRegisterPhone1":user_phone1,
+      "userRegisterPassword":user_pw, "userRegisterName":user_name, "userRegisterEmail":user_email, "userRegisterPhone1":user_phone1,
       "userRegisterPhone2":user_phone2, "userRegisterPhone3":user_phone3
     };
-
     $.ajax({
       type: "post",
       data: user_fix_data_json,

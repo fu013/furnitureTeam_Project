@@ -12,13 +12,14 @@ $(document).ready(function () {
 
     $(".selected_item_delete").on('click', function () {
         let isChecked = $("input:checkbox[name='basket_item_s']:checked").val(); // 체크가 됬는지 안됬는지 알려면 뒤에 꼭! val를 붙여야한다. 체크되면 value값으로 on, 체크가 안되면 undefined를 반환하기때문이다.
-        let checked_item = $("input:checkbox[name='basket_item_s']:checked")
+        let checked_item = $("input:checkbox[name='basket_item_s']:checked");
         if (isChecked) {
             for (let i = 0; i < $(checked_item).length; i++) {
                 let selected_product_num = $(checked_item[i])
                     .parent('.inner_td')
                     .siblings(".basket_item_num")
-                    .text();
+                    .val();
+                    console.log(selected_product_num);
                 let this_parent = $(checked_item[i]).parents(".basket_product_tr");
                 let deletePostNum_json = {
                     "deletePostNum": selected_product_num

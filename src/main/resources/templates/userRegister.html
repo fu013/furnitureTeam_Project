@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{img/core-img/favicon.ico}">
-    <title>FurnitureTeam - sb, jb</title>
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Title -->
+    <title>JBFurniture_userRegister</title>
+
     <!-- Custom CSS -->
-    <link th:href="@{css/jh/userRegister/style.min.css}" rel="stylesheet">
-    <link th:href="@{css/jh/userRegister/userRegister.css}" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/userRegister.css" rel="stylesheet">
 </head>
 <body>
     <div class="main-wrapper">
@@ -20,94 +23,104 @@
             <div class="auth-box bg-white border-top border-secondary" style="margin: 0;">
                 <div>
                     <div class="text-center p-t-20 p-b-20">
-                        <a href="index.html">
+                        <a href="/">
                             <span class="db"><img src="img/core-img/logo.png" alt="logo" /></span>
                         </a>
                     </div>
                     <!-- Form -->
-                    <form class="form-horizontal m-t-20" action="index.html">
+                    <form id="userRegisterForm" method="post">
                         <div class="row p-b-30">
                             <div class="col-12">
-                                <!--아이디-->
+                                <!-- 아이디 -->
                                 <div class="input-group mb-25">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon1">
-                                            <p>아이디</p>
-                                        </span>
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>아이디</p>
+                                            </span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="아이디를 입력하세요" aria-label="Username" aria-describedby="basic-addon1" id="userRegisterId" required>
+                                    <input type="text" class="form-control form-control-lg" placeholder="아이디를 입력해주세요" id="userRegisterId" name="userRegisterId">
+                                    <button id = "idOverlap" type = "button" class="btn">중복확인</button>
                                 </div>
-                                <!--비밀번호-->
+
+                                <!-- 비밀번호 -->
                                 <div class="input-group mb-25">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon2">
-                                            <p>비밀번호</p>
-                                        </span>
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>비밀번호</p>
+                                            </span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="비밀번호를 입력하세요" aria-label="Password" aria-describedby="basic-addon1" id="userRegisterPassword" required>
+                                    <input type="password" class="form-control form-control-lg" placeholder="비밀번호를 입력해주세요" id="userRegisterPassword" name="userRegisterPassword">
                                 </div>
-                                <!--비밀번호 재입력-->
+
+                                <!-- 비밀번호 재입력 -->
                                 <div class="input-group mb-25">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon3">
-                                            <p>비밀번호확인</p>
-                                        </span>
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>비밀번호확인</p>
+                                            </span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="한번더 입력해주세요" aria-label="Password" aria-describedby="basic-addon1" id="userRegisterRePassword" required>
+                                    <input type="password" class="form-control form-control-lg" placeholder="한번더 입력해주세요" id="userRegisterRePassword" name="userRegisterRePassword">
                                 </div>
-                                <!--이름-->
+
+                                <!-- 이름 -->
                                 <div class="input-group mb-25">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon2">
-                                            <p>이름</p>
-                                        </span>
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>이름</p>
+                                            </span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="이름을 입력해주세요">
+                                    <input type="text" class="form-control form-control-lg" placeholder="이름을 입력해주세요" id="userRegisterName" name="userRegisterName">
                                 </div>
-                                <!--생일-->
+
+                                <!-- 생일 -->
                                 <div class="input-group mb-25">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon2">
-                                            <p>생년월일</p>
-                                        </span>
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>생년월일</p>
+                                            </span>
                                     </div>
                                     <input type="date" id="userRegisterBirth" name="userRegisterBirth" class="form-control form-control-lg">
                                 </div>
-                                <!-- email -->
+
+                                <!-- 성별 -->
                                 <div class="input-group mb-25">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon1">
-                                            <p>이메일</p>
-                                        </span>
-                                    </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="이메일을 입력해주세요" aria-label="Username" aria-describedby="basic-addon1" id="userRegisterEmail" required>
-                                </div>
-                                <!--성별-->
-                                <div class="input-group mb-25">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon1">
-                                            <p>성별</p>
-                                        </span>
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>성별</p>
+                                            </span>
                                     </div>
                                     <select id="userRegisterGender" name="userRegisterGender" class="form-control form-control-lg">
                                         <option value="mail" selected="selected">남성</option>
                                         <option value="femail">여성</option>
                                     </select>
                                 </div>
-                                <!--전화번호-->
+
+                                <!-- 이메일 -->
                                 <div class="input-group mb-25">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning colorBox" id="basic-addon1">
-                                            <p>전화번호</p>
-                                        </span>
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>이메일</p>
+                                            </span>
+                                    </div>
+                                    <input type="text" class="form-control form-control-lg" placeholder="이메일을 입력해주세요" id="userRegisterEmail" name="userRegisterEmail">
+                                    <button id = "emailOverlap" type = "button" class="btn">중복확인</button>
+                                </div>
+
+
+                                <!-- 전화번호 -->
+                                <div class="input-group mb-25">
+                                    <div class="input-group-prepend">
+                                            <span class="input-group-text bg-warning colorBox">
+                                                <p>전화번호</p>
+                                            </span>
                                     </div>
                                     <select id="userRegisterPhone1" name="userRegisterPhone1" class="form-control form-control-lg">
                                         <option value="010">010</option>
                                         <option value="011">011</option>
                                         <option value="019">019</option>
                                     </select>
-                                    <input type="text" class="form-control form-control-lg" id="userRegisterPhone2">
-                                    <input type="text" class="form-control form-control-lg" id="userRegisterPhone3">
+                                    <input type="text" class="form-control form-control-lg" id="userRegisterPhone2" name="userRegisterPhone2">
+                                    <input type="text" class="form-control form-control-lg" id="userRegisterPhone3" name="userRegisterPhone3">
                                 </div>
                             </div>
                         </div>
@@ -115,9 +128,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="p-t-20">
-                                        <a href="index.html">
-                                            <button class="btn btn-block btn-lg btn-info" type="button" href="index.html" id="userRegisterCancel">취소</button>
-                                        </a>
+                                        <button class="btn btn-block btn-lg btn-info" type="button" onclick="location.href = '/';">취소</button>
                                         <button style="margin-top: 0.5rem;" class="btn btn-block btn-lg btn-info" type="submit" id="userRegisterSuccess">가입하기</button>
                                     </div>
                                 </div>
@@ -128,10 +139,11 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script th:src="@{js/jh/userRegister/jquery.min.js}"></script>
-    <script th:src="@{js/jh/userRegister/popper.min.js}"></script>
-    <script th:src="@{js/jh/userRegister/bootstrap.min.js}"></script>
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+    <!-- Bootstrap js -->
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- userRegister js -->
+    <script th:src="@{/js/userRegister.js}"></script>
 </body>
-
 </html>

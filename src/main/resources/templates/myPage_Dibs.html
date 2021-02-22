@@ -19,7 +19,7 @@
 </head>
 <body>
     <!-- Search Wrapper Area -->
-    <div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>
+    <!--<div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>-->
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
@@ -50,37 +50,20 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <!-- 상품 하나-->
+                          <tr th:each="selectDibsPostList : ${selectDibsPostList}">
                             <td class="product-thumbnail">
-                              <img src="images/cloth_1.jpg" alt="Image" class="img-fluid">
+                                <a th:href="'postInfo?post_no=' + ${selectDibsPostList.getProduct_no()}">
+                                    <img th:src="${selectDibsPostList.getImg_url_main()}" alt="Image" class="img-fluid" style="height: 15vh; width: 100%;">
+                                </a>
                             </td>
                             <td class="product-name">
-                              <h2 class="h5 text-black">Top Up T-Shirt</h2>
+                              <h2 class="h5 text-black" th:text="${selectDibsPostList.getProductName()}"></h2>
                             </td>
-                            <td>$49.00</td>
+                            <td class="uiProductPrice" th:text="${selectDibsPostList.getProductPrice()}"></td>
                             <td>
-                              <div class="input-group mb-3" style="max-width: 120px;">
-                                $100,000
+                              <div class="input-group mb-3" style="max-width: 120px;" th:text="${selectDibsPostList.getProductSize()}">
                               </div>
-
-                            </td>
-                            <td>$49.00</td>
-                            <td><a href="#" class="btn amado-btnTwo btn-sm">CheckBox</a></td>
-                          </tr>
-
-                          <tr>
-                            <td class="product-thumbnail">
-                              <img src="images/cloth_2.jpg" alt="Image" class="img-fluid">
-                            </td>
-                            <td class="product-name">
-                              <h2 class="h5 text-black">Polo Shirt</h2>
-                            </td>
-                            <td>$49.00</td>
-                            <td>
-                              <div class="input-group mb-3" style="max-width: 120px;">
-                                $100,000
-                              </div>
-
                             </td>
                             <td>$49.00</td>
                             <td><a href="#" class="btn amado-btnTwo btn-sm">CheckBox</a></td>
@@ -135,6 +118,8 @@
     <script th:src="@{js/plugins.js}"></script>
     <!-- Active js -->
     <script th:src="@{js/active.js}"></script>
+    <!-- Index js -->
+    <script th:src="@{/js/index.js}"></script>
 </body>
 
 </html>

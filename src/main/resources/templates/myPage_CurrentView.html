@@ -19,7 +19,7 @@
 </head>
 <body>
     <!-- Search Wrapper Area -->
-    <div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>
+    <!--<div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>-->
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
@@ -36,153 +36,21 @@
         <div class="amado_product_area section-padding-100">
             <div class="container-fluid">
                 <div class="row mb-5">
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+
+                  <!-- 상품 하나 -->
+                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" th:each="viewPostList : ${viewPostList}" data-aos="fade-up">
                     <div class="block-4 text-center border">
                       <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                        <a th:href="'postInfo?post_no=' + ${viewPostList.getProduct_no()}"><img th:src="${viewPostList.getImg_url_main()}" alt="Image placeholder" class="img-fluid" style="height: 40vh; width: 100%;"></a>
                       </figure>
                       <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Tank Top</a></h3>
-                        <p class="mb-0">Finding perfect t-shirt</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Corater</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Polo Shirt</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
+                        <h3><a th:text="${viewPostList.getProductName()}" th:href="'postInfo?post_no=' + ${viewPostList.getProduct_no()}">Tank Top</a></h3>
+                        <p th:text=" '#' + ${viewPostList.getProductCategoryNumberOfHouseholds()} + ', ' + ${viewPostList.getProductCategoryHomeScale()} + ', ' + ${viewPostList.getProductCategoryInterior()}" class="mb-0"></p>
+                        <p th:text="${viewPostList.getProductPrice()}" class="text-primaryOrange font-weight-bold uiProductPrice"></p>
                       </div>
                     </div>
                   </div>
 
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_3.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">T-Shirt Mockup</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Corater</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Tank Top</a></h3>
-                        <p class="mb-0">Finding perfect t-shirt</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Corater</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Polo Shirt</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_3.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">T-Shirt Mockup</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Corater</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Tank Top</a></h3>
-                        <p class="mb-0">Finding perfect t-shirt</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-6 col-lg-4 mb-4 aos-init aos-animate" data-aos="fade-up">
-                    <div class="block-4 text-center border">
-                      <figure class="block-4-image">
-                        <a href="shop-single.html"><img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                      </figure>
-                      <div class="block-4-text p-4">
-                        <h3><a href="shop-single.html">Polo Shirt</a></h3>
-                        <p class="mb-0">Finding perfect products</p>
-                        <p class="text-primaryOrange font-weight-bold">$50</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
             </div>
             <!-- Pagination -->
@@ -216,6 +84,8 @@
     <script th:src="@{js/plugins.js}"></script>
     <!-- Active js -->
     <script th:src="@{js/active.js}"></script>
+    <!-- Index js -->
+    <script th:src="@{/js/index.js}"></script>
 
 </body>
 

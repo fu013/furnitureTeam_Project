@@ -16,7 +16,6 @@
         AND userRegisterPhone2 = #{userRegisterPhone2}
         AND userRegisterPhone3 = #{userRegisterPhone3}
     </select>
-
     <select id="findPassword" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
         SELECT userRegisterPassword FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
         AND userRegisterName = #{userRegisterName}
@@ -25,7 +24,6 @@
         AND userRegisterPhone2 = #{userRegisterPhone2}
         AND userRegisterPhone3 = #{userRegisterPhone3}
     </select>
-
     <select id="modifyPassword" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
         UPDATE userRegisterTable
         SET userRegisterPassword = #{userRegisterPassword}, userRegisterRePassword = #{userRegisterRePassword}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Title -->
+    <title>JBFurniture_login</title>
+
+    <!-- Custom CSS -->
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-white">
+            <div class="auth-box bg-white border-top border-secondary">
+                <div id="loginform">
+                    <div class="text-center p-t-20 p-b-20">
+                        <span class="db"><a href="index.html"><img src="img/core-img/logo.png" alt="logo" /></a></span>
+                    </div>
+                    <div class="row p-b-30">
+                        <div class="col-12">
+                            <!--아이디-->
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control form-control-lg" placeholder="아이디를 입력해주세요" id="loginId">
+                            </div>
+
+                            <!--비밀번호-->
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control form-control-lg" placeholder="비밀번호를 입력해주세요" id="loginPassword">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 로그인, 아이디 분실 링크 -->
+                    <div class="row border-top border-secondary">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="loginBtn">
+                                    <button class="btn" type="submit" id="loginSuccess">로그인</button>
+                                </div>
+                                <div class="p-t-20">
+                                    <div class="goRegister">
+                                        <a href="userRegister.html">회원가입</a>
+                                    </div>
+                                    <div class="findIdPassword">
+                                        <a href="findUserId.html">아이디 찾기</a> &nbsp;|&nbsp;
+                                        <a href="findUserPassword.html">비밀번호 찾기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+    <!-- Bootstrap js -->
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- login js -->
+    <script th:src="@{/js/login.js}"></script>
+</body>
+</html>
