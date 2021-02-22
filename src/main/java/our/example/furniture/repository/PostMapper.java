@@ -1,10 +1,12 @@
 package our.example.furniture.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import our.example.furniture.dto.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 // 상품 게시물관련 Mapper
 @Mapper

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        >
+<mapper namespace="our.example.furniture.repository.PostMapper">
+
+    <!-- INCLUDE -->
+    <sql id="select_indexViewPost">
+        Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
+        Product.productName, Product.productPrice, Product.productView, Product.productColor, Product.productSize, Product_MainImg.img_url_main, Product.likeNum
+    </sql>
+    <!-- 데이터베이스 상품관련 데이터 INSERT QUERY -->
+    <insert id="insertProductInfo">
+        INSERT INTO product(product_no, productCategoryHomeScale, productCategoryNumberOfHouseholds,
+        productCategoryInterior, productName, productPrice, productGuideline, productSize, productColor, productComment, userRegisterId)
+        VALUES(PRODUCT_AUTO_I.NEXTVAL, #{productCategoryHomeScale}, #{productCategoryNumberOfHouseholds}, #{productCategoryInterior},
+        #{productName}, #{productPrice}, #{productGuideline}, #{productSize}, #{productColor}, #{productComment}, #{userLoginId})
+    </insert>
+    <insert id="InsertInnerImages" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+            INTO Product_InnerImages(product_no, img_saveName, img_extName, img_fileSize, img_url_inner)
+            VALUES (PRODUCT_AUTO_I.CURRVAL, #{item.saveImageName}, #{item.extName}, #{item.FileSize}, #{item.imgURL})
+        </foreach>
+    </insert>
+    <insert id="InsertMainImage" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+            INTO Product_MainImg(product_no, img_saveName, img_extName, img_fileSize, img_url_main)
+            VALUES (PRODUCT_AUTO_I.CURRVAL, #{item.saveImageName}, #{item.extName}, #{item.FileSize}, #{item.imgURL})
+        </foreach>
+    </insert>
+    <insert id="WriteComment" parameterType="our.example.furniture.dto.ReviewDTO">
+        INSERT INTO Product_Review(comment_no, product_no, review_satisfaction, review_comment, review_size, review_color)
+        VALUES (REVIEW_AUTO_INCREMENT.NEXTVAL, #{product_no}, #{review_satisfaction}, #{review_comment}, #{review_size}, #{review_color})
+    </insert>
+    <update id="UpdateProductView" parameterType="our.example.furniture.dto.PostDTO">
+        UPDATE Product SET productView = #{productView} + 1 WHERE Product_no = #{product_no}
+    </update>
+    <!-- 데이터베이스 상품관련 데이터 SELECT QUERY -->
+    <select id="selectPostList" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        <include refid="select_indexViewPost"/>
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE 1 = 1
+        <!--
+            마이바티스는 해당 문서가 XML 이기 때문에 SAX Parser 가 동작하면서 "<" 같은 부등호 기호를 XML Parsing 대상으로 인식하기 떄문에
+            xml 대체 표현식으로 넣어줘야한다.
+         -->
+        <if test="minPrice gt 0 and maxPrice gt 0">
+            and Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
+        </if>
+        <if test="minPrice gt 0 and maxPrice == 0">
+            and Product.productPrice &gt; #{minPrice}
+        </if>
+        <if test="maxPrice gt 0 and minPrice == 0">
+            and Product.productPrice &lt; #{maxPrice}
+        </if>
+        <if test="searchN != null and searchN != ''">
+            and Product.productName LIKE #{searchN}
+        </if>
+        <if test="cat1 != null and cat1 != ''">
+            and Product.productCategoryNumberOfHouseholds = #{cat1}
+        </if>
+        <if test="cat2 != null and cat2 != ''">
+            and Product.productCategoryHomeScale = #{cat2}
+        </if>
+        <if test="cat3 != null and cat3 != ''">
+            and Product.productCategoryInterior = #{cat3}
+        </if>
+        ORDER BY ${searchType} DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
+    <select id="SelectPostImages" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
+        SELECT
+        img_url_inner
+        FROM
+        Product_InnerImages WHERE Product_No = #{product_no}
+    </select>
+    <!-- 데이터베이스 Pagination 관련 데이터 QUERY -->
+    <select id="SelectPost" resultType="our.example.furniture.dto.PostDTO" parameterType="our.example.furniture.dto.PostDTO">
+        SELECT
+        Product.Product_no, Product.productCategoryHomeScale, Product.productCategoryNumberOfHouseholds, Product.productCategoryInterior,
+        Product.productName, Product.productPrice, Product.productGuideline, Product.productSize, Product.productComment, Product.productView, Product.productColor, Product_MainImg.img_url_main, Product.likeNum
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE Product.Product_No = #{product_no}
+    </select>
+    <select id="selectPostTotalCount" parameterType="our.example.furniture.dto.PostDTO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        Product
+        WHERE 1 = 1
+        <if test="minPrice gt 0 and maxPrice gt 0">
+            and Product.productPrice BETWEEN #{minPrice} AND #{maxPrice}
+        </if>
+        <if test="minPrice gt 0 and maxPrice == 0">
+            and Product.productPrice &gt; #{minPrice}
+        </if>
+        <if test="maxPrice gt 0 and minPrice == 0">
+            and Product.productPrice &lt; #{maxPrice}
+        </if>
+        <if test="searchN != null and searchN != ''">
+            and Product.productName LIKE #{searchN}
+        </if>
+        <if test="cat1 != null and cat1 != ''">
+            and Product.productCategoryNumberOfHouseholds = #{cat1}
+        </if>
+        <if test="cat2 != null and cat2 != ''">
+            and Product.productCategoryHomeScale = #{cat2}
+        </if>
+        <if test="cat3 != null and cat3 != ''">
+            and Product.productCategoryInterior = #{cat3}
+        </if>
+    </select>
+    <select id="ViewComment" parameterType="our.example.furniture.dto.ReviewDTO" resultType="our.example.furniture.dto.ReviewDTO">
+        SELECT
+        *
+        FROM
+        Product_Review
+        WHERE Product_Review.product_no = #{product_no} ORDER BY create_date DESC
+        OFFSET #{paginationInfo.firstRecordIndex} ROWS FETCH NEXT #{recordsPerPage} ROWS ONLY
+    </select>
+    <select id="selectPostReviewTotalCountThisPage" parameterType="our.example.furniture.dto.ReviewDTO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        Product_Review
+        WHERE Product_Review.product_no = #{product_no} ORDER BY create_date DESC
+    </select>
+    <!-- 장바구니 및 최근 본 페이지 조회 -->
+    <select id="selectViewPostList" parameterType="our.example.furniture.dto.PostDTO" resultType="our.example.furniture.dto.PostDTO">
+        SELECT
+        <include refid="select_indexViewPost"/>
+        FROM
+        Product LEFT OUTER JOIN Product_MainImg ON Product.product_no = Product_MainImg.product_no
+        WHERE Product.Product_No = #{product_no}
+        ORDER BY Product.Product_no DESC
+    </select>
+    <!-- 데이터베이스 댓글 삭제 & 수정 QUERY -->
+    <update id="UpdateComment" parameterType="our.example.furniture.dto.ReviewFixDeleteDTO">
+        UPDATE
+        Product_Review
+        SET
+        review_comment = #{fixed_review_comment}
+        WHERE
+        Product_Review.comment_no = #{fix_comment_no}
+    </update>
+    <delete id="DeleteComment" parameterType="our.example.furniture.dto.ReviewFixDeleteDTO">
+        DELETE
+        FROM
+        Product_Review
+        WHERE
+        Product_Review.comment_no = #{delete_comment_no}
+    </delete>
+    <select id="ViewAfterUpdateComment" parameterType="our.example.furniture.dto.ReviewFixDeleteDTO" resultType="String">
+        SELECT
+        review_comment
+        FROM
+        Product_Review
+        WHERE
+        Product_Review.comment_no = #{fix_comment_no}
+    </select>
+</mapper>

@@ -48,7 +48,7 @@ public class MyPageController {
         }
         return "myPage_CurrentView";
     }
-
+    
     // myPage_Dibs(찜 목록) 요청 처리
     @GetMapping("myPage_Dibs")
     public String myPage_Dibs(@ModelAttribute("params") PostDTO params, HttpServletResponse response, HttpSession session, Model model) throws IOException {

@@ -1,0 +1,25 @@
+브랜치 생성 : git branch 브랜치명
+현재 저장소 바꾸기 : git checkout 브랜치명
+브랜치 생성과 동시에 저장소 바꾸기 : git checkout -b 브랜치명
+브랜치로 파일 푸쉬 : 
+git add .
+git commit -m "메세지"
+처음만
+git push -u origin 브랜치명
+두번째부턴
+git push origin 브랜치명
+
+브랜치에 있는 파일 마스터에 올리기
+git checkout master
+git merge 자신의 브랜치명
+git push origin master
+
+브랜치로 마스터에 올린파일 가져오기
+# git checkout master
+# git pull origin master
+# git checkout brchA
+# git merge master
+
+같은 파일 수정할시 에러생김
+$ git fsck --cache --no-reflogs --lost-found --dangling HEAD
+어떤파일이든 복구해주는 마법의 코드

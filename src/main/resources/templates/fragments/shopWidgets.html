@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="fragment-shopWidgets" class="shop_sidebar_area">
+        <form action="shop" method="get" id="categoryForm">
+            <div class="widget brands mb-50" style="z-index: 1;">
+                <!-- Widget Title -->
+                <input type="hidden" th:value="${params?.currentPageNo}" name="currentPageNo"/>
+                <input type="hidden" th:value="${params?.recordsPerPage}" name="recordsPerPage"/>
+                <input type="hidden" th:value="${params?.pageSize}" name="pageSize"/>
+                <input type="hidden" th:value="${params?.searchType}" name="searchType"/>
+                <h6 class="widget-title mb-10">CategoryFilter</h6>
+                    <select class="w-100" name = "cat1" id="productCategoryNumberOfHouseholds">
+                        <option value="">전체</option>
+                        <option th:selected="${params?.cat1 eq 'single'}" value="single">single</option>
+                        <option th:selected="${params?.cat1 eq 'couple'}" value="couple">couple</option>
+                        <option th:selected="${params?.cat1 eq 'trio'}" value="trio">trio</option>
+                        <option th:selected="${params?.cat1 eq 'squad'}" value="squad">squad</option>
+                        <option th:selected="${params?.cat1 eq 'more'}" value="more">more</option>
+                    </select>
+                    <select class="w-100" id="productCategoryHomeScale" name = "cat2" style="margin-top: 50px;">
+                        <option value="">전체</option>
+                        <option th:selected="${params?.cat2 eq 'oneroom'}" value="oneroom">oneroom</option>
+                        <option th:selected="${params?.cat2 eq 'villa'}" value="villa">villa</option>
+                        <option th:selected="${params?.cat2 eq 'apartment'}" value="apartment">apartment</option>
+                        <option th:selected="${params?.cat2 eq 'house'}" value="house">house</option>
+                        <option th:selected="${params?.cat2 eq 'officetel'}" value="officetel">officetel</option>
+                    </select>
+                    <select class="w-100" id="productCategoryInterior" name = "cat3" style="margin-top: 50px;">
+                        <option value="">전체</option>
+                        <option th:selected="${params?.cat3 eq 'classic'}" value="classic">classic</option>
+                        <option th:selected="${params?.cat3 eq 'modern'}" value="modern">modern</option>
+                        <option th:selected="${params?.cat3 eq 'natural'}" value="natural">natural</option>
+                        <option th:selected="${params?.cat3 eq 'vintage'}" value="vintage">vintage</option>
+                    </select>
+            </div>
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget color mt-230 mb-50" style="z-index: 0; margin-top: 230px;">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">ColorFilter</h6>
+
+                <div class="widget-desc">
+                    <ul class="d-flex">
+                        <li><a href="#" class="color1"></a></li>
+                        <li><a href="#" class="color2"></a></li>
+                        <li><a href="#" class="color3"></a></li>
+                        <li><a href="#" class="color4"></a></li>
+                        <li><a href="#" class="color5"></a></li>
+                        <li><a href="#" class="color6"></a></li>
+                        <li><a href="#" class="color7"></a></li>
+                        <li><a href="#" class="color8"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget brands mb-50" style="z-index: 1;">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-10">PriceFilter</h6>
+                <div class="position-relative form-group">
+                    <label for="price" class=""></label>
+                    <input id="price" th:value="${params?.minPrice}" name="minPrice" placeholder="최소가격 입력" type="text" class="form-control minPrice">
+                </div>
+                <div class="position-relative form-group">
+                    <input id="price" th:value="${params?.maxPrice}" name="maxPrice" placeholder="최대가격 입력" type="text" class="form-control maxPrice">
+                </div>
+            </div>
+            <input type="hidden" th:value="${params?.searchN}" name="searchN"/>
+        </form>
+    </div>
+</html>

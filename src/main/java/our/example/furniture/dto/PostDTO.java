@@ -2,6 +2,11 @@ package our.example.furniture.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class PostDTO extends CommonDTO {
     private int product_no;
     private String userLoginId;
