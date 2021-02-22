@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import our.example.furniture.dto.PostDTO;
+import our.example.furniture.dto.UserRegisterDto;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
+import our.example.furniture.repository.UserRegisterMapper;
 import our.example.furniture.service.PostService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +25,8 @@ import java.util.List;
 
 @Controller
 public class MyPageController {
+    @Autowired
+    private UserRegisterMapper userRegisterMapper;
     @Autowired
     private PostMapper postMapper;
     @Autowired
@@ -103,7 +107,7 @@ public class MyPageController {
     }
     // myPage_UserInfoFix(회원정보수정) url 요청 처리
     @GetMapping("myPage_UserInfoFix")
-    public String myPage_UserInfoFix(HttpSession session, HttpServletResponse response) throws IOException {
+    public String myPage_UserInfoFix(UserRegisterDto userRegisterDto, HttpSession session, HttpServletResponse response, Model model) throws IOException {
         if(session.getAttribute("loginUser") == null) {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();
@@ -112,6 +116,10 @@ public class MyPageController {
             out.println("location.href='/';");
             out.println("</script>");
             out.close();
+        } else {
+            userRegisterDto.setLoginId(session.getAttribute("loginUser").toString());
+            UserRegisterDto userInfo = userRegisterMapper.selectUserTable(userRegisterDto);
+            model.addAttribute("userInfo", userInfo);
         }
         return "myPage_UserInfoFix";
     }

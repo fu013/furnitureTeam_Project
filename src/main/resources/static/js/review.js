@@ -2,7 +2,10 @@
 $(document).ready(function() {
     $("#review_button").click(function (e) {
         const review_comment = $("#review_comment").val();
-        if (!review_comment) {
+        let review_satisfaction = $(":input:radio[name=review_satisfaction]:checked").val();
+        if(!review_satisfaction) {
+            alert("별점을 체크해주세요.");
+        } else if (!review_comment) {
             alert("내용을 입력해주세요.");
         } else {
             let currentDate = new Date();
@@ -11,7 +14,6 @@ $(document).ready(function() {
             const review_color = $("#review_color").val();
             const review_reason = $("#review_reason").val();
             const review_nickname = $("#review_nickname").val();
-            let review_satisfaction = $(":input:radio[name=review_satisfaction]:checked").val();
             var starRepeat = '';
             for (let i = 0; i < review_satisfaction; i++) {
                 starRepeat +=
@@ -86,7 +88,7 @@ $(document).ready(function() {
                url: "/postReviewInfoFix",
                dataType: "text",
                success:function(data){
-                   AjaxFixedReview.text(`수정된 댓글 : ${fixed_review}`);
+                   AjaxFixedReview.text(`${fixed_review}`);
                    alert("댓글이 수정 되었습니다.");
                }
             });

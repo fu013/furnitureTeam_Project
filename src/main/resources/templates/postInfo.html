@@ -20,7 +20,6 @@
     <link rel="stylesheet" th:href="@{css/core-style.css}">
 </head>
 <body>
-    <!-- Search Wrapper Area -->
 
     <div th:replace="/fragments/hiddenVal.html :: fragment-hiddenVal"></div>
 
@@ -64,12 +63,12 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <a class="gallery_img" th:href="${postInfo.getImg_url_main()}">
-                                            <img class="d-block w-100" th:src="${postInfo.getImg_url_main()}" alt="First slide">
+                                            <img class="d-block w-100" th:src="${postInfo.getImg_url_main()}" alt="First slide" style="height: 59vh;">
                                         </a>
                                     </div>
                                     <div class="carousel-item" th:each="postImages : ${postImages}">
                                         <a class="gallery_img">
-                                            <img class="d-block w-100" th:src="${postImages.getImg_url_inner()}" alt="Second slide">
+                                            <img class="d-block w-100" th:src="${postImages.getImg_url_inner()}" alt="Second slide" style="height: 59vh;">
                                         </a>
                                     </div>
                                 </div>
@@ -157,10 +156,10 @@
                             <!-- Tabs -->
                             <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
                                 <li class="nav-item">
-                                    <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
+                                    <a href="#description" class="nav-link active" data-toggle="tab" role="tab">제품 설명</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
+                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">댓글<span class="text-muted" th:text="'(' +${params.getTotal_review_num()} + ')'"></span></a>
                                 </li>
                             </ul>
                             <!-- Tab Content -->
@@ -208,7 +207,7 @@
                                     </th:block>
 
                                     <div class="submit_a_review_area mt-50">
-                                        <h4>Submit A Review</h4>
+                                        <h4>댓글을 남겨보세요</h4>
                                         <form action="#" method="post" onSubmit="return false;">
                                             <div class="row">
                                                 <div class="col-12">
@@ -254,7 +253,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <button type="submit" class="btn alazea-btn" id="review_button">Submit Your Review</button>
+                                                    <button type="submit" class="btn alazea-btn" id="review_button">댓글 등록</button>
                                                 </div>
                                             </div>
                                         </form>

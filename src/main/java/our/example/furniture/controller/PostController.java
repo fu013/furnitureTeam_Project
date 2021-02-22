@@ -40,8 +40,7 @@ public class PostController {
     // 상품 게시글 작성 POST 요청 처리
     @PostMapping("/productRegister")
     public String productRegister(PostDTO postDTO, HttpSession session) throws Exception {
-        /*String userLoginId = session.getAttribute("loginUser").toString();*/
-        String userLoginId = "poow013";
+        String userLoginId = session.getAttribute("loginUser").toString();
         postDTO.setUserLoginId(userLoginId);
         postMapper.insertProductInfo(postDTO);
         // 메인 이미지에 요청값이 있는지 검사하고, 있을 경우에만 Mapper SQL 실행

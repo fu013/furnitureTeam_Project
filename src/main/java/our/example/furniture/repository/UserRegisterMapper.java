@@ -16,4 +16,6 @@ public interface UserRegisterMapper {
 	void userInfoChange(UserRegisterDto userRegisterDto);
 	// 회원탈퇴
 	void userInfoDelete(UserRegisterDto userRegisterDto);
+	// 회원수정 - 유저정보
+	UserRegisterDto selectUserTable(UserRegisterDto userRegisterDto);
 }
