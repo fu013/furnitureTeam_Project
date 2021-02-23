@@ -2,21 +2,34 @@
 $(document).ready(function() {
     $("#review_button").click(function (e) {
         const review_comment = $("#review_comment").val();
-        if (!review_comment) {
+        let review_satisfaction = $(":input:radio[name=review_satisfaction]:checked").val();
+        if(!review_satisfaction) {
+            alert("별점을 체크해주세요.");
+        } else if (!review_comment) {
             alert("내용을 입력해주세요.");
         } else {
             let currentDate = new Date();
             const product_no = $("#review_productNo").val();
             const review_size = $("#review_size").val();
-            const review_satisfaction = $("#review_satisfaction").val();
             const review_color = $("#review_color").val();
+            const review_reason = $("#review_reason").val();
+            const review_nickname = $("#review_nickname").val();
+            var starRepeat = '';
+            for (let i = 0; i < review_satisfaction; i++) {
+                starRepeat +=
+                `<span style="margin-right: 2px;">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </span>`;
+            }
             const review_data_json = {
                 "product_no": product_no,
                 "review_comment": review_comment,
                 "review_satisfaction": review_satisfaction,
                 "current_Date" : currentDate,
                 "review_size" : review_size,
-                "review_color" : review_color
+                "review_color" : review_color,
+                "review_reason" : review_reason,
+                "review_userNickname" : review_nickname
             };
             $.ajax({
                 type: "post",
@@ -25,16 +38,20 @@ $(document).ready(function() {
                 dataType: "json",
                 success: function (data) {
                     $(".review_spot").append(
-                        `<div class="simple_review">
-                            <h4 class="size">상품 사이즈 : ${review_size}</h4>
-                            <h4 class="color">상품 컬러 : ${review_color}</h4>
-                            <p class="user_nickname">유저닉네임 : 미정 </p>
-                            <p class="product_satisfaction">만족도 : ${review_satisfaction}</p>
-                            <button type='button' class='fix_button'>수정</button>
-                            <button type='button' class='delete_button'>삭제</button>
-                            <h5 class="content">코멘트 = ${review_comment}</h5>
-                            <p class='created_at'> 작성시간 : ${currentDate}</p>
-                        </div>`
+                        `
+                        <div class="single_user_review mb-15">
+                            <div class="review-rating">
+                                ${starRepeat}
+                                <span>for ${review_reason}</span>
+                            </div>
+                            <p style="margin: 5px 0;">${review_comment}</p>
+                            <button type='button' class='btn btn-primary fix_button smallBtn'>수정</button>
+                            <button type='button' class='btn btn-primary delete_button smallBtn'>삭제</button>
+                            <div class="review-details">
+                                <p>by ${review_nickname} on <span>${currentDate}</span></p>
+                            </div>
+                        </div>
+                        `
                     )
                 }
             });
@@ -54,9 +71,9 @@ $(document).ready(function() {
         } else {
             $(this).hide();
             $(this).siblings('.delete_button').hide();
-            $(this).before(`<textarea class="fix_comment" id="comment_fix" style="width: 80%; height: 100px; margin-left: 20px;" placeholder='수정할 내용을 입력하세요.'></textarea>`);
-            $(this).after(`<button type="button" class="fix_register">등록</button>`);
-            $(this).after(`<button type="button" class="cancel_fix">취소</button>`);
+            $(this).before(`<textarea class="form-control fix_comment" id="comment_fix" style="width: 30%; height: 100px; margin-bottom: 10px;" placeholder='수정할 내용을 150자 이내로 입력해주세요.'></textarea>`);
+            $(this).after(`<button type="button" class="btn btn-primary fix_register smallBtn">등록</button>`);
+            $(this).after(`<button type="button" class="btn btn-primary cancel_fix smallBtn" style="margin-right: 4px;">취소</button>`);
         }
 
         // 댓글: 수정-등록
@@ -71,7 +88,7 @@ $(document).ready(function() {
                url: "/postReviewInfoFix",
                dataType: "text",
                success:function(data){
-                   AjaxFixedReview.text(`수정된 댓글 : ${fixed_review}`);
+                   AjaxFixedReview.text(`${fixed_review}`);
                    alert("댓글이 수정 되었습니다.");
                }
             });
@@ -98,8 +115,8 @@ $(document).ready(function() {
         } else {
             $(this).hide();
             $(this).siblings('.fix_button').hide();
-            $(this).after(`<button type="button" class="cancel_delete">취소</button>`);
-            $(this).after(`<button type="button" class="real_delete_button" id="delete_real_button">삭제확인</button>`);
+            $(this).after(`<button type="button" class="btn btn-primary real_delete_button smallBtn" id="delete_real_button">삭제확인</button>`);
+            $(this).after(`<button type="button" class="btn btn-primary cancel_delete smallBtn" style="margin-right: 4px;">취소</button>`);
         } // 댓글: 삭제-확인
         $(document).on("click", ".real_delete_button", function(){
             $(this).parents('.simple_review').hide();

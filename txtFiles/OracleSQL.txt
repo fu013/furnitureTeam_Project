@@ -13,9 +13,9 @@ CREATE TABLE userRegisterTable(
 );
 CREATE TABLE Product(
 	product_no number(10) not null PRIMARY KEY,
-	productCategoryHomeScale varchar2(20)  not null,
-	productCategoryNumberOfHouseholds varchar2(20) not null,
-	productCategoryInterior varchar2(20) not null,
+	productCategoryHomeScale varchar2(20) null,
+	productCategoryNumberOfHouseholds varchar2(20) null,
+	productCategoryInterior varchar2(20) null,
 	productName varchar2(50) unique not null,
 	productPrice number(10) not null,
 	productGuideline varchar2(50) Null,
@@ -65,8 +65,9 @@ CREATE TABLE Product_Review(
 	review_userNickname varchar2(40) null,
 	review_comment varchar2(500) not null,
 	review_size varchar2(40) not null,
-	review_satisfaction varchar2(40) not null,
+	review_satisfaction number(10) not null,
 	review_color varchar2(40) not null,
+	review_reason varchar2(40) not null,
 	create_date date default sysdate,
 	CONSTRAINTS FK2_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE
@@ -75,16 +76,6 @@ CREATE TABLE PRODUCT_LIKE(
 	like_no number(10) not null,
 	product_no number(10) not null,
 	userRegisterId varchar2(20) not null,
-	create_date date default sysdate,
-	CONSTRAINT FK1_product_no FOREIGN KEY(product_no)
-		REFERENCES Product(product_no) ON DELETE CASCADE,
-	CONSTRAINT FK2_userRegisterId FOREIGN KEY(userRegisterId)
-		REFERENCES userRegisterTable(userRegisterId) ON DELETE CASCADE
-);
-CREATE TABLE PRODUCT_LIKE(
-	product_no number(10) not null PRIMARY KEY,
-	userRegisterId varchar2(20) not null,
-	ikeYN CHAR(1) DEFAULT 0,
 	create_date date default sysdate,
 	CONSTRAINT FK1_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE,

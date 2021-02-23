@@ -3,7 +3,7 @@ package our.example.furniture.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import our.example.furniture.dto.PostDTO;
-import our.example.furniture.paging.PaginationInfo;
+import our.example.furniture.page.PaginationInfo;
 import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 
@@ -45,7 +45,6 @@ public class PostServiceImpl implements PostService  {
         List<Integer> cookiePostList = new ArrayList<Integer>();
         List<PostDTO> viewPostList = new ArrayList<PostDTO>();
         List<PostDTO> viewPostListOffsetApplied = new ArrayList<PostDTO>();
-
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie:cookies) {
             if(cookie.getName().contains("ViewPostName")) {
@@ -128,6 +127,7 @@ public class PostServiceImpl implements PostService  {
         params.setUserLoginId(session.getAttribute("loginUser").toString());
         List<PostDTO> postDibsList = Collections.emptyList();
         int postDibsTotalCount = myPageMapper.SelectDibsPostCount(params);
+        params.setRecordsPerPage(5);
 
         PaginationInfo paginationInfo = new PaginationInfo(params);
         paginationInfo.setTotalRecordCount(postDibsTotalCount);
@@ -172,6 +172,7 @@ public class PostServiceImpl implements PostService  {
         params.setUserLoginId(session.getAttribute("loginUser").toString());
         List<PostDTO> postUploadList = Collections.emptyList();
         int postUploadTotalCount = myPageMapper.SelectUploadPostCount(params);
+        params.setRecordsPerPage(5);
 
         PaginationInfo paginationInfo = new PaginationInfo(params);
         paginationInfo.setTotalRecordCount(postUploadTotalCount);

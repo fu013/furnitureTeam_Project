@@ -1,6 +1,5 @@
 package our.example.furniture.service;
 
-import our.example.furniture.dto.PostDTO;
 import our.example.furniture.dto.ReviewDTO;
 
 import java.util.List;

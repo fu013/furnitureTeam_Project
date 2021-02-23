@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="fragment-header" class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="/">
-                <img src="img/logo.png"/>
-            </a>
+    <header th:fragment="fragment-header" class="header-area clearfix">
+        <!-- Close Icon -->
+        <div class="nav-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
         </div>
-        <!--로그인 Header-->
-        <ul class="menu" th:if="${session['loginUser']}">
-            <li>
-                <a href="./basket">장바구니</a>
-            </li>
-            <li>
-                <a href="./myPage_CurrentView">마이페이지</a>
-            </li>
-            <li>
-                <a href="./postWriter">글쓰기</a>
-            </li>
-            <li>
-                <a href="./logout">로그아웃</a>
-            </li>
-        </ul>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/"><img src="img/core-img/logo.png" alt=""></a>
+        </div>
 
-        <!--비로그인 Header-->
-        <ul class="menu" th:if="!${session['loginUser']}">
-            <li>
-                <a href="./basket">장바구니</a>
-            </li>
-            <li>
-                <a href="./userRegister">회원가입</a>
-            </li>
-            <li>
-                <a href="./login">로그인</a>
-            </li>
-        </ul>
-    </div>
-</header>
+        <!-- Amado Nav online -->
+        <nav class="amado-nav mb-30" th:if="${session['loginUser']}">
+            <ul class="header_Menu mainMenu">
+                <li><a href="/">홈</a></li>
+                <li><a href="shop">상품</a></li>
+                <li><a href="myPage_CurrentView" class="myPage_CurrentView">마이페이지</a></li>
+                <li><a href="logout">로그아웃</a></li>
+            </ul>
+        </nav>
+
+        <!-- Amado Nav offline-->
+        <nav class="amado-nav mb-30" th:if="!${session['loginUser']}">
+            <ul class="header_Menu mainMenu">
+                <li class="active"><a href="/">홈</a></li>
+                <li><a href="shop">상품</a></li>
+                <li><a href="login">로그인</a></li>
+                <li><a href="userRegister">회원가입</a></li>
+            </ul>
+        </nav>
+        <!-- Cart Menu -->
+        <div class="cart-fav-search mb-30">
+            <a href="basket" class="cart-nav"><img src="img/core-img/cart.png" alt="">장바구니<span>(0)</span></a>
+            <a href="postWriter" class="fav-nav" th:if="${session['loginUser']}"><img src="img/core-img/favorites.png" alt="">글쓰기</a>
+            <a href="#" class="search-nav" style="display: none;"><img src="img/core-img/search.png" alt="">상품 검색</a>
+        </div>
+        <!-- Social Button -->
+        <div class="social-info d-flex justify-content-between">
+            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+    </header>
 </html>

@@ -1,60 +1,125 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="ko">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="viewport" content="width=device=width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Furniture</title>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/myPage.css}"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>FurnitureTeam - sb, jb</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" th:href="@{css/core-style.css}">
+    <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
-<header th:replace="/fragments/header.html :: fragment-header"></header>
-<div style="padding: 20px;">
-    <div class="myInfo">
-        <ul>
-            <li>회원 등급 : 골드 &nbsp;&nbsp; | </li>
-            <li>업로드한 게시물 개수 : 10개 &nbsp;&nbsp; | </li>
-            <li>찜한 게시물 개수 : 10개 </li>
-        </ul>
+    <!-- Search Wrapper Area -->
+    <!--<div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>-->
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div th:replace="/fragments/mobileNav.html :: fragment-mobileNav"></div>
+
+        <!-- Header Area -->
+        <header th:replace="/fragments/header.html :: fragment-header"></header>
+        
+        <!-- ##### Single Widget ##### -->
+        <div th:replace="/fragments/mypageWidget.html :: fragment-mypageWidget"></div>
+
+        <div class="amado_product_area section-padding-100">
+            <div class="container-fluid">
+                <div class="row mb-5">
+                  <form class="col-md-12" method="post">
+                    <div class="site-blocks-table">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th class="product-thumbnail">Image</th>
+                            <th class="product-name">Product</th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Size</th>
+                            <th class="product-total">Total</th>
+                            <th class="product-remove">SelectBox</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- 상품 하나-->
+                          <tr th:each="selectDibsPostList : ${selectDibsPostList}">
+                            <td class="product-thumbnail">
+                                <a th:href="'postInfo?post_no=' + ${selectDibsPostList.getProduct_no()}">
+                                    <img th:src="${selectDibsPostList.getImg_url_main()}" alt="Image" class="img-fluid" style="height: 15vh; width: 100%;">
+                                </a>
+                            </td>
+                            <td class="product-name">
+                              <h2 class="h5 text-black" th:text="${selectDibsPostList.getProductName()}"></h2>
+                            </td>
+                            <td class="uiProductPrice" th:text="${selectDibsPostList.getProductPrice()}"></td>
+                            <td>
+                              <div class="input-group mb-3" style="max-width: 120px;" th:text="${selectDibsPostList.getProductSize()}">
+                              </div>
+                            </td>
+                            <td>$49.00</td>
+                            <td><a href="#" class="btn amado-btnTwo btn-sm">CheckBox</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row mb-5">
+                      <div class="col-md-6 mb-3 mb-md-0">
+                        <button class="btn amado-btnTwo btn-sm btn-block">Add To Cart</button>
+                      </div>
+                      <div class="col-md-6">
+                        <button class="btn amado-btnOutline btn-sm btn-block">Remove All Selected</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- Pagination -->
+            <th:block layout:fragment="paging">
+              <nav th:replace="/fragments/pagination.html :: pagination"></nav>
+            </th:block>
+            <!-- 버튼클릭시 상태에 맞는 현재페이지 쿼리스트링 값 변경 -->
+            <th:block layout:fragment="script">
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    function movePage(uri, queryString) {
+                        location.href = uri + queryString;
+                    }
+                    /*]]>*/
+                </script>
+            </th:block>
+        </div>
     </div>
-    <div class="bodyWrapper">
-        <section>
-            <div class="category">
-                <h1>마이 메뉴</h1>
-                <ul>
-                    <li>
-                        <a href="myPage_CurrentView"><span>최근 본 페이지</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_Like"><span>좋아요를 누른 게시물</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_UploadPost"><span>업로드한 게시물</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_Dibs"><span>찜 목록</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_UserInfoFix"><span>회원정보수정</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_UserWithdrawal"><span>회원탈퇴</span></a>
-                    </li>
-                </ul>
-            </div>
-            <div th:replace="/MyPageFragments/Dibs.html :: MyPage-Dibs"></div>
-        </section>
-        <aside>
-            <h1>광고</h1>
-            <div class="advertisementBox">
-            </div>
-        </aside>
-    </div>
-</div>
-<footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+    <!-- ##### Footer Area ##### -->
+    <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+    <!-- Popper js -->
+    <script th:src="@{js/popper.min.js}"></script>
+    <!-- Bootstrap js -->
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- Plugins js -->
+    <script th:src="@{js/plugins.js}"></script>
+    <!-- Active js -->
+    <script th:src="@{js/active.js}"></script>
+    <!-- Index js -->
+    <script th:src="@{/js/index.js}"></script>
 </body>
+
 </html>

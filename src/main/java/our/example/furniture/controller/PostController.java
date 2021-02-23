@@ -7,13 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import our.example.furniture.dto.*;
-import our.example.furniture.repository.MyPageMapper;
-import our.example.furniture.repository.PostMapper;
+import our.example.furniture.repository.*;
 import our.example.furniture.service.PostReviewService;
 import our.example.furniture.service.PostService;
 import our.example.furniture.service.UploadInnerImages;
 import our.example.furniture.service.UploadMainImage;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -95,7 +93,7 @@ public class PostController {
         }
         List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
 
-        /* 장바구니 여부, 좋아요 여부, 찜목록 여부 */
+        /* 장바구니 여부, 좋아요 여부, 찜목록 여부 *//*
         String basketSessionId = Integer.toString(postInfo.getProduct_no());
         if (session.getAttribute(basketSessionId) != null) {
             postInfo.setBasketYn(true);
@@ -110,7 +108,7 @@ public class PostController {
             if(checkDib > 0) {
                 postInfo.setDibYn(true);
             }
-        }
+        }*/
         model.addAttribute("postInfo", postInfo);
         model.addAttribute("params", params);
         model.addAttribute("postImages", postImages);

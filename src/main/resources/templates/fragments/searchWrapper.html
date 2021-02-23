@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="fragment-searchWrapper" class="search-wrapper section-padding-100">
+        <div class="search-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-content">
+                        <form action="shop" method="get" id="searchForm">
+                            <input type="hidden" th:value="${params?.currentPageNo}" name="currentPageNo"/>
+                            <input type="hidden" th:value="${params?.recordsPerPage}" name="recordsPerPage"/>
+                            <input type="hidden" th:value="${params?.pageSize}" name="pageSize"/>
+                            <input type="hidden" th:value="${params?.searchType}" name="searchType"/>
+                            <input type="search" placeholder="상품명으로 검색" th:value="${params?.searchN}" name="searchN" id="search">
+                            <input type="hidden" th:value="${params?.cat1}" name="cat1"/>
+                            <input type="hidden" th:value="${params?.cat2}" name="cat2"/>
+                            <input type="hidden" th:value="${params?.cat3}" name="cat3"/>
+                            <input type="hidden" th:value="${params?.minPrice}" name="minPrice"/>
+                            <input type="hidden" th:value="${params?.maxPrice}" name="maxPrice"/>
+                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

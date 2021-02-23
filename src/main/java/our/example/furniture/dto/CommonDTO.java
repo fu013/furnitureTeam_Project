@@ -1,7 +1,7 @@
 package our.example.furniture.dto;
 
-import our.example.furniture.paging.Pagination;
-import our.example.furniture.paging.PaginationInfo;
+import our.example.furniture.page.Pagination;
+import our.example.furniture.page.PaginationInfo;
 
 import java.time.LocalDateTime;
 

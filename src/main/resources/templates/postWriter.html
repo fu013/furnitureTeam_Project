@@ -1,129 +1,185 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="ko">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="viewport" content="width=device=width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>FurniturePostWriter</title>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/postWriter.css}"/>
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script th:src="@{/js/postWriter.js}"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>FurnitureTeam - sb, jb</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" th:href="@{css/core-style.css}">
+    <link rel="stylesheet" th:href="@{style.css}">
+    <style>
+        .form-control {
+            margin-bottom: 15px;
+        }
+        label {
+            color: #6d6d6d;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .nice-select {
+            float: none;
+        }
+    </style>
 </head>
 <body>
-<header th:replace="/fragments/header.html :: fragment-header"></header>
-<div class="postWriterWrapper">
-    <h2>게시물작성</h2>
-    <div class="container">
-        <form id="postWriterWrapperForm" method="post" enctype="multipart/form-data">
-            <table>
-                <caption>
-                    <details>
-                        <summary class="summary">게시물 작성폼</summary>
-                        <div class="summary">상품번호, 상품 가이드라인, 상품명, 사이즈, 색상지정, 배송정보, 상품정보</div>
-                    </details>
-                </caption>
-                <colgroup>
-                    <col class="colValue">
-                    <col>
-                </colgroup>
-                <tbody>
-                <tr>
-                    <th><label for="productCategoryHomeScale">주택규모선택</label></th>
-                    <td>
-                        <select name="productCategoryHomeScale" id="productCategoryHomeScale" class="productCategoryHomeScale" title="주택규모선택">
-                            <option value="oneroom">oneroom</option>
-                            <option value="villa">villa</option>
-                            <option value="apartment">apartment</option>
-                            <option value="house">house</option>
-                            <option value="officetel">officetel</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="productCategoryNumberOfHouseholds">가구규모선택</label></th>
-                    <td>
-                        <select name="productCategoryNumberOfHouseholds" id="productCategoryNumberOfHouseholds" class="productCategoryNumberOfHouseholds" title="가구규모선택">
-                            <option value="single">single</option>
-                            <option value="couple">couple</option>
-                            <option value="trio">trio</option>
-                            <option value="squad">squad</option>
-                            <option value="more">more</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="productCategoryInterior">인테리어선택</label></th>
-                    <td>
-                        <select name="productCategoryInterior" id="productCategoryInterior" class="productCategoryInterior" title="인테리어선택">
-                            <option value="classic">classic</option>
-                            <option value="modern">modern</option>
-                            <option value="natural">natural</option>
-                            <option value="vintage">vintage</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="productName">상품명</label></th>
-                    <td><input type="text" id="productName" name="productName" placeholder="필수정보입니다.">
-                </tr>
-                <tr>
-                    <th><label for="productPrice">상품가격</label></th>
-                    <td><input type="text" id="productPrice" name="productPrice" placeholder="필수정보, 숫자만 가능">
-                </tr>
-                <tr>
-                    <th><label for="productGuideline">상품 가이드라인</label></th>
-                    <td><input type="text" id="productGuideline" name="productGuideline" placeholder="40자 이내로 입력해주세요. " maxlength="40" oninput="" >
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="productSize">사이즈</label></th>
-                    <td>
-                        <select id="productSize" name="productSize" class="productSize">
-                            <option value="Small" selected="selected">Small</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Large">Large</option>
-                            <option value="XLarge">XLarge</option>
-                            <option value="XXLarge">XXLarge</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="productColor">색상지정</label></th>
-                    <td>
-                        <select id="productColor" name="productColor" class="productColor">
-                            <option value="Red" selected="selected">Red</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Green">Green</option>
-                            <option value="Black">Black</option>
-                            <option value="White">White</option>
-                            <option value="Pink">Pink</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="productMainImg">상품-대표이미지</label></th>
-                    <td><input type="file" id="productMainImg" name="productMainImg"></td>
-                </tr>
-                <tr>
-                    <th><label for="productImg">상품-내부이미지</label></th>
-                    <td><input type="file" multiple="true" id="productImg" name="productImg[]"></td>
-                </tr>
-                <tr>
-                    <th><label for="productComment">상품정보-내용</label></th>
-                    <td><textarea id="productComment" placeholder="상품사진 밑에 적을 내용을 넣어주세요. (500자 이내)" name="productComment" maxlength="500" oninput=""></textarea></td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="txtCenter">
-                <button class="btnList" type="button" onclick="location.href='/'">취소</button>
-                <button class="btnWrite" type="submit" id="productRegister">게시물등록</button>
+    
+    <!-- Search Wrapper Area -->
+    <!--<div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>-->
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div th:replace="/fragments/mobileNav.html :: fragment-mobileNav"></div>
+
+        <!-- Header Area -->
+        <header th:replace="/fragments/header.html :: fragment-header"></header>
+
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <form id="postWriterWrapperForm" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <h1 style="margin: 20px 0;">새로운 게시물 등록</h1>
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="">
+                                        <div class="position-relative form-group"><label for="name" class="">상품명</label><input
+                                                name="productName" id="name" placeholder="상품명을 입력해주세요." type="text" class="form-control">
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label for="exampleSelect" class="">
+                                                주택규모선택
+                                            </label>
+                                            <select name="productCategoryHomeScale" id="exampleSelect" class="form-control">
+                                                <option value="oneroom">oneroom</option>
+                                                <option value="villa">villa</option>
+                                                <option value="apartment">apartment</option>
+                                                <option value="house">house</option>
+                                                <option value="officetel">officetel</option>
+                                            </select>
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label for="exampleSelect" class="">
+                                                가구규모선택
+                                            </label><select name="productCategoryNumberOfHouseholds" id="exampleSelect" class="form-control">
+                                                <option value="single">single</option>
+                                                <option value="couple">couple</option>
+                                                <option value="trio">trio</option>
+                                                <option value="squad">squad</option>
+                                                <option value="more">more</option>
+                                            </select>
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label for="exampleSelect" class="">
+                                                인테리어선택
+                                            </label><select name="productCategoryInterior" id="exampleSelect" class="form-control">
+                                                <option value="classic">classic</option>
+                                                <option value="modern">modern</option>
+                                                <option value="natural">natural</option>
+                                                <option value="vintage">vintage</option>
+                                            </select>
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label for="exampleSelect" class="">
+                                                상품사이즈선택
+                                            </label><select name="productSize" id="exampleSelect" class="form-control">
+                                                <option value="Small" selected="selected">Small</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="Large">Large</option>
+                                                <option value="XLarge">XLarge</option>
+                                                <option value="XXLarge">XXLarge</option>
+                                            </select>
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <label for="exampleSelect" class="">
+                                                상품색상선택
+                                            </label><select name="productColor" id="exampleSelect" class="form-control">
+                                                <option value="Red" selected="selected">Red</option>
+                                                <option value="Blue">Blue</option>
+                                                <option value="Green">Green</option>
+                                                <option value="Black">Black</option>
+                                                <option value="White">White</option>
+                                                <option value="Pink">Pink</option>
+                                            </select>
+                                        </div>
+                                        <div class="position-relative form-group"><label for="name" class="">상품가격</label><input
+                                                name="productPrice" id="name" placeholder="상품가격을 입력해주세요.(숫자만 가능)" type="text" class="form-control">
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <grammarly-extension data-grammarly-shadow-root="true"
+                                                style="position: absolute; top: 0px; left: 0px; pointer-events: none;"
+                                                class="cGcvT">
+                                            </grammarly-extension><label for="exampleText" class="">상품정보-가이드라인</label><textarea
+                                                name="productGuideline" style="min-height: 80px;" id="exampleText" class="form-control"
+                                                spellcheck="false" maxlength="80"
+                                                placeholder="간략하게 상품에 대한 설명을 적어주세요. (80자 이내)"></textarea>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">상품-메인이미지(1장)</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" name="productMainImg" class="custom-file-input" id="inputGroupFile01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose an Image</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">상품-부가이미지(3장)</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" name="productImg[]" class="custom-file-input" id="inputGroupFile01" multiple="true">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose Images</label>
+                                            </div>
+                                        </div>
+                                        <div class="position-relative form-group">
+                                            <grammarly-extension data-grammarly-shadow-root="true"
+                                                style="position: absolute; top: 0px; left: 0px; pointer-events: none;"
+                                                class="cGcvT">
+                                            </grammarly-extension><label for="exampleText" class="">상품정보-내용</label><textarea
+                                                name="productComment" style="min-height: 200px;" id="exampleText" class="form-control"
+                                                spellcheck="false" maxlength="500"
+                                                placeholder="상품사진 밑에 적을 내용을 넣어주세요. (500자 이내)"></textarea>
+                                        </div>
+                                        <button type="submit" id="productRegister" class="btn btn-secondary" style="width: 100%;">상품 등록</button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
-<footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+        </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+    <!-- ##### Footer Area ##### -->
+    <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+    <!-- Popper js -->
+    <script th:src="@{js/popper.min.js}"></script>
+    <!-- Bootstrap js -->
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- Plugins js -->
+    <script th:src="@{js/plugins.js}"></script>
+    <!-- Active js -->
+    <script th:src="@{js/active.js}"></script>
+    <!-- postWriter js -->
+    <script th:src="@{/js/postWriter.js}"></script>
+    <script>
+        $(".custom-file-input").on("change", function () { var e = $(this).val(); $(this).next(".custom-file-label").html(e) });
+    </script>
 </body>
 </html>

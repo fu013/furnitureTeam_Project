@@ -1,62 +1,111 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="ko">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta name="viewport" content="width=device=width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Furniture</title>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/myPage.css}"/>
-    <link rel="stylesheet" th:href="@{/css/userInfoFix.css}"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>FurnitureTeam - sb, jb</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" th:href="@{css/core-style.css}">
+    <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
-<header th:replace="/fragments/header.html :: fragment-header"></header>
-<div style="padding: 20px;">
-    <div class="myInfo">
-        <ul>
-            <li>회원 등급 : 골드 &nbsp;&nbsp; | </li>
-            <li>업로드한 게시물 개수 : 10개 &nbsp;&nbsp; | </li>
-            <li>찜한 게시물 개수 : 10개 </li>
-        </ul>
-    </div>
-    <div class="bodyWrapper">
-        <section>
-            <div class="category">
-                <h1>마이 메뉴</h1>
-                <ul>
-                    <li>
-                        <a href="myPage_CurrentView"><span>최근 본 페이지</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_Like"><span>좋아요를 누른 게시물</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_UploadPost"><span>업로드한 게시물</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_Dibs"><span>찜 목록</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_UserInfoFix"><span>회원정보수정</span></a>
-                    </li>
-                    <li>
-                        <a href="myPage_UserWithdrawal"><span>회원탈퇴</span></a>
-                    </li>
-                </ul>
+    <!-- Search Wrapper Area -->
+    <!--<div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>-->
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div th:replace="/fragments/mobileNav.html :: fragment-mobileNav"></div>
+
+        <!-- Header Area -->
+        <header th:replace="/fragments/header.html :: fragment-header"></header>
+        
+        <!-- ##### Single Widget ##### -->
+        <div th:replace="/fragments/mypageWidget.html :: fragment-mypageWidget"></div>
+
+        <div class="amado_product_area section-padding-100">
+            <div class="container-fluid pb-5">
+                <div class="row justify-content-md-center">
+                    <div class="card-wrapper col-12" style="max-width: 100%;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">회원 정보 수정</h4>
+                                <form onSubmit="return false;">
+            
+                                    <div class="form-group">
+                                        <label for="user_pw">새 비밀번호</label>
+                                        <input type="password" onchange="validatePw()" class="form-control" id="user_pw" name="user_pw" required="" autofocus="">
+                                        <input type="hidden" id="origin_password" th:value="${userInfo.getUserRegisterPassword()}" class="originUserPassword">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="user_pw_c">비밀번호 확인</label>
+                                        <input type="password" onchange="validatePw_c()" class="form-control" id="user_pw_c" name="user_pw_c" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="user_email">이메일</label>
+                                        <input id="user_email" onchange="validateEmail()" type="email" class="form-control" name="fix_EMAIL" required="" th:value="${userInfo.getUserRegisterEmail()}">
+                                        <input type="hidden" th:value="${userInfo.getUserRegisterEmail()}" class="originUserEmail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="user_name">이름</label>
+                                        <input id="user_name" onchange="validateName()" type="text" class="form-control" th:value="${userInfo.getUserRegisterName()}" name="fix_NAME" required="">
+                                        <input type="hidden" th:value="${userInfo.getUserRegisterName()}" class="originUserName">
+                                    </div>
+                                    <p style="margin-bottom: .5rem;">휴대폰번호</p>
+                                    <div class="input-group mb-15">
+                                        <select id="user_phone1" name="user_phone" class="form-control" style="display: none;">
+                                            <option value="010" th:selected="${userInfo?.getUserRegisterPhone1() eq '010'}" selected>010</option>
+                                            <option value="011" th:selected="${userInfo?.getUserRegisterPhone1() eq '011'}">011</option>
+                                            <option value="012" th:selected="${userInfo?.getUserRegisterPhone1() eq '012'}">012</option>
+                                            <option value="013" th:selected="${userInfo?.getUserRegisterPhone1() eq '013'}">013</option>
+                                            <option value="014" th:selected="${userInfo?.getUserRegisterPhone1() eq '014'}">014</option>
+                                            <option value="015" th:selected="${userInfo?.getUserRegisterPhone1() eq '015'}">015</option>
+                                            <option value="016" th:selected="${userInfo?.getUserRegisterPhone1() eq '016'}">016</option>
+                                            <option value="017" th:selected="${userInfo?.getUserRegisterPhone1() eq '017'}">017</option>
+                                            <option value="018" th:selected="${userInfo?.getUserRegisterPhone1() eq '018'}">018</option>
+                                            <option value="019" th:selected="${userInfo?.getUserRegisterPhone1() eq '019'}">019</option>
+                                        </select><div class="nice-select form-control" tabindex="0"><span class="current">010</span><ul class="list"><li data-value="010" class="option selected">010</li><li data-value="011" class="option">011</li><li data-value="019" class="option">019</li></ul></div>
+                                        <input type="tel" class="form-control form-control-lg" id="user_phone2" onchange="validatePhone2()" th:value="${userInfo.getUserRegisterPhone2()}">
+                                        <input type="tel" class="form-control form-control-lg" id="user_phone3" onchange="validatePhone3()" th:value="${userInfo.getUserRegisterPhone3()}">
+                                    </div>
+                                    <div class="form-group no-margin">
+                                        <button type="button" id="btn_save" class="btn_save btn amado-btnTwo btn-block">수정</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div th:replace="/MyPageFragments/UserInfoFix.html :: MyPage-UserInfoFix"></div>
-        </section>
-        <aside>
-            <h1>광고</h1>
-            <div class="advertisementBox">
-            </div>
-        </aside>
+        </div>
     </div>
-</div>
-<footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+    <!-- ##### Footer Area ##### -->
+    <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
+    <!-- Popper js -->
+    <script th:src="@{js/popper.min.js}"></script>
+    <!-- Bootstrap js -->
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <!-- Plugins js -->
+    <script th:src="@{js/plugins.js}"></script>
+    <!-- Active js -->
+    <script th:src="@{js/active.js}"></script>
+    <!-- userInfoFix js -->
+    <script th:src="@{/js/userInfoFix.js}"></script>
 </body>
-<script th:src="@{/js/userInfoFix.js}"></script>
+
 </html>

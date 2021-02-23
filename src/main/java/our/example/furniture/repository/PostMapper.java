@@ -1,10 +1,12 @@
 package our.example.furniture.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import our.example.furniture.dto.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 // 상품 게시물관련 Mapper
 @Mapper
@@ -38,4 +40,7 @@ public interface PostMapper {
 
     // 장바구니 및 최근 본 페이지 Select
     PostDTO selectViewPostList(PostDTO params);
+
+    // 인덱스 페이지 최근 올린 게시물 9개
+    List<PostDTO> indexPostList(PostDTO params);
 }
