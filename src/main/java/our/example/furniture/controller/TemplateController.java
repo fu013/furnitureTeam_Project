@@ -71,11 +71,11 @@ public class TemplateController {
         return "userRegister";
     }
     
-/* // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
+    // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
     @GetMapping("/findUserId")
     public String findUserId(Model model) { return "findUserId"; }
     @GetMapping("/findUserPassword")
     public String findUserPassword(Model model) { return "findUserPassword"; }
     @GetMapping("/modifyUserPassword")
-    public String modifyUserPassword(Model model) { return "modifyUserPassword"; }*/
+    public String modifyUserPassword(Model model) { return "modifyUserPassword"; }
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{img/core-img/favicon.ico}">
+
+    <!-- Title -->
+    <title>SJFurniture_findUserId</title>
+
+    <!-- Custom CSS -->
+    <link th:href="@{css/style.min.css}" rel="stylesheet">
+    <link th:href="@{css/findUserId.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="main-wrapper">
+    <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-white">
+        <div class="auth-box bg-white border-top border-secondary" style="margin: 0;">
+            <div>
+                <div class="text-center p-t-20 p-b-20">
+                    <a href="/">
+                        <span class="db"><img src="img/core-img/logo.png" alt="logo" /></span>
+                    </a>
+                </div>
+                <div class="row p-b-30">
+                    <div class="col-12">
+                        <!--이름-->
+                        <div class="input-group mb-25">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text bg-warning colorBox">
+                                        <p>이름</p>
+                                    </span>
+                            </div>
+                            <input type="text" class="form-control form-control-lg" placeholder="이름을 입력해주세요" id="findUserIdName">
+                        </div>
+                        <!-- email -->
+                        <div class="input-group mb-25">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text bg-warning colorBox">
+                                        <p>이메일</p>
+                                    </span>
+                            </div>
+                            <input type="text" class="form-control form-control-lg" placeholder="이메일을 입력해주세요" id="findUserIdEmail" required>
+                        </div>
+                        <!--전화번호-->
+                        <div class="input-group mb-25">
+                            <div class="input-group-prepend">
+                                    <span class="input-group-text bg-warning colorBox">
+                                        <p>전화번호</p>
+                                    </span>
+                            </div>
+                            <select id="findUserIdPhone1" class="form-control form-control-lg">
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="019">019</option>
+                            </select>
+                            <input type="text" class="form-control form-control-lg" id="findUserIdPhone2">
+                            <input type="text" class="form-control form-control-lg" id="findUserIdPhone3">
+                        </div>
+                    </div>
+                </div>
+                <div class="row border-top border-secondary">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="p-t-20">
+                                <button style="margin-top: 0.5rem;" class="btn btn-block btn-lg btn-info" type="submit" id="findUserId">아이디 찾기</button>
+                            </div>
+                            <div class="p-t-20">
+                                <div class="goLogin">
+                                    <a onclick="location.href = 'login'" style="cursor:pointer">로그인</a>
+                                </div>
+                                <div class="findPassword">
+                                    <!--<a href="findUserPassword">비밀번호 찾기</a>-->
+                                    <a onclick="location.href = 'findUserPassword'"  style="cursor:pointer">비밀번호 찾기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{js/jquery.min.js}"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{/js/findUserIdPassword.js}"></script>
+</body></html>

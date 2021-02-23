@@ -5,7 +5,7 @@ body {
 
 #userRegisterCancel,
 #userRegisterSuccess{border: 1px solid white; background-color: black; color: white}
-.colorBox{width: 105px;}
+.colorBox{width: 110px;}
 .mb-15 {
     margin-bottom: 15px !important; 
 }
@@ -41,4 +41,5 @@ p {
 .border-top { border-top: none!important; }
 .form-control { height: 45px; }
 .p-b-20 { padding-bottom: 20px; }
-.p-b-30 { padding-bottom: 0!important;}
+.p-b-30 { padding-bottom: 0!important; margin-top: 30px!important; }
+.auth-wrapper .auth-box { max-width: 450px; }

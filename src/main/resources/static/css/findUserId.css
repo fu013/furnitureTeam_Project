@@ -37,9 +37,9 @@ p {
     background-color: #131212;
 }
 .border-top { border-top: none!important; }
-.p-b-30 { padding-bottom: 0!important; }
-.p-t-20 { padding-top: 0!important; }
-.goRegister { float: left; }
+.p-b-30 { padding-bottom: 0!important; margin-top: 30px!important; }
+.p-t-20 { padding-top: 20px!important; }
+.goLogin { float: left; }
 .findPassword { text-align: right; }
 a { color: #6d6d6d;}
 .form-control { height: 45px; }

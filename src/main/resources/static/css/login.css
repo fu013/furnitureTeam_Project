@@ -24,7 +24,7 @@ body {
 
 .border-top { border-top: none!important; }
 .p-t-20 { padding-top: 20px!important;}
-.p-b-30 { padding-bottom: 0!important;}
+.p-b-30 { padding-bottom: 0!important; margin-top: 30px!important; }
 .findIdPassword { text-align: right; }
 .goRegister { float: left; }
 a { color: #6d6d6d;}
