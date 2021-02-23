@@ -24,29 +24,16 @@ $(document).ready(function () {
         const product_no = $("#review_productNo").val();
         const basket_data_json = { "basketProductNum": product_no };
         const basket_delete_data_json = { "deletePostNum": product_no };
-        if($("#basketIcon").hasClass("xi-cart-o")) {
-            $.ajax({
-                type: "post",
-                data: basket_data_json,
-                url: "/basketRegister",
-                dataType: "text",
-                success: function (data) {
-                    alert(data);
-                    $("#basket_button").find(".xi-cart-o").attr('class','xi-cart');
-                }
-            });
-        } else {
-            $.ajax({
-                type: "post",
-                data: basket_delete_data_json,
-                url: "/basketPostDelete",
-                dataType: "text",
-                success: function(data){
-                    alert("장바구니에서 제거되었습니다.");
-                    $("#basket_button").find(".xi-cart").attr('class','xi-cart-o');
-                }
-            });
-        }
+        $.ajax({
+            type: "post",
+            data: basket_data_json,
+            url: "/basketRegister",
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+                $("#basket_button").find(".xi-cart-o").attr('class','xi-cart');
+            }
+        });
     });
 
     // 숫자 타입에서 쓸 수 있도록 format() 함수 추가
@@ -70,5 +57,7 @@ $(document).ready(function () {
     };
 
     const productPrice = $(".productPrice").text();
-    $(".productPrice").text("가격 : " + productPrice.format() + " 원");
+    $(".productPrice").text(productPrice.format() + " ₩");
+    const productPrice2 = $(".productPrice2").text();
+    $(".productPrice2").text(productPrice2.format() + " ₩");
 });

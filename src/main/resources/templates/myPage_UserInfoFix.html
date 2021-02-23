@@ -19,7 +19,7 @@
 </head>
 <body>
     <!-- Search Wrapper Area -->
-    <div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>
+    <!--<div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>-->
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
@@ -40,43 +40,46 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">회원 정보 수정</h4>
-                                <form>
+                                <form onSubmit="return false;">
             
                                     <div class="form-group">
-                                        <label for="name">기존 비밀번호</label>
-                                        <input type="text" class="form-control" id="name" name="name" required="" autofocus="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email">새 비밀번호</label>
-                                        <input id="email" type="email" class="form-control" name="email" required="">
+                                        <label for="user_pw">새 비밀번호</label>
+                                        <input type="password" onchange="validatePw()" class="form-control" id="user_pw" name="user_pw" required="" autofocus="">
+                                        <input type="hidden" id="origin_password" th:value="${userInfo.getUserRegisterPassword()}" class="originUserPassword">
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">기존 이메일</label>
-                                        <input id="email" type="email" class="form-control" name="email" required="">
+                                        <label for="user_pw_c">비밀번호 확인</label>
+                                        <input type="password" onchange="validatePw_c()" class="form-control" id="user_pw_c" name="user_pw_c" required="">
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">이름</label>
-                                        <input id="email" type="email" class="form-control" name="email" required="">
+                                        <label for="user_email">이메일</label>
+                                        <input id="user_email" onchange="validateEmail()" type="email" class="form-control" name="fix_EMAIL" required="" th:value="${userInfo.getUserRegisterEmail()}">
+                                        <input type="hidden" th:value="${userInfo.getUserRegisterEmail()}" class="originUserEmail">
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">생년월일</label>
-                                        <input id="email" type="email" class="form-control" name="email" required="">
+                                        <label for="user_name">이름</label>
+                                        <input id="user_name" onchange="validateName()" type="text" class="form-control" th:value="${userInfo.getUserRegisterName()}" name="fix_NAME" required="">
+                                        <input type="hidden" th:value="${userInfo.getUserRegisterName()}" class="originUserName">
                                     </div>
                                     <p style="margin-bottom: .5rem;">휴대폰번호</p>
                                     <div class="input-group mb-15">
-                                        <select id="userRegisterPhone1" name="userRegisterPhone1" class="form-control">
-                                            <option value="010">010</option>
-                                            <option value="011">011</option>
-                                            <option value="019">019</option>
-                                        </select>
-                                        <input type="text" class="form-control form-control-lg" id="userRegisterPhone2">
-                                        <input type="text" class="form-control form-control-lg" id="userRegisterPhone3">
+                                        <select id="user_phone1" name="user_phone" class="form-control" style="display: none;">
+                                            <option value="010" th:selected="${userInfo?.getUserRegisterPhone1() eq '010'}" selected>010</option>
+                                            <option value="011" th:selected="${userInfo?.getUserRegisterPhone1() eq '011'}">011</option>
+                                            <option value="012" th:selected="${userInfo?.getUserRegisterPhone1() eq '012'}">012</option>
+                                            <option value="013" th:selected="${userInfo?.getUserRegisterPhone1() eq '013'}">013</option>
+                                            <option value="014" th:selected="${userInfo?.getUserRegisterPhone1() eq '014'}">014</option>
+                                            <option value="015" th:selected="${userInfo?.getUserRegisterPhone1() eq '015'}">015</option>
+                                            <option value="016" th:selected="${userInfo?.getUserRegisterPhone1() eq '016'}">016</option>
+                                            <option value="017" th:selected="${userInfo?.getUserRegisterPhone1() eq '017'}">017</option>
+                                            <option value="018" th:selected="${userInfo?.getUserRegisterPhone1() eq '018'}">018</option>
+                                            <option value="019" th:selected="${userInfo?.getUserRegisterPhone1() eq '019'}">019</option>
+                                        </select><div class="nice-select form-control" tabindex="0"><span class="current">010</span><ul class="list"><li data-value="010" class="option selected">010</li><li data-value="011" class="option">011</li><li data-value="019" class="option">019</li></ul></div>
+                                        <input type="tel" class="form-control form-control-lg" id="user_phone2" onchange="validatePhone2()" th:value="${userInfo.getUserRegisterPhone2()}">
+                                        <input type="tel" class="form-control form-control-lg" id="user_phone3" onchange="validatePhone3()" th:value="${userInfo.getUserRegisterPhone3()}">
                                     </div>
                                     <div class="form-group no-margin">
-                                        <a href="/index.html" class="btn amado-btnTwo btn-block">
-                                            수정 완료
-                                        </a>
+                                        <button type="button" id="btn_save" class="btn_save btn amado-btnTwo btn-block">수정</button>
                                     </div>
                                 </form>
                             </div>
@@ -101,6 +104,8 @@
     <script th:src="@{js/plugins.js}"></script>
     <!-- Active js -->
     <script th:src="@{js/active.js}"></script>
+    <!-- userInfoFix js -->
+    <script th:src="@{/js/userInfoFix.js}"></script>
 </body>
 
 </html>

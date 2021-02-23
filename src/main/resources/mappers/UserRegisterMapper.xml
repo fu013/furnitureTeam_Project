@@ -22,13 +22,20 @@
 	<select id = "passwordCheck" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
 		SELECT userRegisterPassword FROM userRegisterTable WHERE userRegisterId = #{loginId} AND userRegisterPassword = #{userRegisterPassword}
 	</select>
+	<select id="selectUserTable" resultType="our.example.furniture.dto.UserRegisterDto">
+		SELECT
+		*
+		from
+		userRegisterTable
+		WHERE
+		userRegisterId = #{loginId}
+	</select>
 	<update id = "userInfoChange" parameterType = "our.example.furniture.dto.UserRegisterDto">
 		UPDATE
 		userRegisterTable
 		SET
 		userRegisterPassword = #{userRegisterPassword},
 		userRegisterName = #{userRegisterName},
-		userRegisterBirth = #{userRegisterBirth},
 		userRegisterEmail = #{userRegisterEmail},
 		userRegisterPhone1 = #{userRegisterPhone1},
 		userRegisterPhone2 = #{userRegisterPhone2},

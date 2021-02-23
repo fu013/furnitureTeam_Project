@@ -65,8 +65,9 @@ CREATE TABLE Product_Review(
 	review_userNickname varchar2(40) null,
 	review_comment varchar2(500) not null,
 	review_size varchar2(40) not null,
-	review_satisfaction varchar2(40) not null,
+	review_satisfaction number(10) not null,
 	review_color varchar2(40) not null,
+	review_reason varchar2(40) not null,
 	create_date date default sysdate,
 	CONSTRAINTS FK2_product_no FOREIGN KEY(product_no)
 		REFERENCES Product(product_no) ON DELETE CASCADE

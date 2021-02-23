@@ -56,10 +56,14 @@ $(document).ready(function () {
         var uiProductPrice = document.getElementsByClassName("uiProductPrice");
         for (var i = 0; i < uiProductPrice.length; i++) {
            var string = uiProductPrice[i].innerHTML;
-           uiProductPrice[i].innerHTML = "가격 : " + string.format() + " 원";
+           uiProductPrice[i].innerHTML = "" + string.format() + " ₩";
         }
 
         $("#productCategoryNumberOfHouseholds, #productCategoryHomeScale, #productCategoryInterior, .minPrice, .maxPrice").on('change', function() {
             $('#categoryForm').submit();
+        });
+
+        $("#sortBydate").on('change', function() {
+            $('#searchTypeForm').submit();
         });
 });

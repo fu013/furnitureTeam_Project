@@ -130,7 +130,7 @@ $(document).ready(function() {
             dataType: "text",
             success: function(data){
                 alert(data);
-                location.href = "/";
+                location.href = '/';
             }
         })
     })

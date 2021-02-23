@@ -6,10 +6,11 @@ public class ReviewDTO extends CommonDTO {
     private String review_userNickname;
     private String review_comment;
     private String review_size;
-    private String review_satisfaction;
     private String review_color;
     private String create_date;
     private int total_review_num;
+    private int review_satisfaction;
+    private String review_reason;
 
     public int getProduct_no() {
         return product_no;
@@ -27,11 +28,11 @@ public class ReviewDTO extends CommonDTO {
         this.review_userNickname = review_userNickname;
     }
 
-    public String getReview_satisfaction() {
+    public int getReview_satisfaction() {
         return review_satisfaction;
     }
 
-    public void setReview_satisfaction(String review_satisfaction) {
+    public void setReview_satisfaction(int review_satisfaction) {
         this.review_satisfaction = review_satisfaction;
     }
 
@@ -81,5 +82,13 @@ public class ReviewDTO extends CommonDTO {
 
     public void setComment_no(int comment_no) {
         this.comment_no = comment_no;
+    }
+
+    public String getReview_reason() {
+        return review_reason;
+    }
+
+    public void setReview_reason(String review_reason) {
+        this.review_reason = review_reason;
     }
 }

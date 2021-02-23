@@ -45,9 +45,18 @@ public class TemplateController {
 
     // "/" url 요청시, template/index.html 로 DOM 랜더링
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(PostDTO params, Model model) {
+        List<PostDTO> indexPostList = postMapper.indexPostList(params);
+        for(int i = 0; i < indexPostList.size(); i++) {
+            if(indexPostList.get(i).getImg_url_main() == null) {
+                String a = "img/null.gif";
+                indexPostList.get(i).setImg_url_main(a);
+            }
+        }
+        model.addAttribute("indexPostList", indexPostList);
         return "index";
     }
+
     // login url 요청시, template/login.html 로 DOM 랜더링
     @GetMapping("/login")
     public String login(Model model) { return "login"; }

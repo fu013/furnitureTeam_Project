@@ -6,6 +6,7 @@ import our.example.furniture.page.PaginationInfo;
 import java.time.LocalDateTime;
 
 public class CommonDTO extends Pagination {
+
     // 페이징 정보
     private PaginationInfo paginationInfo;
 

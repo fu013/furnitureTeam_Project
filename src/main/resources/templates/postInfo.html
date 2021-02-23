@@ -13,13 +13,15 @@
     <!-- Favicon  -->
     <link rel="icon" th:href="@{img/core-img/favicon.ico}">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Core Style CSS -->
     <link rel="stylesheet" th:href="@{css/core-style.css}">
-    <link rel="stylesheet" th:href="@{style.css}">
 </head>
 <body>
-    <!-- Search Wrapper Area -->
-    <div th:replace="/fragments/searchWrapper.html :: fragment-searchWrapper"></div>
+
+    <div th:replace="/fragments/hiddenVal.html :: fragment-hiddenVal"></div>
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
@@ -39,9 +41,9 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mt-50">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Furniture</a></li>
-                                <li class="breadcrumb-item"><a href="#">Chairs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">white modern chair</li>
+                                <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                                <li class="breadcrumb-item"><a href="#">PostInfo</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${postInfo.getProductName()}"></li>
                             </ol>
                         </nav>
                     </div>
@@ -52,35 +54,21 @@
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" th:src="${postInfo.getImg_url_main()}" th:style="'background-image:url(' + ${postInfo.getImg_url_main()} + ');'">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pro-big-2.jpg);">
-                                    </li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pro-big-3.jpg);">
-                                    </li>
-                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pro-big-4.jpg);">
+                                    <li data-target="#product_details_slider" th:each="postImages, i: ${postImages}" th:src="${postImages.getImg_url_inner()}" th:data-slide-to="${i.count}" th:style="'background-image:url(' + ${postImages.getImg_url_inner()} + ');'">
                                     </li>
                                 </ol>
                                 <!-- carousel-item도 슬라이더 개수만큼 생성 -->
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <a class="gallery_img" href="img/product-img/pro-big-1.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-1.jpg" alt="First slide">
+                                        <a class="gallery_img" th:href="${postInfo.getImg_url_main()}">
+                                            <img class="d-block w-100" th:src="${postInfo.getImg_url_main()}" alt="First slide" style="height: 59vh;">
                                         </a>
                                     </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-2.jpg" alt="Second slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-3.jpg" alt="Third slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                    <div class="carousel-item" th:each="postImages : ${postImages}">
+                                        <a class="gallery_img">
+                                            <img class="d-block w-100" th:src="${postImages.getImg_url_inner()}" alt="Second slide" style="height: 59vh;">
                                         </a>
                                     </div>
                                 </div>
@@ -92,9 +80,9 @@
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">$180</p>
+                                <p class="product-price productPrice" th:text="${postInfo.getProductPrice()}"></p>
                                 <a href="product-details.html">
-                                    <h6>White Modern Chair</h6>
+                                    <h6 th:text="${postInfo.getProductName()}"></h6>
                                 </a>
                                 <!-- Ratings & Review -->
                                 <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -106,7 +94,13 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
                                     <div class="review">
-                                        <a href="#">Write A Review</a>
+                                        <a href="#">
+                                            <span><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                            <span th:text="': ' + ${postInfo.getProductView()}"></span>
+                                            &nbsp;&nbsp;
+                                            <span><i class="fa fa-heart" aria-hidden="true"></i></span>
+                                            <span th:text="': ' + ${postInfo.getLikeNum()}"></span>
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- Avaiable -->
@@ -115,13 +109,13 @@
 
                             <div class="short_overview my-5">
                                 <h6>GuideLine</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
+                                <p th:text="${postInfo.getProductGuideline()} ? ${postInfo.getProductGuideline()} : '가이드라인 없음'"></p>
                             </div>
 
                             <div class="products--meta">
-                                <p><span>Color:</span> <span>White</span></p>
-                                <p><span>Tags:</span> <span>plants, green, cactus </span></p>
-                                <p><span>Price:</span> <span>200,000</span></p>
+                                <p><span>Color:</span> <span th:text="${postInfo.getProductColor()}"></span></p>
+                                <p><span>Tags:</span> <span th:text="${postInfo.getProductCategoryNumberOfHouseholds()}+ ', ' + ${postInfo.getProductCategoryHomeScale()}+ ', ' + ${postInfo.getProductCategoryInterior()}"></span></p>
+                                <p><span>Price:</span> <span class="productPrice2" th:text="${postInfo.getProductPrice()}"></span></p>
                                 <p>
                                     <span>Share on:</span>
                                     <span>
@@ -134,7 +128,7 @@
                             </div>
 
                             <!-- Add to Cart Form -->
-                            <form class="cart clearfix" method="post">
+                            <form class="cart clearfix" method="post" onSubmit="return false;">
                                 <div class="cart-btn d-flex mb-50">
                                     <p>Qty</p>
                                     <div class="quantity">
@@ -143,12 +137,12 @@
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
-                                <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add To Cart</button>
-                                <button type="submit" name="like" value="5" class="btn amado-btn">
-                                    <i class="xi-heart-o" style="font-size: 4rem; vertical-align: inherit; color: black;" id="likeIcon"></i>
+                                <button type="button" name="basket" id="basket_button" value="5" class="btn amado-btn basket">Add To Cart</button>
+                                <button type="button" name="like" value="5" class="btn btn-primary amado-btn like_button" style="color: black;">
+                                    좋아요
                                 </button>
-                                <button type="submit" name="dibs" value="5" class="btn amado-btn">
-                                    <i class="xi-gift-o" style="font-size: 4rem; vertical-align: inherit; color: black;" id="dibsIcon"></i>
+                                <button type="button" name="dibs" value="5" class="btn btn-primary amado-btn dibs_button" style="color: black;">
+                                    찜하기
                                 </button>
                             </form>
                         </div>
@@ -162,121 +156,109 @@
                             <!-- Tabs -->
                             <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
                                 <li class="nav-item">
-                                    <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
+                                    <a href="#description" class="nav-link active" data-toggle="tab" role="tab">제품 설명</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
+                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">댓글<span class="text-muted" th:text="'(' +${params.getTotal_review_num()} + ')'"></span></a>
                                 </li>
                             </ul>
                             <!-- Tab Content -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="description">
                                     <div class="description_area">
-                                        <p>Sed a facilisis orci. Curabitur magna urna, varius placerat placerat sodales, pretium vitae orci. Aliquam erat volutpat. Cras sit amet suscipit magna. Quisque turpis odio, facilisis vel eleifend eu, dignissim ac odio.</p>
-                                        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In scelerisque augue at the moment mattis. Proin vitae arcu sit amet justo sollicitudin tincidunt sit amet ut velit.Proin placerat vel augue eget euismod. Phasellus cursus orci eu tellus vestibulum, vestibulum urna accumsan. Vestibulum ut ullamcorper sapien. Pellentesque molestie, est ac vestibulum eleifend, lorem ipsum mollis ipsum.</p>
+                                        <p th:text="${postInfo.getProductComment()} ? ${postInfo.getProductComment()} : '설명 없음'" style="text-align: center;"></p>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="reviews">
                                     <div class="reviews_area">
                                         <ul>
-                                            <li>
-                                                <div class="single_user_review mb-15">
+                                            <li class="review_spot">
+                                                <!-- 댓글하나 -->
+                                                <div class="single_user_review mb-15" th:each="reviewInfo : ${reviewInfo}">
                                                     <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Quality</span>
+                                                        <span style="margin-right: 2px;"th:each="starRepeat : *{#numbers.sequence( 1, reviewInfo.getReview_satisfaction())}">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span th:text="'for ' + ${reviewInfo.getReview_reason()}"></span>
                                                     </div>
+                                                    <p class="content" style="margin: 5px 0;" th:text="${reviewInfo.getReview_comment()}"></p>
+                                                    <input type="hidden" class="comment_no" th:value="${reviewInfo.getComment_no()}"/>
+                                                    <button type='button' class='btn btn-primary fix_button smallBtn'>수정</button>
+                                                    <button type='button' class='btn btn-primary delete_button smallBtn'>삭제</button>
                                                     <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
-                                                    </div>
-                                                </div>
-                                                <div class="single_user_review mb-15">
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Design</span>
-                                                    </div>
-                                                    <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
-                                                    </div>
-                                                </div>
-                                                <div class="single_user_review">
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Value</span>
-                                                    </div>
-                                                    <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                        <p>by <a href="#" th:text="${reviewInfo.getReview_userNickname()}"></a> on <span th:text="${reviewInfo.getCreate_date()}"></span></p>
                                                     </div>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
+                                    <th:block layout:frament="paging">
+                                        <nav th:replace="/fragments/pagination.html :: pagination"></nav>
+                                    </th:block>
+                                    <!-- 버튼클릭시 상태에 맞는 현재페이지 쿼리스트링 값 변경 -->
+                                    <th:block layout:fragment="script">
+                                        <script th:inline="javascript">
+                                            /*<![CDATA[*/
+                                            function movePage(uri, queryString) {
+                                                location.href = uri + queryString;
+                                            }
+                                            /*]]>*/
+                                        </script>
+                                    </th:block>
 
                                     <div class="submit_a_review_area mt-50">
-                                        <h4>Submit A Review</h4>
-                                        <form action="#" method="post">
+                                        <h4>댓글을 남겨보세요</h4>
+                                        <form action="#" method="post" onSubmit="return false;">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group d-flex align-items-center">
                                                         <span class="mr-15">Your Ratings:</span>
                                                         <div class="stars">
-                                                            <input type="radio" name="star" class="star-1" id="star-1">
-                                                            <label class="star-1" for="star-1">1</label>
-                                                            <input type="radio" name="star" class="star-2" id="star-2">
-                                                            <label class="star-2" for="star-2">2</label>
-                                                            <input type="radio" name="star" class="star-3" id="star-3">
-                                                            <label class="star-3" for="star-3">3</label>
-                                                            <input type="radio" name="star" class="star-4" id="star-4">
-                                                            <label class="star-4" for="star-4">4</label>
-                                                            <input type="radio" name="star" class="star-5" id="star-5">
-                                                            <label class="star-5" for="star-5">5</label>
+                                                            <input type="radio" name="review_satisfaction" class="star-1 review_satisfaction" id="star-1" value="1">
+                                                            <label class="star-1" for="star-1"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-2 review_satisfaction" id="star-2" value="2">
+                                                            <label class="star-2" for="star-2"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-3 review_satisfaction" id="star-3" value="3">
+                                                            <label class="star-3" for="star-3"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-4 review_satisfaction" id="star-4" value="4">
+                                                            <label class="star-4" for="star-4"></label>
+                                                            <input type="radio" name="review_satisfaction" class="star-5 review_satisfaction" id="star-5" value="5">
+                                                            <label class="star-5" for="star-5"></label>
                                                             <span></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
-                                                        <label for="name">Nickname</label>
-                                                        <input type="email" class="form-control" id="name" placeholder="Nazrul">
+                                                        <label for="review_nickname">NickName</label>
+                                                        <input type="text" class="form-control" id="review_nickname" placeholder="닉네임을 입력하세요">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
-                                                        <label for="options">Reason for your rating</label>
-                                                        <select class="form-control" id="options">
-                                                              <option>Quality</option>
-                                                              <option>Value</option>
-                                                              <option>Design</option>
-                                                              <option>Price</option>
-                                                              <option>Others</option>
+                                                        <label for="review_reason">Reason for your rating</label>
+                                                        <select class="form-control" id="review_reason">
+                                                              <option value="Quality">Quality</option>
+                                                              <option value="Value">Value</option>
+                                                              <option value="Design">Design</option>
+                                                              <option value="Price">Price</option>
+                                                              <option value="Others">Others</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="comments">Comments</label>
-                                                        <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
+                                                        <label for="review_comment">Comments</label>
+                                                        <textarea class="form-control" id="review_comment" rows="5" data-max-length="150" placeholder="150자 이내로 적어주세요."></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <button type="submit" class="btn alazea-btn">Submit Your Review</button>
+                                                    <button type="submit" class="btn alazea-btn" id="review_button">댓글 등록</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -287,68 +269,27 @@
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
-    <!-- ##### Newsletter Area End ##### -->
-
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer_area clearfix">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Single Widget Area -->
-                <div class="col-12 col-lg-4">
-                    <div class="single_widget_area">
-                        <!-- Logo -->
-                        <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
-                        </div>
-                        <!-- Copywrite Text -->
-                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                </div>
-                <!-- Single Widget Area -->
-                <div class="col-12 col-lg-8">
-                    <div class="single_widget_area">
-                        <!-- Footer Menu -->
-                        <div class="footer_menu">
-                            <nav class="navbar navbar-expand-lg justify-content-end">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-                                <div class="collapse navbar-collapse" id="footerNavContent">
-                                    <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">홈</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">상품</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">로그인</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="checkout.html">회원가입</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ##### Footer Area End ##### -->
+    <!-- ##### Footer Area ##### -->
+    <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script th:src="@{js/jquery/jquery-2.2.4.min.js}"></script>
     <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
+    <script th:src="@{js/popper.min.js}"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
     <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
+    <script th:src="@{js/plugins.js}"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
-
+    <script th:src="@{js/active.js}"></script>
+    <!-- postWriter js -->
+    <script th:src="@{/js/postInfo.js}"></script>
+    <!-- review js -->
+    <script th:src="@{/js/review.js}"></script>
+    <!-- dibs js -->
+    <script th:src="@{/js/dibs.js}"></script>
+    <!-- like js -->
+    <script th:src="@{/js/like.js}"></script>
 </body>
 
 </html>
