@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Favicon icon -->
     <link rel="icon" th:href="@{img/core-img/favicon.ico}">
@@ -15,7 +14,7 @@
     <!-- Title -->
     <title>SJFurniture_findUserId</title>
 
-    <!-- Custom CSS -->
+    <!-- Core Style CSS -->
     <link th:href="@{css/style.min.css}" rel="stylesheet">
     <link th:href="@{css/findUserId.css}" rel="stylesheet">
 </head>
@@ -25,11 +24,14 @@
     <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-white">
         <div class="auth-box bg-white border-top border-secondary" style="margin: 0;">
             <div>
+                <!-- SJFurniture 로고 -> 클릭하면 메인페이지 -->
                 <div class="text-center p-t-20 p-b-20">
                     <a href="/">
-                        <span class="db"><img src="img/core-img/logo.png" alt="logo" /></span>
+                        <span class="db"><img src="img/core-img/logo.png" alt="logo"/></span>
                     </a>
                 </div>
+
+                <!-- 아이디 찾기 정보 입력 -->
                 <div class="row p-b-30">
                     <div class="col-12">
                         <!--이름-->
@@ -39,8 +41,10 @@
                                         <p>이름</p>
                                     </span>
                             </div>
-                            <input type="text" class="form-control form-control-lg" placeholder="이름을 입력해주세요" id="findUserIdName">
+                            <input type="text" class="form-control form-control-lg" placeholder="이름을 입력해주세요"
+                                   id="findUserIdName">
                         </div>
+
                         <!-- email -->
                         <div class="input-group mb-25">
                             <div class="input-group-prepend">
@@ -48,8 +52,10 @@
                                         <p>이메일</p>
                                     </span>
                             </div>
-                            <input type="text" class="form-control form-control-lg" placeholder="이메일을 입력해주세요" id="findUserIdEmail" required>
+                            <input type="text" class="form-control form-control-lg" placeholder="이메일을 입력해주세요"
+                                   id="findUserIdEmail" required>
                         </div>
+
                         <!--전화번호-->
                         <div class="input-group mb-25">
                             <div class="input-group-prepend">
@@ -67,19 +73,27 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 조회, 찾기 링크 -->
                 <div class="row border-top border-secondary">
                     <div class="col-12">
                         <div class="form-group">
+                            <!-- 아이디 찾기 -->
                             <div class="p-t-20">
-                                <button style="margin-top: 0.5rem;" class="btn btn-block btn-lg btn-info" type="submit" id="findUserId">아이디 찾기</button>
+                                <button style="margin-top: 0.5rem;" class="btn btn-block btn-lg btn-info" type="submit"
+                                        id="findUserId">아이디 찾기
+                                </button>
                             </div>
+
                             <div class="p-t-20">
+                                <!-- 로그인 페이지 이동 -->
                                 <div class="goLogin">
                                     <a onclick="location.href = 'login'" style="cursor:pointer">로그인</a>
                                 </div>
+
+                                <!-- 비밀번호 찾기 페이지 이동 -->
                                 <div class="findPassword">
-                                    <!--<a href="findUserPassword">비밀번호 찾기</a>-->
-                                    <a onclick="location.href = 'findUserPassword'"  style="cursor:pointer">비밀번호 찾기</a>
+                                    <a onclick="location.href = 'findUserPassword'" style="cursor:pointer">비밀번호 찾기</a>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +104,8 @@
     </div>
 </div>
 <script th:src="@{js/jquery.min.js}"></script>
-<!-- Bootstrap tether Core JavaScript -->
 <script th:src="@{js/bootstrap.min.js}"></script>
 <script th:src="@{/js/findUserIdPassword.js}"></script>
-</body></html>
+
+</body>
+</html>

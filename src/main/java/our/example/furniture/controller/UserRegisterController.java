@@ -43,6 +43,7 @@ public class UserRegisterController {
         }
         return result;
     }
+
     // 회원가입 Email 중복 체크
     @ResponseBody
     @PostMapping("/emailOverlapCheck")
@@ -55,6 +56,7 @@ public class UserRegisterController {
         }
         return result;
     }
+
     // 기존 비밀번호가 맞는지 체크(인증 절차)
     @ResponseBody
     @PostMapping("/passwordCheck")
@@ -68,6 +70,7 @@ public class UserRegisterController {
         }
         return result;
     }
+
     // 회원정보 수정 요청에 대한 응답
     @ResponseBody
     @PostMapping("/userInfoChange")
@@ -76,6 +79,7 @@ public class UserRegisterController {
         userRegisterMapper.userInfoChange(userRegisterDto);
         return "회원정보가 수정되었습니다(자동 재로그인).";
     }
+
     // 회원정보 탈퇴 요청에 대한 응답
     @ResponseBody
     @PostMapping("/userWithdrawal")
@@ -90,6 +94,7 @@ public class UserRegisterController {
         }
         return "회원탈퇴가 완료되었습니다.";
     }
+
     // 회원 정보 수정 - 보안 :: 기존 비밀번호 입력 페이지
     @GetMapping("/myPage_passwordCheck")
     public String myPage_passwordCheck(Model model, UserRegisterDto userRegisterDto, HttpServletResponse response, HttpSession session) throws IOException {
@@ -108,6 +113,7 @@ public class UserRegisterController {
         }
         return "myPage_passwordCheck";
     }
+
     // 회원 탈퇴 - 보안 :: 기존 비밀번호 입력 페이지
     @GetMapping("/myPage_passwordCheck2")
     public String myPage_passwordCheck2(Model model, UserRegisterDto userRegisterDto, HttpServletResponse response, HttpSession session) throws IOException {

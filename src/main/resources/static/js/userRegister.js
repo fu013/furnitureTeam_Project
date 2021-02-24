@@ -2,12 +2,13 @@ window.onload = function() {
 	// 아이디, 비밀번호는 영문자로 시작하는 6~20자 영문자 또는 숫자
 	var idPwJ = /^[a-z]+[a-z0-9]{5,19}$/i;
 	// 이메일은 숫자, 알파벳, 대문자 가능 + @ + 영어, 숫자조합, 대문자 가능 + com들어오는 자리는 2~3자리만 가능
-	var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 	// 이름은 2~6자리 한글만 가능
 	var nameJ = /^[가-힣]{2,6}$/;
 	// 핸드폰번호는 숫자로 3~4자리만 가능
 	var phoneJ = /^[0-9]{3,4}$/;
 
+    // 아이디 중복확인 버튼 js -> 공백, 유효성 검사 후 json요청
 	$("#idOverlap").on('click', function(e) {
               const idVal = $("#userRegisterId").val();
               const idOverlap_data_json = {
@@ -28,12 +29,19 @@ window.onload = function() {
                      url : '/idOverlapCheck',
                      dataType : "text",
                      success : function(data) {
-                       alert(data);
+                        alert(data);
+                        if(data == "이 아이디는 사용가능합니다."){
+                            $("input[name='checkedId']").val('Y');
+                        }
+                        else {
+                            $("input[name='checkedId']").val('');
+                        }
                      }
                 });
               }
            });
 
+    // 이메일 중복확인 버튼 js -> 공백, 유효성 검사 후 json요청
      $("#emailOverlap").on('click', function(e){
             const emailVal = $("#userRegisterEmail").val();
             const emailOverlap_data_json = {
@@ -55,11 +63,18 @@ window.onload = function() {
                     dataType : "text",
                     success : function(data) {
                         alert(data);
+                        if(data == "이 이메일은 사용가능합니다."){
+                            $("input[name='checkedEmail']").val('Y');
+                        }
+                        else {
+                            $("input[name='checkedEmail']").val('');
+                        }
                     }
                 })
             }
      })
 
+    // 회원가입 버튼을 누르면 유효성 검사 후 formData로 요청
 	$("#userRegisterSuccess").on('click', function(e) {
 		var id = document.getElementById("userRegisterId");
 		var pw = document.getElementById("userRegisterPassword");
@@ -83,6 +98,11 @@ window.onload = function() {
 			id.focus();
 			e.preventDefault;
 			return false;
+		}
+		else if ($("input[name='checkedId']").val()=="") {
+		    alert("아이디 중복 확인을 해주세요");
+		    e.preventDefault;
+		    return false;
 		}
 		else if (pw.value == "") {
 			alert("비밀번호를 입력해 주세요");
@@ -136,6 +156,11 @@ window.onload = function() {
 			email.focus();
 			e.preventDefault;
 			return false;
+		}
+		else if($("input[name='checkedEmail']").val()=="") {
+		    alert("이메일 중복 확인을 해주세요");
+		    e.preventDefault;
+		    return false;
 		}
 		else if (phone2.value == ""){
 			alert("전화번호를 입력해 주세요");

@@ -1,5 +1,6 @@
 // 로그인 AJAX 요청
 $(document).ready(function() {
+    // 로그인 버튼을 누르면 공백인지 검사 후 json요청
 	$("#loginSuccess").on('click', function (e) {
 		const idVal = $("#loginId").val();
 		const pwVal = $("#loginPassword").val();

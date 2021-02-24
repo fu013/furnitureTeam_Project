@@ -2,7 +2,7 @@ $(document).ready(function() {
 	// 아이디, 비밀번호는 영문자로 시작하는 6~20자 영문자 또는 숫자
 	var idPwJ = /^[a-z]+[a-z0-9]{5,19}$/i;
 
-    // 아이디 찾기
+    // 아이디 찾기 js -> 공백 검사 후 json요청
     $("#findUserId").on('click', function(e) {
         const nameVal = $("#findUserIdName").val();
         const emailVal = $("#findUserIdEmail").val();
@@ -45,7 +45,7 @@ $(document).ready(function() {
         }
     })
 
-    // 비밀번호 찾기
+    // 비밀번호 찾기 js -> 공백 검사 후 json요청
     $("#findUserPassword").on('click', function(e) {
         const idVal = $("#findUserPasswordId").val();
         const nameVal = $("#findUserPasswordName").val();
@@ -99,7 +99,7 @@ $(document).ready(function() {
         }
     })
 
-    // 비밀번호 수정
+    // 비밀번호 수정 js -> 공백, 유효성 검사 후 json요청
     $("#modifySuccess").on('click', function(e){
         const passwordVal = $("#modifyPassword").val();
         const passwordReVal = $("#modifyRePassword").val();
