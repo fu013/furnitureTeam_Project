@@ -15,11 +15,15 @@ import our.example.furniture.repository.MyPageMapper;
 import our.example.furniture.repository.PostMapper;
 import our.example.furniture.repository.UserRegisterMapper;
 import our.example.furniture.service.PostService;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -152,8 +156,7 @@ public class MyPageController {
                 myPageMapper.InsertDibs(params);
                 result = "찜 목록에 추가되었습니다.";
             } else {
-                myPageMapper.DeleteDibs(params);
-                result = "찜 목록에서 삭제되었습니다.";
+                result = "이미 찜 목록에 등록되있습니다.";
             }
         }
         return result;
@@ -174,10 +177,60 @@ public class MyPageController {
                 myPageMapper.UpdateLike(params);
                 result = "좋아요가 등록되었습니다.";
             } else {
-                myPageMapper.DeleteLike(params);
-                myPageMapper.UpdateLike(params);
-                result = "좋아요에서 삭제되었습니다.";
+                result = "이미 좋아요에 등록되있습니다.";
             }
+        }
+        return result;
+    }
+
+    // 찜 게시물 삭제 [체크박스]
+    @ResponseBody
+    @PostMapping("/dibsPostDelete")
+    public String dibsPostDelete(int deletePostNum, HttpSession session, PostDTO postDTO) {
+        if(session.getAttribute("loginUser") != null) {
+            List<Integer> deletePostNumList = new ArrayList<Integer>();
+            postDTO.setUserLoginId(session.getAttribute("loginUser").toString());
+            deletePostNumList.add(deletePostNum);
+            for (int i = 0; i < deletePostNumList.size(); i++) {
+                postDTO.setProduct_no(deletePostNumList.get(i));
+                log.info(deletePostNumList.get(i));
+                myPageMapper.DeleteDibs(postDTO);
+            }
+        }
+        return null;
+    }
+
+    // 업로드 게시물 삭제 [체크박스]
+    @ResponseBody
+    @PostMapping("/uploadPostDelete")
+    public String uploadPostDelete(int deletePostNum, HttpSession session, HttpServletRequest request, HttpServletResponse response, PostDTO postDTO) {
+        if(session.getAttribute("loginUser") != null) {
+            List<Integer> deletePostNumList = new ArrayList<Integer>();
+            List<String> deletePostNameList = new ArrayList<String>();
+            deletePostNumList.add(deletePostNum);
+            deletePostNameList.add(postDTO.getProductName());
+            postDTO.setUserLoginId(session.getAttribute("loginUser").toString());
+            for (int i = 0; i < deletePostNumList.size(); i++) {
+                String cookieName = "ViewPostName" + deletePostNumList.get(i).toString();
+                Cookie cookie = new Cookie(cookieName, deletePostNameList.get(i));
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                postDTO.setProduct_no(deletePostNumList.get(i));
+                myPageMapper.DeleteUploadPost(postDTO);
+            }
+        }
+        return null;
+    }
+    @ResponseBody
+    @PostMapping("/uploadPostFixed")
+    public String uploadPostFixed(HttpSession session, PostDTO params) {
+        String result = "";
+        if(session.getAttribute("loginUser") != null) {
+            params.setUserLoginId(session.getAttribute("loginUser").toString());
+            myPageMapper.UpdatePost(params);
+            result = "게시물이 성공적으로 수정되었습니다.";
+        } else {
+            result = "게시물 수정이 실패했습니다.";
         }
         return result;
     }

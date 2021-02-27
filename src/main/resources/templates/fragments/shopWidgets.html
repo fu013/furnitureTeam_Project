@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <div th:fragment="fragment-shopWidgets" class="shop_sidebar_area">
         <form action="shop" method="get" id="categoryForm">
-            <div class="widget brands mb-50" style="z-index: 1;">
+            <div class="widget brands mb-50" style="z-index: 2;">
                 <!-- Widget Title -->
                 <input type="hidden" th:value="${params?.currentPageNo}" name="currentPageNo"/>
                 <input type="hidden" th:value="${params?.recordsPerPage}" name="recordsPerPage"/>
@@ -36,21 +36,6 @@
 
             <!-- ##### Single Widget ##### -->
             <div class="widget color mt-230 mb-50" style="z-index: 0; margin-top: 230px;">
-                <!-- Widget Title -->
-                <h6 class="widget-title mb-30">ColorFilter</h6>
-
-                <div class="widget-desc">
-                    <ul class="d-flex">
-                        <li><a href="#" class="color1"></a></li>
-                        <li><a href="#" class="color2"></a></li>
-                        <li><a href="#" class="color3"></a></li>
-                        <li><a href="#" class="color4"></a></li>
-                        <li><a href="#" class="color5"></a></li>
-                        <li><a href="#" class="color6"></a></li>
-                        <li><a href="#" class="color7"></a></li>
-                        <li><a href="#" class="color8"></a></li>
-                    </ul>
-                </div>
             </div>
 
             <!-- ##### Single Widget ##### -->

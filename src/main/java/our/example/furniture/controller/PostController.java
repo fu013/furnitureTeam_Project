@@ -38,6 +38,7 @@ public class PostController {
     private Log log = LogFactory.getLog(this.getClass());
 
     // 상품 게시글 작성 POST 요청 처리
+    @ResponseBody
     @PostMapping("/productRegister")
     public String productRegister(PostDTO postDTO, HttpSession session) throws Exception {
         String userLoginId = session.getAttribute("loginUser").toString();
@@ -48,13 +49,17 @@ public class PostController {
             List<MainImageInfoDto> MainImageLogic = uploadMainImage.MainImageLogic(postDTO);
             postMapper.InsertMainImage(MainImageLogic);
         }
-
+        String alert = "";
         // 내부 이미지에 요청값이 있는지 검사하고, 있을 경우에만 Mapper SQL 실행
         if(postDTO.getProductImg().length >= 1 && !postDTO.getProductImg()[0].isEmpty()) {
-            List<InnerImagesInfoDto> InnerImageLogic = uploadInnerImages.InnerImagesLogic(postDTO);
-            postMapper.InsertInnerImages(InnerImageLogic);
+            if(postDTO.getProductImg().length > 3) {
+                alert = "부가이미지 개수가 3개보다 많습니다.";
+            } else {
+                List<InnerImagesInfoDto> InnerImageLogic = uploadInnerImages.InnerImagesLogic(postDTO);
+                postMapper.InsertInnerImages(InnerImageLogic);
+            }
         }
-        return "index";
+        return alert;
     }
 
     // 상품 상세페이지 URL 요청처리 (상품 및 댓글 조회)
@@ -122,6 +127,8 @@ public class PostController {
     public List<ReviewDTO> ReqReview(ReviewDTO params) {
         postMapper.WriteComment(params);
         List<ReviewDTO> reviewInfo = postReviewService.getReviewList(params);
+        log.info(reviewInfo.get(0).getReview_userNickname());
+        log.info(reviewInfo.get(0).getReview_comment());
         return reviewInfo;
     }
 

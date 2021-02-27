@@ -102,6 +102,14 @@
         WHERE
         Product_like.product_no = #{product_no} AND Product_like.userRegisterId = #{userLoginId}
     </delete>
+    <!-- 업로드한 게시물 삭제 -->
+    <delete id="DeleteUploadPost" parameterType="our.example.furniture.dto.PostDTO">
+        DELETE
+        FROM
+        Product
+        WHERE
+        Product.product_no = #{product_no} AND Product.userRegisterId = #{userLoginId}
+    </delete>
 
     <!-- 게시물 테이블에 좋아요 상태 변경 -->
     <update id="UpdateLike" parameterType="our.example.furniture.dto.PostDTO">
@@ -111,5 +119,16 @@
         likeNum = (SELECT Count(*) from Product_Like WHERE Product_Like.Product_no = #{product_no})
         WHERE
         Product.Product_no = #{product_no}
+    </update>
+    <update id="UpdatePost" parameterType="our.example.furniture.dto.PostDTO">
+        UPDATE
+        Product
+        SET
+        Product.productPrice = #{productPrice},
+        Product.productName = #{productName},
+        Product.productSize = #{productSize},
+        Product.productColor = #{productColor}
+        WHERE
+        Product.Product_no = #{product_no} AND Product.userRegisterId = #{userLoginId}
     </update>
 </mapper>

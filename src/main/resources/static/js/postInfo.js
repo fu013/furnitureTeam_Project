@@ -31,7 +31,6 @@ $(document).ready(function () {
             dataType: "text",
             success: function (data) {
                 alert(data);
-                $("#basket_button").find(".xi-cart-o").attr('class','xi-cart');
             }
         });
     });
