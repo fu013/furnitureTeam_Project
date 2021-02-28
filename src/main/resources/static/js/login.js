@@ -25,8 +25,10 @@ $(document).ready(function() {
 				url : '/loginSuccess',
                 dataType: "text",
 				success: function(data) {
-                    location.href = "/";
                     alert(data);
+                    if(data == "로그인에 성공했습니다.") {
+                        location.href = "/";
+                    }
                 }
 			});
 		}

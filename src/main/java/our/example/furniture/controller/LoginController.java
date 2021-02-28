@@ -36,7 +36,7 @@ public class LoginController {
             session.setMaxInactiveInterval(60*60);
             result = "로그인에 성공했습니다.";
         } else { // 로그인 실패
-            result = "아이디나 비밀번호가 일치하지않아 로그인에 실패했습니다.";
+            result = "아이디나 비밀번호가 일치하지 않습니다.";
         }
         return result;
     }
