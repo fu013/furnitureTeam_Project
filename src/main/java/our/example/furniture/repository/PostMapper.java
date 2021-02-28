@@ -1,12 +1,10 @@
 package our.example.furniture.repository;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import our.example.furniture.dto.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 // 상품 게시물관련 Mapper
 @Mapper
@@ -14,8 +12,8 @@ public interface PostMapper {
 
     // 게시물 작성시 - 데이터베이스에 데이터 추가하는 Method
     void insertProductInfo(PostDTO params);
-    void InsertInnerImages(List<InnerImagesInfoDto> params) throws IOException;
-    void InsertMainImage(List<MainImageInfoDto> params) throws IOException;
+    void InsertInnerImages(List<InnerImagesInfoDTO> params) throws IOException;
+    void InsertMainImage(List<MainImageInfoDTO> params) throws IOException;
 
     // 게시물 조회수 카운트
     void UpdateProductView(PostDTO params);

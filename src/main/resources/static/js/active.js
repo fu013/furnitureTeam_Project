@@ -9,11 +9,11 @@
          if (this.href === path) {
             $(this).parent().addClass('active');
             $(this).parent().siblings().removeClass('active');
-            if (path.includes('shop') == true) {
-                $('.search-nav').css( "display", "block");
-            }
          }
      });
+     if (path.includes('shop') == true) {
+         $('.search-nav').css( "display", "block");
+     }
      if (path.includes('myPage') == true) {
          $('.mainMenu li').removeClass('active');
          $('.myPage_CurrentView').parent().addClass('active');

@@ -13,16 +13,16 @@
 		#{userRegisterName}, #{userRegisterBirth}, #{userRegisterGender}, #{userRegisterEmail},
 		#{userRegisterPhone1}, #{userRegisterPhone2}, #{userRegisterPhone3})
 	</insert>
-	<select id = "idOverlap" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
+	<select id = "idOverlap" parameterType = "our.example.furniture.dto.UserRegisterDTO" resultType = "String">
 		SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{idOverlapCheck}
 	</select>
-	<select id = "emailOverlap" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
+	<select id = "emailOverlap" parameterType = "our.example.furniture.dto.UserRegisterDTO" resultType = "String">
 		SELECT userRegisterEmail FROM userRegisterTable WHERE userRegisterEmail = #{emailOverlapCheck}
 	</select>
-	<select id = "passwordCheck" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
+	<select id = "passwordCheck" parameterType = "our.example.furniture.dto.UserRegisterDTO" resultType = "String">
 		SELECT userRegisterPassword FROM userRegisterTable WHERE userRegisterId = #{loginId} AND userRegisterPassword = #{userRegisterPassword}
 	</select>
-	<select id="selectUserTable" resultType="our.example.furniture.dto.UserRegisterDto">
+	<select id="selectUserTable" resultType="our.example.furniture.dto.UserRegisterDTO">
 		SELECT
 		*
 		from
@@ -30,7 +30,7 @@
 		WHERE
 		userRegisterId = #{loginId}
 	</select>
-	<update id = "userInfoChange" parameterType = "our.example.furniture.dto.UserRegisterDto">
+	<update id = "userInfoChange" parameterType = "our.example.furniture.dto.UserRegisterDTO">
 		UPDATE
 		userRegisterTable
 		SET
@@ -43,7 +43,7 @@
 		WHERE
 		userRegisterId = #{loginId}
 	</update>
-	<delete id="userInfoDelete" parameterType = "our.example.furniture.dto.UserRegisterDto">
+	<delete id="userInfoDelete" parameterType = "our.example.furniture.dto.UserRegisterDTO">
 		DELETE
 		FROM
 		userRegisterTable

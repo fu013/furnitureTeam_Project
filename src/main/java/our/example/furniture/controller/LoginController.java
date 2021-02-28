@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import our.example.furniture.dto.UserRegisterDto;
+import our.example.furniture.dto.UserRegisterDTO;
 import our.example.furniture.repository.LoginMapper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+// 로그인 관련 컨트롤러
 @Controller
 public class LoginController {
     @Autowired
@@ -26,7 +27,7 @@ public class LoginController {
     // 로그인 요청
     @ResponseBody
     @PostMapping("/loginSuccess")
-    public String loginSuccess(UserRegisterDto userRegisterDto, HttpServletRequest request, Model model) {
+    public String loginSuccess(UserRegisterDTO userRegisterDto, HttpServletRequest request, Model model) {
         String result = loginMapper.overlapLogin(userRegisterDto);
         // 로그인 성공
         if (result != null) {
@@ -40,7 +41,6 @@ public class LoginController {
         }
         return result;
     }
-
     // 로그아웃 요청
     @GetMapping("/logout")
     public void logout(HttpSession session, HttpServletResponse response) throws IOException {
@@ -53,11 +53,10 @@ public class LoginController {
         out.println("</script>");
         out.close();
     }
-
     // 아이디 찾기
     @ResponseBody
     @PostMapping("/findUserId")
-    public String findUserId(UserRegisterDto userRegisterDto) {
+    public String findUserId(UserRegisterDTO userRegisterDto) {
         String result = loginMapper.findId(userRegisterDto);
         if(result == null) {
             result = "일치하는 정보가 없습니다.";
@@ -66,11 +65,10 @@ public class LoginController {
         }
         return result;
     }
-
     // 비밀번호 찾기
     @ResponseBody
     @PostMapping("/findUserPassword")
-    public String findUserPassword(UserRegisterDto userRegisterDto, HttpSession session) {
+    public String findUserPassword(UserRegisterDTO userRegisterDto, HttpSession session) {
         String result = loginMapper.findPassword(userRegisterDto);
         if(result == null) {
             result = "일치하는 정보가 없습니다.";
@@ -82,11 +80,10 @@ public class LoginController {
         }
         return result;
     }
-
     // 비밀번호 수정
     @ResponseBody
     @PostMapping("/modifyUserPassword")
-    public String modifyPassword(UserRegisterDto userRegisterDto, HttpSession session) {
+    public String modifyPassword(UserRegisterDTO userRegisterDto, HttpSession session) {
         userRegisterDto.setUserRegisterId(session.getAttribute("tempUserId").toString());
         String result = loginMapper.modifyPassword(userRegisterDto);
         result = "회원님의 비밀번호가 변경되었습니다.";

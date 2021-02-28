@@ -53,8 +53,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <form class="">
-                                        <div class="position-relative form-group"><label for="name" class="">상품명</label><input
-                                                name="productName" id="name" placeholder="상품명을 입력해주세요." type="text" class="form-control">
+                                        <div class="position-relative form-group"><label for="productName" class="">상품명</label><input
+                                                name="productName" id="productName" placeholder="상품명을 입력해주세요. (최대 40자)" maxlength="40" type="text" class="form-control">
                                         </div>
                                         <div class="position-relative form-group">
                                             <label for="exampleSelect" class="">
@@ -104,16 +104,18 @@
                                             <label for="exampleSelect" class="">
                                                 상품색상선택
                                             </label><select name="productColor" id="exampleSelect" class="form-control">
-                                                <option value="Red" selected="selected">Red</option>
-                                                <option value="Blue">Blue</option>
-                                                <option value="Green">Green</option>
-                                                <option value="Black">Black</option>
-                                                <option value="White">White</option>
-                                                <option value="Pink">Pink</option>
+                                                <option value="white" selected="selected">white</option>
+                                                <option value="gray">gray</option>
+                                                <option value="black">black</option>
+                                                <option value="blue">blue</option>
+                                                <option value="red">red</option>
+                                                <option value="yellow">yellow</option>
+                                                <option value="orange">orange</option>
+                                                <option value="brown">brown</option>
                                             </select>
                                         </div>
-                                        <div class="position-relative form-group"><label for="name" class="">상품가격</label><input
-                                                name="productPrice" id="name" placeholder="상품가격을 입력해주세요.(숫자만 가능)" type="text" class="form-control">
+                                        <div class="position-relative form-group"><label for="productPrice" class="">상품가격</label><input
+                                                name="productPrice" id="productPrice" placeholder="상품가격을 입력해주세요.(숫자만 가능)" type="text" maxlength="10" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control">
                                         </div>
                                         <div class="position-relative form-group">
                                             <grammarly-extension data-grammarly-shadow-root="true"
@@ -138,7 +140,7 @@
                                                 <span class="input-group-text">상품-부가이미지(3장)</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input type="file" name="productImg[]" class="custom-file-input" id="inputGroupFile01" multiple="true">
+                                                <input type="file" name="productImg[]" class="custom-file-input" id="inputGroupFile01" multiple="true" maxlength="3">
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose Images</label>
                                             </div>
                                         </div>

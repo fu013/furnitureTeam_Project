@@ -31,8 +31,8 @@
         </foreach>
     </insert>
     <insert id="WriteComment" parameterType="our.example.furniture.dto.ReviewDTO">
-        INSERT INTO Product_Review(comment_no, product_no, review_satisfaction, review_comment, review_size, review_color, review_reason)
-        VALUES (REVIEW_AUTO_INCREMENT.NEXTVAL, #{product_no}, #{review_satisfaction}, #{review_comment}, #{review_size}, #{review_color}, #{review_reason})
+        INSERT INTO Product_Review(comment_no, product_no, review_satisfaction, review_comment, review_size, review_color, review_reason, review_userNickname)
+        VALUES (REVIEW_AUTO_INCREMENT.NEXTVAL, #{product_no}, #{review_satisfaction}, #{review_comment}, #{review_size}, #{review_color}, #{review_reason}, #{review_userNickname})
     </insert>
     <update id="UpdateProductView" parameterType="our.example.furniture.dto.PostDTO">
         UPDATE Product SET productView = #{productView} + 1 WHERE Product_no = #{product_no}

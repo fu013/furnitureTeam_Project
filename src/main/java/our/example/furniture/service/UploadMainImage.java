@@ -1,7 +1,7 @@
 package our.example.furniture.service;
 
 import org.springframework.stereotype.Component;
-import our.example.furniture.dto.MainImageInfoDto;
+import our.example.furniture.dto.MainImageInfoDTO;
 import our.example.furniture.dto.PostDTO;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.List;
 public class UploadMainImage {
     private static final String SAVE_PATH_MAIN = "/images/main";
 
-    public List<MainImageInfoDto> MainImageLogic(PostDTO postDTO) throws IOException {
+    public List<MainImageInfoDTO> MainImageLogic(PostDTO postDTO) throws IOException {
 
         // 메인 이미지 - 원래 이름
         String mainImgName = postDTO.getProductMainImg().getOriginalFilename();
@@ -27,9 +27,9 @@ public class UploadMainImage {
         String imgURL = "/main/" + saveFileName;
 
         // 메인 이미지 - 이미지 리스트
-        List<MainImageInfoDto> MainImageList = new ArrayList<>();
+        List<MainImageInfoDTO> MainImageList = new ArrayList<>();
 
-        MainImageInfoDto mainImgDto = new MainImageInfoDto();
+        MainImageInfoDTO mainImgDto = new MainImageInfoDTO();
         mainImgDto.setSaveImageName(saveFileName);
         mainImgDto.setExtName(extName);
         mainImgDto.setFileSize(mainImgSize);

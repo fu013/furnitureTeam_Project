@@ -51,12 +51,14 @@
                         </thead>
                         <tbody>
                           <!-- 상품 하나-->
-                          <tr th:each="selectDibsPostList : ${selectDibsPostList}">
-                            <td class="product-thumbnail">
+                          <tr class="dibs_product_tr" th:each="selectDibsPostList : ${selectDibsPostList}">
+                            <td class="product-thumbnail inner_td" style="position: relative;">
+                                <input type="checkbox" class="inner_checkbox" name="dibs_item_s" style="margin: 0; padding: 0; position: absolute; width: 20px; left: 20px; top: 20px; height: 20px; line-height: 20px;"/>
                                 <a th:href="'postInfo?post_no=' + ${selectDibsPostList.getProduct_no()}">
                                     <img th:src="${selectDibsPostList.getImg_url_main()}" alt="Image" class="img-fluid" style="height: 15vh; width: 100%;">
                                 </a>
                             </td>
+                            <input type="hidden" class="dibs_item_num" th:value="${selectDibsPostList.getProduct_no()}">
                             <td class="product-name">
                               <h2 class="h5 text-black" th:text="${selectDibsPostList.getProductName()}"></h2>
                             </td>
@@ -66,7 +68,7 @@
                               </div>
                             </td>
                             <td>$49.00</td>
-                            <td><a href="#" class="btn amado-btnTwo btn-sm">CheckBox</a></td>
+                            <td class="basket_button_td"><button type="button" class="btn amado-btnTwo btn-sm basket_button">장바구니 담기</button></td>
                           </tr>
                         </tbody>
                       </table>
@@ -76,14 +78,17 @@
 
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="row mb-5">
-                      <div class="col-md-6 mb-3 mb-md-0">
-                        <button class="btn amado-btnTwo btn-sm btn-block">Add To Cart</button>
+                      <div class="row mb-5">
+                          <div class="col-md-6 mb-3">
+                              <button class="btn amado-btnOutline btn-sm btn-block all_item_select">상품 전체선택</button>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                              <button class="btn amado-btnOutline btn-sm btn-block all_item_deselect">전체선택해제</button>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                              <button class="btn amado-btnTwo btn-sm btn-block selected_item_delete">선택상품 삭제</button>
+                          </div>
                       </div>
-                      <div class="col-md-6">
-                        <button class="btn amado-btnOutline btn-sm btn-block">Remove All Selected</button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -120,6 +125,8 @@
     <script th:src="@{js/active.js}"></script>
     <!-- Index js -->
     <script th:src="@{/js/index.js}"></script>
+    <!-- dibsCheck js -->
+    <script th:src="@{/js/dibsCheck.js}"></script>
 </body>
 
 </html>

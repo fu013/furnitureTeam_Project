@@ -1165,16 +1165,6 @@ img {
 .pagination {
   position: relative;
   z-index: 1; }
-  .pagination .page-item .page-link {
-    width: 40px;
-    height: 40px;
-    border: none;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 40px;
-    padding: 0;
-    text-align: center;
-    color: #242424; }
     .pagination .page-item .page-link:hover, .pagination .page-item .page-link:focus {
       color: #fff;
       box-shadow: none;
@@ -1291,21 +1281,21 @@ img {
         position: relative;
         z-index: 1;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); }
-        .widget.color .widget-desc ul li a.color1 {
+        .widget.color .widget-desc ul li a.white {
           background-color: #ffffff; }
-        .widget.color .widget-desc ul li a.color2 {
+        .widget.color .widget-desc ul li a.gray {
           background-color: #969696; }
-        .widget.color .widget-desc ul li a.color3 {
+        .widget.color .widget-desc ul li a.black {
           background-color: #030303; }
-        .widget.color .widget-desc ul li a.color4 {
+        .widget.color .widget-desc ul li a.blue {
           background-color: #0315ff; }
-        .widget.color .widget-desc ul li a.color5 {
+        .widget.color .widget-desc ul li a.red {
           background-color: #dc0647; }
-        .widget.color .widget-desc ul li a.color6 {
+        .widget.color .widget-desc ul li a.yellow {
           background-color: #fff56a; }
-        .widget.color .widget-desc ul li a.color7 {
+        .widget.color .widget-desc ul li a.orange {
           background-color: #f26e51; }
-        .widget.color .widget-desc ul li a.color8 {
+        .widget.color .widget-desc ul li a.brown {
           background-color: #9a8777; }
   .widget.brands .form-check {
     margin-bottom: 25px; }

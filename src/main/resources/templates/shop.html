@@ -60,6 +60,33 @@
             -o-transform:scale(1.2);
             transform:scale(1.2);
         }
+        #colorCircle {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 50%;
+            background-color: #ffffff;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 3px rgb(0 0 0 / 15%);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+        }
+        #colorCircle.white {
+          background-color: #ffffff; }
+        #colorCircle.gray {
+          background-color: #969696; }
+        #colorCircle.black {
+          background-color: #030303; }
+        #colorCircle.blue {
+          background-color: #0315ff; }
+        #colorCircle.red {
+          background-color: #dc0647; }
+        #colorCircle.yellow {
+          background-color: #fff56a; }
+        #colorCircle.orange {
+          background-color: #f26e51; }
+        #colorCircle.brown {
+          background-color: #9a8777; }
     </style>
 </head>
 <body>
@@ -141,19 +168,7 @@
                                 </div>
                                 <!-- Ratings & Cart -->
                                 <div class="ratings-cart text-right">
-                                    <a
-                                        href="#" class="color2" style="
-                                        width: 20px;
-                                        height: 20px;
-                                        display: inline-block;
-                                        border-radius: 50%;
-                                        background-color: #ffffff;
-                                        position: relative;
-                                        z-index: 1;
-                                        box-shadow: 0 0 3px rgb(0 0 0 / 15%);
-                                        background-color: #0315ff;
-                                        ">
-                                    </a>
+                                    <a href="#" id="colorCircle" th:class="${postList.getProductColor()}"></a>
                                     <div class="ratings">
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -169,8 +184,6 @@
                                             <span><i class="fa fa-heart" aria-hidden="true" style="color: #6b6b6b; font-size: 14px;"></i></span>
                                             <span th:text="': ' + ${postList.getLikeNum()}"></span>
                                         </text>
-                                        &nbsp;
-                                        <a href="basket" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
                                     </div>
                                 </div>
                             </div>
