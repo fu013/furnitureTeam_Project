@@ -1,6 +1,6 @@
 package our.example.furniture.dto;
 
-    public class MainImageInfoDto {
+    public class MainImageInfoDTO {
         private String saveImageName;
         private String extName;
         private Long FileSize;

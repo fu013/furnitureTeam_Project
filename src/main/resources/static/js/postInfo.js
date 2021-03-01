@@ -31,7 +31,6 @@ $(document).ready(function () {
             dataType: "text",
             success: function (data) {
                 alert(data);
-                $("#basket_button").find(".xi-cart-o").attr('class','xi-cart');
             }
         });
     });
@@ -57,7 +56,7 @@ $(document).ready(function () {
     };
 
     const productPrice = $(".productPrice").text();
-    $(".productPrice").text(productPrice.format() + " ₩");
+    $(".productPrice").text(productPrice.format() + "₩");
     const productPrice2 = $(".productPrice2").text();
-    $(".productPrice2").text(productPrice2.format() + " ₩");
+    $(".productPrice2").text(productPrice2.format() + "₩");
 });

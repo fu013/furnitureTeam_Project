@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import our.example.furniture.dto.InnerImagesInfoDto;
+import our.example.furniture.dto.InnerImagesInfoDTO;
 import our.example.furniture.dto.PostDTO;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -46,18 +46,18 @@ public class UploadInnerImages {
     }
 
 
-    public List<InnerImagesInfoDto> InnerImagesLogic(PostDTO postDTO) throws IOException {
+    public List<InnerImagesInfoDTO> InnerImagesLogic(PostDTO postDTO) throws IOException {
 
         // 이너 이미지 배열 형식으로 데이터 받아오기
         MultipartFile[] images = postDTO.getProductImg();
 
         // 이너 이미지(다중) - 데이터 담을 리스트(HashMap Data) 생성
-        List<InnerImagesInfoDto> imagesList = new ArrayList<>();
+        List<InnerImagesInfoDTO> imagesList = new ArrayList<>();
 
 
         for (int i = 0; i < images.length; i++) {
             // Dto 생성
-            InnerImagesInfoDto imageInfoDto = new InnerImagesInfoDto();
+            InnerImagesInfoDTO imageInfoDto = new InnerImagesInfoDTO();
 
             // 이너 이미지(다중) - 원래 이름
             String innerImagesName = images[i].getOriginalFilename();

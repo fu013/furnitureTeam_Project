@@ -5,23 +5,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
         >
 <mapper namespace = "our.example.furniture.repository.LoginMapper">
-    <!-- 로그인 요청 데이터 SELECT -->
-    <select id="overlapLogin" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType="String">
+    <select id="overlapLogin" parameterType = "our.example.furniture.dto.UserRegisterDTO" resultType="String">
         SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
         AND userRegisterPassword = #{userRegisterPassword}
     </select>
-
-    <!-- 아이디 찾기 -->
-    <select id="findId" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
+    <select id="findId" parameterType="our.example.furniture.dto.UserRegisterDTO" resultType="String">
         SELECT userRegisterId FROM userRegisterTable WHERE userRegisterName = #{userRegisterName}
         AND userRegisterEmail = #{userRegisterEmail}
         AND userRegisterPhone1 = #{userRegisterPhone1}
         AND userRegisterPhone2 = #{userRegisterPhone2}
         AND userRegisterPhone3 = #{userRegisterPhone3}
     </select>
-
-    <!-- 비밀번호 찾기 -->
-    <select id="findPassword" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
+    <select id="findPassword" parameterType="our.example.furniture.dto.UserRegisterDTO" resultType="String">
         SELECT userRegisterPassword FROM userRegisterTable WHERE userRegisterId = #{userRegisterId}
         AND userRegisterName = #{userRegisterName}
         AND userRegisterEmail = #{userRegisterEmail}
@@ -29,9 +24,7 @@
         AND userRegisterPhone2 = #{userRegisterPhone2}
         AND userRegisterPhone3 = #{userRegisterPhone3}
     </select>
-
-    <!-- 비밀번호 수정 -->
-    <select id="modifyPassword" parameterType="our.example.furniture.dto.UserRegisterDto" resultType="String">
+    <select id="modifyPassword" parameterType="our.example.furniture.dto.UserRegisterDTO" resultType="String">
         UPDATE userRegisterTable
         SET userRegisterPassword = #{userRegisterPassword}, userRegisterRePassword = #{userRegisterRePassword}
         WHERE userRegisterId = #{userRegisterId}

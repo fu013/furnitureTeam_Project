@@ -1,21 +1,21 @@
 package our.example.furniture.repository;
 
 import org.apache.ibatis.annotations.Mapper;
-import our.example.furniture.dto.UserRegisterDto;
+import our.example.furniture.dto.UserRegisterDTO;
 
 // 회원가입 관련 Mapper
 @Mapper
 public interface UserRegisterMapper {
-	void insertUserRegister(UserRegisterDto userRegisterDto);
-	String idOverlap(UserRegisterDto userRegisterDto);
-	String emailOverlap(UserRegisterDto userRegisterDto);
+	void insertUserRegister(UserRegisterDTO userRegisterDto);
+	String idOverlap(UserRegisterDTO userRegisterDto);
+	String emailOverlap(UserRegisterDTO userRegisterDto);
 	
 	// 회원정보수정시 기존비밀번호를 한번 더 체크
-	String passwordCheck(UserRegisterDto userRegisterDto);
+	String passwordCheck(UserRegisterDTO userRegisterDto);
 	// 회원정보수정
-	void userInfoChange(UserRegisterDto userRegisterDto);
+	void userInfoChange(UserRegisterDTO userRegisterDto);
 	// 회원탈퇴
-	void userInfoDelete(UserRegisterDto userRegisterDto);
+	void userInfoDelete(UserRegisterDTO userRegisterDto);
 	// 회원수정 - 유저정보
-	UserRegisterDto selectUserTable(UserRegisterDto userRegisterDto);
+	UserRegisterDTO selectUserTable(UserRegisterDTO userRegisterDto);
 }

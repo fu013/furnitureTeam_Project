@@ -5,7 +5,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
         >
 <mapper namespace = "our.example.furniture.repository.UserRegisterMapper">
-	<!-- 회원가입 db insert -->
 	<insert id = "insertUserRegister">
 		INSERT INTO userRegisterTable(userRegisterId, userRegisterPassword, userRegisterRePassword,
 		userRegisterName, userRegisterBirth, userRegisterGender, userRegisterEmail,
@@ -14,24 +13,16 @@
 		#{userRegisterName}, #{userRegisterBirth}, #{userRegisterGender}, #{userRegisterEmail},
 		#{userRegisterPhone1}, #{userRegisterPhone2}, #{userRegisterPhone3})
 	</insert>
-
-	<!-- 아이디 중복확인 버튼 -->
-	<select id = "idOverlap" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
+	<select id = "idOverlap" parameterType = "our.example.furniture.dto.UserRegisterDTO" resultType = "String">
 		SELECT userRegisterId FROM userRegisterTable WHERE userRegisterId = #{idOverlapCheck}
 	</select>
-
-	<!-- 이메일 중복확인 버튼 -->
-	<select id = "emailOverlap" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
+	<select id = "emailOverlap" parameterType = "our.example.furniture.dto.UserRegisterDTO" resultType = "String">
 		SELECT userRegisterEmail FROM userRegisterTable WHERE userRegisterEmail = #{emailOverlapCheck}
 	</select>
-
-	<!-- 기존 비밀번호가 맞는지 체크(인증 절차) -->
-	<select id = "passwordCheck" parameterType = "our.example.furniture.dto.UserRegisterDto" resultType = "String">
+	<select id = "passwordCheck" parameterType = "our.example.furniture.dto.UserRegisterDTO" resultType = "String">
 		SELECT userRegisterPassword FROM userRegisterTable WHERE userRegisterId = #{loginId} AND userRegisterPassword = #{userRegisterPassword}
 	</select>
-
-	<!-- 회원수정 - 유저정보 -->
-	<select id="selectUserTable" resultType="our.example.furniture.dto.UserRegisterDto">
+	<select id="selectUserTable" resultType="our.example.furniture.dto.UserRegisterDTO">
 		SELECT
 		*
 		from
@@ -39,9 +30,7 @@
 		WHERE
 		userRegisterId = #{loginId}
 	</select>
-
-	<!-- 회원정보수정 -->
-	<update id = "userInfoChange" parameterType = "our.example.furniture.dto.UserRegisterDto">
+	<update id = "userInfoChange" parameterType = "our.example.furniture.dto.UserRegisterDTO">
 		UPDATE
 		userRegisterTable
 		SET
@@ -54,9 +43,7 @@
 		WHERE
 		userRegisterId = #{loginId}
 	</update>
-
-	<!-- 회원탈퇴 -->
-	<delete id="userInfoDelete" parameterType = "our.example.furniture.dto.UserRegisterDto">
+	<delete id="userInfoDelete" parameterType = "our.example.furniture.dto.UserRegisterDTO">
 		DELETE
 		FROM
 		userRegisterTable

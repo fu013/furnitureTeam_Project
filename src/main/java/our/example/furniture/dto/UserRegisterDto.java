@@ -1,6 +1,6 @@
 package our.example.furniture.dto;
 
-public class UserRegisterDto {
+public class UserRegisterDTO {
     private String userRegisterId;
     private String userRegisterPassword;
     private String userRegisterRePassword;

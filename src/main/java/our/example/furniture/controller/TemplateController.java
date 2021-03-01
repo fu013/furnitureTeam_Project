@@ -61,25 +61,21 @@ public class TemplateController {
     @GetMapping("/login")
     public String login(Model model) { return "login"; }
 
-    // postWriter url 요청시, template/postWriter.html 로 DOM 랜더링
+    // postWriter url 요청시, template/login.html 로 DOM 랜더링
     @GetMapping("/postWriter")
     public String postWriter(Model model) { return "postWriter"; }
 
-    // userRegister url 요청시, template/userRegister.html 로 DOM 랜더링
+    // userRegister url 요청시, template/login.html 로 DOM 랜더링
     @GetMapping("/userRegister")
     public String register(Model model) {
         return "userRegister";
     }
     
-    // findUserId url 요청시, template/findUserId.html 로 DOM 랜더링
+    // findUserIdPassword[아이디, 비밀번호 찾기, 수정] :: Template Mapping
     @GetMapping("/findUserId")
     public String findUserId(Model model) { return "findUserId"; }
-
-    // findUserPassword url 요청시, template/findUserPassword.html 로 DOM 랜더링
     @GetMapping("/findUserPassword")
     public String findUserPassword(Model model) { return "findUserPassword"; }
-
-    // modifyUserPassword url 요청시, template/modifyUserPassword.html 로 DOM 랜더링
     @GetMapping("/modifyUserPassword")
     public String modifyUserPassword(Model model) { return "modifyUserPassword"; }
 }

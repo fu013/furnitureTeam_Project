@@ -16,6 +16,11 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" th:href="@{css/core-style.css}">
     <link rel="stylesheet" th:href="@{style.css}">
+    <style>
+        .nice-select {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <!-- Search Wrapper Area -->
@@ -41,33 +46,60 @@
                       <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <th class="product-thumbnail">Image</th>
-                            <th class="product-name">Product</th>
-                            <th class="product-price">Price</th>
-                            <th class="product-quantity">Size</th>
-                            <th class="product-total">Total</th>
-                            <th class="product-remove">SelectBox</th>
+                              <th class="product-thumbnail">Image</th>
+                              <th class="product-name">Product</th>
+                              <th class="product-price">Price</th>
+                              <th class="product-quantity">Size</th>
+                              <th class="product-color">Color</th>
+                              <th class="product-remove">SelectBox</th>
                           </tr>
                         </thead>
                         <tbody>
                             <!-- 상품 하나-->
-                            <tr th:each="selectUploadPostList : ${selectUploadPostList}">
+                            <tr class="upload_product_tr" th:each="selectUploadPostList : ${selectUploadPostList}">
                                 <a th:href="'postInfo?post_no=' + ${selectUploadPostList.getProduct_no()}">
-                                    <td class="product-thumbnail">
+                                    <td class="product-thumbnail inner_td" style="position: relative;">
+                                        <input type="checkbox" class="inner_checkbox" name="upload_item_s" style="margin: 0; padding: 0; position: absolute; width: 20px; left: 20px; top: 20px; height: 20px; line-height: 20px;"/>
                                         <a th:href="'postInfo?post_no=' + ${selectUploadPostList.getProduct_no()}">
                                             <img th:src="${selectUploadPostList.getImg_url_main()}" alt="Image" class="img-fluid" style="height: 15vh; width: 100%;">
                                         </a>
                                     </td>
-                                    <td class="product-name">
-                                        <h2 class="h5 text-black" th:text="${selectUploadPostList.getProductName()}"></h2>
+                                    <input type="hidden" class="upload_item_num" th:value="${selectUploadPostList.getProduct_no()}">
+                                    <input type="hidden" class="upload_product_name" th:value="${selectUploadPostList.getProductName()}">
+                                    <td class="product_name_td">
+                                        <h2 class="h5 text-black product_name" th:text="${selectUploadPostList.getProductName()}"></h2>
+                                        <input type="text" class="fix_product_name form-control" style="display: none;" placeholder="상품명 수정(최대40자)" maxlength="40">
                                     </td>
-                                    <td class="uiProductPrice" th:text="${selectUploadPostList.getProductPrice()}"></td>
-                                    <td>
-                                        <div class="input-group mb-3" style="max-width: 120px;" th:text="${selectUploadPostList.getProductSize()}">
-                                        </div>
+                                    <td class="product_price_td">
+                                        <text class="uiProductPrice product_price" th:text="${selectUploadPostList.getProductPrice()}"></text>
+                                        <input type="text" class="fix_product_price form-control" style="display: none;" placeholder="상품가격 수정(최대10자리)" maxlength="10" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                     </td>
-                                    <td>$49.00</td>
-                                    <td><a href="#" class="btn amado-btnTwo btn-sm">CheckBox</a></td>
+                                    <td class="product_size_td">
+                                        <div class="input-group mb-3 product_size" style="max-width: 120px;" th:text="${selectUploadPostList.getProductSize()}"></div>
+                                        <select name="productSize" class="fix_product_size" style="display: none; height: 38px;">
+                                            <option value="Small" selected="selected">Small</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Large">Large</option>
+                                            <option value="XLarge">XLarge</option>
+                                            <option value="XXLarge">XXLarge</option>
+                                        </select>
+                                    </td>
+                                    <td class="product_color_td">
+                                        <text class="product_color">red</text>
+                                        <select name="productColor" class="fix_product_color" style="display: none; height: 38px;">
+                                            <option value="white" selected="selected">white</option>
+                                            <option value="gray">gray</option>
+                                            <option value="black">black</option>
+                                            <option value="blue">blue</option>
+                                            <option value="red">red</option>
+                                            <option value="yellow">yellow</option>
+                                            <option value="orange">orange</option>
+                                            <option value="brown">brown</option>
+                                        </select>
+                                    </td>
+                                    <td class="FixPost fix_button_td">
+                                        <a href="#" class="btn amado-btnTwo btn-sm fix_button">수정</a>
+                                    </td>
                                 </a>
                             </tr>
                         </tbody>
@@ -79,12 +111,15 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="row mb-5">
-                      <div class="col-md-6 mb-3 mb-md-0">
-                        <button class="btn amado-btnTwo btn-sm btn-block">Add To Cart</button>
-                      </div>
-                      <div class="col-md-6">
-                        <button class="btn amado-btnOutline btn-sm btn-block">Remove All Selected</button>
-                      </div>
+                        <div class="col-md-6 mb-3">
+                            <button class="btn amado-btnOutline btn-sm btn-block all_item_select">상품 전체선택</button>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <button class="btn amado-btnOutline btn-sm btn-block all_item_deselect">전체선택해제</button>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <button class="btn amado-btnTwo btn-sm btn-block selected_item_delete">선택상품 삭제</button>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -122,6 +157,8 @@
     <script th:src="@{js/active.js}"></script>
     <!-- Index js -->
     <script th:src="@{/js/index.js}"></script>
+    <!-- uploadCheck js -->
+    <script th:src="@{/js/uploadCheck.js}"></script>
 </body>
 
 </html>

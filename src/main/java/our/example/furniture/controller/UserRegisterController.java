@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import our.example.furniture.dto.UserRegisterDto;
+import our.example.furniture.dto.UserRegisterDTO;
 import our.example.furniture.repository.UserRegisterMapper;
 
 import javax.servlet.http.Cookie;
@@ -26,7 +26,7 @@ public class UserRegisterController {
 
     // 등록 성공시 Data Insert
     @PostMapping("/userRegisterSuccess")
-    public String temp2(UserRegisterDto userRegisterDto) {
+    public String temp2(UserRegisterDTO userRegisterDto) {
         userRegisterMapper.insertUserRegister(userRegisterDto);
         return "index";
     }
@@ -34,7 +34,7 @@ public class UserRegisterController {
     // 회원가입 ID 중복 체크
     @ResponseBody
     @PostMapping("/idOverlapCheck")
-    public String idOverlapCheck(UserRegisterDto userRegisterDto) {
+    public String idOverlapCheck(UserRegisterDTO userRegisterDto) {
         String result = userRegisterMapper.idOverlap(userRegisterDto);
         if(result == null) {
             result = "이 아이디는 사용가능합니다.";
@@ -43,11 +43,10 @@ public class UserRegisterController {
         }
         return result;
     }
-
     // 회원가입 Email 중복 체크
     @ResponseBody
     @PostMapping("/emailOverlapCheck")
-    public String emailOverlapCheck(UserRegisterDto userRegisterDto) {
+    public String emailOverlapCheck(UserRegisterDTO userRegisterDto) {
         String result = userRegisterMapper.emailOverlap(userRegisterDto);
         if(result == null) {
             result = "이 이메일은 사용가능합니다.";
@@ -56,11 +55,10 @@ public class UserRegisterController {
         }
         return result;
     }
-
     // 기존 비밀번호가 맞는지 체크(인증 절차)
     @ResponseBody
     @PostMapping("/passwordCheck")
-    public String passwordCheck(UserRegisterDto userRegisterDto, HttpSession session) {
+    public String passwordCheck(UserRegisterDTO userRegisterDto, HttpSession session) {
         userRegisterDto.setLoginId(session.getAttribute("loginUser").toString());
         String result = userRegisterMapper.passwordCheck(userRegisterDto);
         if(result == null) {
@@ -70,20 +68,18 @@ public class UserRegisterController {
         }
         return result;
     }
-
     // 회원정보 수정 요청에 대한 응답
     @ResponseBody
     @PostMapping("/userInfoChange")
-    public String userInfoChange(UserRegisterDto userRegisterDto, HttpSession session) {
+    public String userInfoChange(UserRegisterDTO userRegisterDto, HttpSession session) {
         userRegisterDto.setLoginId(session.getAttribute("loginUser").toString());
         userRegisterMapper.userInfoChange(userRegisterDto);
         return "회원정보가 수정되었습니다(자동 재로그인).";
     }
-
     // 회원정보 탈퇴 요청에 대한 응답
     @ResponseBody
     @PostMapping("/userWithdrawal")
-    public String userWithdrawal(UserRegisterDto userRegisterDto, HttpServletRequest request) {
+    public String userWithdrawal(UserRegisterDTO userRegisterDto, HttpServletRequest request) {
         userRegisterMapper.userInfoDelete(userRegisterDto);
 
         Cookie[] cookies = request.getCookies();
@@ -94,10 +90,9 @@ public class UserRegisterController {
         }
         return "회원탈퇴가 완료되었습니다.";
     }
-
     // 회원 정보 수정 - 보안 :: 기존 비밀번호 입력 페이지
     @GetMapping("/myPage_passwordCheck")
-    public String myPage_passwordCheck(Model model, UserRegisterDto userRegisterDto, HttpServletResponse response, HttpSession session) throws IOException {
+    public String myPage_passwordCheck(Model model, UserRegisterDTO userRegisterDto, HttpServletResponse response, HttpSession session) throws IOException {
         if(session.getAttribute("loginUser") == null) {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();
@@ -108,15 +103,14 @@ public class UserRegisterController {
             out.close();
         } else {
             userRegisterDto.setLoginId(session.getAttribute("loginUser").toString());
-            UserRegisterDto userInfo = userRegisterMapper.selectUserTable(userRegisterDto);
+            UserRegisterDTO userInfo = userRegisterMapper.selectUserTable(userRegisterDto);
             model.addAttribute("userInfo", userInfo);
         }
         return "myPage_passwordCheck";
     }
-
     // 회원 탈퇴 - 보안 :: 기존 비밀번호 입력 페이지
     @GetMapping("/myPage_passwordCheck2")
-    public String myPage_passwordCheck2(Model model, UserRegisterDto userRegisterDto, HttpServletResponse response, HttpSession session) throws IOException {
+    public String myPage_passwordCheck2(Model model, UserRegisterDTO userRegisterDto, HttpServletResponse response, HttpSession session) throws IOException {
         if(session.getAttribute("loginUser") == null) {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();
@@ -127,7 +121,7 @@ public class UserRegisterController {
             out.close();
         } else {
             userRegisterDto.setLoginId(session.getAttribute("loginUser").toString());
-            UserRegisterDto userInfo = userRegisterMapper.selectUserTable(userRegisterDto);
+            UserRegisterDTO userInfo = userRegisterMapper.selectUserTable(userRegisterDto);
             model.addAttribute("userInfo", userInfo);
         }
         return "myPage_passwordCheck2";
