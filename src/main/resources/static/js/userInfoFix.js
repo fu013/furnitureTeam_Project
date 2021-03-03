@@ -63,51 +63,28 @@ function validatePhone3(){
 
 //   // 첫번쨰자리 010~ 019 가능 , 두번쨰 0~9 3,4자리, 3번쨰 무조건4자리
 window.onload = function() {
-/*    $("#check_repeat_email").on('click', function () {
-    let user_email = document.getElementById('user_email').value;
-    if (mailJ.test(user_email) == false) {
-      alert('메일 형식에 맞게 입력해주세요.');
-    } else if (user_email == '') {
-      alert('이메일을 입력해주세요.');
-    } else {
-      const user_email_data_json = {
-          "emailOverlapCheck":user_email
-      };
-      $.ajax({
-        type: "post",
-        data: user_email_data_json,
-        url: "/emailOverlapCheck",
-        dataType: "text",
-        success: function(data) {
-          alert(data);
-          document.getElementById('duplicate_check_email').value = data;
-        }
-      });
-    }
-    });
-
-    $("#check_repeat_pw").on('click', function () {
-      let user_origin_password = document.getElementById('origin_password').value;
-      if (pwJ.test(user_origin_password) == false) {
-        alert('비밀번호 형식에 맞게 입력해주세요.');
-      } else if (user_origin_password == '') {
-        alert('기존 비밀번호를 입력해주세요.');
-      } else {
-        const user_password_data_json = {
-            "userRegisterPassword":user_origin_password
+    $("#check_repeat_email").on('click', function () {
+        let user_email = document.getElementById('user_email').value;
+        if (mailJ.test(user_email) == false) {
+        alert('메일 형식에 맞게 입력해주세요.');
+        } else if (user_email == '') {
+        alert('이메일을 입력해주세요.');
+        } else {
+        const user_email_data_json = {
+            "emailOverlapCheck":user_email
         };
         $.ajax({
-          type: "post",
-          data: user_password_data_json,
-          url: "/passwordCheck",
-          dataType: "text",
-          success: function(data) {
-            alert(data);
-            document.getElementById('duplicate_check_pw').value = data;
-          }
-        });
-      }
-    });*/
+            type: "post",
+            data: user_email_data_json,
+            url: "/emailOverlapCheck",
+            dataType: "text",
+            success: function(data) {
+              alert(data);
+              document.getElementById('duplicate_check_email').value = data;
+            }
+          });
+        }
+    });
 
     const register = document.getElementById('btn_save'); // 찾은 서브밋타입 버튼
     register.addEventListener('click', function(){ // 클릭했을때 onload + 클릭했을때니깐 클릭하기전에 모든걸 한번더 읽었을경우라는 전제가 포함된다.
@@ -189,6 +166,12 @@ window.onload = function() {
     if(origin_password == user_pw) {
       alert('새 비밀번호가 기존의 비밀번호와 일치합니다.');
       document.getElementById('origin_password').focus();
+      return false;
+    }
+
+    if(document.getElementById('duplicate_check_email').value != '이 이메일은 사용가능합니다.') {
+      alert('이메일 중복검사를 안했거나 이메일이 중복입니다.');
+      document.getElementById('user_email').focus();
       return false;
     }
 

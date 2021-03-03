@@ -56,7 +56,7 @@ $(document).ready(function () {
     };
 
     const productPrice = $(".productPrice").text();
-    $(".productPrice").text(productPrice.format() + " ₩");
+    $(".productPrice").text(productPrice.format() + "₩");
     const productPrice2 = $(".productPrice2").text();
-    $(".productPrice2").text(productPrice2.format() + " ₩");
+    $(".productPrice2").text(productPrice2.format() + "₩");
 });
